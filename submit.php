@@ -134,12 +134,12 @@ try {
             'INSERT INTO form_submissions
                 (form_type, name, email, phone, course, preferred_date, review_setup, message, ip_address, user_agent)
              SELECT
-                :form_type, :name, :email, :phone, :course, :preferred_date, :review_setup, :message, :ip_address, :user_agent
+                :form_type_insert, :name, :email_insert, :phone, :course, :preferred_date, :review_setup, :message, :ip_address, :user_agent
              WHERE NOT EXISTS (
                 SELECT 1
                 FROM form_submissions
-                WHERE form_type = :form_type
-                  AND LOWER(TRIM(email)) = LOWER(TRIM(:email))
+                WHERE form_type = :form_type_check
+                  AND LOWER(TRIM(email)) = LOWER(TRIM(:email_check))
              )'
         );
     } else {
@@ -153,8 +153,12 @@ try {
 
     $statement->execute([
         ':form_type' => $formType,
+        ':form_type_insert' => $formType,
+        ':form_type_check' => $formType,
         ':name' => $name,
         ':email' => $email,
+        ':email_insert' => $email,
+        ':email_check' => $email,
         ':phone' => $phone,
         ':course' => $course !== '' ? $course : null,
         ':preferred_date' => $preferredDate !== '' ? $preferredDate : null,
