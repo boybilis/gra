@@ -511,6 +511,21 @@
   box-shadow: none;
   text-shadow: none;
 }
+@media (min-width: 992px) {
+  #course-package .row.gy-4 > [class*="col-"] {
+    width: 25%;
+  }
+}
+@media (max-width: 575px) {
+  #course-package .row.gy-4 {
+    --bs-gutter-x: 12px;
+    --bs-gutter-y: 12px;
+  }
+  #course-package .row.gy-4 > [class*="col-"] {
+    width: 50%;
+    flex: 0 0 auto;
+  }
+}
 #free-resources .campus-resource-link {
   display: inline-flex;
   align-items: center;

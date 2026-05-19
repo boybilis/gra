@@ -119,9 +119,10 @@
       </div>
       <div class="container">
         <div class="row gy-4">
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100"><div class="service-item position-relative"><div class="icon"><i class="fas fa-globe"></i></div><h3>Program Access</h3><p>3 months review access with comprehensive lectures, review materials, and guided study direction.</p></div></div>
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200"><div class="service-item position-relative"><div class="icon"><i class="fas fa-video"></i></div><h3>Live Online Review</h3><p>Attend live online sessions, intensive coaching, consultations, and exam-focused discussions.</p></div></div>
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300"><div class="service-item position-relative"><div class="icon"><i class="fas fa-laptop"></i></div><h3>Artemis360 Tools</h3><p>Use online practice tests, recorded lessons, test banks, study guides, and progress support.</p></div></div>
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100"><div class="service-item position-relative"><div class="icon"><i class="fas fa-globe"></i></div><h3>Program Access</h3><p>3 months review access with comprehensive lectures, review materials, and guided study direction.</p></div></div>
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200"><div class="service-item position-relative"><div class="icon"><i class="fas fa-video"></i></div><h3>Live Online Review</h3><p>Attend live online sessions, intensive coaching, consultations, and exam-focused discussions.</p></div></div>
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300"><div class="service-item position-relative"><div class="icon"><i class="fas fa-laptop"></i></div><h3>Artemis360 Tools</h3><p>Use online practice tests, recorded lessons, test banks, study guides, and progress support.</p></div></div>
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400"><div class="service-item position-relative"><div class="icon"><i class="fas fa-earth-asia"></i></div><h3>PassEasy Prometric Track</h3><p>Strengthen Prometric exam readiness with GCC-aligned practice focus, pacing strategy, and concept review.</p></div></div>
         </div>
       </div>
     </section>
@@ -202,8 +203,4 @@
   <script src="<?php echo versioned_asset('assets/js/gra-content.js'); ?>"></script>
 </body>
 </html>
-
-
-
-
 
