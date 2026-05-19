@@ -151,22 +151,35 @@ try {
         );
     }
 
-    $statement->execute([
-        ':form_type' => $formType,
-        ':form_type_insert' => $formType,
-        ':form_type_check' => $formType,
-        ':name' => $name,
-        ':email' => $email,
-        ':email_insert' => $email,
-        ':email_check' => $email,
-        ':phone' => $phone,
-        ':course' => $course !== '' ? $course : null,
-        ':preferred_date' => $preferredDate !== '' ? $preferredDate : null,
-        ':review_setup' => $reviewSetup !== '' ? $reviewSetup : null,
-        ':message' => $message !== '' ? $message : null,
-        ':ip_address' => $ipAddress !== '' ? $ipAddress : null,
-        ':user_agent' => $userAgent !== '' ? $userAgent : null,
-    ]);
+    if ($formType === 'booking') {
+        $statement->execute([
+            ':form_type_insert' => $formType,
+            ':form_type_check' => $formType,
+            ':name' => $name,
+            ':email_insert' => $email,
+            ':email_check' => $email,
+            ':phone' => $phone,
+            ':course' => $course !== '' ? $course : null,
+            ':preferred_date' => $preferredDate !== '' ? $preferredDate : null,
+            ':review_setup' => $reviewSetup !== '' ? $reviewSetup : null,
+            ':message' => $message !== '' ? $message : null,
+            ':ip_address' => $ipAddress !== '' ? $ipAddress : null,
+            ':user_agent' => $userAgent !== '' ? $userAgent : null,
+        ]);
+    } else {
+        $statement->execute([
+            ':form_type' => $formType,
+            ':name' => $name,
+            ':email' => $email,
+            ':phone' => $phone,
+            ':course' => $course !== '' ? $course : null,
+            ':preferred_date' => $preferredDate !== '' ? $preferredDate : null,
+            ':review_setup' => $reviewSetup !== '' ? $reviewSetup : null,
+            ':message' => $message !== '' ? $message : null,
+            ':ip_address' => $ipAddress !== '' ? $ipAddress : null,
+            ':user_agent' => $userAgent !== '' ? $userAgent : null,
+        ]);
+    }
 
     if ($formType === 'booking' && $statement->rowCount() === 0) {
         http_response_code(409);
