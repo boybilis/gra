@@ -101,6 +101,7 @@
             <li><a href="https://artemis360.gapuzreview.com">Artemis360</a></li>
             <li><a href="#testimonials">Passers</a></li>
             <li><a href="#enroll">Contact</a></li>
+            <li><a href="test-processing.php">Test Processing</a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
