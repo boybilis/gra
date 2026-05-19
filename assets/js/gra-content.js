@@ -193,6 +193,11 @@
   }
 
   let courseCardClickBound = false;
+  const closeCourseCard = (card) => {
+    card.classList.remove('is-desc-open');
+    const toggle = card.querySelector('.course-desc-toggle');
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+  };
   const mobileCourseCards = () => {
     const cards = Array.from(document.querySelectorAll('#courses .row.gy-4:not(.learning-mode-cards) .service-item'));
     const isMobile = window.matchMedia('(max-width: 575px)').matches;
@@ -203,12 +208,24 @@
       if (!desc) return;
 
       if (!isMobile) {
-        card.classList.remove('is-desc-open');
+        closeCourseCard(card);
         if (existingToggle) existingToggle.remove();
         return;
       }
 
-      if (existingToggle) return;
+      if (existingToggle) {
+        if (card.dataset.descHandlersBound !== 'true') {
+          card.addEventListener('mouseleave', () => closeCourseCard(card));
+          card.addEventListener('focusout', () => {
+            window.setTimeout(() => {
+              const active = document.activeElement;
+              if (!(active instanceof Element) || !card.contains(active)) closeCourseCard(card);
+            }, 0);
+          });
+          card.dataset.descHandlersBound = 'true';
+        }
+        return;
+      }
 
       const toggle = document.createElement('button');
       toggle.type = 'button';
@@ -223,6 +240,14 @@
         toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
       });
       card.appendChild(toggle);
+      card.addEventListener('mouseleave', () => closeCourseCard(card));
+      card.addEventListener('focusout', () => {
+        window.setTimeout(() => {
+          const active = document.activeElement;
+          if (!(active instanceof Element) || !card.contains(active)) closeCourseCard(card);
+        }, 0);
+      });
+      card.dataset.descHandlersBound = 'true';
     });
 
     if (!courseCardClickBound) {
@@ -235,9 +260,7 @@
         const currentCards = Array.from(document.querySelectorAll('#courses .row.gy-4:not(.learning-mode-cards) .service-item'));
         currentCards.forEach((card) => {
           if (card === activeCard) return;
-          card.classList.remove('is-desc-open');
-          const toggle = card.querySelector('.course-desc-toggle');
-          if (toggle) toggle.setAttribute('aria-expanded', 'false');
+          closeCourseCard(card);
         });
       });
       courseCardClickBound = true;
