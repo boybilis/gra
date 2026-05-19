@@ -380,6 +380,7 @@
   padding: 18px 20px;
   background: #fff;
   border: 1px solid color-mix(in srgb, var(--gra-navy), transparent 84%);
+  border-radius: 10px;
 }
 .learning-mode-card i {
   width: 54px;
@@ -388,21 +389,29 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: var(--gra-navy);
-  color: #fff;
+  background: transparent;
+  color: var(--gra-navy);
   border-radius: 6px;
   font-size: 22px;
 }
 .learning-mode-cards > div:nth-child(2) .learning-mode-card i {
-  background: var(--accent-color);
+  background: transparent;
+  color: var(--accent-color);
 }
 .learning-mode-card h3 {
   margin: 0 0 5px;
   font-size: 20px;
 }
+.learning-mode-cards > div:nth-child(1) .learning-mode-card h3 {
+  color: var(--gra-navy);
+}
+.learning-mode-cards > div:nth-child(2) .learning-mode-card h3 {
+  color: var(--accent-color);
+}
 .learning-mode-card p {
   margin: 0;
   font-size: 14px;
+  color: #1f2d3d;
 }
 @media (max-width: 575px) {
   #courses .learning-mode-cards {
