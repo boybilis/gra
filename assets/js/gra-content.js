@@ -7,29 +7,84 @@
   const formModalTriggers = Array.from(document.querySelectorAll('[data-open-form-modal]'));
   const formModals = Array.from(document.querySelectorAll('.form-modal'));
 
+  const formOtpState = new WeakMap();
+  const parseJsonSafe = async (response) => {
+    try {
+      return await response.json();
+    } catch (_error) {
+      return null;
+    }
+  };
+
   forms.forEach((form) => {
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       const button = form.querySelector('button[type="submit"]');
       if (!button) return;
       const originalText = button.textContent;
-      button.textContent = 'Submitting...';
+
+      const emailInput = form.querySelector('input[name="email"]');
+      const email = (emailInput && 'value' in emailInput ? String(emailInput.value).trim() : '');
+      if (!email) {
+        button.textContent = 'Email is required';
+        window.setTimeout(() => { button.textContent = originalText; }, 1800);
+        return;
+      }
       button.disabled = true;
+
       try {
-        const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
-        let result = null;
-        try {
-          result = await response.json();
-        } catch (_error) {
-          result = null;
+        const otpState = formOtpState.get(form);
+        let verificationToken = otpState && otpState.email === email ? otpState.token : '';
+
+        if (!verificationToken) {
+          button.textContent = 'Sending OTP...';
+          const sendOtpResponse = await fetch('otp.php', {
+            method: 'POST',
+            headers: { Accept: 'application/json' },
+            body: new URLSearchParams({ action: 'send', email }),
+          });
+          const sendOtpResult = await parseJsonSafe(sendOtpResponse);
+          if (!sendOtpResponse.ok || !sendOtpResult || !sendOtpResult.ok) {
+            throw new Error((sendOtpResult && sendOtpResult.message) || 'Unable to send OTP.');
+          }
+
+          const otpCode = window.prompt('Enter the 6-digit OTP sent to your email. Code expires in 2 minutes.');
+          if (!otpCode) {
+            throw new Error('OTP is required to continue.');
+          }
+
+          button.textContent = 'Verifying OTP...';
+          const verifyOtpResponse = await fetch('otp.php', {
+            method: 'POST',
+            headers: { Accept: 'application/json' },
+            body: new URLSearchParams({ action: 'verify', email, otp: otpCode }),
+          });
+          const verifyOtpResult = await parseJsonSafe(verifyOtpResponse);
+          if (!verifyOtpResponse.ok || !verifyOtpResult || !verifyOtpResult.ok || !verifyOtpResult.verification_token) {
+            throw new Error((verifyOtpResult && verifyOtpResult.message) || 'OTP verification failed.');
+          }
+
+          verificationToken = verifyOtpResult.verification_token;
+          formOtpState.set(form, { email, token: verificationToken });
         }
-        if (!response.ok || !result || !result.ok) throw new Error((result && result.message) || 'Please try again');
+
+        button.textContent = 'Submitting...';
+        const formData = new FormData(form);
+        formData.set('otp_verification_token', verificationToken);
+        const response = await fetch(form.action, { method: 'POST', body: formData, headers: { Accept: 'application/json' } });
+        const result = await parseJsonSafe(response);
+        if (!response.ok || !result || !result.ok) {
+          throw new Error((result && result.message) || 'Please try again');
+        }
+
         form.reset();
+        formOtpState.delete(form);
         button.textContent = 'Submitted';
       } catch (error) {
+        formOtpState.delete(form);
         button.textContent = error instanceof Error ? error.message : 'Please try again';
       } finally {
-        window.setTimeout(() => { button.textContent = originalText; button.disabled = false; }, 2200);
+        window.setTimeout(() => { button.textContent = originalText; button.disabled = false; }, 2400);
       }
     });
   });

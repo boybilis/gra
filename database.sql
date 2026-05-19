@@ -36,3 +36,17 @@ CREATE TABLE IF NOT EXISTS mini_lessons (
   PRIMARY KEY (id),
   INDEX idx_mini_lessons_active_sort (is_active, sort_order, id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS email_otp_verifications (
+  email VARCHAR(190) NOT NULL,
+  otp_hash CHAR(64) DEFAULT NULL,
+  otp_expires_at DATETIME DEFAULT NULL,
+  otp_used_at DATETIME DEFAULT NULL,
+  verification_token CHAR(64) DEFAULT NULL,
+  verification_expires_at DATETIME DEFAULT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (email),
+  INDEX idx_email_otp_expires (otp_expires_at),
+  INDEX idx_email_verification_expires (verification_expires_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -5,6 +5,7 @@ header('Content-Type: application/json');
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'database.php';
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'mail_config.php';
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'otp-verification.php';
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'phpmailer' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Exception.php';
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'phpmailer' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'PHPMailer.php';
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'phpmailer' . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'SMTP.php';
@@ -104,6 +105,7 @@ $course = clean_value('course');
 $preferredDate = clean_value('preferred_date');
 $reviewSetup = clean_value('review_setup');
 $message = clean_value('message');
+$otpVerificationToken = clean_value('otp_verification_token');
 $submittedAt = date('c');
 $ipAddress = $_SERVER['REMOTE_ADDR'] ?? '';
 $userAgent = isset($_SERVER['HTTP_USER_AGENT']) ? substr((string) $_SERVER['HTTP_USER_AGENT'], 0, 255) : '';
@@ -126,8 +128,20 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     exit;
 }
 
+if ($otpVerificationToken === '') {
+    http_response_code(422);
+    echo json_encode(['ok' => false, 'message' => 'Email verification is required.']);
+    exit;
+}
+
 try {
     $database = get_database();
+    $otpTokenValid = consume_email_verification_token($database, $email, $otpVerificationToken);
+    if (!$otpTokenValid) {
+        http_response_code(422);
+        echo json_encode(['ok' => false, 'message' => 'OTP verification expired. Please verify your email again.']);
+        exit;
+    }
 
     if ($formType === 'booking') {
         $statement = $database->prepare(
