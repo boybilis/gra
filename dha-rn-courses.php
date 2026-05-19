@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+  <?php require_once __DIR__ . '/asset-version.php'; ?>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>DHA RN PassEasy Course | Gapuz Review Academy</title>
@@ -18,8 +19,8 @@
   <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-  <link href="assets/css/main.css?v=4" rel="stylesheet">
-  <link href="assets/css/gra-content.css?v=4" rel="stylesheet">
+  <link href="<?php echo versioned_asset('assets/css/main.css'); ?>" rel="stylesheet">
+  <link href="<?php echo versioned_asset('assets/css/gra-content.css'); ?>" rel="stylesheet">
 </head>
 
 <body class="index-page gra-page">
@@ -195,11 +196,10 @@
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/js/main.js?v=2"></script>
-  <script src="assets/js/gra-content.js?v=2"></script>
+  <script src="<?php echo versioned_asset('assets/js/main.js'); ?>"></script>
+  <script src="<?php echo versioned_asset('assets/js/gra-content.js'); ?>"></script>
 </body>
 </html>
-
 
 
 
