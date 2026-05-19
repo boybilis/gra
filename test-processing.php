@@ -40,10 +40,10 @@ require_once __DIR__ . '/asset-version.php';
             <li><a href="index.php#about">About</a></li>
             <li><a href="index.php#courses">Courses</a></li>
             <li><a href="index.php#free-courses">Free Courses</a></li>
-            <li><a href="test-processing.php" class="active">Test Processing</a></li>
             <li><a href="https://artemis360.gapuzreview.com">Artemis360</a></li>
             <li><a href="index.php#testimonials">Passers</a></li>
             <li><a href="index.php#enroll">Contact</a></li>
+            <li><a href="test-processing.php" class="active">Test Processing</a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
@@ -56,24 +56,102 @@ require_once __DIR__ . '/asset-version.php';
     <section class="about section light-background">
       <div class="container section-title" data-aos="fade-up">
         <h2>Test Processing</h2>
-        <p>Support for exam application documents, scheduling requirements, and processing guidance.</p>
+        <p>Reliable guidance for exam requirements, document preparation, and application processing support.</p>
       </div>
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-4">
           <div class="col-lg-6">
-            <h3>What We Help You Process</h3>
+            <h3>What We Support</h3>
             <ul>
-              <li><i class="bi bi-check2-all"></i> <span>Application document checklist and preparation</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Exam scheduling and test center requirement guidance</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Status follow-up support and timeline reminders</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Application checklist planning and document readiness</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Step-by-step filing guidance based on your exam pathway</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Scheduling coordination and test center preparation reminders</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Follow-up support for updates, requirements, and timeline tracking</span></li>
             </ul>
           </div>
           <div class="col-lg-6">
-            <h3>Need Assistance?</h3>
-            <p>Submit your details and a GRA adviser can guide your test processing steps.</p>
-            <p><a href="index.php#enroll" class="btn btn-primary">Contact an Adviser</a></p>
+            <h3>Why Candidates Choose GRA Processing Support</h3>
+            <p>Our team helps simplify the processing journey so you can focus on preparation. You get practical guidance, organized next steps, and responsive support from inquiry to exam readiness.</p>
+            <p><a href="index.php#enroll" class="btn btn-primary">Request Processing Assistance</a></p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section class="services section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Processing Coverage</h2>
+        <p>Built to support both first-time applicants and repeat takers who need a clearer process.</p>
+      </div>
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row gy-4">
+          <div class="col-lg-4 col-md-6">
+            <div class="service-item position-relative">
+              <div class="icon"><i class="fas fa-file-lines"></i></div>
+              <h3>Document Guidance</h3>
+              <p>Understand what to prepare, where to submit, and how to avoid common filing issues.</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="service-item position-relative">
+              <div class="icon"><i class="fas fa-calendar-check"></i></div>
+              <h3>Scheduling Support</h3>
+              <p>Get help aligning your target exam date with your processing and review timeline.</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="service-item position-relative">
+              <div class="icon"><i class="fas fa-headset"></i></div>
+              <h3>Ongoing Follow-Up</h3>
+              <p>Receive updates and reminders so your next required step is always clear and timely.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features section light-background">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>How It Works</h2>
+        <p>A clear processing flow designed to reduce delays and confusion.</p>
+      </div>
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row gy-4">
+          <div class="col-lg-3 col-md-6">
+            <div class="icon-box d-flex position-relative h-100">
+              <i class="fa-solid fa-circle-info flex-shrink-0"></i>
+              <div><h4>1. Initial Assessment</h4><p>Share your target exam and background so we can map your required steps.</p></div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="icon-box d-flex position-relative h-100">
+              <i class="fa-solid fa-list-check flex-shrink-0"></i>
+              <div><h4>2. Checklist Setup</h4><p>Receive a structured checklist and guidance for each document requirement.</p></div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="icon-box d-flex position-relative h-100">
+              <i class="fa-solid fa-paper-plane flex-shrink-0"></i>
+              <div><h4>3. Submission Stage</h4><p>Proceed with filing while our team helps you track status and needed updates.</p></div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="icon-box d-flex position-relative h-100">
+              <i class="fa-solid fa-flag-checkered flex-shrink-0"></i>
+              <div><h4>4. Exam Readiness</h4><p>Finalize scheduling and continue your review path with fewer processing blockers.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="appointment section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Start Your Processing Plan</h2>
+        <p>Connect with a GRA adviser for personalized processing guidance.</p>
+      </div>
+      <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
+        <a href="index.php#enroll" class="btn btn-primary">Talk to a Processing Adviser</a>
       </div>
     </section>
   </main>
