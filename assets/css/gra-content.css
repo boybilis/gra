@@ -499,6 +499,16 @@
   box-shadow: none;
   border: 1px solid color-mix(in srgb, var(--gra-navy), transparent 84%);
 }
+@media (max-width: 575px) {
+  #free-resources .row.gy-4 {
+    --bs-gutter-x: 12px;
+    --bs-gutter-y: 12px;
+  }
+  #free-resources .row.gy-4 > [class*="col-"] {
+    width: 50%;
+    flex: 0 0 auto;
+  }
+}
 #free-resources .service-item:hover {
   box-shadow: none;
 }
