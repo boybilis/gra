@@ -45,5 +45,8 @@ $accessGranted = is_booking_email_registered($email);
       <a class="btn btn-outline-primary" href="online-campus.php">Back to Online Campus</a>
     <?php endif; ?>
   </main>
+  <footer id="footer" class="footer dark-background">
+    <div class="container copyright text-center mt-4"><p><span>Copyright</span> <strong class="px-1 sitename">Gapuz Review Academy</strong> <span>All Rights Reserved</span></p></div>
+  </footer>
 </body>
 </html>
