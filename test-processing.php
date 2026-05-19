@@ -26,6 +26,39 @@ require_once __DIR__ . '/asset-version.php';
       opacity: 1 !important;
       transform: none !important;
     }
+    .test-processing-page .processing-services .service-item {
+      border: 0;
+      box-shadow: none;
+      color: #fff;
+      min-height: 100%;
+    }
+    .test-processing-page .processing-services .service-item:before {
+      display: none;
+    }
+    .test-processing-page .processing-services .row > div:nth-child(odd) .service-item {
+      background: #003057;
+    }
+    .test-processing-page .processing-services .row > div:nth-child(even) .service-item {
+      background: #ff6e11;
+    }
+    .test-processing-page .processing-services .service-item h3,
+    .test-processing-page .processing-services .service-item p,
+    .test-processing-page .processing-services .service-item .icon i {
+      color: #fff;
+    }
+    .test-processing-page .processing-services .service-item .icon {
+      width: auto;
+      height: auto;
+      margin: 0 0 14px;
+      background: transparent;
+      border: 0;
+      border-radius: 0;
+      display: block;
+    }
+    .test-processing-page .processing-services .service-item .icon i {
+      font-size: 28px;
+      line-height: 1;
+    }
   </style>
 </head>
 <body class="index-page gra-page test-processing-page">
@@ -85,7 +118,7 @@ require_once __DIR__ . '/asset-version.php';
       </div>
     </section>
 
-    <section class="services section">
+    <section class="services section processing-services">
       <div class="container section-title" data-aos="fade-up">
         <h2>Processing Coverage</h2>
         <p>Our processing team can assist you with the following services.</p>
