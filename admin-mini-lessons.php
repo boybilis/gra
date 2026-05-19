@@ -3,11 +3,30 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/asset-version.php';
 require_once __DIR__ . '/mini-lessons-library.php';
+require_once __DIR__ . '/mini-lessons-admin-auth.php';
 
 $feedback = '';
 $error = '';
+$loginError = '';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && (string) ($_POST['action'] ?? '') === 'login') {
+    $username = (string) ($_POST['username'] ?? '');
+    $password = (string) ($_POST['password'] ?? '');
+    if (!mini_lessons_admin_login($username, $password)) {
+        $loginError = 'Invalid username or password.';
+    } else {
+        header('Location: admin-mini-lessons.php');
+        exit;
+    }
+}
+
+if (isset($_GET['logout']) && $_GET['logout'] === '1') {
+    mini_lessons_admin_logout();
+    header('Location: admin-mini-lessons.php');
+    exit;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_mini_lessons_admin_logged_in()) {
     $action = trim((string) ($_POST['action'] ?? ''));
 
     try {
@@ -36,6 +55,50 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+if (!is_mini_lessons_admin_logged_in()):
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Admin Login | Gapuz Review Academy</title>
+  <link href="assets/img/gra/gra-logo.png" rel="icon">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="<?php echo versioned_asset('assets/css/main.css'); ?>" rel="stylesheet">
+  <link href="<?php echo versioned_asset('assets/css/gra-content.css'); ?>" rel="stylesheet">
+</head>
+<body class="index-page gra-page">
+  <main class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="p-4 border rounded bg-white">
+          <h2 class="h4 mb-3">Mini Lessons Admin Login</h2>
+          <?php if ($loginError !== ''): ?>
+            <div class="alert alert-danger"><?php echo htmlspecialchars($loginError, ENT_QUOTES, 'UTF-8'); ?></div>
+          <?php endif; ?>
+          <form method="post" action="admin-mini-lessons.php">
+            <input type="hidden" name="action" value="login">
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input id="username" name="username" type="text" class="form-control" required>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input id="password" name="password" type="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
+<?php
+exit;
+endif;
+
 $lessons = [];
 try {
     $lessons = get_all_mini_lessons();
@@ -61,7 +124,10 @@ try {
         <a href="index.php" class="logo d-flex align-items-center me-auto">
           <img src="assets/img/gra/gra-logo.png" alt="Gapuz Review Academy logo">
         </a>
-        <a class="cta-btn" href="mini-lessons.php">View Mini Lessons</a>
+        <div class="d-flex align-items-center gap-2">
+          <a class="cta-btn" href="mini-lessons.php">View Mini Lessons</a>
+          <a class="btn btn-outline-light btn-sm" href="admin-mini-lessons.php?logout=1">Logout</a>
+        </div>
       </div>
     </div>
   </header>
