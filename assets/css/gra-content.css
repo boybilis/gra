@@ -538,6 +538,32 @@
   border-radius: 4px;
   text-decoration: none;
 }
+.course-overview-btn {
+  border-width: 1px;
+  font-weight: 600;
+}
+.course-overview-btn-primary {
+  background: var(--gra-navy);
+  border-color: var(--gra-navy);
+  color: #fff;
+}
+.course-overview-btn-primary:hover,
+.course-overview-btn-primary:focus {
+  background: #0b2f52;
+  border-color: #0b2f52;
+  color: #fff;
+}
+.course-overview-btn-secondary {
+  background: var(--accent-color);
+  border-color: var(--accent-color);
+  color: #fff;
+}
+.course-overview-btn-secondary:hover,
+.course-overview-btn-secondary:focus {
+  background: #d96600;
+  border-color: #d96600;
+  color: #fff;
+}
 #free-resources .campus-resource-card.is-locked .campus-resource-link {
   background: #9daab6;
   pointer-events: none;

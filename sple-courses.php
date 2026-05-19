@@ -73,7 +73,7 @@
               <li><i class="bi bi-check2-all"></i> <span>Recorded lessons, review materials, and test bank access.</span></li>
               <li><i class="bi bi-check2-all"></i> <span>Artemis360 learning tools for practice, tracking, and self-paced study.</span></li>
             </ul>
-            <p><a href="#course-enroll" class="btn btn-primary">Enroll Now</a> <a href="index.php#courses" class="btn btn-outline-primary ms-2">Back to Courses</a></p>
+            <p><a href="#course-enroll" class="btn course-overview-btn course-overview-btn-primary">Enroll Now</a> <a href="index.php#courses" class="btn course-overview-btn course-overview-btn-secondary ms-2">Back to Courses</a></p>
           </div>
         </div>
       </div>
@@ -203,4 +203,5 @@
   <script src="<?php echo versioned_asset('assets/js/gra-content.js'); ?>"></script>
 </body>
 </html>
+
 
