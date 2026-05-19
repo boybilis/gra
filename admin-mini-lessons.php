@@ -8,6 +8,16 @@ require_once __DIR__ . '/mini-lessons-admin-auth.php';
 $feedback = '';
 $error = '';
 $loginError = '';
+$testimonialFolderOptions = [
+    'nclex' => 'NCLEX',
+    'dha' => 'DHA',
+    'haad-doh' => 'HAAD / DOH',
+    'prometric' => 'Prometric',
+    'pnle' => 'PNLE',
+    'sple' => 'SPLE',
+    'civil-service' => 'Civil Service',
+];
+$testimonialBaseDir = __DIR__ . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'gra' . DIRECTORY_SEPARATOR . 'passers';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && (string) ($_POST['action'] ?? '') === 'login') {
     $username = (string) ($_POST['username'] ?? '');
@@ -49,6 +59,87 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_mini_lessons_admin_logged_in()) 
             }
             delete_mini_lesson($id);
             $feedback = 'Mini lesson deleted.';
+        } elseif ($action === 'upload_testimonials') {
+            $selectedFolder = strtolower(trim((string) ($_POST['testimonial_folder'] ?? '')));
+            if (!array_key_exists($selectedFolder, $testimonialFolderOptions)) {
+                throw new InvalidArgumentException('Please choose a valid testimonial folder.');
+            }
+            if (!isset($_FILES['testimonial_images'])) {
+                throw new InvalidArgumentException('Please choose image files to upload.');
+            }
+
+            $allowedExtensions = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+            $maxFileSizeBytes = 8 * 1024 * 1024;
+            $targetDir = $testimonialBaseDir . DIRECTORY_SEPARATOR . $selectedFolder;
+            if (!is_dir($targetDir) && !mkdir($targetDir, 0775, true) && !is_dir($targetDir)) {
+                throw new RuntimeException('Unable to create target upload folder.');
+            }
+
+            $names = $_FILES['testimonial_images']['name'] ?? [];
+            $tmpNames = $_FILES['testimonial_images']['tmp_name'] ?? [];
+            $errors = $_FILES['testimonial_images']['error'] ?? [];
+            $sizes = $_FILES['testimonial_images']['size'] ?? [];
+
+            if (!is_array($names) || count($names) === 0) {
+                throw new InvalidArgumentException('Please choose image files to upload.');
+            }
+
+            $uploadedCount = 0;
+            $skippedCount = 0;
+
+            foreach ($names as $index => $originalName) {
+                $uploadError = (int) ($errors[$index] ?? UPLOAD_ERR_NO_FILE);
+                if ($uploadError === UPLOAD_ERR_NO_FILE) {
+                    continue;
+                }
+                if ($uploadError !== UPLOAD_ERR_OK) {
+                    $skippedCount++;
+                    continue;
+                }
+
+                $tmpPath = (string) ($tmpNames[$index] ?? '');
+                $fileSize = (int) ($sizes[$index] ?? 0);
+                if ($tmpPath === '' || !is_uploaded_file($tmpPath) || $fileSize <= 0 || $fileSize > $maxFileSizeBytes) {
+                    $skippedCount++;
+                    continue;
+                }
+
+                $extension = strtolower(pathinfo((string) $originalName, PATHINFO_EXTENSION));
+                if (!in_array($extension, $allowedExtensions, true)) {
+                    $skippedCount++;
+                    continue;
+                }
+
+                $baseName = pathinfo((string) $originalName, PATHINFO_FILENAME);
+                $safeBase = preg_replace('/[^A-Za-z0-9._-]+/', '-', $baseName);
+                $safeBase = trim((string) $safeBase, '-._');
+                if ($safeBase === '') {
+                    $safeBase = 'testimonial';
+                }
+
+                $targetPath = $targetDir . DIRECTORY_SEPARATOR . $safeBase . '.' . $extension;
+                $counter = 1;
+                while (file_exists($targetPath)) {
+                    $targetPath = $targetDir . DIRECTORY_SEPARATOR . $safeBase . '-' . $counter . '.' . $extension;
+                    $counter++;
+                }
+
+                if (!move_uploaded_file($tmpPath, $targetPath)) {
+                    $skippedCount++;
+                    continue;
+                }
+
+                $uploadedCount++;
+            }
+
+            if ($uploadedCount === 0) {
+                throw new RuntimeException('No files were uploaded. Please check your files and try again.');
+            }
+
+            $feedback = $uploadedCount . ' testimonial image(s) uploaded to ' . $testimonialFolderOptions[$selectedFolder] . '.';
+            if ($skippedCount > 0) {
+                $feedback .= ' ' . $skippedCount . ' file(s) were skipped due to invalid format/size or upload error.';
+            }
         }
     } catch (Throwable $exception) {
         $error = $exception->getMessage();
@@ -170,6 +261,31 @@ try {
           </div>
         </div>
         <button type="submit" class="btn btn-primary">Save Lesson</button>
+      </form>
+    </section>
+
+    <section class="mb-4 p-3 border rounded bg-white">
+      <h3 class="h5">Upload Testimonials (Bulk)</h3>
+      <p class="mb-3">Upload multiple images to a course folder under <code>assets/img/gra/passers</code>.</p>
+      <form method="post" action="admin-mini-lessons.php" enctype="multipart/form-data">
+        <input type="hidden" name="action" value="upload_testimonials">
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="testimonial_folder" class="form-label">Course Folder</label>
+            <select id="testimonial_folder" name="testimonial_folder" class="form-select" required>
+              <option value="">Select folder</option>
+              <?php foreach ($testimonialFolderOptions as $folderKey => $folderLabel): ?>
+                <option value="<?php echo htmlspecialchars($folderKey, ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($folderLabel, ENT_QUOTES, 'UTF-8'); ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="col-md-8 mb-3">
+            <label for="testimonial_images" class="form-label">Images</label>
+            <input id="testimonial_images" name="testimonial_images[]" type="file" class="form-control" accept=".jpg,.jpeg,.png,.webp,.gif" multiple required>
+            <div class="form-text">Allowed formats: JPG, JPEG, PNG, WEBP, GIF (max 8MB each).</div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Upload Images</button>
       </form>
     </section>
 

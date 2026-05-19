@@ -55,7 +55,7 @@
 
   <main class="main">
 
-    <section id="online-campus" class="about section light-background">
+    <sect ion id="online-campus" class="about section light-background">
       <div class="container section-title" data-aos="fade-up">
         <h2>Online Campus</h2>
         <p>Experience the GRA difference with free learning resources and digital review access.</p>
@@ -72,6 +72,11 @@
       </div>
     </section>
 
+     <section id="course-enroll" class="appointment section light-background">
+      <div class="container section-title" data-aos="fade-up"><h2>Register for Free Course Access</h2><p>A GRA adviser can follow up with free course and enrollment details.</p></div>
+      <div class="container" data-aos="fade-up" data-aos-delay="100"><form action="submit.php" method="post" role="form" class="site-form gra-medicio-form"><input type="hidden" name="form_type" value="booking"><div class="row"><div class="col-md-4 form-group"><input type="text" name="name" class="form-control" placeholder="Full Name" required></div><div class="col-md-4 form-group mt-3 mt-md-0"><input type="email" class="form-control" name="email" placeholder="Email" required></div><div class="col-md-4 form-group mt-3 mt-md-0"><input type="tel" class="form-control" name="phone" placeholder="Mobile / Messaging App" required></div></div><div class="form-group mt-3"><textarea class="form-control" name="message" rows="5" placeholder="Questions or notes"></textarea></div><div class="mt-3 text-center"><button type="submit">Submit Registration Interest</button></div></form></div>
+    </section>
+ 
     <section id="campus-access" class="appointment section">
       <div class="container section-title" data-aos="fade-up">
         <h2>Unlock Free Resources</h2>
@@ -101,10 +106,7 @@
       </div></div>
     </section>
 
-    <section id="course-enroll" class="appointment section light-background">
-      <div class="container section-title" data-aos="fade-up"><h2>Register for Free Course Access</h2><p>A GRA adviser can follow up with free course and enrollment details.</p></div>
-      <div class="container" data-aos="fade-up" data-aos-delay="100"><form action="submit.php" method="post" role="form" class="site-form gra-medicio-form"><input type="hidden" name="form_type" value="booking"><div class="row"><div class="col-md-4 form-group"><input type="text" name="name" class="form-control" placeholder="Full Name" required></div><div class="col-md-4 form-group mt-3 mt-md-0"><input type="email" class="form-control" name="email" placeholder="Email" required></div><div class="col-md-4 form-group mt-3 mt-md-0"><input type="tel" class="form-control" name="phone" placeholder="Mobile / Messaging App" required></div></div><div class="form-group mt-3"><textarea class="form-control" name="message" rows="5" placeholder="Questions or notes"></textarea></div><div class="mt-3 text-center"><button type="submit">Submit Registration Interest</button></div></form></div>
-    </section>
+   
   </main>
 
   <footer id="footer" class="footer dark-background">
