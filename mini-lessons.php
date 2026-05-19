@@ -38,8 +38,7 @@ if ($accessGranted) {
     .campus-video-list { padding: 10px; display: grid; gap: 10px; }
     .campus-video-item { display: grid; grid-template-columns: 118px 1fr; gap: 10px; text-decoration: none; color: #1f2d3d; border: 1px solid rgba(0,48,87,.14); border-radius: 6px; padding: 8px; }
     .campus-video-item img { width: 100%; border-radius: 4px; object-fit: cover; }
-    .campus-video-item h3 { font-size: 15px; margin: 0 0 4px; color: #003057; }
-    .campus-video-item p { font-size: 13px; margin: 0; }
+    .campus-video-item h3 { font-size: 15px; margin: 0; color: #003057; }
     .campus-gate { max-width: 760px; margin: 48px auto; background: #fff; border: 1px solid rgba(0,48,87,.16); border-radius: 8px; padding: 24px; text-align: center; }
     @media (max-width: 992px) { .campus-video-grid { grid-template-columns: 1fr; } }
   </style>
@@ -91,7 +90,7 @@ if ($accessGranted) {
           <?php foreach ($lessons as $lesson): ?>
           <a class="campus-video-item" href="#" data-video-id="<?php echo htmlspecialchars($lesson['youtube_video_id'], ENT_QUOTES, 'UTF-8'); ?>" data-video-title="<?php echo htmlspecialchars($lesson['title'], ENT_QUOTES, 'UTF-8'); ?>" data-video-desc="<?php echo htmlspecialchars((string) ($lesson['description'] ?? ''), ENT_QUOTES, 'UTF-8'); ?>">
             <img src="https://img.youtube.com/vi/<?php echo htmlspecialchars($lesson['youtube_video_id'], ENT_QUOTES, 'UTF-8'); ?>/hqdefault.jpg" alt="<?php echo htmlspecialchars($lesson['title'], ENT_QUOTES, 'UTF-8'); ?>">
-            <div><h3><?php echo htmlspecialchars($lesson['title'], ENT_QUOTES, 'UTF-8'); ?></h3><p><?php echo htmlspecialchars((string) ($lesson['description'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></p></div>
+            <div><h3><?php echo htmlspecialchars($lesson['title'], ENT_QUOTES, 'UTF-8'); ?></h3></div>
           </a>
           <?php endforeach; ?>
         </aside>
@@ -121,3 +120,4 @@ if ($accessGranted) {
   </script>
 </body>
 </html>
+
