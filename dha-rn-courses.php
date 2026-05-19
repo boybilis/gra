@@ -79,33 +79,6 @@
       </div>
     </section>
 
-    <section id="course-package" class="services section">
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Course Package</h2>
-        <p>A 360-degree review approach for focused preparation.</p>
-      </div>
-      <div class="container">
-        <div class="row gy-4">
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100"><div class="service-item position-relative"><div class="icon"><i class="fas fa-user-nurse"></i></div><h3>Program Access</h3><p>3 months review access with comprehensive lectures, review materials, and guided study direction.</p></div></div>
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200"><div class="service-item position-relative"><div class="icon"><i class="fas fa-video"></i></div><h3>Live Online Review</h3><p>Attend live online sessions, intensive coaching, consultations, and exam-focused discussions.</p></div></div>
-          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300"><div class="service-item position-relative"><div class="icon"><i class="fas fa-laptop"></i></div><h3>Artemis360 Tools</h3><p>Use online practice tests, recorded lessons, test banks, study guides, and progress support.</p></div></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="course-details" class="features section light-background">
-      <div class="container">
-        <div class="row justify-content-around gy-4">
-          <div class="features-image col-lg-6" data-aos="fade-up" data-aos-delay="100"><img src="assets/img/gra/artemis-platform.jpg" alt="Artemis360 learning platform"></div>
-          <div class="col-lg-5 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
-            <h3>Study support from content to confidence.</h3>
-            <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="300"><i class="fa-solid fa-list-check flex-shrink-0"></i><div><h4>Course inclusions</h4><p>Exam pathway orientation, study pacing, high-yield concept review, and question analysis techniques.</p></div></div>
-            <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="400"><i class="fa-solid fa-chalkboard-user flex-shrink-0"></i><div><h4>Expert coaching</h4><p>Experienced Testmasters guide students through common exam challenges and readiness planning.</p></div></div>
-            <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="500"><i class="fa-solid fa-clock flex-shrink-0"></i><div><h4>Flexible access</h4><p>Recorded lectures and 24/7 review materials help students prepare around work, school, and family schedules.</p></div></div>
-          </div>
-        </div>
-      </div>
-    </section>
     <?php
       require_once __DIR__ . DIRECTORY_SEPARATOR . 'passer-library.php';
       $coursePassers = get_latest_passer_images(8, 'dha');
@@ -136,7 +109,36 @@
     </section>
     <?php endif; ?>
 
-    <section id="testmasters" class="doctors section">
+    
+
+
+    <section id="course-package" class="services section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Course Package</h2>
+        <p>A 360-degree review approach for focused preparation.</p>
+      </div>
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100"><div class="service-item position-relative"><div class="icon"><i class="fas fa-user-nurse"></i></div><h3>Program Access</h3><p>3 months review access with comprehensive lectures, review materials, and guided study direction.</p></div></div>
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200"><div class="service-item position-relative"><div class="icon"><i class="fas fa-video"></i></div><h3>Live Online Review</h3><p>Attend live online sessions, intensive coaching, consultations, and exam-focused discussions.</p></div></div>
+          <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300"><div class="service-item position-relative"><div class="icon"><i class="fas fa-laptop"></i></div><h3>Artemis360 Tools</h3><p>Use online practice tests, recorded lessons, test banks, study guides, and progress support.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="course-details" class="features section light-background">
+      <div class="container">
+        <div class="row justify-content-around gy-4">
+          <div class="features-image col-lg-6" data-aos="fade-up" data-aos-delay="100"><img src="assets/img/gra/artemis-platform.jpg" alt="Artemis360 learning platform"></div>
+          <div class="col-lg-5 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+            <h3>Study support from content to confidence.</h3>
+            <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="300"><i class="fa-solid fa-list-check flex-shrink-0"></i><div><h4>Course inclusions</h4><p>Exam pathway orientation, study pacing, high-yield concept review, and question analysis techniques.</p></div></div>
+            <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="400"><i class="fa-solid fa-chalkboard-user flex-shrink-0"></i><div><h4>Expert coaching</h4><p>Experienced Testmasters guide students through common exam challenges and readiness planning.</p></div></div>
+            <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="500"><i class="fa-solid fa-clock flex-shrink-0"></i><div><h4>Flexible access</h4><p>Recorded lectures and 24/7 review materials help students prepare around work, school, and family schedules.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section><section id="testmasters" class="doctors section">
       <div class="container section-title" data-aos="fade-up">
         <h2>Testmasters</h2>
         <p>Lead Testmasters for DHA-RN preparation.</p>
@@ -200,6 +202,7 @@
   <script src="<?php echo versioned_asset('assets/js/gra-content.js'); ?>"></script>
 </body>
 </html>
+
 
 
 
