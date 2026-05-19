@@ -379,7 +379,7 @@
   gap: 16px;
   padding: 18px 20px;
   background: #fff;
-  border: 1px solid color-mix(in srgb, var(--gra-navy), transparent 84%);
+  border: 0;
   border-radius: 10px;
 }
 .learning-mode-card i {
