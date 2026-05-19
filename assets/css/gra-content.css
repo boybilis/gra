@@ -460,6 +460,10 @@
 #free-resources .service-item:hover {
   box-shadow: none;
 }
+#free-resources .service-item:hover h4,
+#free-resources .service-item:hover h4 a {
+  color: #f37507;
+}
 #free-resources .service-item .icon,
 #free-resources .service-item .icon i {
   box-shadow: none;

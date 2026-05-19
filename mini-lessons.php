@@ -88,6 +88,7 @@ if ($accessGranted) {
           <p id="campus-main-desc" class="mb-0"><?php echo htmlspecialchars((string) ($firstLesson['description'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></p>
         </article>
         <aside class="campus-video-list">
+          <h3 class="h5 mb-1 px-1">Video Lessons</h3>
           <?php foreach ($lessons as $lesson): ?>
           <a class="campus-video-item" href="#" data-video-id="<?php echo htmlspecialchars($lesson['youtube_video_id'], ENT_QUOTES, 'UTF-8'); ?>" data-video-title="<?php echo htmlspecialchars($lesson['title'], ENT_QUOTES, 'UTF-8'); ?>" data-video-desc="<?php echo htmlspecialchars((string) ($lesson['description'] ?? ''), ENT_QUOTES, 'UTF-8'); ?>">
             <img src="https://img.youtube.com/vi/<?php echo htmlspecialchars($lesson['youtube_video_id'], ENT_QUOTES, 'UTF-8'); ?>/hqdefault.jpg" alt="<?php echo htmlspecialchars($lesson['title'], ENT_QUOTES, 'UTF-8'); ?>">
