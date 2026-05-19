@@ -410,39 +410,58 @@
   }
 }
 
-/* Two-column mobile courses. */
+/* Compact interactive mobile course cards. */
 @media (max-width: 575px) {
   #courses .row.gy-4:not(.learning-mode-cards) {
     --bs-gutter-x: 12px;
     --bs-gutter-y: 12px;
   }
   #courses .row.gy-4:not(.learning-mode-cards) > [class*="col-"] {
-    width: 50%;
+    width: 33.333333%;
     flex: 0 0 auto;
   }
   #courses .service-item {
-    padding: 18px 10px;
+    padding: 14px 8px 10px;
   }
   #courses .service-item .icon {
-    width: 46px;
-    height: 46px;
-    margin-bottom: 14px;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
   }
   #courses .service-item .icon i {
-    font-size: 20px;
+    font-size: 16px;
   }
   #courses .service-item h3 {
-    font-size: 16px;
-    margin-bottom: 8px;
+    font-size: 13px;
+    margin-bottom: 6px;
   }
   #courses .service-item p {
+    display: none;
     font-size: 12px;
     line-height: 1.35;
+  }
+  #courses .service-item .course-desc-toggle {
+    position: relative;
+    z-index: 3;
+    margin-top: 4px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--gra-navy);
+    font-size: 14px;
+    line-height: 1;
+  }
+  #courses .service-item.is-desc-open p {
+    display: block;
+    margin-top: 6px;
+  }
+  #courses .service-item.is-desc-open .course-desc-toggle {
+    transform: rotate(180deg);
   }
 }
 @media (max-width: 360px) {
   #courses .row.gy-4:not(.learning-mode-cards) > [class*="col-"] {
-    width: 100%;
+    width: 50%;
   }
 }
 

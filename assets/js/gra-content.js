@@ -192,4 +192,59 @@
     });
   }
 
+  let courseCardClickBound = false;
+  const mobileCourseCards = () => {
+    const cards = Array.from(document.querySelectorAll('#courses .row.gy-4:not(.learning-mode-cards) .service-item'));
+    const isMobile = window.matchMedia('(max-width: 575px)').matches;
+
+    cards.forEach((card) => {
+      const desc = card.querySelector('p');
+      const existingToggle = card.querySelector('.course-desc-toggle');
+      if (!desc) return;
+
+      if (!isMobile) {
+        card.classList.remove('is-desc-open');
+        if (existingToggle) existingToggle.remove();
+        return;
+      }
+
+      if (existingToggle) return;
+
+      const toggle = document.createElement('button');
+      toggle.type = 'button';
+      toggle.className = 'course-desc-toggle';
+      toggle.setAttribute('aria-label', 'Show course details');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.innerHTML = '<i class="bi bi-chevron-down"></i>';
+      toggle.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const isOpen = card.classList.toggle('is-desc-open');
+        toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+      card.appendChild(toggle);
+    });
+
+    if (!courseCardClickBound) {
+      document.addEventListener('click', (event) => {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+        const isMobileNow = window.matchMedia('(max-width: 575px)').matches;
+        if (!isMobileNow) return;
+        const activeCard = target.closest('#courses .row.gy-4:not(.learning-mode-cards) .service-item');
+        const currentCards = Array.from(document.querySelectorAll('#courses .row.gy-4:not(.learning-mode-cards) .service-item'));
+        currentCards.forEach((card) => {
+          if (card === activeCard) return;
+          card.classList.remove('is-desc-open');
+          const toggle = card.querySelector('.course-desc-toggle');
+          if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+      courseCardClickBound = true;
+    }
+  };
+
+  mobileCourseCards();
+  window.addEventListener('resize', mobileCourseCards);
+
 })();
