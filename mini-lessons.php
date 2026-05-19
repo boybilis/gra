@@ -3,9 +3,19 @@ declare(strict_types=1);
 
 require_once __DIR__ . '/asset-version.php';
 require_once __DIR__ . '/campus-access.php';
+require_once __DIR__ . '/mini-lessons-library.php';
 
 $email = trim((string) ($_GET['email'] ?? ''));
 $accessGranted = is_booking_email_registered($email);
+$lessons = [];
+$loadError = null;
+if ($accessGranted) {
+    try {
+        $lessons = get_active_mini_lessons();
+    } catch (Throwable $exception) {
+        $loadError = 'Unable to load mini lessons right now.';
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,31 +69,34 @@ $accessGranted = is_booking_email_registered($email);
         <h2>Mini Lessons</h2>
         <p>Watch free lessons from the GRA online campus channel.</p>
       </div>
+      <?php if ($loadError !== null): ?>
+      <div class="campus-gate">
+        <h3>Mini Lessons</h3>
+        <p><?php echo htmlspecialchars($loadError, ENT_QUOTES, 'UTF-8'); ?></p>
+      </div>
+      <?php elseif (count($lessons) === 0): ?>
+      <div class="campus-gate">
+        <h3>No Lessons Yet</h3>
+        <p>Mini lessons will appear here once added by admin.</p>
+      </div>
+      <?php else: ?>
+      <?php $firstLesson = $lessons[0]; ?>
       <div class="campus-video-grid">
         <article class="campus-video-player">
-          <iframe id="campus-main-video" src="https://www.youtube.com/embed/1Q8fG0TtVAY" title="GRA Mini Lesson" allowfullscreen></iframe>
-          <h3 id="campus-main-title" class="mt-3 mb-1">NCLEX Pharmacology Basics</h3>
-          <p id="campus-main-desc" class="mb-0">Build a solid approach to common medication question types.</p>
+          <iframe id="campus-main-video" src="https://www.youtube.com/embed/<?php echo htmlspecialchars($firstLesson['youtube_video_id'], ENT_QUOTES, 'UTF-8'); ?>" title="GRA Mini Lesson" allowfullscreen></iframe>
+          <h3 id="campus-main-title" class="mt-3 mb-1"><?php echo htmlspecialchars($firstLesson['title'], ENT_QUOTES, 'UTF-8'); ?></h3>
+          <p id="campus-main-desc" class="mb-0"><?php echo htmlspecialchars((string) ($firstLesson['description'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></p>
         </article>
         <aside class="campus-video-list">
-          <a class="campus-video-item" href="#" data-video-id="1Q8fG0TtVAY" data-video-title="NCLEX Pharmacology Basics" data-video-desc="Build a solid approach to common medication question types.">
-            <img src="https://img.youtube.com/vi/1Q8fG0TtVAY/hqdefault.jpg" alt="NCLEX Pharmacology Basics">
-            <div><h3>NCLEX Pharmacology Basics</h3><p>Medication safety and high-yield recall tips.</p></div>
+          <?php foreach ($lessons as $lesson): ?>
+          <a class="campus-video-item" href="#" data-video-id="<?php echo htmlspecialchars($lesson['youtube_video_id'], ENT_QUOTES, 'UTF-8'); ?>" data-video-title="<?php echo htmlspecialchars($lesson['title'], ENT_QUOTES, 'UTF-8'); ?>" data-video-desc="<?php echo htmlspecialchars((string) ($lesson['description'] ?? ''), ENT_QUOTES, 'UTF-8'); ?>">
+            <img src="https://img.youtube.com/vi/<?php echo htmlspecialchars($lesson['youtube_video_id'], ENT_QUOTES, 'UTF-8'); ?>/hqdefault.jpg" alt="<?php echo htmlspecialchars($lesson['title'], ENT_QUOTES, 'UTF-8'); ?>">
+            <div><h3><?php echo htmlspecialchars($lesson['title'], ENT_QUOTES, 'UTF-8'); ?></h3><p><?php echo htmlspecialchars((string) ($lesson['description'] ?? ''), ENT_QUOTES, 'UTF-8'); ?></p></div>
           </a>
-          <a class="campus-video-item" href="#" data-video-id="fVY4nJ1xkR8" data-video-title="PNLE Test-Taking Strategy" data-video-desc="A practical framework for timed PNLE questions.">
-            <img src="https://img.youtube.com/vi/fVY4nJ1xkR8/hqdefault.jpg" alt="PNLE Test-Taking Strategy">
-            <div><h3>PNLE Test-Taking Strategy</h3><p>How to avoid traps and eliminate wrong options.</p></div>
-          </a>
-          <a class="campus-video-item" href="#" data-video-id="3fumBcKC6RE" data-video-title="DHA Review Planning" data-video-desc="Plan your weekly DHA review with better retention.">
-            <img src="https://img.youtube.com/vi/3fumBcKC6RE/hqdefault.jpg" alt="DHA Review Planning">
-            <div><h3>DHA Review Planning</h3><p>Create a focused schedule in under 10 minutes.</p></div>
-          </a>
-          <a class="campus-video-item" href="#" data-video-id="J---aiyznGQ" data-video-title="Memory Anchoring for Nursing Exams" data-video-desc="Use quick memory anchors for difficult topics.">
-            <img src="https://img.youtube.com/vi/J---aiyznGQ/hqdefault.jpg" alt="Memory Anchoring">
-            <div><h3>Memory Anchoring</h3><p>Simple techniques to remember core concepts.</p></div>
-          </a>
+          <?php endforeach; ?>
         </aside>
       </div>
+      <?php endif; ?>
     </section>
     <?php endif; ?>
   </main>

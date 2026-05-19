@@ -19,6 +19,16 @@ $accessGranted = is_booking_email_registered($email);
   <link href="<?php echo versioned_asset('assets/css/gra-content.css'); ?>" rel="stylesheet">
 </head>
 <body class="index-page gra-page">
+  <header id="header" class="header sticky-top">
+    <div class="branding d-flex align-items-center">
+      <div class="container position-relative d-flex align-items-center justify-content-end">
+        <a href="index.php" class="logo d-flex align-items-center me-auto">
+          <img src="assets/img/gra/gra-logo.png" alt="Gapuz Review Academy logo">
+        </a>
+        <a class="cta-btn" href="online-campus.php">Back to Online Campus</a>
+      </div>
+    </div>
+  </header>
   <main class="container py-5">
     <?php if (!$accessGranted): ?>
       <h2>Email Verification Needed</h2>

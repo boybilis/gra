@@ -22,3 +22,17 @@ CREATE TABLE IF NOT EXISTS form_submissions (
   INDEX idx_form_submissions_submitted_at (submitted_at),
   INDEX idx_form_submissions_email (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS mini_lessons (
+  id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  title VARCHAR(200) NOT NULL,
+  description TEXT DEFAULT NULL,
+  youtube_url VARCHAR(500) NOT NULL,
+  youtube_video_id VARCHAR(32) NOT NULL,
+  sort_order INT NOT NULL DEFAULT 0,
+  is_active TINYINT(1) NOT NULL DEFAULT 1,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  INDEX idx_mini_lessons_active_sort (is_active, sort_order, id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
