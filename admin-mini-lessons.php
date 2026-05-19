@@ -162,7 +162,7 @@ try {
         <div class="row">
           <div class="col-md-9 mb-3">
             <label for="description" class="form-label">Description</label>
-            <input id="description" name="description" type="text" class="form-control">
+            <textarea id="description" name="description" class="form-control" rows="4"></textarea>
           </div>
           <div class="col-md-3 mb-3">
             <label for="sort_order" class="form-label">Sort Order</label>

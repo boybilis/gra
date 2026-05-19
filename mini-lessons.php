@@ -39,6 +39,7 @@ if ($accessGranted) {
     .campus-video-item { display: grid; grid-template-columns: 118px 1fr; gap: 10px; text-decoration: none; color: #1f2d3d; border: 1px solid rgba(0,48,87,.14); border-radius: 6px; padding: 8px; }
     .campus-video-item img { width: 100%; border-radius: 4px; object-fit: cover; }
     .campus-video-item h3 { font-size: 15px; margin: 0; color: #003057; }
+    #campus-main-desc { white-space: pre-line; }
     .campus-gate { max-width: 760px; margin: 48px auto; background: #fff; border: 1px solid rgba(0,48,87,.16); border-radius: 8px; padding: 24px; text-align: center; }
     @media (max-width: 992px) { .campus-video-grid { grid-template-columns: 1fr; } }
   </style>
