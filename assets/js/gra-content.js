@@ -17,12 +17,17 @@
       button.disabled = true;
       try {
         const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
-        const result = await response.json();
-        if (!response.ok || !result.ok) throw new Error(result.message || 'Submission failed.');
+        let result = null;
+        try {
+          result = await response.json();
+        } catch (_error) {
+          result = null;
+        }
+        if (!response.ok || !result || !result.ok) throw new Error((result && result.message) || 'Please try again');
         form.reset();
         button.textContent = 'Submitted';
       } catch (error) {
-        button.textContent = 'Please try again';
+        button.textContent = error instanceof Error ? error.message : 'Please try again';
       } finally {
         window.setTimeout(() => { button.textContent = originalText; button.disabled = false; }, 2200);
       }
