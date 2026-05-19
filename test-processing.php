@@ -88,29 +88,57 @@ require_once __DIR__ . '/asset-version.php';
     <section class="services section">
       <div class="container section-title" data-aos="fade-up">
         <h2>Processing Coverage</h2>
-        <p>Built to support both first-time applicants and repeat takers who need a clearer process.</p>
+        <p>Our processing team can assist you with the following services.</p>
       </div>
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-4">
           <div class="col-lg-4 col-md-6">
             <div class="service-item position-relative">
               <div class="icon"><i class="fas fa-file-lines"></i></div>
-              <h3>Document Guidance</h3>
-              <p>Understand what to prepare, where to submit, and how to avoid common filing issues.</p>
+              <h3>Licensing Assistance</h3>
+              <p>Guidance on licensing requirements and document preparation.</p>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
             <div class="service-item position-relative">
-              <div class="icon"><i class="fas fa-calendar-check"></i></div>
-              <h3>Scheduling Support</h3>
-              <p>Get help aligning your target exam date with your processing and review timeline.</p>
+              <div class="icon"><i class="fas fa-rotate-left"></i></div>
+              <h3>Reactivation</h3>
+              <p>Support for reactivating licenses and completing required steps.</p>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
             <div class="service-item position-relative">
-              <div class="icon"><i class="fas fa-headset"></i></div>
-              <h3>Ongoing Follow-Up</h3>
-              <p>Receive updates and reminders so your next required step is always clear and timely.</p>
+              <div class="icon"><i class="fas fa-id-card"></i></div>
+              <h3>License By Endorsement</h3>
+              <p>Assistance for endorsement pathways and application processing.</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="service-item position-relative">
+              <div class="icon"><i class="fas fa-certificate"></i></div>
+              <h3>Visa Screen</h3>
+              <p>Help with VisaScreen requirements, document flow, and updates.</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="service-item position-relative">
+              <div class="icon"><i class="fas fa-comments"></i></div>
+              <h3>Consultancy</h3>
+              <p>Professional guidance for exam pathway and processing planning.</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="service-item position-relative">
+              <div class="icon"><i class="fas fa-ticket"></i></div>
+              <h3>ATT</h3>
+              <p>Support for ATT-related processing and timeline follow-up.</p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="service-item position-relative">
+              <div class="icon"><i class="fas fa-screwdriver-wrench"></i></div>
+              <h3>Trouble Shooting</h3>
+              <p>Resolution support for common processing blockers and delays.</p>
             </div>
           </div>
         </div>
