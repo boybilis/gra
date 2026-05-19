@@ -127,56 +127,48 @@ require_once __DIR__ . '/asset-version.php';
         <div class="row gy-4">
           <div class="col-lg-3 col-md-6">
             <div class="service-item position-relative">
-              <div class="icon"><i class="fas fa-vials"></i></div>
               <h3>Test Processing</h3>
               <p>End-to-end assistance for test processing requirements and submission flow.</p>
             </div>
           </div>
           <div class="col-lg-3 col-md-6">
             <div class="service-item position-relative">
-              <div class="icon"><i class="fas fa-file-lines"></i></div>
               <h3>Licensing Assistance</h3>
               <p>Guidance on licensing requirements and document preparation.</p>
             </div>
           </div>
           <div class="col-lg-3 col-md-6">
             <div class="service-item position-relative">
-              <div class="icon"><i class="fas fa-rotate-left"></i></div>
               <h3>Reactivation</h3>
               <p>Support for reactivating licenses and completing required steps.</p>
             </div>
           </div>
           <div class="col-lg-3 col-md-6">
             <div class="service-item position-relative">
-              <div class="icon"><i class="fas fa-id-card"></i></div>
               <h3>License By Endorsement</h3>
               <p>Assistance for endorsement pathways and application processing.</p>
             </div>
           </div>
           <div class="col-lg-3 col-md-6">
             <div class="service-item position-relative">
-              <div class="icon"><i class="fas fa-certificate"></i></div>
               <h3>Visa Screen</h3>
               <p>Help with VisaScreen requirements, document flow, and updates.</p>
             </div>
           </div>
           <div class="col-lg-3 col-md-6">
             <div class="service-item position-relative">
-              <div class="icon"><i class="fas fa-comments"></i></div>
               <h3>Consultancy</h3>
               <p>Professional guidance for exam pathway and processing planning.</p>
             </div>
           </div>
           <div class="col-lg-3 col-md-6">
             <div class="service-item position-relative">
-              <div class="icon"><i class="fas fa-ticket"></i></div>
               <h3>ATT</h3>
               <p>Support for ATT-related processing and timeline follow-up.</p>
             </div>
           </div>
           <div class="col-lg-3 col-md-6">
             <div class="service-item position-relative">
-              <div class="icon"><i class="fas fa-screwdriver-wrench"></i></div>
               <h3>Trouble Shooting</h3>
               <p>Resolution support for common processing blockers and delays.</p>
             </div>
