@@ -20,8 +20,15 @@ require_once __DIR__ . '/asset-version.php';
   <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
   <link href="<?php echo versioned_asset('assets/css/main.css'); ?>" rel="stylesheet">
   <link href="<?php echo versioned_asset('assets/css/gra-content.css'); ?>" rel="stylesheet">
+  <style>
+    /* Fallback: keep content visible even if AOS JS does not initialize. */
+    .test-processing-page [data-aos] {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  </style>
 </head>
-<body class="index-page gra-page">
+<body class="index-page gra-page test-processing-page">
   <header id="header" class="header sticky-top">
     <div class="topbar d-flex align-items-center">
       <div class="container d-flex justify-content-center justify-content-md-between">
