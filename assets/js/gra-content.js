@@ -80,6 +80,19 @@
         form.reset();
         formOtpState.delete(form);
         button.textContent = 'Submitted';
+
+        const formTypeInput = form.querySelector('input[name="form_type"]');
+        const formType = formTypeInput && 'value' in formTypeInput ? String(formTypeInput.value).trim() : '';
+        const campusAccessSection = document.getElementById('campus-access');
+        if (formType === 'booking' && campusAccessSection) {
+          campusAccessSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          if (!campusAccessSection.hasAttribute('tabindex')) {
+            campusAccessSection.setAttribute('tabindex', '-1');
+          }
+          window.setTimeout(() => {
+            campusAccessSection.focus();
+          }, 350);
+        }
       } catch (error) {
         formOtpState.delete(form);
         button.textContent = error instanceof Error ? error.message : 'Please try again';
@@ -153,6 +166,24 @@
       if (kind === 'success') campusStatus.classList.add('is-success');
     };
 
+    const focusFreeResources = () => {
+      const resourcesSection = document.getElementById('free-resources');
+      const firstResourceLink = document.querySelector('#free-resources [data-campus-resource]');
+      if (resourcesSection) {
+        resourcesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (!resourcesSection.hasAttribute('tabindex')) {
+          resourcesSection.setAttribute('tabindex', '-1');
+        }
+        window.setTimeout(() => {
+          if (firstResourceLink instanceof HTMLElement) {
+            firstResourceLink.focus();
+          } else {
+            resourcesSection.focus();
+          }
+        }, 350);
+      }
+    };
+
     const setResourcesUnlocked = (email) => {
       resourceLinks.forEach((link) => {
         const baseHref = link.dataset.resourceHref || link.getAttribute('href') || '#';
@@ -206,6 +237,7 @@
         .then((result) => {
           setResourcesUnlocked(rememberedEmail);
           setCampusStatus(result.message || 'Email verified. Resources unlocked.', 'success');
+          focusFreeResources();
         })
         .catch(() => {
           window.localStorage.removeItem(storageKey);
@@ -234,6 +266,7 @@
         window.localStorage.setItem(storageKey, email);
         setResourcesUnlocked(email);
         setCampusStatus(result.message || 'Email verified. Resources unlocked.', 'success');
+        focusFreeResources();
       } catch (error) {
         window.localStorage.removeItem(storageKey);
         setResourcesLocked();
