@@ -59,6 +59,37 @@ require_once __DIR__ . '/asset-version.php';
       font-size: 28px;
       line-height: 1;
     }
+    .test-processing-page .btn.btn-primary {
+      background: var(--accent-color);
+      border-color: var(--accent-color);
+      color: #fff;
+    }
+    .test-processing-page .btn.btn-primary:hover,
+    .test-processing-page .btn.btn-primary:focus {
+      background: #f37507;
+      border-color: #f37507;
+      color: #fff;
+    }
+    @media (max-width: 575px) {
+      .test-processing-page .processing-steps .row > [class*="col-"] {
+        width: 50%;
+        flex: 0 0 auto;
+      }
+      .test-processing-page .processing-steps .row {
+        --bs-gutter-x: 12px;
+        --bs-gutter-y: 12px;
+      }
+      .test-processing-page .processing-steps .icon-box {
+        padding: 12px;
+      }
+      .test-processing-page .processing-steps .icon-box h4 {
+        font-size: 14px;
+      }
+      .test-processing-page .processing-steps .icon-box p {
+        font-size: 12px;
+        line-height: 1.35;
+      }
+    }
   </style>
 </head>
 <body class="index-page gra-page test-processing-page">
@@ -177,7 +208,7 @@ require_once __DIR__ . '/asset-version.php';
       </div>
     </section>
 
-    <section class="features section light-background">
+    <section class="features section light-background processing-steps">
       <div class="container section-title" data-aos="fade-up">
         <h2>How It Works</h2>
         <p>A clear processing flow designed to reduce delays and confusion.</p>
