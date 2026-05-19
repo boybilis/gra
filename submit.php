@@ -128,12 +128,28 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 
 try {
     $database = get_database();
-    $statement = $database->prepare(
-        'INSERT INTO form_submissions
-            (form_type, name, email, phone, course, preferred_date, review_setup, message, ip_address, user_agent)
-         VALUES
-            (:form_type, :name, :email, :phone, :course, :preferred_date, :review_setup, :message, :ip_address, :user_agent)'
-    );
+
+    if ($formType === 'booking') {
+        $statement = $database->prepare(
+            'INSERT INTO form_submissions
+                (form_type, name, email, phone, course, preferred_date, review_setup, message, ip_address, user_agent)
+             SELECT
+                :form_type, :name, :email, :phone, :course, :preferred_date, :review_setup, :message, :ip_address, :user_agent
+             WHERE NOT EXISTS (
+                SELECT 1
+                FROM form_submissions
+                WHERE form_type = :form_type
+                  AND LOWER(TRIM(email)) = LOWER(TRIM(:email))
+             )'
+        );
+    } else {
+        $statement = $database->prepare(
+            'INSERT INTO form_submissions
+                (form_type, name, email, phone, course, preferred_date, review_setup, message, ip_address, user_agent)
+             VALUES
+                (:form_type, :name, :email, :phone, :course, :preferred_date, :review_setup, :message, :ip_address, :user_agent)'
+        );
+    }
 
     $statement->execute([
         ':form_type' => $formType,
@@ -147,6 +163,12 @@ try {
         ':ip_address' => $ipAddress !== '' ? $ipAddress : null,
         ':user_agent' => $userAgent !== '' ? $userAgent : null,
     ]);
+
+    if ($formType === 'booking' && $statement->rowCount() === 0) {
+        http_response_code(409);
+        echo json_encode(['ok' => false, 'message' => 'This email is already registered.']);
+        exit;
+    }
 } catch (Throwable $exception) {
     http_response_code(500);
     echo json_encode(['ok' => false, 'message' => 'Unable to save submission.']);
