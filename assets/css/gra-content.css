@@ -574,6 +574,18 @@
   border-color: #d96600;
   color: #fff;
 }
+.footer-stick-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.footer-stick-page main,
+.footer-stick-page .main {
+  flex: 1 0 auto;
+}
+.footer-stick-page .footer {
+  margin-top: auto;
+}
 #free-resources .campus-resource-card.is-locked .campus-resource-link {
   background: #9daab6;
   pointer-events: none;

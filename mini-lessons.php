@@ -44,7 +44,7 @@ if ($accessGranted) {
     @media (max-width: 992px) { .campus-video-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
-<body class="index-page gra-page campus-video-page">
+<body class="index-page gra-page campus-video-page footer-stick-page">
   <header id="header" class="header sticky-top">
     <div class="topbar d-flex align-items-center">
       <div class="container d-flex justify-content-center justify-content-md-between">
@@ -131,4 +131,5 @@ if ($accessGranted) {
   </script>
 </body>
 </html>
+
 

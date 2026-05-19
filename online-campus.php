@@ -23,7 +23,7 @@
   <link href="<?php echo versioned_asset('assets/css/gra-content.css'); ?>" rel="stylesheet">
 </head>
 
-<body class="index-page gra-page">
+<body class="index-page gra-page footer-stick-page">
   <header id="header" class="header sticky-top">
     <div class="topbar d-flex align-items-center">
       <div class="container d-flex justify-content-center justify-content-md-between">
@@ -123,4 +123,5 @@
   <script src="<?php echo versioned_asset('assets/js/gra-content.js'); ?>"></script>
 </body>
 </html>
+
 

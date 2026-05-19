@@ -18,7 +18,7 @@ $accessGranted = is_booking_email_registered($email);
   <link href="<?php echo versioned_asset('assets/css/main.css'); ?>" rel="stylesheet">
   <link href="<?php echo versioned_asset('assets/css/gra-content.css'); ?>" rel="stylesheet">
 </head>
-<body class="index-page gra-page">
+<body class="index-page gra-page footer-stick-page">
   <header id="header" class="header sticky-top">
     <div class="branding d-flex align-items-center">
       <div class="container position-relative d-flex align-items-center justify-content-end">
@@ -48,3 +48,4 @@ $accessGranted = is_booking_email_registered($email);
   </footer>
 </body>
 </html>
+
