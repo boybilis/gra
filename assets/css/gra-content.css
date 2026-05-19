@@ -465,6 +465,36 @@
   box-shadow: none;
   text-shadow: none;
 }
+#free-resources .campus-resource-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+  padding: 8px 14px;
+  background: var(--accent-color);
+  color: #fff;
+  font-weight: 700;
+  border-radius: 4px;
+  text-decoration: none;
+}
+#free-resources .campus-resource-card.is-locked .campus-resource-link {
+  background: #9daab6;
+  pointer-events: none;
+}
+#free-resources .campus-resource-card.is-locked {
+  opacity: .82;
+}
+.campus-access-status {
+  margin: 14px 0 0;
+  font-weight: 600;
+  color: var(--gra-navy);
+}
+.campus-access-status.is-error {
+  color: #b3261e;
+}
+.campus-access-status.is-success {
+  color: #1f7a35;
+}
 #free-courses .free-register-card {
   background: var(--gra-navy);
 }

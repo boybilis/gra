@@ -83,4 +83,113 @@
     showTestimonialSlide(0);
   }
 
+  const campusAccessForm = document.getElementById('campus-access-form');
+  if (campusAccessForm) {
+    const campusEmailInput = document.getElementById('campus-access-email');
+    const campusStatus = document.getElementById('campus-access-status');
+    const resourceLinks = Array.from(document.querySelectorAll('[data-campus-resource]'));
+    const storageKey = 'graCampusAccessEmail';
+
+    const setCampusStatus = (message, kind) => {
+      if (!campusStatus) return;
+      campusStatus.textContent = message;
+      campusStatus.classList.remove('is-error', 'is-success');
+      if (kind === 'error') campusStatus.classList.add('is-error');
+      if (kind === 'success') campusStatus.classList.add('is-success');
+    };
+
+    const setResourcesUnlocked = (email) => {
+      resourceLinks.forEach((link) => {
+        const baseHref = link.dataset.resourceHref || link.getAttribute('href') || '#';
+        link.href = `${baseHref}?email=${encodeURIComponent(email)}`;
+        link.setAttribute('aria-disabled', 'false');
+        link.closest('.campus-resource-card')?.classList.remove('is-locked');
+      });
+    };
+
+    const setResourcesLocked = () => {
+      resourceLinks.forEach((link) => {
+        link.href = '#';
+        link.setAttribute('aria-disabled', 'true');
+        link.closest('.campus-resource-card')?.classList.add('is-locked');
+      });
+    };
+
+    const verifyCampusEmail = async (email) => {
+      const formData = new FormData();
+      formData.append('email', email);
+
+      const response = await fetch(campusAccessForm.action, {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' },
+      });
+
+      const result = await response.json();
+      if (!response.ok || !result.ok || !result.registered) {
+        throw new Error(result.message || 'Email verification failed.');
+      }
+
+      return result;
+    };
+
+    setResourcesLocked();
+
+    resourceLinks.forEach((link) => {
+      link.addEventListener('click', (event) => {
+        if (link.getAttribute('aria-disabled') === 'true') {
+          event.preventDefault();
+          setCampusStatus('Verify your registered email to unlock free resources.', 'error');
+        }
+      });
+    });
+
+    const rememberedEmail = window.localStorage.getItem(storageKey);
+    if (rememberedEmail && campusEmailInput) {
+      campusEmailInput.value = rememberedEmail;
+      verifyCampusEmail(rememberedEmail)
+        .then((result) => {
+          setResourcesUnlocked(rememberedEmail);
+          setCampusStatus(result.message || 'Email verified. Resources unlocked.', 'success');
+        })
+        .catch(() => {
+          window.localStorage.removeItem(storageKey);
+          setResourcesLocked();
+        });
+    }
+
+    campusAccessForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const email = (campusEmailInput?.value || '').trim();
+      if (!email) {
+        setResourcesLocked();
+        setCampusStatus('Please enter your email first.', 'error');
+        return;
+      }
+
+      const submitButton = document.getElementById('campus-access-submit');
+      const originalText = submitButton ? submitButton.textContent : '';
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Verifying...';
+      }
+
+      try {
+        const result = await verifyCampusEmail(email);
+        window.localStorage.setItem(storageKey, email);
+        setResourcesUnlocked(email);
+        setCampusStatus(result.message || 'Email verified. Resources unlocked.', 'success');
+      } catch (error) {
+        window.localStorage.removeItem(storageKey);
+        setResourcesLocked();
+        setCampusStatus(error instanceof Error ? error.message : 'Unable to verify email right now.', 'error');
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalText;
+        }
+      }
+    });
+  }
+
 })();

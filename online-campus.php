@@ -72,17 +72,37 @@
       </div>
     </section>
 
+    <section id="campus-access" class="appointment section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Unlock Free Resources</h2>
+        <p>Enter the same email you used when you registered your Online Campus interest.</p>
+      </div>
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <form id="campus-access-form" class="gra-medicio-form" action="check-booking-access.php" method="post" novalidate>
+          <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-8 form-group">
+              <input id="campus-access-email" type="email" name="email" class="form-control" placeholder="Registered email address" required>
+            </div>
+            <div class="col-lg-3 col-md-4 form-group mt-3 mt-md-0 text-center text-md-start">
+              <button id="campus-access-submit" type="submit">Verify Email</button>
+            </div>
+          </div>
+          <p id="campus-access-status" class="campus-access-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
     <section id="free-resources" class="featured-services section">
       <div class="container"><div class="row gy-4">
-        <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100"><div class="service-item position-relative"><div class="icon"><i class="fas fa-book-open icon"></i></div><h4>Free Mini Lessons</h4><p>Preview GRA's learning style with focused introductory lessons.</p></div></div>
-        <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200"><div class="service-item position-relative"><div class="icon"><i class="fas fa-clipboard-question icon"></i></div><h4>Practice Quizzes</h4><p>Check readiness and reinforce review topics through quick quizzes.</p></div></div>
-        <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300"><div class="service-item position-relative"><div class="icon"><i class="fas fa-file-arrow-down icon"></i></div><h4>Downloadable Notes</h4><p>Keep review reminders and topic summaries within reach.</p></div></div>
-        <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="400"><div class="service-item position-relative"><div class="icon"><i class="fas fa-display icon"></i></div><h4>Orientation Webinar</h4><p>Learn how to choose the right review program and setup.</p></div></div>
+        <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100"><div class="service-item position-relative campus-resource-card is-locked"><div class="icon"><i class="fas fa-book-open icon"></i></div><h4>Free Mini Lessons</h4><p>Preview GRA's learning style with focused introductory lessons.</p><a class="campus-resource-link" data-campus-resource data-resource-href="mini-lessons.php" href="mini-lessons.php" aria-disabled="true">Open Mini Lessons</a></div></div>
+        <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200"><div class="service-item position-relative campus-resource-card is-locked"><div class="icon"><i class="fas fa-clipboard-question icon"></i></div><h4>Practice Quizzes</h4><p>Check readiness and reinforce review topics through quick quizzes.</p><a class="campus-resource-link" data-campus-resource data-resource-href="practice-quizzes.php" href="practice-quizzes.php" aria-disabled="true">Open Practice Quizzes</a></div></div>
+        <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300"><div class="service-item position-relative campus-resource-card is-locked"><div class="icon"><i class="fas fa-file-arrow-down icon"></i></div><h4>Downloadable Notes</h4><p>Keep review reminders and topic summaries within reach.</p><a class="campus-resource-link" data-campus-resource data-resource-href="downloadable-notes.php" href="downloadable-notes.php" aria-disabled="true">Open Downloadable Notes</a></div></div>
+        <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="400"><div class="service-item position-relative campus-resource-card is-locked"><div class="icon"><i class="fas fa-display icon"></i></div><h4>Orientation Webinar</h4><p>Learn how to choose the right review program and setup.</p><a class="campus-resource-link" data-campus-resource data-resource-href="orientation-webinar.php" href="orientation-webinar.php" aria-disabled="true">Open Orientation Webinar</a></div></div>
       </div></div>
     </section>
 
     <section id="course-enroll" class="appointment section light-background">
-      <div class="container section-title" data-aos="fade-up"><h2>Register Your Interest</h2><p>A GRA adviser can follow up with free course and enrollment details.</p></div>
+      <div class="container section-title" data-aos="fade-up"><h2>Register for Free Course Access</h2><p>A GRA adviser can follow up with free course and enrollment details.</p></div>
       <div class="container" data-aos="fade-up" data-aos-delay="100"><form action="submit.php" method="post" role="form" class="site-form gra-medicio-form"><input type="hidden" name="form_type" value="booking"><div class="row"><div class="col-md-4 form-group"><input type="text" name="name" class="form-control" placeholder="Full Name" required></div><div class="col-md-4 form-group mt-3 mt-md-0"><input type="email" class="form-control" name="email" placeholder="Email" required></div><div class="col-md-4 form-group mt-3 mt-md-0"><input type="tel" class="form-control" name="phone" placeholder="Mobile / Messaging App" required></div></div><div class="form-group mt-3"><textarea class="form-control" name="message" rows="5" placeholder="Questions or notes"></textarea></div><div class="mt-3 text-center"><button type="submit">Submit Registration Interest</button></div></form></div>
     </section>
   </main>
@@ -119,7 +139,6 @@
   <script src="<?php echo versioned_asset('assets/js/gra-content.js'); ?>"></script>
 </body>
 </html>
-
 
 
 
