@@ -18,6 +18,7 @@ require_once __DIR__ . '/asset-version.php';
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="<?php echo versioned_asset('assets/css/main.css'); ?>" rel="stylesheet">
   <link href="<?php echo versioned_asset('assets/css/gra-content.css'); ?>" rel="stylesheet">
   <style>
@@ -254,6 +255,82 @@ require_once __DIR__ . '/asset-version.php';
         </div>
       </div>
     </section>
+    <section id="processing-testimonials" class="featured-passers section light-background">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Processing Testimonials</h2>
+        <p>Recent licensing milestones from our test processing clients.</p>
+      </div>
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <?php
+          $processingDir = __DIR__ . '/assets/img/gra/processing';
+          $processingImages = [];
+          if (is_dir($processingDir)) {
+            $processingEntries = scandir($processingDir);
+            if (is_array($processingEntries)) {
+              natcasesort($processingEntries);
+              foreach ($processingEntries as $processingEntry) {
+                if ($processingEntry === '.' || $processingEntry === '..') {
+                  continue;
+                }
+                $processingImagePath = $processingDir . '/' . $processingEntry;
+                if (!is_file($processingImagePath)) {
+                  continue;
+                }
+                $processingExt = strtolower((string) pathinfo($processingEntry, PATHINFO_EXTENSION));
+                if (!in_array($processingExt, ['jpg', 'jpeg', 'png', 'webp'], true)) {
+                  continue;
+                }
+                $processingImageName = pathinfo($processingEntry, PATHINFO_FILENAME);
+                $processingImageLabel = ucwords(str_replace(['-', '_'], ' ', $processingImageName));
+                $processingImages[] = [
+                  'url' => 'assets/img/gra/processing/' . rawurlencode($processingEntry),
+                  'label' => $processingImageLabel !== '' ? $processingImageLabel : 'Processing Testimonial',
+                ];
+              }
+            }
+          }
+          $processingImageCount = count($processingImages);
+          $processingDesktopSlides = 4;
+          $processingTabletSlides = 2;
+          $processingSwiperConfig = [
+            'loop' => $processingImageCount > $processingDesktopSlides,
+            'speed' => 600,
+            'autoplay' => $processingImageCount > 1 ? ['delay' => 4200] : false,
+            'slidesPerView' => 1,
+            'spaceBetween' => 16,
+            'pagination' => [
+              'el' => '.swiper-pagination',
+              'clickable' => true,
+            ],
+            'breakpoints' => [
+              '768' => ['slidesPerView' => $processingTabletSlides, 'spaceBetween' => 18],
+              '1200' => ['slidesPerView' => $processingDesktopSlides, 'spaceBetween' => 20],
+            ],
+          ];
+        ?>
+        <?php if ($processingImageCount > 0): ?>
+        <div class="swiper init-swiper featured-passers-swiper">
+          <script type="application/json" class="swiper-config"><?php echo json_encode($processingSwiperConfig, JSON_UNESCAPED_SLASHES); ?></script>
+          <div class="swiper-wrapper">
+            <?php foreach ($processingImages as $processingImage): ?>
+            <div class="swiper-slide">
+              <article class="featured-passer-card">
+                <img src="<?php echo htmlspecialchars($processingImage['url'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($processingImage['label'], ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
+                <div class="featured-passer-meta">
+                  <h3><?php echo htmlspecialchars($processingImage['label'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                  <p>GRA Processing</p>
+                </div>
+              </article>
+            </div>
+            <?php endforeach; ?>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+        <?php else: ?>
+        <p class="text-center mb-0">No processing testimonials uploaded yet.</p>
+        <?php endif; ?>
+      </div>
+    </section>
 
     <section class="about section light-background">
       <div class="container section-title" data-aos="fade-up">
@@ -486,7 +563,34 @@ require_once __DIR__ . '/asset-version.php';
 
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
+  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
   <script src="<?php echo versioned_asset('assets/js/main.js'); ?>"></script>
   <script src="<?php echo versioned_asset('assets/js/gra-content.js'); ?>"></script>
+  <script>
+    (function () {
+      function initProcessingTestimonials() {
+        if (typeof Swiper === 'undefined') return;
+        var carousel = document.querySelector('#processing-testimonials .init-swiper');
+        if (!carousel || carousel.classList.contains('is-swiper-ready')) return;
+        var configNode = carousel.querySelector('.swiper-config');
+        if (!configNode) return;
+        try {
+          var config = JSON.parse(configNode.textContent.trim());
+          new Swiper(carousel, config);
+          carousel.classList.add('is-swiper-ready');
+        } catch (e) {
+          console.error('Processing testimonials swiper config error', e);
+        }
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initProcessingTestimonials);
+      } else {
+        initProcessingTestimonials();
+      }
+      window.addEventListener('load', initProcessingTestimonials);
+    })();
+  </script>
 </body>
 </html>
