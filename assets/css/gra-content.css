@@ -729,9 +729,7 @@
   cursor: zoom-in;
 }
 .featured-passers .featured-passer-meta {
-  padding: 16px 18px 18px;
-  text-align: center;
-  margin-top: auto;
+  display: none;
 }
 .featured-passers .featured-passer-meta h3 {
   margin: 0 0 6px;

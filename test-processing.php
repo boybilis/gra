@@ -18,6 +18,7 @@ require_once __DIR__ . '/asset-version.php';
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="<?php echo versioned_asset('assets/css/main.css'); ?>" rel="stylesheet">
   <link href="<?php echo versioned_asset('assets/css/gra-content.css'); ?>" rel="stylesheet">
@@ -315,11 +316,9 @@ require_once __DIR__ . '/asset-version.php';
             <?php foreach ($processingImages as $processingImage): ?>
             <div class="swiper-slide">
               <article class="featured-passer-card">
-                <img src="<?php echo htmlspecialchars($processingImage['url'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($processingImage['label'], ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
-                <div class="featured-passer-meta">
-                  <h3><?php echo htmlspecialchars($processingImage['label'], ENT_QUOTES, 'UTF-8'); ?></h3>
-                  <p>GRA Processing</p>
-                </div>
+                <a href="<?php echo htmlspecialchars($processingImage['url'], ENT_QUOTES, 'UTF-8'); ?>" class="glightbox" data-gallery="processing-testimonials" data-title="<?php echo htmlspecialchars($processingImage['label'], ENT_QUOTES, 'UTF-8'); ?>">
+                  <img src="<?php echo htmlspecialchars($processingImage['url'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($processingImage['label'], ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
+                </a>
               </article>
             </div>
             <?php endforeach; ?>
