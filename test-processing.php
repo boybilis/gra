@@ -248,9 +248,9 @@ require_once __DIR__ . '/asset-version.php';
             <h2>Your Fast, Reliable Path to NCLEX &amp; International Nursing Licensure</h2>
             <p>From credential evaluation to exam eligibility, <b> GRA Test Processing </b>guides you every step of the way&#8212;so you can focus on passing.</p>
             <div class="d-flex flex-column flex-md-row justify-content-center gap-2 gap-md-3 mt-3 processing-hero-actions">
-              <a href="index.php#enroll" class="btn btn-primary">Book a Free Consultation</a>
+              <a href="#processing-consultation" class="btn btn-primary">Book a Free Consultation</a>
               <a href="test-processing.php#processing-packages" class="btn btn-processing-blue">View Processing Packages</a>
-              <a href="index.php#enroll" class="btn btn-primary">Start My Application</a>
+              <a href="#processing-consultation" class="btn btn-primary">Start My Application</a>
             </div>
           </div>
         </div>
@@ -509,7 +509,7 @@ require_once __DIR__ . '/asset-version.php';
       </div>
     </section>
 
-    <section class="appointment section">
+    <section id="processing-consultation" class="appointment section">
       <div class="container section-title" data-aos="fade-up">
         <span class="eyebrow">Book a Consultation</span>
         <h2>Not Sure Which Pathway Is Best?</h2>
@@ -518,6 +518,14 @@ require_once __DIR__ . '/asset-version.php';
       <div class="container processing-consultation-wrap" data-aos="fade-up" data-aos-delay="100">
         <form action="submit-processing.php" method="post" role="form" class="site-form gra-medicio-form processing-consultation-form">
           <input type="hidden" name="form_type" value="processing_consultation">
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <select name="inquiry_type" class="form-control" required>
+                <option value="Consultation" selected>Inquiry Type: Consultation</option>
+                <option value="Application">Inquiry Type: Application</option>
+              </select>
+            </div>
+          </div>
           <div class="row">
             <div class="col-md-6 form-group">
               <input type="text" name="name" class="form-control" placeholder="Name" required>

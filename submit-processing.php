@@ -35,6 +35,7 @@ function e(string $value): string
 $name = clean_value('name');
 $email = clean_value('email');
 $phone = clean_value('phone');
+$inquiryType = clean_value('inquiry_type');
 $country = clean_value('country');
 $licenseCountry = clean_value('license_country');
 $targetCountry = clean_value('target_country');
@@ -54,6 +55,10 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     http_response_code(422);
     echo json_encode(['ok' => false, 'message' => 'Please enter a valid email address.']);
     exit;
+}
+
+if ($inquiryType === '' || !in_array($inquiryType, ['Consultation', 'Application'], true)) {
+    $inquiryType = 'Consultation';
 }
 
 try {
@@ -77,11 +82,12 @@ try {
     $mail->setFrom(MAIL_FROM_EMAIL, MAIL_FROM_NAME);
     $mail->addAddress('processing@gratestprepworldwide.com', 'GRA Processing Team');
     $mail->addReplyTo($email, $name);
-    $mail->Subject = 'New Test Processing Consultation Submission';
+    $mail->Subject = 'New Test Processing ' . $inquiryType . ' Submission';
 
     $rows = [
         'Submitted At' => $submittedAt,
         'Form Type' => $formType !== '' ? $formType : 'processing_consultation',
+        'Inquiry Type' => $inquiryType,
         'Name' => $name,
         'Email' => $email,
         'Mobile / WhatsApp' => $phone,
@@ -106,11 +112,11 @@ try {
 
     $mail->isHTML(true);
     $mail->Body = '<div style="font-family:Arial,sans-serif;color:#1f2d3d;">'
-        . '<h2 style="color:#0a486f;">New Test Processing Consultation</h2>'
+        . '<h2 style="color:#0a486f;">New Test Processing ' . e($inquiryType) . '</h2>'
         . '<table style="border-collapse:collapse;width:100%;max-width:720px;">' . $htmlRows . '</table>'
         . '</div>';
 
-    $plain = "New Test Processing Consultation\n\n";
+    $plain = "New Test Processing " . $inquiryType . "\n\n";
     foreach ($rows as $label => $value) {
         if ($value === '') {
             continue;
@@ -126,4 +132,4 @@ try {
     exit;
 }
 
-echo json_encode(['ok' => true, 'message' => 'Consultation request submitted.']);
+echo json_encode(['ok' => true, 'message' => $inquiryType . ' request submitted.']);
