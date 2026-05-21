@@ -97,7 +97,7 @@
             <?php foreach ($coursePassers as $passerImage): $passerAlt = htmlspecialchars(($passerImage['name'] ?? 'GRA passer') . ' testimonial poster', ENT_QUOTES, 'UTF-8'); $passerUrl = htmlspecialchars($passerImage['url'], ENT_QUOTES, 'UTF-8'); ?>
             <div class="swiper-slide">
               <article class="featured-passer-card">
-                <a href="<?php echo $passerUrl; ?>" class="glightbox" data-gallery="prometric-passers" data-title="<?php echo $passerAlt; ?>">
+                <a href="<?php echo $passerUrl; ?>" class="glightbox" data-gallery="prometric-passers">
                   <img src="<?php echo $passerUrl; ?>" alt="<?php echo $passerAlt; ?>" loading="lazy" decoding="async">
                 </a>
               </article>
