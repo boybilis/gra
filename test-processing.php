@@ -199,6 +199,31 @@ require_once __DIR__ . '/asset-version.php';
       flex-direction: column;
       gap: 8px;
     }
+    .test-processing-page .floating-contact-toggle {
+      width: 44px;
+      height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 50%;
+      background: #003057;
+      color: #fff;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+    }
+    .test-processing-page .floating-contact-toggle i {
+      font-size: 18px;
+      line-height: 1;
+    }
+    .test-processing-page .floating-contact-actions {
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .test-processing-page .floating-contact-stack.is-open .floating-contact-actions {
+      display: flex;
+    }
     .test-processing-page .floating-contact-stack a {
       width: 44px;
       height: 44px;
@@ -734,12 +759,17 @@ require_once __DIR__ . '/asset-version.php';
     </div>
   </footer>
 
-  <div class="floating-contact-stack" aria-label="Floating contact actions">
-    <a href="tel:0285599060" aria-label="Call GRA"><i class="bi bi-telephone"></i></a>
-    <a href="https://wa.me/639285599060" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="bi bi-whatsapp"></i></a>
-    <a href="https://m.me/gapuzreviewacademyofficial" target="_blank" rel="noopener" aria-label="Open Messenger"><i class="bi bi-messenger"></i></a>
-    <a href="#processing-consultation" aria-label="Book consultation"><i class="bi bi-calendar-check"></i></a>
-    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center" aria-label="Scroll to top"><i class="bi bi-arrow-up-short"></i></a>
+  <div class="floating-contact-stack" id="floating-contact-stack" aria-label="Floating contact actions">
+    <button type="button" class="floating-contact-toggle" id="floating-contact-toggle" aria-label="Open contact actions" aria-expanded="false">
+      <i class="bi bi-three-dots-vertical"></i>
+    </button>
+    <div class="floating-contact-actions" id="floating-contact-actions">
+      <a href="tel:0285599060" aria-label="Call GRA"><i class="bi bi-telephone"></i></a>
+      <a href="https://wa.me/639285599060" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="bi bi-whatsapp"></i></a>
+      <a href="https://m.me/gapuzreviewacademyofficial" target="_blank" rel="noopener" aria-label="Open Messenger"><i class="bi bi-messenger"></i></a>
+      <a href="#processing-consultation" aria-label="Book consultation"><i class="bi bi-calendar-check"></i></a>
+      <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center" aria-label="Scroll to top"><i class="bi bi-arrow-up-short"></i></a>
+    </div>
   </div>
   <div id="preloader"></div>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -786,6 +816,15 @@ require_once __DIR__ . '/asset-version.php';
         initProcessingTestimonials();
         initProcessingLightbox();
       });
+
+      var floatingToggle = document.getElementById('floating-contact-toggle');
+      var floatingStack = document.getElementById('floating-contact-stack');
+      if (floatingToggle && floatingStack) {
+        floatingToggle.addEventListener('click', function () {
+          var isOpen = floatingStack.classList.toggle('is-open');
+          floatingToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        });
+      }
     })();
   </script>
 </body>
