@@ -140,39 +140,55 @@ require_once __DIR__ . '/asset-version.php';
       border-radius: 12px;
       min-height: 0;
       padding: 10px 12px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.05);
+      box-shadow: none;
     }
     .test-processing-page .processing-steps .row {
       --bs-gutter-x: 12px;
       --bs-gutter-y: 12px;
     }
+    .test-processing-page .processing-steps .section-title {
+      padding-bottom: 8px;
+      margin-bottom: 0;
+    }
+    .test-processing-page .processing-steps .container[data-aos][data-aos-delay="100"] {
+      margin-top: 6px;
+    }
     .test-processing-page .processing-steps .row > div:nth-child(even) .icon-box {
       border-left-color: #ff6e11;
     }
     .test-processing-page .processing-steps .step-icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
+      width: 58px;
+      height: 58px;
+      min-width: 58px;
+      min-height: 58px;
+      max-width: 58px;
+      max-height: 58px;
+      border-radius: 999px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       background: #fff;
       color: #003057;
-      flex: 0 0 46px;
+      flex: 0 0 58px;
       margin-right: 10px;
+      aspect-ratio: 1 / 1;
     }
     .test-processing-page .processing-steps .step-icon i {
-      font-size: 22px;
+      font-size: 28px;
       color: inherit;
+      display: block !important;
+      width: auto !important;
+      height: auto !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+      background: transparent !important;
+      border-radius: 0 !important;
+      line-height: 1 !important;
     }
     .test-processing-page .processing-steps .row > div:nth-child(even) .step-icon {
       background: #fff;
       color: #ff6e11;
-    }
-    .test-processing-page .processing-steps .icon-box:hover .step-icon,
-    .test-processing-page .processing-steps .icon-box:hover .step-icon i {
-      background: #fff !important;
-      color: inherit !important;
     }
     .test-processing-page .processing-steps .step-head {
       display: flex;
@@ -331,8 +347,8 @@ require_once __DIR__ . '/asset-version.php';
         line-height: 1.25;
       }
       .test-processing-page .processing-steps .row > [class*="col-"] {
-        width: 100%;
-        flex: 0 0 100%;
+        width: 50%;
+        flex: 0 0 50%;
       }
       .test-processing-page .processing-steps .row {
         --bs-gutter-x: 12px;
@@ -616,7 +632,7 @@ require_once __DIR__ . '/asset-version.php';
       <div class="container section-title" data-aos="fade-up">
         <span class="eyebrow">Processing Journey / Step-by-Step Timeline</span>
         <h2>Your Journey to Exam Eligibility</h2>
-        <p>Visual timeline:</p>
+        <p>A guided step-by-step path from application to exam readiness.</p>
       </div>
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-4">
