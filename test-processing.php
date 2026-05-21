@@ -216,16 +216,21 @@ require_once __DIR__ . '/asset-version.php';
       .test-processing-page #processing-hero > .container {
         padding-top: 44px;
         padding-bottom: 36px;
+        padding-left: 18px;
+        padding-right: 18px;
       }
       .test-processing-page #processing-hero h2 {
-        font-size: 30px;
-        line-height: 1.2;
+        font-size: 24px;
+        line-height: 1.22;
         margin-bottom: 12px;
+        overflow-wrap: anywhere;
+        word-break: normal;
       }
       .test-processing-page #processing-hero p {
-        font-size: 14px;
-        line-height: 1.45;
+        font-size: 13px;
+        line-height: 1.5;
         margin-bottom: 0;
+        overflow-wrap: anywhere;
       }
       .test-processing-page .processing-hero-actions {
         margin-top: 14px !important;
