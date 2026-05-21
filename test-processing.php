@@ -355,25 +355,27 @@ require_once __DIR__ . '/asset-version.php';
         --bs-gutter-y: 12px;
       }
       .test-processing-page .processing-steps .step-icon {
-        width: 52px;
-        height: 52px;
-        flex-basis: 52px;
-        margin-right: 10px;
-      }
-      .test-processing-page .processing-steps .step-icon i {
-        font-size: 24px;
+        display: none !important;
       }
       .test-processing-page .processing-steps .step-no {
-        width: 30px;
-        height: 30px;
-        font-size: 18px;
+        width: 24px;
+        height: 24px;
+        font-size: 13px;
       }
       .test-processing-page .processing-steps .icon-box h4 {
-        font-size: 19px;
+        font-size: 14px;
+        line-height: 1.2;
       }
       .test-processing-page .processing-steps .icon-box p {
-        font-size: 14px;
-        line-height: 1.35;
+        font-size: 12px;
+        line-height: 1.3;
+      }
+      .test-processing-page .processing-steps .step-head {
+        gap: 6px;
+        margin-bottom: 2px;
+      }
+      .test-processing-page .processing-steps .icon-box {
+        padding: 9px 10px;
       }
     }
   </style>
