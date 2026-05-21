@@ -232,6 +232,17 @@ require_once __DIR__ . '/asset-version.php';
       }
     }
     @media (max-width: 575px) {
+      .test-processing-page .trust-stack {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px !important;
+      }
+      .test-processing-page .trust-stack .learning-mode-card {
+        padding: 10px;
+      }
+      .test-processing-page .trust-stack .learning-mode-card h3 {
+        font-size: 14px;
+        line-height: 1.25;
+      }
       .test-processing-page #processing-hero {
         min-height: 560px;
         background-position: center center;
