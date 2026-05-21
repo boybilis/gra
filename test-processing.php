@@ -218,6 +218,24 @@ require_once __DIR__ . '/asset-version.php';
     .test-processing-page .floating-contact-stack a:nth-child(3) { background: #0084ff; }
     .test-processing-page .floating-contact-stack a:nth-child(4) { background: #ff6e11; }
     .test-processing-page .floating-contact-stack #scroll-top { background: #003057; }
+    .test-processing-page .floating-contact-stack #scroll-top {
+      position: static;
+      right: auto;
+      bottom: auto;
+      z-index: auto;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      visibility: hidden;
+      opacity: 0;
+    }
+    .test-processing-page .floating-contact-stack #scroll-top.active {
+      visibility: visible;
+      opacity: 1;
+    }
+    .test-processing-page .floating-contact-stack:has(#scroll-top.active) {
+      bottom: 74px;
+    }
     .test-processing-page #processing-hero {
       position: relative;
       background-image: url('assets/img/gra/hero-artemis-cover.jpg');
