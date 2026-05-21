@@ -208,14 +208,23 @@ require_once __DIR__ . '/asset-version.php';
       position: relative;
       z-index: 1;
     }
+    @media (max-width: 768px) {
+      .test-processing-page #processing-hero.section {
+        padding: 0 !important;
+      }
+      .test-processing-page #processing-hero > .container {
+        margin-top: 20px !important;
+        margin-bottom: 0 !important;
+        padding-top: 20px !important;
+        padding-bottom: 25px !important;
+      }
+    }
     @media (max-width: 575px) {
       .test-processing-page #processing-hero {
         min-height: 0;
         background-position: center top;
       }
       .test-processing-page #processing-hero > .container {
-        padding-top: 44px;
-        padding-bottom: 36px;
         padding-left: 18px;
         padding-right: 18px;
         margin-left: 12px !important;
