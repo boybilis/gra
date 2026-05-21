@@ -190,6 +190,42 @@ require_once __DIR__ . '/asset-version.php';
     .test-processing-page .processing-consultation-form button {
       pointer-events: auto;
     }
+    .test-processing-page .sticky-contact-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1100;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-top: 1px solid color-mix(in srgb, var(--gra-navy), transparent 70%);
+      box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.12);
+    }
+    .test-processing-page .sticky-contact-bar a {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      min-height: 56px;
+      background: #003057;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.1;
+      padding: 6px 4px;
+    }
+    .test-processing-page .sticky-contact-bar a:nth-child(even) {
+      background: #ff6e11;
+    }
+    .test-processing-page .sticky-contact-bar a i {
+      font-size: 14px;
+      line-height: 1;
+    }
+    .test-processing-page .footer {
+      margin-bottom: 56px;
+    }
     .test-processing-page #processing-hero {
       position: relative;
       background-image: url('assets/img/gra/hero-artemis-cover.jpg');
@@ -687,6 +723,25 @@ require_once __DIR__ . '/asset-version.php';
       <p><span>Copyright</span> <strong class="px-1 sitename">Gapuz Review Academy</strong> <span>All Rights Reserved</span></p>
     </div>
   </footer>
+
+  <div class="sticky-contact-bar" aria-label="Sticky contact actions">
+    <a href="tel:0285599060" aria-label="Call GRA">
+      <i class="bi bi-telephone"></i>
+      <span>Call</span>
+    </a>
+    <a href="https://wa.me/639285599060" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+      <i class="bi bi-whatsapp"></i>
+      <span>WhatsApp</span>
+    </a>
+    <a href="https://m.me/gapuzreviewacademyofficial" target="_blank" rel="noopener" aria-label="Open Messenger">
+      <i class="bi bi-messenger"></i>
+      <span>Messenger</span>
+    </a>
+    <a href="#processing-consultation" aria-label="Book consultation">
+      <i class="bi bi-calendar-check"></i>
+      <span>Book Consultation</span>
+    </a>
+  </div>
 
   <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
   <div id="preloader"></div>
