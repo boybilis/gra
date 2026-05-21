@@ -77,6 +77,12 @@ require_once __DIR__ . '/asset-version.php';
       padding-left: 0;
       margin: 0;
     }
+    .test-processing-page .processing-checklist.processing-checklist-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 24px;
+      row-gap: 6px;
+    }
     .test-processing-page .processing-checklist li {
       margin-bottom: 8px;
     }
@@ -87,16 +93,36 @@ require_once __DIR__ . '/asset-version.php';
       line-height: 1.5;
     }
     .test-processing-page .trust-stack .learning-mode-card i {
-      width: 42px;
-      height: 42px;
-      flex: 0 0 42px;
-      border-radius: 50%;
-      background: var(--accent-color);
-      color: #fff;
-      font-size: 18px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+      display: none !important;
+    }
+    .test-processing-page .trust-stack .learning-mode-card {
+      padding: 12px 10px;
+      gap: 8px;
+      align-items: flex-start;
+      border: 1px solid #b6bcc6 !important;
+      border-radius: 8px;
+      box-shadow: none !important;
+    }
+    .test-processing-page .trust-stack .learning-mode-card h6 {
+      font-size: 16px;
+      line-height: 1.2;
+      margin: 0;
+      font-weight: 700;
+    }
+    .test-processing-page .trust-stack .learning-mode-card h6::after {
+      display: none !important;
+      content: none !important;
+    }
+    .test-processing-page .trust-stack > [class*="col-"]:nth-child(odd) .learning-mode-card h6 {
+      color: #ff6e11;
+    }
+    .test-processing-page .trust-stack > [class*="col-"]:nth-child(even) .learning-mode-card h6 {
+      color: #003057;
+    }
+    .test-processing-page .trust-stack .learning-mode-card p {
+      font-size: 13px;
+      line-height: 1.25;
+      margin: 4px 0 0;
     }
     .test-processing-page .processing-outline-title {
       font-size: 24px;
@@ -331,18 +357,18 @@ require_once __DIR__ . '/asset-version.php';
       }
     }
     @media (max-width: 575px) {
+      .test-processing-page .processing-checklist.processing-checklist-grid {
+        grid-template-columns: 1fr;
+        row-gap: 4px;
+      }
       .test-processing-page #processing-hero h2 {
         font-size: 1.5rem;
         line-height: 1.35;
       }
-      .test-processing-page .trust-stack {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 10px !important;
-      }
       .test-processing-page .trust-stack .learning-mode-card {
         padding: 10px;
       }
-      .test-processing-page .trust-stack .learning-mode-card h3 {
+      .test-processing-page .trust-stack .learning-mode-card h6 {
         font-size: 14px;
         line-height: 1.25;
       }
@@ -520,57 +546,7 @@ require_once __DIR__ . '/asset-version.php';
       </div>
     </section>
 
-    <section class="about section light-background">
-      <div class="container section-title" data-aos="fade-up">
-        <span class="eyebrow">GRA Test Processing</span>
-        <h2>Why Choose GRA Test Processing</h2>
-        <p></p>
-      </div>
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <div class="row gy-4">
-          <div class="col-lg-6">
-            <div class="d-grid gap-3 trust-stack">
-              <div class="learning-mode-card">
-                <i class="fa-solid fa-bolt"></i>
-                <div>
-                  <h3>Fast &amp; Reliable Processing</h3>
-                </div>
-              </div>
-              <div class="learning-mode-card">
-                <i class="fa-solid fa-user-check"></i>
-                <div>
-                  <h3>Expert Guidance</h3>
-                </div>
-              </div>
-              <div class="learning-mode-card">
-                <i class="fa-solid fa-globe"></i>
-                <div>
-                  <h3>Trusted by Nurses Worldwide</h3>
-                </div>
-              </div>
-              <div class="learning-mode-card">
-                <i class="fa-solid fa-layer-group"></i>
-                <div>
-                  <h3>Review + Processing in One Place</h3>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <h3 class="processing-outline-title">Why Nurses Trust GRA Test Processing</h3>
-            <ul class="processing-checklist">
-              <li><i class="bi bi-check2-all"></i> <span>End-to-end application assistance</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Fast document checklist and verification guidance</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>State-specific expert processing support</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Personalized case handling</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Transparent step-by-step updates</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Combined review + processing advantage</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Trusted digital support team</span></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
+    
 
     <section id="processing-packages" class="services section processing-services">
       <div class="container section-title" data-aos="fade-up">
@@ -689,9 +665,87 @@ require_once __DIR__ . '/asset-version.php';
           <div class="col-lg-4 col-md-6">
             <div class="icon-box d-flex position-relative h-100">
               <div class="step-icon"><i class="bi bi-mortarboard"></i></div>
-              <div><div class="step-head"><span class="step-no">9</span><h4>Sit with NCLEX</h4></div><p>The final step. Show your readiness and go for succes!.</p></div>
+              <div><div class="step-head"><span class="step-no">9</span><h4>Sit for the NCLEX</h4></div><p>The final step. Show your readiness and go for succes!.</p></div>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+	
+	<section class="about section light-background">
+      <div class="container section-title" data-aos="fade-up">
+        <span class="eyebrow">GRA Test Processing</span>
+        <h2>Why Choose GRA Test Processing</h2>
+		<p><b>Why Nurses Trust GRA Test Processing?</b></p>
+      </div>
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row gy-4">
+          <div class="col-12 mb-4">
+            <ul class="processing-checklist processing-checklist-grid">
+              <li><i class="bi bi-check2-all"></i> <span>End-to-end application assistance</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Fast document checklist and verification guidance</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>State-specific expert processing support</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Personalized case handling</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Transparent step-by-step updates</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Combined review + processing advantage</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Trusted digital support team</span></li>
+            </ul>
+          </div>
+		  </div>
+		  <div class="row g-2 trust-stack">
+          <div class="col-6 col-md-4 col-lg-2">
+            <div class="learning-mode-card">
+              <div>
+                <h6>Expert Guidance</h6>
+                <p><small>Every step backed by expeerience.</small></p>
+              </div>
+            </div>
+          </div>
+		   <div class="col-6 col-md-4 col-lg-2">
+            <div class="learning-mode-card">
+              <div>
+                <h6>Fast and Reliable</h6>
+                <p><small>Consistent handling with clear and timely coordination.</small></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-4 col-lg-2">
+            <div class="learning-mode-card">
+              <div>
+                <h6>End-to-End Support</h6>
+                <p><small>From application to exam readiness.</small></p>
+              </div>
+            </div>
+          </div>
+		  
+		  <div class="col-6 col-md-4 col-lg-2">
+            <div class="learning-mode-card">
+              <div>
+                <h6>Timely Updates</h6>
+                <p><small>Stay informed at every stage of the process.</small></p>
+              </div>
+            </div>
+          </div>
+		  
+          <div class="col-6 col-md-4 col-lg-2">
+            <div class="learning-mode-card">
+              <div>
+                <h6>One stop shop</h6>
+                <p><small>Review + Processing in One Place.</small></p>
+              </div>
+            </div>
+          </div>
+		  
+		   <div class="col-6 col-md-4 col-lg-2">
+            <div class="learning-mode-card">
+              <div>
+                <h6>Ready to Begin your Journey</h6>
+				<p><small>Let's take the first step together.</small></p>
+              </div>
+            </div>
+          </div>
+		  
+		  
         </div>
       </div>
     </section>
