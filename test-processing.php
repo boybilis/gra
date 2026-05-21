@@ -258,6 +258,28 @@ require_once __DIR__ . '/asset-version.php';
       bottom: 70px;
     }
     @media (max-width: 768px) {
+      .test-processing-page #processing-hero.section {
+        padding: 0 !important;
+      }
+      .test-processing-page #processing-hero .carousel {
+        min-height: 460px !important;
+      }
+      .test-processing-page #processing-hero .carousel-item {
+        padding-top: 30px;
+        min-height: 460px !important;
+        align-items: flex-start !important;
+      }
+      .test-processing-page #processing-hero .carousel-item > img {
+        height: 460px !important;
+        object-fit: cover;
+        object-position: center top;
+      }
+      .test-processing-page #processing-hero .container {
+        margin-top: 20px !important;
+        margin-bottom: 0 !important;
+        padding-top: 20px !important;
+        padding-bottom: 25px !important;
+      }
       .test-processing-page #processing-hero .processing-hero-actions {
         margin-top: 14px !important;
       }
