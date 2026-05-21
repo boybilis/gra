@@ -96,7 +96,17 @@
           <ul>
             <li><a href="#hero" class="active">Home</a></li>
             <li><a href="#about">About</a></li>
-            <li><a href="#courses">Courses</a></li>
+            <li class="dropdown"><a href="#courses"><span>Courses</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+              <ul>
+                <li><a href="nclex-rn-courses.php">NCLEX-RN</a></li>
+                <li><a href="dha-rn-courses.php">DHA-RN</a></li>
+                <li><a href="doh-haad-rn-courses.php">DOH / HAAD-RN</a></li>
+                <li><a href="prometric-rn-courses.php">Prometric-RN</a></li>
+                <li><a href="pnle-courses.php">PNLE</a></li>
+                <li><a href="sple-courses.php">SPLE</a></li>
+                <li><a href="civil-service-courses.php">Civil Service</a></li>
+              </ul>
+            </li>
             <li><a href="#free-courses">Free Courses</a></li>
             <li><a href="https://artemis360.gapuzreview.com">Artemis360</a></li>
             <li><a href="#testimonials">Passers</a></li>
