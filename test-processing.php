@@ -124,6 +124,22 @@ require_once __DIR__ . '/asset-version.php';
   </header>
 
   <main class="main">
+    <section id="processing-hero" class="hero section">
+      <div class="container" data-aos="fade-up">
+        <div class="row justify-content-center text-center">
+          <div class="col-lg-10">
+            <h2>Your Fast, Reliable Path to NCLEX &amp; International Nursing Licensure</h2>
+            <p>From credential evaluation to exam eligibility, GRA Test Processing guides you every step of the way&#8212;so you can focus on passing.</p>
+            <div class="d-flex flex-column flex-md-row justify-content-center gap-2 gap-md-3 mt-3">
+              <a href="index.php#enroll" class="btn btn-primary">Book a Free Consultation</a>
+              <a href="#processing-packages" class="btn btn-primary">View Processing Packages</a>
+              <a href="index.php#enroll" class="btn btn-primary">Start My Application</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="about section light-background">
       <div class="container section-title" data-aos="fade-up">
         <h2>Test Processing</h2>
@@ -149,7 +165,7 @@ require_once __DIR__ . '/asset-version.php';
       </div>
     </section>
 
-    <section class="services section processing-services">
+    <section id="processing-packages" class="services section processing-services">
       <div class="container section-title" data-aos="fade-up">
         <h2>Processing Coverage</h2>
         <p>Our processing team can assist you with the following services.</p>
