@@ -286,8 +286,8 @@ require_once __DIR__ . '/asset-version.php';
     }
     @media (max-width: 575px) {
       .test-processing-page #processing-hero h2 {
-        font-size: 1.75rem;
-        line-height: 1.3;
+        font-size: 1.5rem;
+        line-height: 1.35;
       }
       .test-processing-page .trust-stack {
         grid-template-columns: repeat(2, minmax(0, 1fr));
