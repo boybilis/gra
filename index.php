@@ -242,15 +242,16 @@
             'speed' => 600,
             'autoplay' => $featuredPasserCount > 1 ? ['delay' => 4500] : false,
             'slidesPerView' => 1,
+            'grid' => ['rows' => 1, 'fill' => 'row'],
             'pagination' => [
               'el' => '.swiper-pagination',
               'type' => 'bullets',
               'clickable' => true,
             ],
             'breakpoints' => [
-              '320' => ['slidesPerView' => 1, 'spaceBetween' => 18],
-              '768' => ['slidesPerView' => $featuredTabletSlides, 'spaceBetween' => 20],
-              '1200' => ['slidesPerView' => $featuredDesktopSlides, 'spaceBetween' => 20],
+              '320' => ['slidesPerView' => 1, 'spaceBetween' => 18, 'grid' => ['rows' => 1]],
+              '768' => ['slidesPerView' => $featuredTabletSlides, 'spaceBetween' => 20, 'grid' => ['rows' => 2]],
+              '1200' => ['slidesPerView' => $featuredDesktopSlides, 'spaceBetween' => 20, 'grid' => ['rows' => 2]],
             ],
           ];
         ?>

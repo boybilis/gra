@@ -298,14 +298,16 @@ require_once __DIR__ . '/asset-version.php';
             'speed' => 600,
             'autoplay' => $processingImageCount > 1 ? ['delay' => 4200] : false,
             'slidesPerView' => 1,
+            'grid' => ['rows' => 1, 'fill' => 'row'],
             'spaceBetween' => 16,
             'pagination' => [
               'el' => '.swiper-pagination',
               'clickable' => true,
             ],
             'breakpoints' => [
-              '768' => ['slidesPerView' => $processingTabletSlides, 'spaceBetween' => 18],
-              '1200' => ['slidesPerView' => $processingDesktopSlides, 'spaceBetween' => 20],
+              '320' => ['slidesPerView' => 1, 'spaceBetween' => 18, 'grid' => ['rows' => 1]],
+              '768' => ['slidesPerView' => $processingTabletSlides, 'spaceBetween' => 18, 'grid' => ['rows' => 2]],
+              '1200' => ['slidesPerView' => $processingDesktopSlides, 'spaceBetween' => 20, 'grid' => ['rows' => 2]],
             ],
           ];
         ?>
