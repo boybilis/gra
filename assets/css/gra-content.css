@@ -400,7 +400,7 @@
 }
 .learning-mode-card h3 {
   margin: 0 0 5px;
-  font-size: 20px;
+  font-size: 18px;
 }
 .learning-mode-cards > div:nth-child(1) .learning-mode-card h3 {
   color: var(--gra-navy);

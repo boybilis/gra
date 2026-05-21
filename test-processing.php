@@ -31,9 +31,14 @@ require_once __DIR__ . '/asset-version.php';
       box-shadow: none;
       color: #fff;
       min-height: 100%;
+      text-align: left;
     }
     .test-processing-page .processing-services .service-item:before {
       display: none;
+    }
+    .test-processing-page .processing-services .row > div:nth-child(even) .service-item:after,
+    .test-processing-page .processing-services .row > div:nth-child(even) .service-item h3:after {
+      background: #003057 !important;
     }
     .test-processing-page .processing-services .row > div:nth-child(odd) .service-item {
       background: #003057;
@@ -45,6 +50,12 @@ require_once __DIR__ . '/asset-version.php';
     .test-processing-page .processing-services .service-item p,
     .test-processing-page .processing-services .service-item .icon i {
       color: #fff;
+    }
+    .test-processing-page .processing-services .processing-flag {
+      display: inline-block;
+      font-size: 20px;
+      line-height: 1;
+      margin-bottom: 10px;
     }
     .test-processing-page .processing-services .service-item .icon {
       width: auto;
@@ -59,6 +70,37 @@ require_once __DIR__ . '/asset-version.php';
       font-size: 28px;
       line-height: 1;
     }
+    .test-processing-page .processing-checklist {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+    .test-processing-page .processing-checklist li {
+      margin-bottom: 8px;
+    }
+    .test-processing-page .processing-checklist li:last-child {
+      margin-bottom: 0;
+    }
+    .test-processing-page .processing-checklist span {
+      line-height: 1.5;
+    }
+    .test-processing-page .trust-stack .learning-mode-card i {
+      width: 42px;
+      height: 42px;
+      flex: 0 0 42px;
+      border-radius: 50%;
+      background: var(--accent-color);
+      color: #fff;
+      font-size: 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .test-processing-page .processing-outline-title {
+      font-size: 24px;
+      line-height: 1.25;
+      margin-bottom: 12px;
+    }
     .test-processing-page .btn.btn-primary {
       background: var(--accent-color);
       border-color: var(--accent-color);
@@ -69,6 +111,25 @@ require_once __DIR__ . '/asset-version.php';
       background: #f37507;
       border-color: #f37507;
       color: #fff;
+    }
+    .test-processing-page .btn.btn-processing-blue {
+      background: #003057;
+      border-color: #003057;
+      color: #fff;
+    }
+    .test-processing-page .btn.btn-processing-blue:hover,
+    .test-processing-page .btn.btn-processing-blue:focus {
+      background: #002542;
+      border-color: #002542;
+      color: #fff;
+    }
+    .test-processing-page .processing-hero-actions {
+      position: relative;
+      z-index: 3;
+      pointer-events: auto;
+    }
+    .test-processing-page .processing-hero-actions a {
+      pointer-events: auto;
     }
     @media (max-width: 575px) {
       .test-processing-page .processing-steps .row > [class*="col-"] {
@@ -130,9 +191,9 @@ require_once __DIR__ . '/asset-version.php';
           <div class="col-lg-10">
             <h2>Your Fast, Reliable Path to NCLEX &amp; International Nursing Licensure</h2>
             <p>From credential evaluation to exam eligibility, GRA Test Processing guides you every step of the way&#8212;so you can focus on passing.</p>
-            <div class="d-flex flex-column flex-md-row justify-content-center gap-2 gap-md-3 mt-3">
+            <div class="d-flex flex-column flex-md-row justify-content-center gap-2 gap-md-3 mt-3 processing-hero-actions">
               <a href="index.php#enroll" class="btn btn-primary">Book a Free Consultation</a>
-              <a href="#processing-packages" class="btn btn-primary">View Processing Packages</a>
+              <a href="test-processing.php#processing-packages" class="btn btn-processing-blue">View Processing Packages</a>
               <a href="index.php#enroll" class="btn btn-primary">Start My Application</a>
             </div>
           </div>
@@ -143,12 +204,12 @@ require_once __DIR__ . '/asset-version.php';
     <section class="about section light-background">
       <div class="container section-title" data-aos="fade-up">
         <h2>Why Choose GRA Test Processing</h2>
-        <p>Why Nurses Trust GRA Test Processing</p>
+        <p></p>
       </div>
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-4">
           <div class="col-lg-6">
-            <div class="d-grid gap-3">
+            <div class="d-grid gap-3 trust-stack">
               <div class="learning-mode-card">
                 <i class="fa-solid fa-bolt"></i>
                 <div>
@@ -176,8 +237,8 @@ require_once __DIR__ . '/asset-version.php';
             </div>
           </div>
           <div class="col-lg-6">
-            <h3>Why Nurses Trust GRA Test Processing</h3>
-            <ul>
+            <h3 class="processing-outline-title">Why Nurses Trust GRA Test Processing</h3>
+            <ul class="processing-checklist">
               <li><i class="bi bi-check2-all"></i> <span>End-to-end application assistance</span></li>
               <li><i class="bi bi-check2-all"></i> <span>Fast document checklist and verification guidance</span></li>
               <li><i class="bi bi-check2-all"></i> <span>State-specific expert processing support</span></li>
@@ -193,57 +254,56 @@ require_once __DIR__ . '/asset-version.php';
 
     <section id="processing-packages" class="services section processing-services">
       <div class="container section-title" data-aos="fade-up">
-        <h2>Processing Coverage</h2>
-        <p>Our processing team can assist you with the following services.</p>
+        <h2>What We Process For You</h2>
+        <p>Comprehensive support across major nursing licensure pathways.</p>
       </div>
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-4">
           <div class="col-lg-3 col-md-6">
             <div class="service-item position-relative">
-              <h3>Test Processing</h3>
-              <p>End-to-end assistance for test processing requirements and submission flow.</p>
+              <div class="processing-flag" aria-label="United States">🇺🇸</div>
+              <h3>NCLEX USA</h3>
+              <ul class="processing-checklist">
+                <li><i class="bi bi-check2-all"></i> <span>State board application</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>CES / CGFNS guidance</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>Pearson VUE registration</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>ATT assistance</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>License endorsement guidance</span></li>
+              </ul>
             </div>
           </div>
           <div class="col-lg-3 col-md-6">
             <div class="service-item position-relative">
-              <h3>Licensing Assistance</h3>
-              <p>Guidance on licensing requirements and document preparation.</p>
+              <div class="processing-flag" aria-label="Canada">🇨🇦</div>
+              <h3>NCLEX Canada</h3>
+              <ul class="processing-checklist">
+                <li><i class="bi bi-check2-all"></i> <span>NNAS guidance</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>Provincial licensing pathways</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>Jurisprudence exam guidance (where applicable)</span></li>
+              </ul>
             </div>
           </div>
           <div class="col-lg-3 col-md-6">
             <div class="service-item position-relative">
-              <h3>Reactivation</h3>
-              <p>Support for reactivating licenses and completing required steps.</p>
+              <div class="processing-flag" aria-label="Middle East">🇦🇪</div>
+              <h3>Middle East Licensing</h3>
+              <ul class="processing-checklist">
+                <li><i class="bi bi-check2-all"></i> <span>DHA</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>DOH Abu Dhabi</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>HAAD equivalency guidance</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>PROMETRIC pathways</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>DataFlow guidance</span></li>
+              </ul>
             </div>
           </div>
           <div class="col-lg-3 col-md-6">
             <div class="service-item position-relative">
-              <h3>License By Endorsement</h3>
-              <p>Assistance for endorsement pathways and application processing.</p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6">
-            <div class="service-item position-relative">
-              <h3>Visa Screen</h3>
-              <p>Help with VisaScreen requirements, document flow, and updates.</p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6">
-            <div class="service-item position-relative">
-              <h3>Consultancy</h3>
-              <p>Professional guidance for exam pathway and processing planning.</p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6">
-            <div class="service-item position-relative">
-              <h3>ATT</h3>
-              <p>Support for ATT-related processing and timeline follow-up.</p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6">
-            <div class="service-item position-relative">
-              <h3>Trouble Shooting</h3>
-              <p>Resolution support for common processing blockers and delays.</p>
+              <div class="processing-flag" aria-label="United Kingdom">🇬🇧</div>
+              <h3>UK / Other Pathways</h3>
+              <ul class="processing-checklist">
+                <li><i class="bi bi-check2-all"></i> <span>NMC guidance</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>CBT / OSCE pathway support</span></li>
+              </ul>
             </div>
           </div>
         </div>
