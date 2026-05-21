@@ -212,24 +212,37 @@ require_once __DIR__ . '/asset-version.php';
       .test-processing-page #processing-hero.section {
         padding: 0 !important;
       }
+      .test-processing-page #processing-hero {
+        min-height: 520px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+      }
       .test-processing-page #processing-hero > .container {
         margin-top: 20px !important;
         margin-bottom: 0 !important;
         padding-top: 20px !important;
         padding-bottom: 25px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        max-width: calc(100% - 32px);
+      }
+      .test-processing-page #processing-hero h2 {
+        font-size: 30px;
       }
     }
     @media (max-width: 575px) {
       .test-processing-page #processing-hero {
-        min-height: 0;
+        min-height: 560px;
         background-position: center center;
         overflow: hidden;
       }
       .test-processing-page #processing-hero > .container {
         padding-left: 18px;
         padding-right: 18px;
-        margin-left: 16px !important;
-        margin-right: 16px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        max-width: calc(100% - 32px);
       }
       .test-processing-page #processing-hero .row {
         --bs-gutter-x: 0;
