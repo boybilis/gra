@@ -142,23 +142,27 @@ require_once __DIR__ . '/asset-version.php';
 
     <section class="about section light-background">
       <div class="container section-title" data-aos="fade-up">
-        <h2>Test Processing</h2>
-        <p>Reliable guidance for exam requirements, document preparation, and application processing support.</p>
+        <h2>Why Choose GRA Test Processing</h2>
+        <p>Why Nurses Trust GRA Test Processing</p>
       </div>
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-4">
           <div class="col-lg-6">
-            <h3>What We Support</h3>
+            <h3>What You Get</h3>
             <ul>
-              <li><i class="bi bi-check2-all"></i> <span>Application checklist planning and document readiness</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Step-by-step filing guidance based on your exam pathway</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Scheduling coordination and test center preparation reminders</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Follow-up support for updates, requirements, and timeline tracking</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>End-to-end application assistance</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Fast document checklist and verification guidance</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>State-specific expert processing support</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Personalized case handling</span></li>
             </ul>
           </div>
           <div class="col-lg-6">
-            <h3>Why Candidates Choose GRA Processing Support</h3>
-            <p>Our team helps simplify the processing journey so you can focus on preparation. You get practical guidance, organized next steps, and responsive support from inquiry to exam readiness.</p>
+            <h3>Built for Serious Applicants</h3>
+            <ul>
+              <li><i class="bi bi-check2-all"></i> <span>Transparent step-by-step updates</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Combined review + processing advantage</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Trusted digital support team</span></li>
+            </ul>
             <p><a href="index.php#enroll" class="btn btn-primary">Request Processing Assistance</a></p>
           </div>
         </div>
