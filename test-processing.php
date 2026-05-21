@@ -176,13 +176,16 @@ require_once __DIR__ . '/asset-version.php';
             </div>
           </div>
           <div class="col-lg-6">
-            <h3>Built for Serious Applicants</h3>
+            <h3>Why Nurses Trust GRA Test Processing</h3>
             <ul>
+              <li><i class="bi bi-check2-all"></i> <span>End-to-end application assistance</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Fast document checklist and verification guidance</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>State-specific expert processing support</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Personalized case handling</span></li>
               <li><i class="bi bi-check2-all"></i> <span>Transparent step-by-step updates</span></li>
               <li><i class="bi bi-check2-all"></i> <span>Combined review + processing advantage</span></li>
               <li><i class="bi bi-check2-all"></i> <span>Trusted digital support team</span></li>
             </ul>
-            <p><a href="index.php#enroll" class="btn btn-primary">Request Processing Assistance</a></p>
           </div>
         </div>
       </div>
