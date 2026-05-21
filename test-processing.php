@@ -222,13 +222,14 @@ require_once __DIR__ . '/asset-version.php';
     @media (max-width: 575px) {
       .test-processing-page #processing-hero {
         min-height: 0;
-        background-position: center top;
+        background-position: center center;
+        overflow: hidden;
       }
       .test-processing-page #processing-hero > .container {
         padding-left: 18px;
         padding-right: 18px;
-        margin-left: 12px !important;
-        margin-right: 12px !important;
+        margin-left: 16px !important;
+        margin-right: 16px !important;
       }
       .test-processing-page #processing-hero .row {
         --bs-gutter-x: 0;
