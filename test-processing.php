@@ -255,7 +255,7 @@ require_once __DIR__ . '/asset-version.php';
       bottom: 66px;
     }
     .test-processing-page .floating-contact-stack.with-scroll-top {
-      bottom: 114px;
+      bottom: 70px;
     }
     .test-processing-page #processing-hero {
       position: relative;
