@@ -33,10 +33,11 @@
       button.disabled = true;
 
       try {
+        const skipOtp = form.action.includes('submit-processing.php');
         const otpState = formOtpState.get(form);
         let verificationToken = otpState && otpState.email === email ? otpState.token : '';
 
-        if (!verificationToken) {
+        if (!skipOtp && !verificationToken) {
           button.textContent = 'Sending OTP...';
           const sendOtpResponse = await fetch('otp.php', {
             method: 'POST',
@@ -70,7 +71,9 @@
 
         button.textContent = 'Submitting...';
         const formData = new FormData(form);
-        formData.set('otp_verification_token', verificationToken);
+        if (!skipOtp) {
+          formData.set('otp_verification_token', verificationToken);
+        }
         const response = await fetch(form.action, { method: 'POST', body: formData, headers: { Accept: 'application/json' } });
         const result = await parseJsonSafe(response);
         if (!response.ok || !result || !result.ok) {

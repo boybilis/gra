@@ -177,6 +177,17 @@ require_once __DIR__ . '/asset-version.php';
       height: auto !important;
       display: inline-block;
     }
+    .test-processing-page .processing-consultation-wrap {
+      position: relative;
+      z-index: 4;
+      pointer-events: auto;
+    }
+    .test-processing-page .processing-consultation-form,
+    .test-processing-page .processing-consultation-form input,
+    .test-processing-page .processing-consultation-form textarea,
+    .test-processing-page .processing-consultation-form button {
+      pointer-events: auto;
+    }
     @media (max-width: 575px) {
       .test-processing-page .processing-steps .row > [class*="col-"] {
         width: 50%;
@@ -426,8 +437,8 @@ require_once __DIR__ . '/asset-version.php';
         <h2>Not Sure Which Pathway Is Best?</h2>
         <p>Speak with a GRA processing specialist for personalized guidance based on your country, credentials, and goals.</p>
       </div>
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <form action="submit-processing.php" method="post" role="form" class="site-form gra-medicio-form">
+      <div class="container processing-consultation-wrap" data-aos="fade-up" data-aos-delay="100">
+        <form action="submit-processing.php" method="post" role="form" class="site-form gra-medicio-form processing-consultation-form">
           <input type="hidden" name="form_type" value="processing_consultation">
           <div class="row">
             <div class="col-md-6 form-group">
