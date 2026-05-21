@@ -148,29 +148,29 @@ require_once __DIR__ . '/asset-version.php';
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-4">
           <div class="col-lg-6">
-            <div class="row gy-3">
-              <div class="col-sm-6">
-                <div class="icon-box d-flex position-relative h-100">
-                  <i class="fa-solid fa-bolt flex-shrink-0"></i>
-                  <div><h4>Fast &amp; Reliable Processing</h4></div>
+            <div class="d-grid gap-3">
+              <div class="learning-mode-card">
+                <i class="fa-solid fa-bolt"></i>
+                <div>
+                  <h3>Fast &amp; Reliable Processing</h3>
                 </div>
               </div>
-              <div class="col-sm-6">
-                <div class="icon-box d-flex position-relative h-100">
-                  <i class="fa-solid fa-user-check flex-shrink-0"></i>
-                  <div><h4>Expert Guidance</h4></div>
+              <div class="learning-mode-card">
+                <i class="fa-solid fa-user-check"></i>
+                <div>
+                  <h3>Expert Guidance</h3>
                 </div>
               </div>
-              <div class="col-sm-6">
-                <div class="icon-box d-flex position-relative h-100">
-                  <i class="fa-solid fa-globe flex-shrink-0"></i>
-                  <div><h4>Trusted by Nurses Worldwide</h4></div>
+              <div class="learning-mode-card">
+                <i class="fa-solid fa-globe"></i>
+                <div>
+                  <h3>Trusted by Nurses Worldwide</h3>
                 </div>
               </div>
-              <div class="col-sm-6">
-                <div class="icon-box d-flex position-relative h-100">
-                  <i class="fa-solid fa-layer-group flex-shrink-0"></i>
-                  <div><h4>Review + Processing in One Place</h4></div>
+              <div class="learning-mode-card">
+                <i class="fa-solid fa-layer-group"></i>
+                <div>
+                  <h3>Review + Processing in One Place</h3>
                 </div>
               </div>
             </div>
