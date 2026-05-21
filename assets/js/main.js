@@ -98,6 +98,28 @@
   document.addEventListener('scroll', toggleScrollTop);
 
   /**
+   * Floating contact menu toggle and scroll-top spacing sync
+   */
+  const floatingToggle = document.getElementById('floating-contact-toggle');
+  const floatingStack = document.getElementById('floating-contact-stack');
+
+  if (floatingToggle && floatingStack) {
+    floatingToggle.addEventListener('click', () => {
+      const isOpen = floatingStack.classList.toggle('is-open');
+      floatingToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+
+    const syncFloatingStackOffset = () => {
+      if (!scrollTop) return;
+      floatingStack.classList.toggle('with-scroll-top', scrollTop.classList.contains('active'));
+    };
+
+    window.addEventListener('load', syncFloatingStackOffset);
+    document.addEventListener('scroll', syncFloatingStackOffset);
+    syncFloatingStackOffset();
+  }
+
+  /**
    * Animation on scroll function and init
    */
   function aosInit() {

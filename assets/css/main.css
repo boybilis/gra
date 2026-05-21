@@ -762,6 +762,74 @@ h6 {
 }
 
 /*--------------------------------------------------------------
+# Floating Contact Menu
+--------------------------------------------------------------*/
+.floating-contact-stack {
+  position: fixed;
+  right: 12px;
+  bottom: 66px;
+  z-index: 1100;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.floating-contact-stack.with-scroll-top {
+  bottom: 70px;
+}
+
+.floating-contact-toggle {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--accent-color);
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.floating-contact-toggle i {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.floating-contact-actions {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.floating-contact-stack.is-open .floating-contact-actions {
+  display: flex;
+}
+
+.floating-contact-stack .floating-contact-actions a {
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+.floating-contact-stack .floating-contact-actions a i {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.floating-contact-stack .floating-contact-actions a:nth-child(1) { background: #003057; }
+.floating-contact-stack .floating-contact-actions a:nth-child(2) { background: #25D366; }
+.floating-contact-stack .floating-contact-actions a:nth-child(3) { background: #0084ff; }
+.floating-contact-stack .floating-contact-actions a:nth-child(4) { background: #ff6e11; }
+
+/*--------------------------------------------------------------
 # Disable aos animation delay on mobile devices
 --------------------------------------------------------------*/
 @media screen and (max-width: 768px) {
