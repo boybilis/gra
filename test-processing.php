@@ -679,7 +679,8 @@ require_once __DIR__ . '/asset-version.php';
 		<p><b>Why Nurses Trust GRA Test Processing?</b></p>
       </div>
       <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <div class="row gy-4">
+        <!--
+		<div class="row gy-4">
           <div class="col-12 mb-4">
             <ul class="processing-checklist processing-checklist-grid">
               <li><i class="bi bi-check2-all"></i> <span>End-to-end application assistance</span></li>
@@ -692,6 +693,7 @@ require_once __DIR__ . '/asset-version.php';
             </ul>
           </div>
 		  </div>
+		  -->
 		  <div class="row g-2 trust-stack">
           <div class="col-6 col-md-4 col-lg-2">
             <div class="learning-mode-card">
