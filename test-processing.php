@@ -259,6 +259,7 @@ require_once __DIR__ . '/asset-version.php';
     }
     .test-processing-page #processing-hero {
       position: relative;
+      min-height: auto !important;
       background-image: url('assets/img/gra/hero-artemis-cover.jpg');
       background-size: cover;
       background-position: center;
