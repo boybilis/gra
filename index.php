@@ -83,7 +83,7 @@
   <header id="header" class="header sticky-top">
     <div class="topbar d-flex align-items-center">
       <div class="container d-flex justify-content-center justify-content-md-between">
-        <div class="d-none d-md-flex align-items-center">Learn with confidence. Review with support.</div>
+        <div class="d-none d-md-flex align-items-center">Learn With Confidence.</div>
         <div class="d-flex align-items-center gap-3"><span><i class="bi bi-telephone me-1"></i> 0285599060 / 85599062</span><span class="d-none d-lg-inline"><i class="bi bi-envelope me-1"></i> Inquire@gratestprepworldwide.com</span></div>
       </div>
     </div>
@@ -281,7 +281,7 @@
     <section id="about" class="about section">
       <div class="container section-title" data-aos="fade-up">
         <h2>About GRA</h2>
-        <p>The leadership behind every Gapuz Review Academy success story.</p>
+        <p>Built on a legacy of excellence.</p>
       </div>
       <div class="container">
         <div class="row gy-4">
@@ -289,14 +289,14 @@
             <img src="assets/img/gra/evangeline-gapuz.png" class="img-fluid" alt="Gapuz Review Academy leadership and legacy" loading="lazy" decoding="async">
           </div>
           <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
-            <h3>Learn with confidence. Review with support.</h3>
+            <h3>Powered by expert-led, exam-focused digital learning.</h3>
             <p class="fst-italic">Gapuz Review Academy prepares students for local and international licensure and career exams through expert-led review programs, structured learning, and a supportive academic community.</p>
             <ul>
               <li><i class="bi bi-check2-all"></i> <span>PassEasy courses for NCLEX, DHA, HAAD (DOH), Prometric, PNLE, SPLE, and Civil Service.</span></li>
               <li><i class="bi bi-check2-all"></i> <span>Live online and fully online learning options for flexible preparation.</span></li>
               <li><i class="bi bi-check2-all"></i> <span>Artemis360 access for recorded lectures, practice exams, study guides, and progress support.</span></li>
             </ul>
-            <p>As an ethical review center, GRA continues a legacy of reliable service and exam-focused preparation. The goal is not only to help students take the exam, but to help them prepare with clarity and confidence.</p>
+            <p>As an ethical and student-centered review academy, GRA continues a legacy of trusted service and exam excellence. We don&rsquo;t just prepare students to take their tests&mdash;we prepare them to pass through expert guidance, smart strategies, and confidence-building support.</p>
           </div>
         </div>
       </div>
@@ -304,8 +304,8 @@
 
     <section id="courses" class="services section light-background">
       <div class="container section-title" data-aos="fade-up">
-        <h2>Review Courses</h2>
-        <p>Join GRA's PassEasy(TM) Courses for NCLEX, DHA, HAAD (DOH), Prometric, PNLE, SPLE, and Civil Service, and pass your licensure exams the easiest and more affordable way.</p>
+        <h2>Test Prep Courses</h2>
+        <p>Expert Led. Convenient. Exam- focused.</p>
       </div>
       <div class="container">
         <div class="row justify-content-center gy-4 mb-5 learning-mode-cards" data-aos="fade-up" data-aos-delay="100">
@@ -324,6 +324,15 @@
               <div>
                 <h3>Fully Online</h3>
                 <p>Study at your own pace with recorded lectures and 24/7 access.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="learning-mode-card">
+              <i class="fa-solid fa-chalkboard-user"></i>
+              <div>
+                <h3>Live / In Person</h3>
+                <p>Attend classes in person at specific GRA locations.</p>
               </div>
             </div>
           </div>
