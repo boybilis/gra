@@ -242,24 +242,20 @@ require_once __DIR__ . '/asset-version.php';
     .test-processing-page .floating-contact-stack a:nth-child(2) { background: #25D366; }
     .test-processing-page .floating-contact-stack a:nth-child(3) { background: #0084ff; }
     .test-processing-page .floating-contact-stack a:nth-child(4) { background: #ff6e11; }
-    .test-processing-page .floating-contact-stack #scroll-top { background: #003057; }
-    .test-processing-page .floating-contact-stack #scroll-top {
-      position: static;
-      right: auto;
-      bottom: auto;
-      z-index: auto;
+    .test-processing-page #scroll-top {
+      right: 12px;
+      bottom: 14px;
+      border-radius: 50%;
       width: 44px;
       height: 44px;
-      border-radius: 50%;
-      visibility: hidden;
-      opacity: 0;
+      background: #003057;
+      z-index: 1099;
     }
-    .test-processing-page .floating-contact-stack #scroll-top.active {
-      visibility: visible;
-      opacity: 1;
+    .test-processing-page .floating-contact-stack {
+      bottom: 66px;
     }
-    .test-processing-page .floating-contact-stack:has(#scroll-top.active) {
-      bottom: 74px;
+    .test-processing-page .floating-contact-stack.with-scroll-top {
+      bottom: 114px;
     }
     .test-processing-page #processing-hero {
       position: relative;
@@ -768,9 +764,9 @@ require_once __DIR__ . '/asset-version.php';
       <a href="https://wa.me/639285599060" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="bi bi-whatsapp"></i></a>
       <a href="https://m.me/gapuzreviewacademyofficial" target="_blank" rel="noopener" aria-label="Open Messenger"><i class="bi bi-messenger"></i></a>
       <a href="#processing-consultation" aria-label="Book consultation"><i class="bi bi-calendar-check"></i></a>
-      <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center" aria-label="Scroll to top"><i class="bi bi-arrow-up-short"></i></a>
     </div>
   </div>
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center" aria-label="Scroll to top"><i class="bi bi-arrow-up-short"></i></a>
   <div id="preloader"></div>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
@@ -825,6 +821,15 @@ require_once __DIR__ . '/asset-version.php';
           floatingToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         });
       }
+
+      var scrollTopBtn = document.getElementById('scroll-top');
+      function syncFloatingStackOffset() {
+        if (!floatingStack || !scrollTopBtn) return;
+        floatingStack.classList.toggle('with-scroll-top', scrollTopBtn.classList.contains('active'));
+      }
+      window.addEventListener('scroll', syncFloatingStackOffset, { passive: true });
+      window.addEventListener('load', syncFloatingStackOffset);
+      syncFloatingStackOffset();
     })();
   </script>
 </body>
