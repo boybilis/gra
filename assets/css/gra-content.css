@@ -517,6 +517,23 @@
     width: 50%;
     flex: 0 0 auto;
   }
+  #free-resources .service-item {
+    padding: 14px;
+  }
+  #free-resources .service-item .icon {
+    margin: 0 0 10px;
+  }
+  #free-resources .service-item h4 {
+    margin: 0 0 8px;
+    line-height: 1.2;
+  }
+  #free-resources .service-item p {
+    margin: 0;
+    line-height: 1.35;
+  }
+  #free-resources .campus-resource-link {
+    margin-top: 10px;
+  }
 }
 #free-resources .service-item:hover {
   box-shadow: none;
@@ -618,6 +635,25 @@
 }
 .campus-access-status.is-success {
   color: #1f7a35;
+}
+@media (max-width: 767.98px) {
+  #course-enroll .gra-medicio-form .row,
+  #campus-access .gra-medicio-form .row {
+    row-gap: 10px;
+  }
+
+  #course-enroll .gra-medicio-form .form-group,
+  #campus-access .gra-medicio-form .form-group {
+    margin-top: 0 !important;
+    padding-bottom: 0;
+  }
+
+  #course-enroll .gra-medicio-form button[type=submit],
+  #campus-access .gra-medicio-form button[type=submit] {
+    width: 100%;
+    min-height: 44px;
+    white-space: normal;
+  }
 }
 #free-courses .free-register-card {
   background: var(--gra-navy);

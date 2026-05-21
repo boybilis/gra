@@ -244,6 +244,36 @@ h6 {
   transition: all 0.5s;
 }
 
+.header .topbar .online-campus-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 48px;
+  height: 28px;
+  padding: 0 10px;
+  background: #ff6e11;
+  color: #003057;
+  border: 1px solid #003057;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0;
+}
+
+@media (max-width: 767.98px) {
+  .header .topbar .online-campus-link {
+    margin-left: 12px;
+  }
+}
+
+.header .topbar .online-campus-link:hover,
+.header .topbar .online-campus-link:focus {
+  background: #003057;
+  color: #ff6e11;
+  border-color: #ff6e11;
+}
+
 .header .branding {
   min-height: 60px;
   padding: 10px 0;

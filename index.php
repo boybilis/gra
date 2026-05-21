@@ -82,8 +82,8 @@
 <body class="index-page gra-page">
   <header id="header" class="header sticky-top">
     <div class="topbar d-flex align-items-center">
-      <div class="container d-flex justify-content-center justify-content-md-between">
-        <div class="d-none d-md-flex align-items-center">Learn With Confidence.</div>
+      <div class="container d-flex justify-content-between">
+        <div class="d-flex align-items-center gap-2"><span class="d-none d-md-inline">Learn With Confidence.</span><a class="online-campus-link" href="online-campus.php">ONLINE CAMPUS</a></div>
         <div class="d-flex align-items-center gap-3"><span><i class="bi bi-telephone me-1"></i> 0285599060 / 85599062</span><span class="d-none d-lg-inline"><i class="bi bi-envelope me-1"></i> Inquire@gratestprepworldwide.com</span></div>
       </div>
     </div>
@@ -188,28 +188,28 @@
           <div class="col-6 col-md-6 col-xl d-flex" data-aos="fade-up" data-aos-delay="100">
             <div class="service-item position-relative">
               <div class="icon"><i class="fas fa-book-open icon"></i></div>
-              <h4><a href="online-campus.php" class="stretched-link">Free Mini Lessons</a></h4>
+              <h4><a href="free-course.php" class="stretched-link">Free Mini Lessons</a></h4>
               <p>Start with guided lessons that introduce the GRA approach before enrolling in a full review program.</p>
             </div>
           </div>
           <div class="col-6 col-md-6 col-xl d-flex" data-aos="fade-up" data-aos-delay="200">
             <div class="service-item position-relative">
               <div class="icon"><i class="fas fa-clipboard-question icon"></i></div>
-              <h4><a href="online-campus.php" class="stretched-link">Practice Quizzes</a></h4>
+              <h4><a href="free-course.php" class="stretched-link">Practice Quizzes</a></h4>
               <p>Build exam confidence with review questions designed for active recall and readiness checks.</p>
             </div>
           </div>
           <div class="col-6 col-md-6 col-xl d-flex" data-aos="fade-up" data-aos-delay="300">
             <div class="service-item position-relative">
               <div class="icon"><i class="fas fa-file-arrow-down icon"></i></div>
-              <h4><a href="online-campus.php" class="stretched-link">Downloadable Notes</a></h4>
+              <h4><a href="free-course.php" class="stretched-link">Downloadable Notes</a></h4>
               <p>Use compact learning notes to organize your first steps and reinforce high-yield review topics.</p>
             </div>
           </div>
           <div class="col-6 col-md-6 col-xl d-flex" data-aos="fade-up" data-aos-delay="400">
             <div class="service-item position-relative">
               <div class="icon"><i class="fas fa-display icon"></i></div>
-              <h4><a href="online-campus.php" class="stretched-link">Orientation Webinar</a></h4>
+              <h4><a href="free-course.php" class="stretched-link">Orientation Webinar</a></h4>
               <p>Learn how GRA, PassEasy, and Artemis360 work together for flexible online preparation.</p>
             </div>
           </div>
@@ -218,7 +218,7 @@
               <div class="icon"><i class="fas fa-user-plus icon"></i></div>
               <h4>Start learning for free!</h4>
               <p>Experience the GRA difference with free learning resources.</p>
-              <a href="online-campus.php" class="free-register-btn stretched-link">Register free account</a>
+              <a href="free-course.php" class="free-register-btn stretched-link">Register free account</a>
             </div>
           </div>
         </div>
@@ -499,7 +499,7 @@
           <div class="social-links d-flex mt-4"><a href="https://www.facebook.com/gapuzreviewacademyofficial"><i class="bi bi-facebook"></i></a></div>
         </div>
         <div class="col-lg-2 col-md-3 footer-links"><h4>Courses</h4><ul><li><a href="nclex-rn-courses.php">NCLEX</a></li><li><a href="dha-rn-courses.php">DHA</a></li><li><a href="doh-haad-rn-courses.php">HAAD / DOH</a></li><li><a href="prometric-rn-courses.php">Prometric</a></li></ul></div>
-        <div class="col-lg-2 col-md-3 footer-links"><h4>More Programs</h4><ul><li><a href="pnle-courses.php">PNLE</a></li><li><a href="sple-courses.php">SPLE</a></li><li><a href="civil-service-courses.php">Civil Service</a></li><li><a href="online-campus.php">Online Campus</a></li></ul></div>
+        <div class="col-lg-2 col-md-3 footer-links"><h4>More Programs</h4><ul><li><a href="pnle-courses.php">PNLE</a></li><li><a href="sple-courses.php">SPLE</a></li><li><a href="civil-service-courses.php">Civil Service</a></li><li><a href="free-course.php">Online Campus</a></li></ul></div>
         <div class="col-lg-3 col-md-3 footer-links"><h4>Quick Links</h4><ul><li><a href="index.php#about">About GRA</a></li><li><a href="index.php#free-courses">Free Courses</a></li><li><a href="https://artemis360.gapuzreview.com">Artemis360</a></li><li><a href="index.php#enroll">Enroll</a></li></ul></div>
       </div>
     </div>

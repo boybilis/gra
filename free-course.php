@@ -5,7 +5,7 @@
   <?php require_once __DIR__ . '/asset-version.php'; ?>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Online Campus | Gapuz Review Academy</title>
+  <title>Free Course | Gapuz Review Academy</title>
   <meta name="description" content="Gapuz Review Academy review programs for NCLEX, DHA, HAAD, Prometric, PNLE, SPLE, Civil Service, and online learning.">
   <meta name="keywords" content="Gapuz Review Academy, PassEasy, NCLEX, DHA, HAAD, Prometric, PNLE, SPLE, Civil Service">
   <link href="assets/img/gra/gra-logo.png" rel="icon">
@@ -56,14 +56,14 @@
 
   <main class="main">
 
-    <sect ion id="online-campus" class="about section light-background">
+    <section id="online-campus" class="about section light-background">
       <div class="container section-title" data-aos="fade-up">
-        <h2>Online Campus</h2>
+        <h2>Free Course</h2>
         <p>Experience the GRA difference with free learning resources and digital review access.</p>
       </div>
       <div class="container">
         <div class="row gy-4">
-          <div class="col-lg-6 position-relative align-self-start" data-aos="fade-up" data-aos-delay="100"><img src="assets/img/gra/artemis-platform.jpg" class="img-fluid" alt="GRA Online Campus"></div>
+          <div class="col-lg-6 position-relative align-self-start" data-aos="fade-up" data-aos-delay="100"><img src="assets/img/gra/artemis-platform.jpg" class="img-fluid" alt="GRA Free Course"></div>
           <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
             <h3>Start learning for free.</h3>
             <p class="fst-italic">Use GRA's free course page to explore mini lessons, practice quizzes, downloadable notes, and orientation resources before choosing a full review program.</p>
@@ -81,7 +81,7 @@
     <section id="campus-access" class="appointment section">
       <div class="container section-title" data-aos="fade-up">
         <h2>Unlock Free Resources</h2>
-        <p>Enter the same email you used when you registered your Online Campus interest.</p>
+        <p>Enter the same email you used when you registered your Free Course interest.</p>
       </div>
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <form id="campus-access-form" class="gra-medicio-form" action="check-booking-access.php" method="post" novalidate>
@@ -102,7 +102,7 @@
       <div class="container"><div class="row gy-4">
         <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100"><div class="service-item position-relative campus-resource-card is-locked"><div class="icon"><i class="fas fa-book-open icon"></i></div><h4>Free Mini Lessons</h4><p>Preview GRA's learning style with focused introductory lessons.</p><a class="campus-resource-link" data-campus-resource data-resource-href="mini-lessons.php" href="mini-lessons.php" aria-disabled="true">Open Mini Lessons</a></div></div>
         <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200"><div class="service-item position-relative campus-resource-card is-locked"><div class="icon"><i class="fas fa-clipboard-question icon"></i></div><h4>Practice Quizzes</h4><p>Check readiness and reinforce review topics through quick quizzes.</p><a class="campus-resource-link" data-campus-resource data-resource-href="practice-quizzes.php" href="practice-quizzes.php" aria-disabled="true">Open Practice Quizzes</a></div></div>
-        <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300"><div class="service-item position-relative campus-resource-card is-locked"><div class="icon"><i class="fas fa-file-arrow-down icon"></i></div><h4>Downloadable Notes</h4><p>Keep review reminders and topic summaries within reach.</p><a class="campus-resource-link" data-campus-resource data-resource-href="downloadable-notes.php" href="downloadable-notes.php" aria-disabled="true">Open Downloadable Notes</a></div></div>
+        <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300"><div class="service-item position-relative campus-resource-card is-locked"><div class="icon"><i class="fas fa-file-arrow-down icon"></i></div><h4>Download Notes</h4><p>Keep review reminders and topic summaries within reach.</p><a class="campus-resource-link" data-campus-resource data-resource-href="downloadable-notes.php" href="downloadable-notes.php" aria-disabled="true">Open Downloadable Notes</a></div></div>
         <div class="col-xl-3 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="400"><div class="service-item position-relative campus-resource-card is-locked"><div class="icon"><i class="fas fa-display icon"></i></div><h4>Orientation Webinar</h4><p>Learn how to choose the right review program and setup.</p><a class="campus-resource-link" data-campus-resource data-resource-href="orientation-webinar.php" href="orientation-webinar.php" aria-disabled="true">Open Orientation Webinar</a></div></div>
       </div></div>
     </section>

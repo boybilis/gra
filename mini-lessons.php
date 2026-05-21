@@ -47,8 +47,8 @@ if ($accessGranted) {
 <body class="index-page gra-page campus-video-page footer-stick-page">
   <header id="header" class="header sticky-top">
     <div class="topbar d-flex align-items-center">
-      <div class="container d-flex justify-content-center justify-content-md-between">
-        <div class="d-none d-md-flex align-items-center">Learn With Confidence.</div>
+      <div class="container d-flex justify-content-between">
+        <div class="d-flex align-items-center gap-2"><span class="d-none d-md-inline">Learn With Confidence.</span><a class="online-campus-link" href="online-campus.php">ONLINE CAMPUS</a></div>
         <div class="d-flex align-items-center gap-3"><span><i class="bi bi-telephone me-1"></i> 0285599060 / 85599062</span><span class="d-none d-lg-inline"><i class="bi bi-envelope me-1"></i> Inquire@gratestprepworldwide.com</span></div>
       </div>
     </div>
@@ -57,7 +57,7 @@ if ($accessGranted) {
         <a href="index.php" class="logo d-flex align-items-center me-auto">
           <img src="assets/img/gra/gra-logo.png" alt="Gapuz Review Academy logo">
         </a>
-        <a class="cta-btn" href="online-campus.php">Back to Online Campus</a>
+        <a class="cta-btn" href="free-course.php">Back to Online Campus</a>
       </div>
     </div>
   </header>
@@ -67,7 +67,7 @@ if ($accessGranted) {
     <section class="campus-gate">
       <h2>Email Verification Needed</h2>
       <p>Please unlock resources from Online Campus first using your registered email.</p>
-      <a class="btn btn-primary" href="online-campus.php#campus-access">Go to Email Verification</a>
+      <a class="btn btn-primary" href="free-course.php#campus-access">Go to Email Verification</a>
     </section>
     <?php else: ?>
     <section class="campus-video-shell">
