@@ -316,7 +316,7 @@ require_once __DIR__ . '/asset-version.php';
             <?php foreach ($processingImages as $processingImage): ?>
             <div class="swiper-slide">
               <article class="featured-passer-card">
-                <a href="<?php echo htmlspecialchars($processingImage['url'], ENT_QUOTES, 'UTF-8'); ?>" class="glightbox" data-gallery="processing-testimonials" data-title="<?php echo htmlspecialchars($processingImage['label'], ENT_QUOTES, 'UTF-8'); ?>">
+                <a href="<?php echo htmlspecialchars($processingImage['url'], ENT_QUOTES, 'UTF-8'); ?>" class="glightbox" data-gallery="processing-testimonials">
                   <img src="<?php echo htmlspecialchars($processingImage['url'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($processingImage['label'], ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async">
                 </a>
               </article>

@@ -265,7 +265,7 @@
             ?>
             <div class="swiper-slide">
               <article class="featured-passer-card">
-                <a href="<?php echo $passerUrl; ?>" class="glightbox" data-gallery="featured-passers" data-title="<?php echo $passerAlt; ?>">
+                <a href="<?php echo $passerUrl; ?>" class="glightbox" data-gallery="featured-passers">
                   <img src="<?php echo $passerUrl; ?>" alt="<?php echo $passerAlt; ?>" loading="lazy" decoding="async">
                 </a>
               </article>
