@@ -706,6 +706,7 @@
 }
 .featured-passers .swiper-slide {
   height: auto;
+  pointer-events: auto;
 }
 .featured-passers .featured-passer-card {
   width: 100%;
@@ -727,6 +728,9 @@
 .featured-passers .featured-passer-card a {
   display: block;
   cursor: zoom-in;
+  position: relative;
+  z-index: 2;
+  pointer-events: auto;
 }
 .featured-passers .featured-passer-meta {
   display: none;

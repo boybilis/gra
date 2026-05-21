@@ -569,6 +569,14 @@ require_once __DIR__ . '/asset-version.php';
   <script src="<?php echo versioned_asset('assets/js/gra-content.js'); ?>"></script>
   <script>
     (function () {
+      function initProcessingLightbox() {
+        if (typeof GLightbox === 'undefined') return;
+        if (window.__processingLightbox) return;
+        window.__processingLightbox = GLightbox({
+          selector: '#processing-testimonials .glightbox'
+        });
+      }
+
       function initProcessingTestimonials() {
         if (typeof Swiper === 'undefined') return;
         var carousel = document.querySelector('#processing-testimonials .init-swiper');
@@ -584,11 +592,18 @@ require_once __DIR__ . '/asset-version.php';
         }
       }
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initProcessingTestimonials);
+        document.addEventListener('DOMContentLoaded', function () {
+          initProcessingTestimonials();
+          initProcessingLightbox();
+        });
       } else {
         initProcessingTestimonials();
+        initProcessingLightbox();
       }
-      window.addEventListener('load', initProcessingTestimonials);
+      window.addEventListener('load', function () {
+        initProcessingTestimonials();
+        initProcessingLightbox();
+      });
     })();
   </script>
 </body>
