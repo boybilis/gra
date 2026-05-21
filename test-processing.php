@@ -131,6 +131,52 @@ require_once __DIR__ . '/asset-version.php';
     .test-processing-page .processing-hero-actions a {
       pointer-events: auto;
     }
+    .test-processing-page .processing-steps .icon-box {
+      padding: 14px 14px;
+      border: 0;
+      min-height: 0;
+      height: auto;
+      margin-top: 0;
+    }
+    .test-processing-page .processing-steps .row {
+      --bs-gutter-x: 8px;
+      --bs-gutter-y: 8px;
+    }
+    .test-processing-page .processing-steps .icon-box.h-100 {
+      height: auto !important;
+    }
+    .test-processing-page .processing-steps .row > div:nth-child(odd) .icon-box {
+      background: #003057;
+      color: #fff;
+    }
+    .test-processing-page .processing-steps .row > div:nth-child(even) .icon-box {
+      background: #ff6e11;
+      color: #fff;
+    }
+    .test-processing-page .processing-steps .icon-box h4,
+    .test-processing-page .processing-steps .icon-box p,
+    .test-processing-page .processing-steps .icon-box i {
+      color: #fff;
+    }
+    .test-processing-page .processing-steps .icon-box h4 {
+      font-size: 15px;
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+    .test-processing-page .processing-steps .icon-box p {
+      font-size: 12px;
+      line-height: 1.4;
+      margin-bottom: 0;
+    }
+    .test-processing-page .processing-steps .icon-box i {
+      font-size: 18px;
+      margin-right: 10px;
+      margin-top: 2px;
+      background: transparent !important;
+      width: auto !important;
+      height: auto !important;
+      display: inline-block;
+    }
     @media (max-width: 575px) {
       .test-processing-page .processing-steps .row > [class*="col-"] {
         width: 50%;
@@ -139,9 +185,6 @@ require_once __DIR__ . '/asset-version.php';
       .test-processing-page .processing-steps .row {
         --bs-gutter-x: 12px;
         --bs-gutter-y: 12px;
-      }
-      .test-processing-page .processing-steps .icon-box {
-        padding: 12px;
       }
       .test-processing-page .processing-steps .icon-box h4 {
         font-size: 14px;
@@ -190,7 +233,7 @@ require_once __DIR__ . '/asset-version.php';
         <div class="row justify-content-center text-center">
           <div class="col-lg-10">
             <h2>Your Fast, Reliable Path to NCLEX &amp; International Nursing Licensure</h2>
-            <p>From credential evaluation to exam eligibility, GRA Test Processing guides you every step of the way&#8212;so you can focus on passing.</p>
+            <p>From credential evaluation to exam eligibility, <b> GRA Test Processing </b>guides you every step of the way&#8212;so you can focus on passing.</p>
             <div class="d-flex flex-column flex-md-row justify-content-center gap-2 gap-md-3 mt-3 processing-hero-actions">
               <a href="index.php#enroll" class="btn btn-primary">Book a Free Consultation</a>
               <a href="test-processing.php#processing-packages" class="btn btn-processing-blue">View Processing Packages</a>
@@ -203,6 +246,7 @@ require_once __DIR__ . '/asset-version.php';
 
     <section class="about section light-background">
       <div class="container section-title" data-aos="fade-up">
+        <span class="eyebrow">GRA Test Processing</span>
         <h2>Why Choose GRA Test Processing</h2>
         <p></p>
       </div>
@@ -312,33 +356,64 @@ require_once __DIR__ . '/asset-version.php';
 
     <section class="features section light-background processing-steps">
       <div class="container section-title" data-aos="fade-up">
-        <h2>How It Works</h2>
-        <p>A clear processing flow designed to reduce delays and confusion.</p>
+        <span class="eyebrow">Processing Journey / Step-by-Step Timeline</span>
+        <h2>Your Journey to Exam Eligibility</h2>
+        <p>Visual timeline:</p>
       </div>
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-4">
-          <div class="col-lg-3 col-md-6">
+          <div class="col-lg-4 col-md-6">
             <div class="icon-box d-flex position-relative h-100">
-              <i class="fa-solid fa-circle-info flex-shrink-0"></i>
-              <div><h4>1. Initial Assessment</h4><p>Share your target exam and background so we can map your required steps.</p></div>
+              <i class="bi bi-calendar-check flex-shrink-0"></i>
+              <div><h4>1. Book Consultation</h4><p>Start with a focused consultation to map your best licensure route.</p></div>
             </div>
           </div>
-          <div class="col-lg-3 col-md-6">
+          <div class="col-lg-4 col-md-6">
             <div class="icon-box d-flex position-relative h-100">
-              <i class="fa-solid fa-list-check flex-shrink-0"></i>
-              <div><h4>2. Checklist Setup</h4><p>Receive a structured checklist and guidance for each document requirement.</p></div>
+              <i class="bi bi-clipboard2-check flex-shrink-0"></i>
+              <div><h4>2. Eligibility Assessment</h4><p>We review your profile and documents against pathway requirements.</p></div>
             </div>
           </div>
-          <div class="col-lg-3 col-md-6">
+          <div class="col-lg-4 col-md-6">
             <div class="icon-box d-flex position-relative h-100">
-              <i class="fa-solid fa-paper-plane flex-shrink-0"></i>
-              <div><h4>3. Submission Stage</h4><p>Proceed with filing while our team helps you track status and needed updates.</p></div>
+              <i class="bi bi-signpost-split flex-shrink-0"></i>
+              <div><h4>3. Choose State / Pathway</h4><p>Select the state board or licensing track that fits your goals.</p></div>
             </div>
           </div>
-          <div class="col-lg-3 col-md-6">
+          <div class="col-lg-4 col-md-6">
             <div class="icon-box d-flex position-relative h-100">
-              <i class="fa-solid fa-flag-checkered flex-shrink-0"></i>
-              <div><h4>4. Exam Readiness</h4><p>Finalize scheduling and continue your review path with fewer processing blockers.</p></div>
+              <i class="bi bi-folder2-open flex-shrink-0"></i>
+              <div><h4>4. Prepare Documents</h4><p>Complete your requirements using a clear checklist and file guidance.</p></div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="icon-box d-flex position-relative h-100">
+              <i class="bi bi-send-check flex-shrink-0"></i>
+              <div><h4>5. Application Submission</h4><p>Submit your application accurately with support at every step.</p></div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="icon-box d-flex position-relative h-100">
+              <i class="bi bi-patch-check flex-shrink-0"></i>
+              <div><h4>6. Verification / Credential Evaluation</h4><p>Track verification and evaluation progress with timely updates.</p></div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="icon-box d-flex position-relative h-100">
+              <i class="bi bi-journal-check flex-shrink-0"></i>
+              <div><h4>7. Exam Registration</h4><p>Register for your exam with proper timing and complete details.</p></div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="icon-box d-flex position-relative h-100">
+              <i class="bi bi-envelope-check flex-shrink-0"></i>
+              <div><h4>8. Receive Eligibility / ATT</h4><p>Get your eligibility notice or ATT and prepare for scheduling.</p></div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="icon-box d-flex position-relative h-100">
+              <i class="bi bi-mortarboard flex-shrink-0"></i>
+              <div><h4>9. Prepare for Exam with GRA Review</h4><p>Move into targeted review so your processing and prep stay aligned.</p></div>
             </div>
           </div>
         </div>
@@ -347,11 +422,47 @@ require_once __DIR__ . '/asset-version.php';
 
     <section class="appointment section">
       <div class="container section-title" data-aos="fade-up">
-        <h2>Start Your Processing Plan</h2>
-        <p>Connect with a GRA adviser for personalized processing guidance.</p>
+        <span class="eyebrow">Book a Consultation</span>
+        <h2>Not Sure Which Pathway Is Best?</h2>
+        <p>Speak with a GRA processing specialist for personalized guidance based on your country, credentials, and goals.</p>
       </div>
-      <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
-        <a href="index.php#enroll" class="btn btn-primary">Talk to a Processing Adviser</a>
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <form action="submit-processing.php" method="post" role="form" class="site-form gra-medicio-form">
+          <input type="hidden" name="form_type" value="processing_consultation">
+          <div class="row">
+            <div class="col-md-6 form-group">
+              <input type="text" name="name" class="form-control" placeholder="Name" required>
+            </div>
+            <div class="col-md-6 form-group mt-3 mt-md-0">
+              <input type="email" name="email" class="form-control" placeholder="Email" required>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 form-group mt-3">
+              <input type="text" name="phone" class="form-control" placeholder="Mobile / WhatsApp" required>
+            </div>
+            <div class="col-md-6 form-group mt-3">
+              <input type="text" name="country" class="form-control" placeholder="Country">
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 form-group mt-3">
+              <input type="text" name="license_country" class="form-control" placeholder="License Country">
+            </div>
+            <div class="col-md-6 form-group mt-3">
+              <input type="text" name="target_country" class="form-control" placeholder="Target Country">
+            </div>
+          </div>
+          <div class="form-group mt-3">
+            <input type="text" name="preferred_state_region" class="form-control" placeholder="Preferred State / Region">
+          </div>
+          <div class="form-group mt-3">
+            <textarea class="form-control" name="message" rows="5" placeholder="Questions"></textarea>
+          </div>
+          <div class="mt-3 text-center">
+            <button type="submit" class="btn btn-primary">Book Consultation</button>
+          </div>
+        </form>
       </div>
     </section>
   </main>
