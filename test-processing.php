@@ -475,8 +475,8 @@ require_once __DIR__ . '/asset-version.php';
             ],
             'breakpoints' => [
               '320' => ['slidesPerView' => 1, 'spaceBetween' => 18, 'grid' => ['rows' => 1]],
-              '768' => ['slidesPerView' => $processingTabletSlides, 'spaceBetween' => 18, 'grid' => ['rows' => 2]],
-              '1200' => ['slidesPerView' => $processingDesktopSlides, 'spaceBetween' => 20, 'grid' => ['rows' => 2]],
+              '768' => ['slidesPerView' => $processingTabletSlides, 'spaceBetween' => 18, 'grid' => ['rows' => 1]],
+              '1200' => ['slidesPerView' => $processingDesktopSlides, 'spaceBetween' => 20, 'grid' => ['rows' => 1]],
             ],
           ];
         ?>
