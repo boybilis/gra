@@ -134,50 +134,80 @@ require_once __DIR__ . '/asset-version.php';
       pointer-events: auto;
     }
     .test-processing-page .processing-steps .icon-box {
-      padding: 14px 14px;
-      border: 0;
+      background: #fff;
+      border: 1px solid #dce4ee;
+      border-left: 6px solid #003057;
+      border-radius: 12px;
       min-height: 0;
-      height: auto;
-      margin-top: 0;
+      padding: 10px 12px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.05);
     }
     .test-processing-page .processing-steps .row {
-      --bs-gutter-x: 8px;
-      --bs-gutter-y: 8px;
-    }
-    .test-processing-page .processing-steps .icon-box.h-100 {
-      height: auto !important;
-    }
-    .test-processing-page .processing-steps .row > div:nth-child(odd) .icon-box {
-      background: #003057;
-      color: #fff;
+      --bs-gutter-x: 12px;
+      --bs-gutter-y: 12px;
     }
     .test-processing-page .processing-steps .row > div:nth-child(even) .icon-box {
-      background: #ff6e11;
-      color: #fff;
+      border-left-color: #ff6e11;
     }
-    .test-processing-page .processing-steps .icon-box h4,
-    .test-processing-page .processing-steps .icon-box p,
-    .test-processing-page .processing-steps .icon-box i {
+    .test-processing-page .processing-steps .step-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #fff;
+      color: #003057;
+      flex: 0 0 46px;
+      margin-right: 10px;
+    }
+    .test-processing-page .processing-steps .step-icon i {
+      font-size: 22px;
+      color: inherit;
+    }
+    .test-processing-page .processing-steps .row > div:nth-child(even) .step-icon {
+      background: #fff;
+      color: #ff6e11;
+    }
+    .test-processing-page .processing-steps .icon-box:hover .step-icon,
+    .test-processing-page .processing-steps .icon-box:hover .step-icon i {
+      background: #fff !important;
+      color: inherit !important;
+    }
+    .test-processing-page .processing-steps .step-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 3px;
+    }
+    .test-processing-page .processing-steps .step-no {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #003057;
       color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1;
+      flex: 0 0 36px;
+    }
+    .test-processing-page .processing-steps .row > div:nth-child(even) .step-no {
+      background: #ff6e11;
     }
     .test-processing-page .processing-steps .icon-box h4 {
-      font-size: 15px;
-      line-height: 1.3;
-      margin-bottom: 4px;
+      font-size: 18px;
+      margin: 0;
+      line-height: 1.15;
+      color: #0d2d66;
     }
     .test-processing-page .processing-steps .icon-box p {
-      font-size: 12px;
-      line-height: 1.4;
-      margin-bottom: 0;
-    }
-    .test-processing-page .processing-steps .icon-box i {
-      font-size: 18px;
-      margin-right: 10px;
-      margin-top: 2px;
-      background: transparent !important;
-      width: auto !important;
-      height: auto !important;
-      display: inline-block;
+      margin: 0;
+      color: #1f2d3d;
+      font-size: 14px;
+      line-height: 1.25;
     }
     .test-processing-page .processing-consultation-wrap {
       position: relative;
@@ -301,18 +331,32 @@ require_once __DIR__ . '/asset-version.php';
         line-height: 1.25;
       }
       .test-processing-page .processing-steps .row > [class*="col-"] {
-        width: 50%;
-        flex: 0 0 auto;
+        width: 100%;
+        flex: 0 0 100%;
       }
       .test-processing-page .processing-steps .row {
         --bs-gutter-x: 12px;
         --bs-gutter-y: 12px;
       }
+      .test-processing-page .processing-steps .step-icon {
+        width: 52px;
+        height: 52px;
+        flex-basis: 52px;
+        margin-right: 10px;
+      }
+      .test-processing-page .processing-steps .step-icon i {
+        font-size: 24px;
+      }
+      .test-processing-page .processing-steps .step-no {
+        width: 30px;
+        height: 30px;
+        font-size: 18px;
+      }
       .test-processing-page .processing-steps .icon-box h4 {
-        font-size: 14px;
+        font-size: 19px;
       }
       .test-processing-page .processing-steps .icon-box p {
-        font-size: 12px;
+        font-size: 14px;
         line-height: 1.35;
       }
     }
@@ -578,56 +622,56 @@ require_once __DIR__ . '/asset-version.php';
         <div class="row gy-4">
           <div class="col-lg-4 col-md-6">
             <div class="icon-box d-flex position-relative h-100">
-              <i class="bi bi-calendar-check flex-shrink-0"></i>
-              <div><h4>1. Book Consultation</h4><p>Start with a focused consultation to map your best licensure route.</p></div>
+              <div class="step-icon"><i class="bi bi-calendar-check"></i></div>
+              <div><div class="step-head"><span class="step-no">1</span><h4>Book Consultation</h4></div><p>Start with a focused consultation to map your best licensure route.</p></div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
             <div class="icon-box d-flex position-relative h-100">
-              <i class="bi bi-clipboard2-check flex-shrink-0"></i>
-              <div><h4>2. Eligibility Assessment</h4><p>We review your profile and documents against pathway requirements.</p></div>
+              <div class="step-icon"><i class="bi bi-clipboard2-check"></i></div>
+              <div><div class="step-head"><span class="step-no">2</span><h4>Eligibility Assessment</h4></div><p>We review your profile and documents against pathway requirements.</p></div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
             <div class="icon-box d-flex position-relative h-100">
-              <i class="bi bi-signpost-split flex-shrink-0"></i>
-              <div><h4>3. Choose State / Pathway</h4><p>Select the state board or licensing track that fits your goals.</p></div>
+              <div class="step-icon"><i class="bi bi-signpost-split"></i></div>
+              <div><div class="step-head"><span class="step-no">3</span><h4>Choose State / Pathway</h4></div><p>Select the state board or licensing track that fits your goals.</p></div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
             <div class="icon-box d-flex position-relative h-100">
-              <i class="bi bi-folder2-open flex-shrink-0"></i>
-              <div><h4>4. Prepare Documents</h4><p>Complete your requirements using a clear checklist and file guidance.</p></div>
+              <div class="step-icon"><i class="bi bi-folder2-open"></i></div>
+              <div><div class="step-head"><span class="step-no">4</span><h4>Prepare Documents</h4></div><p>Complete your requirements using a clear checklist and file guidance.</p></div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
             <div class="icon-box d-flex position-relative h-100">
-              <i class="bi bi-send-check flex-shrink-0"></i>
-              <div><h4>5. Application Submission</h4><p>Submit your application accurately with support at every step.</p></div>
+              <div class="step-icon"><i class="bi bi-send-check"></i></div>
+              <div><div class="step-head"><span class="step-no">5</span><h4>Application Submission</h4></div><p>Submit your application accurately with support at every step.</p></div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
             <div class="icon-box d-flex position-relative h-100">
-              <i class="bi bi-patch-check flex-shrink-0"></i>
-              <div><h4>6. Verification / Credential Evaluation</h4><p>Track verification and evaluation progress with timely updates.</p></div>
+              <div class="step-icon"><i class="bi bi-patch-check"></i></div>
+              <div><div class="step-head"><span class="step-no">6</span><h4>Verification / Credential Evaluation</h4></div><p>Track verification and evaluation progress with timely updates.</p></div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
             <div class="icon-box d-flex position-relative h-100">
-              <i class="bi bi-journal-check flex-shrink-0"></i>
-              <div><h4>7. Exam Registration</h4><p>Register for your exam with proper timing and complete details.</p></div>
+              <div class="step-icon"><i class="bi bi-journal-check"></i></div>
+              <div><div class="step-head"><span class="step-no">7</span><h4>Exam Registration</h4></div><p>Register for your exam with proper timing and complete details.</p></div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
             <div class="icon-box d-flex position-relative h-100">
-              <i class="bi bi-envelope-check flex-shrink-0"></i>
-              <div><h4>8. Receive Eligibility / ATT</h4><p>Get your eligibility notice or ATT and prepare for scheduling.</p></div>
+              <div class="step-icon"><i class="bi bi-envelope-check"></i></div>
+              <div><div class="step-head"><span class="step-no">8</span><h4>Receive Eligibility / ATT</h4></div><p>Get your eligibility notice or ATT and prepare for scheduling.</p></div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
             <div class="icon-box d-flex position-relative h-100">
-              <i class="bi bi-mortarboard flex-shrink-0"></i>
-              <div><h4>9. Prepare for Exam with GRA Review</h4><p>Move into targeted review so your processing and prep stay aligned.</p></div>
+              <div class="step-icon"><i class="bi bi-mortarboard"></i></div>
+              <div><div class="step-head"><span class="step-no">9</span><h4>Prepare for Exam with GRA Review</h4></div><p>Move into targeted review so your processing and prep stay aligned.</p></div>
             </div>
           </div>
         </div>
