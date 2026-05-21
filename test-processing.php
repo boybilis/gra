@@ -207,7 +207,7 @@ require_once __DIR__ . '/asset-version.php';
       justify-content: center;
       border: 0;
       border-radius: 50%;
-      background: #003057;
+      background: #ff6e11;
       color: #fff;
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
       cursor: pointer;
