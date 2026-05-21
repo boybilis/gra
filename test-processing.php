@@ -190,7 +190,46 @@ require_once __DIR__ . '/asset-version.php';
     .test-processing-page .processing-consultation-form button {
       pointer-events: auto;
     }
+    .test-processing-page #processing-hero {
+      position: relative;
+      background-image: url('assets/img/gra/hero-artemis-cover.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .test-processing-page #processing-hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 48, 87, 0.52);
+      pointer-events: none;
+    }
+    .test-processing-page #processing-hero > .container {
+      position: relative;
+      z-index: 1;
+    }
     @media (max-width: 575px) {
+      .test-processing-page #processing-hero {
+        min-height: 0;
+        background-position: center top;
+      }
+      .test-processing-page #processing-hero > .container {
+        padding-top: 44px;
+        padding-bottom: 36px;
+      }
+      .test-processing-page #processing-hero h2 {
+        font-size: 30px;
+        line-height: 1.2;
+        margin-bottom: 12px;
+      }
+      .test-processing-page #processing-hero p {
+        font-size: 14px;
+        line-height: 1.45;
+        margin-bottom: 0;
+      }
+      .test-processing-page .processing-hero-actions {
+        margin-top: 14px !important;
+      }
       .test-processing-page .processing-steps .row > [class*="col-"] {
         width: 50%;
         flex: 0 0 auto;
