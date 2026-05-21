@@ -218,6 +218,20 @@ require_once __DIR__ . '/asset-version.php';
         padding-bottom: 36px;
         padding-left: 18px;
         padding-right: 18px;
+        margin-left: 12px !important;
+        margin-right: 12px !important;
+      }
+      .test-processing-page #processing-hero .row {
+        --bs-gutter-x: 0;
+        margin-left: 0;
+        margin-right: 0;
+      }
+      .test-processing-page #processing-hero .row > [class*="col-"] {
+        width: 100%;
+        max-width: 100%;
+        flex: 0 0 100%;
+        padding-left: 0;
+        padding-right: 0;
       }
       .test-processing-page #processing-hero h2 {
         font-size: 24px;
