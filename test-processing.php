@@ -262,15 +262,15 @@ require_once __DIR__ . '/asset-version.php';
         padding: 0 !important;
       }
       .test-processing-page #processing-hero .carousel {
-        min-height: 460px !important;
+        min-height: 520px !important;
       }
       .test-processing-page #processing-hero .carousel-item {
         padding-top: 30px;
-        min-height: 460px !important;
+        min-height: 520px !important;
         align-items: flex-start !important;
       }
       .test-processing-page #processing-hero .carousel-item > img {
-        height: 460px !important;
+        height: 520px !important;
         object-fit: cover;
         object-position: center top;
       }
