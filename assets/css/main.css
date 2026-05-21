@@ -735,8 +735,8 @@ h6 {
   position: fixed;
   visibility: hidden;
   opacity: 0;
-  right: 15px;
-  bottom: 15px;
+  right: 12px;
+  bottom: 14px;
   z-index: 99999;
   background-color: #003057;
   width: 44px;
