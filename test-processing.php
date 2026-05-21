@@ -279,12 +279,6 @@ require_once __DIR__ . '/asset-version.php';
       .test-processing-page #processing-hero.section {
         padding: 0 !important;
       }
-      .test-processing-page #processing-hero {
-        min-height: 520px;
-        display: flex;
-        align-items: flex-start;
-        justify-content: center;
-      }
       .test-processing-page #processing-hero > .container {
         margin-top: 20px !important;
         margin-bottom: 0 !important;
@@ -293,9 +287,6 @@ require_once __DIR__ . '/asset-version.php';
         margin-left: auto !important;
         margin-right: auto !important;
         max-width: calc(100% - 32px);
-      }
-      .test-processing-page #processing-hero h2 {
-        font-size: 30px;
       }
     }
     @media (max-width: 575px) {
@@ -311,7 +302,6 @@ require_once __DIR__ . '/asset-version.php';
         line-height: 1.25;
       }
       .test-processing-page #processing-hero {
-        min-height: 560px;
         background-position: center center;
         overflow: hidden;
       }
@@ -321,31 +311,6 @@ require_once __DIR__ . '/asset-version.php';
         margin-left: auto !important;
         margin-right: auto !important;
         max-width: calc(100% - 32px);
-      }
-      .test-processing-page #processing-hero .row {
-        --bs-gutter-x: 0;
-        margin-left: 0;
-        margin-right: 0;
-      }
-      .test-processing-page #processing-hero .row > [class*="col-"] {
-        width: 100%;
-        max-width: 100%;
-        flex: 0 0 100%;
-        padding-left: 0;
-        padding-right: 0;
-      }
-      .test-processing-page #processing-hero h2 {
-        font-size: 24px;
-        line-height: 1.22;
-        margin-bottom: 12px;
-        overflow-wrap: anywhere;
-        word-break: normal;
-      }
-      .test-processing-page #processing-hero p {
-        font-size: 13px;
-        line-height: 1.5;
-        margin-bottom: 0;
-        overflow-wrap: anywhere;
       }
       .test-processing-page .processing-hero-actions {
         margin-top: 14px !important;
