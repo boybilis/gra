@@ -671,7 +671,7 @@ require_once __DIR__ . '/asset-version.php';
           <div class="col-lg-4 col-md-6">
             <div class="icon-box d-flex position-relative h-100">
               <div class="step-icon"><i class="bi bi-patch-check"></i></div>
-              <div><div class="step-head"><span class="step-no">6</span><h4>Verification and Evaluation</h4></div><p>Track verification and evaluation progress with timely updates.</p></div>
+              <div><div class="step-head"><span class="step-no">6</span><h4>Verification and Evaluation</h4></div><p>Track verification and credential evaluation progress with timely updates.</p></div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
@@ -683,13 +683,13 @@ require_once __DIR__ . '/asset-version.php';
           <div class="col-lg-4 col-md-6">
             <div class="icon-box d-flex position-relative h-100">
               <div class="step-icon"><i class="bi bi-envelope-check"></i></div>
-              <div><div class="step-head"><span class="step-no">8</span><h4>ATT and Exam Booking</h4></div><p>Get your eligibility notice or ATT and prepare for scheduling.</p></div>
+              <div><div class="step-head"><span class="step-no">8</span><h4>ATT and Exam Booking</h4></div><p>Receive your ATT and book your exam with confidence.</p></div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
             <div class="icon-box d-flex position-relative h-100">
               <div class="step-icon"><i class="bi bi-mortarboard"></i></div>
-              <div><div class="step-head"><span class="step-no">9</span><h4>Prepare for Exam with GRA Review</h4></div><p>Move into targeted review so your processing and prep stay aligned.</p></div>
+              <div><div class="step-head"><span class="step-no">9</span><h4>Sit with NCLEX</h4></div><p>The final step. Show your readiness and go for succes!.</p></div>
             </div>
           </div>
         </div>
