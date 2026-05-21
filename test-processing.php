@@ -813,23 +813,6 @@ require_once __DIR__ . '/asset-version.php';
         initProcessingLightbox();
       });
 
-      var floatingToggle = document.getElementById('floating-contact-toggle');
-      var floatingStack = document.getElementById('floating-contact-stack');
-      if (floatingToggle && floatingStack) {
-        floatingToggle.addEventListener('click', function () {
-          var isOpen = floatingStack.classList.toggle('is-open');
-          floatingToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        });
-      }
-
-      var scrollTopBtn = document.getElementById('scroll-top');
-      function syncFloatingStackOffset() {
-        if (!floatingStack || !scrollTopBtn) return;
-        floatingStack.classList.toggle('with-scroll-top', scrollTopBtn.classList.contains('active'));
-      }
-      window.addEventListener('scroll', syncFloatingStackOffset, { passive: true });
-      window.addEventListener('load', syncFloatingStackOffset);
-      syncFloatingStackOffset();
     })();
   </script>
 </body>
