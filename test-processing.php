@@ -257,40 +257,16 @@ require_once __DIR__ . '/asset-version.php';
     .test-processing-page .floating-contact-stack.with-scroll-top {
       bottom: 70px;
     }
-    .test-processing-page #processing-hero {
-      position: relative;
-      min-height: auto !important;
-      background-image: url('assets/img/gra/hero-artemis-cover.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
-    .test-processing-page #processing-hero::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0, 48, 87, 0.52);
-      pointer-events: none;
-    }
-    .test-processing-page #processing-hero > .container {
-      position: relative;
-      z-index: 1;
-    }
     @media (max-width: 768px) {
-      .test-processing-page #processing-hero.section {
-        padding: 0 !important;
-      }
-      .test-processing-page #processing-hero > .container {
-        margin-top: 20px !important;
-        margin-bottom: 0 !important;
-        padding-top: 20px !important;
-        padding-bottom: 25px !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        max-width: calc(100% - 32px);
+      .test-processing-page #processing-hero .processing-hero-actions {
+        margin-top: 14px !important;
       }
     }
     @media (max-width: 575px) {
+      .test-processing-page #processing-hero h2 {
+        font-size: 1.75rem;
+        line-height: 1.3;
+      }
       .test-processing-page .trust-stack {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 10px !important;
@@ -301,20 +277,6 @@ require_once __DIR__ . '/asset-version.php';
       .test-processing-page .trust-stack .learning-mode-card h3 {
         font-size: 14px;
         line-height: 1.25;
-      }
-      .test-processing-page #processing-hero {
-        background-position: center center;
-        overflow: hidden;
-      }
-      .test-processing-page #processing-hero > .container {
-        padding-left: 18px;
-        padding-right: 18px;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        max-width: calc(100% - 32px);
-      }
-      .test-processing-page .processing-hero-actions {
-        margin-top: 14px !important;
       }
       .test-processing-page .processing-steps .row > [class*="col-"] {
         width: 50%;
@@ -377,15 +339,21 @@ require_once __DIR__ . '/asset-version.php';
 
   <main class="main">
     <section id="processing-hero" class="hero section">
-      <div class="container" data-aos="fade-up">
-        <div class="row justify-content-center text-center">
-          <div class="col-lg-10">
-            <h2>Your Fast, Reliable Path to NCLEX &amp; International Nursing Licensure</h2>
-            <p>From credential evaluation to exam eligibility, <b> GRA Test Processing </b>guides you every step of the way&#8212;so you can focus on passing.</p>
-            <div class="d-flex flex-column flex-md-row justify-content-center gap-2 gap-md-3 mt-3 processing-hero-actions">
-              <a href="#processing-consultation" class="btn btn-primary">Book a Free Consultation</a>
-              <a href="test-processing.php#processing-packages" class="btn btn-processing-blue">View Processing Packages</a>
-              <a href="#processing-consultation" class="btn btn-primary">Start My Application</a>
+      <div id="processing-hero-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+        <div class="carousel-item active">
+          <img src="assets/img/gra/hero-artemis-cover.jpg" alt="Test processing hero cover" fetchpriority="high">
+          <div class="container passeasy-hero-container col-lg-8">
+            <div class="row align-items-center gy-3">
+              <div class="text-center">
+                <span class="eyebrow">GRA TEST PROCESSING</span>
+                <h2>Your Fast, Reliable Path to NCLEX &amp; International Nursing Licensure</h2>
+                <p>From credential evaluation to exam eligibility, <b> GRA Test Processing </b>guides you every step of the way&#8212;so you can focus on passing.</p>
+                <div class="d-flex flex-column flex-md-row justify-content-center gap-2 gap-md-3 mt-3 processing-hero-actions">
+                  <a href="#processing-consultation" class="btn btn-primary">Book a Free Consultation</a>
+                  <a href="test-processing.php#processing-packages" class="btn btn-processing-blue">View Processing Packages</a>
+                  <a href="#processing-consultation" class="btn btn-primary">Start My Application</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
