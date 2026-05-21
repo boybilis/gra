@@ -659,7 +659,7 @@ require_once __DIR__ . '/asset-version.php';
           <div class="col-lg-4 col-md-6">
             <div class="icon-box d-flex position-relative h-100">
               <div class="step-icon"><i class="bi bi-folder2-open"></i></div>
-              <div><div class="step-head"><span class="step-no">4</span><h4>Prepare Documents</h4></div><p>Complete your requirements using a clear checklist and file guidance.</p></div>
+              <div><div class="step-head"><span class="step-no">4</span><h4>Prepare Your Documents</h4></div><p>Complete your requirements using a clear checklist and file guidance.</p></div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
@@ -671,7 +671,7 @@ require_once __DIR__ . '/asset-version.php';
           <div class="col-lg-4 col-md-6">
             <div class="icon-box d-flex position-relative h-100">
               <div class="step-icon"><i class="bi bi-patch-check"></i></div>
-              <div><div class="step-head"><span class="step-no">6</span><h4>Verification / Credential Evaluation</h4></div><p>Track verification and evaluation progress with timely updates.</p></div>
+              <div><div class="step-head"><span class="step-no">6</span><h4>Verification and Evaluation</h4></div><p>Track verification and evaluation progress with timely updates.</p></div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
@@ -683,7 +683,7 @@ require_once __DIR__ . '/asset-version.php';
           <div class="col-lg-4 col-md-6">
             <div class="icon-box d-flex position-relative h-100">
               <div class="step-icon"><i class="bi bi-envelope-check"></i></div>
-              <div><div class="step-head"><span class="step-no">8</span><h4>Receive Eligibility / ATT</h4></div><p>Get your eligibility notice or ATT and prepare for scheduling.</p></div>
+              <div><div class="step-head"><span class="step-no">8</span><h4>ATT and Exam Booking</h4></div><p>Get your eligibility notice or ATT and prepare for scheduling.</p></div>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
