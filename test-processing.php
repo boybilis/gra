@@ -148,12 +148,12 @@ require_once __DIR__ . '/asset-version.php';
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row gy-4">
           <div class="col-lg-6">
-            <h3>What You Get</h3>
+            <h3>Trust Badges</h3>
             <ul>
-              <li><i class="bi bi-check2-all"></i> <span>End-to-end application assistance</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Fast document checklist and verification guidance</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>State-specific expert processing support</span></li>
-              <li><i class="bi bi-check2-all"></i> <span>Personalized case handling</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Fast &amp; Reliable Processing</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Expert Guidance</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Trusted by Nurses Worldwide</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>Review + Processing in One Place</span></li>
             </ul>
           </div>
           <div class="col-lg-6">
