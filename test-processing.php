@@ -718,6 +718,7 @@ require_once __DIR__ . '/asset-version.php';
                 <li><i class="bi bi-check2-all"></i> <span>CBT / OSCE pathway support</span></li>
               </ul>
 			  <br>
+			  <hr>
 			   <div class="processing-flag" aria-label="Philippines">🇵🇭</div>
               <h3>Philippines</h3>
 			   <ul class="processing-checklist">
