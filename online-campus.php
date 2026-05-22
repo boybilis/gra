@@ -225,7 +225,14 @@
         padding-top: 8px !important;
         padding-bottom: 8px !important;
       }
-      .campus-page #online-campus-hero .hero-copy { padding-top: 0 !important; }
+      .campus-page #online-campus-hero .hero-copy {
+        padding-top: 0 !important;
+        padding-bottom: 50px !important;
+        background: rgba(255, 255, 255, 0.8) !important;
+      }
+      .campus-page #online-campus-hero .hero-copy .campus-sub {
+        color: #0f172a !important;
+      }
       .campus-page #online-campus-hero.section {
         padding: 0 !important;
       }
