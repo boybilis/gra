@@ -73,8 +73,8 @@
     .campus-sub { font-size: clamp(1rem, 1.05vw, 1.35rem); line-height: 1.45; color: #1f2d3d; margin-bottom: 16px; max-width: 520px; }
     .campus-btn { border-radius: 10px; font-weight: 700; font-size: 1rem; padding: 8px 12px; display: flex; align-items: center; gap: 8px; text-decoration: none; margin-bottom: 8px; justify-content: center; white-space: nowrap; }
     .campus-btn.b1 { background: #ff7a12; color: #fff; }
-    .campus-btn.b2 { background: #1d5ed9; color: #fff; }
-    .campus-btn.b3 { background: #fff; color: #1d5ed9; border: 1px solid #1d5ed9; }
+    .campus-btn.b2 { background: #003057; color: #fff; }
+    .campus-btn.b3 { background: #fff; color: #003057; border: 1px solid #003057; }
     .campus-media { min-height: 360px; height: 100%; border-radius: 14px; overflow: hidden; position: relative; }
     .campus-media img { width: 100%; height: 100%; object-fit: cover; }
     .campus-media-tag { position: absolute; right: 14px; bottom: 14px; background: #fff; color: #003057; border-radius: 10px; border: 1px solid #d9e3ef; padding: 8px 12px; font-weight: 700; font-size: 1.35rem; }
@@ -113,7 +113,7 @@
       line-height: 1.35;
       padding-top: 10px;
     }
-    .support-form button[type=submit] { width: 100%; border: 0; border-radius: 10px; background: #1d5ed9; color: #fff; font-size: .98rem; font-weight: 700; padding: 9px; }
+    .support-form button[type=submit] { width: 100%; border: 0; border-radius: 10px; background: #003057; color: #fff; font-size: .98rem; font-weight: 700; padding: 9px; }
     .oc-note { text-align: center; color: #64748b; font-size: .88rem; margin-top: 10px; }
     .oc-end { border: 1px solid #dfe7f1; background: #f2f6fc; border-radius: 14px; padding: 14px; text-align: center; color: #0b1e4b; font-size: 1.3rem; font-weight: 700; }
     .oc-end small { display: block; margin-top: 4px; font-weight: 500; color: #334155; font-size: .9rem; }
