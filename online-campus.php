@@ -332,9 +332,9 @@
         <h2 class="oc-title">MESSAGE US - WE'RE HERE TO HELP!</h2>
         <p class="oc-sub">Chat with us anytime through your preferred app.</p>
         <div class="row g-3 row-cols-1 row-cols-md-3">
-          <div class="col"><a class="chat-link cwa" href="https://wa.me/639285599060"><i class="bi bi-whatsapp"></i>WhatsApp</a></div>
-          <div class="col"><a class="chat-link ctg" href="https://t.me/"> <i class="bi bi-telegram"></i>Telegram</a></div>
-          <div class="col"><a class="chat-link cvb" href="viber://chat?number=%2B639285599060"><i class="bi bi-telephone-inbound"></i>Viber</a></div>
+          <div class="col"><a class="chat-link cwa" href="https://wa.me/639292135926"><i class="bi bi-whatsapp"></i>WhatsApp</a></div>
+          <div class="col"><a class="chat-link ctg" href="https://t.me/+639292135926"> <i class="bi bi-telegram"></i>Telegram</a></div>
+          <div class="col"><a class="chat-link cvb" href="viber://chat?number=%2B639292135926"><i class="bi bi-telephone-inbound"></i>Viber</a></div>
         </div>
       </section>
 
