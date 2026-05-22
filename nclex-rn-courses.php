@@ -28,6 +28,12 @@
         flex: 0 0 auto !important;
       }
     }
+    @media (max-width: 991.98px) {
+      #course-package .nclex-package-grid > [class*="col-"] {
+        width: 100% !important;
+        flex: 0 0 100% !important;
+      }
+    }
     #course-package .nclex-package-grid .service-item,
     #course-package .nclex-package-grid .service-item h2,
     #course-package .nclex-package-grid .service-item h3,
