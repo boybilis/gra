@@ -134,14 +134,22 @@ require_once __DIR__ . '/asset-version.php';
       margin: 4px 0 0;
     }
     .test-processing-page .processing-steps .processing-summary-row .icon-box {
-      padding: 12px 10px;
-      gap: 8px;
+      padding: 10px 16px;
+      gap: 6px;
       align-items: flex-start;
+      justify-content: flex-start;
       border: 1px solid #b6bcc6 !important;
       border-radius: 8px;
       box-shadow: none !important;
       background: #fff;
       border-left-width: 1px;
+      min-height: 100% !important;
+      height: 100% !important;
+    }
+    .test-processing-page .processing-steps .processing-summary-row .icon-box:hover,
+    .test-processing-page .processing-steps .processing-summary-row .icon-box:focus,
+    .test-processing-page .processing-steps .processing-summary-row .icon-box:focus-within {
+      box-shadow: none !important;
     }
     .test-processing-page .processing-steps .processing-summary-row .step-icon {
       display: none !important;
@@ -163,17 +171,18 @@ require_once __DIR__ . '/asset-version.php';
       line-height: 1 !important;
     }
     .test-processing-page .processing-steps .processing-summary-row .summary-logo {
-      width: 44px;
-      height: 44px;
-      min-width: 44px;
-      min-height: 44px;
-      margin-right: 8px;
+      width: 72px;
+      height: 72px;
+      min-width: 72px;
+      min-height: 72px;
+      margin-right: 10px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
       border-radius: 8px;
       background: #fff;
+      border: 1px solid #ff6e11;
     }
     .test-processing-page .processing-steps .processing-summary-row .summary-logo img {
       width: 100%;
@@ -183,10 +192,11 @@ require_once __DIR__ . '/asset-version.php';
     }
     .test-processing-page .processing-steps .processing-summary-row .step-head {
       margin-bottom: 0;
+      line-height: 1.1;
     }
     .test-processing-page .processing-steps .processing-summary-row .icon-box h4 {
-      font-size: 16px;
-      line-height: 1.2;
+      font-size: 15px;
+      line-height: 1.15;
       margin: 0;
       font-weight: 700;
       color: #003057;
@@ -195,9 +205,17 @@ require_once __DIR__ . '/asset-version.php';
       color: #ff6e11;
     }
     .test-processing-page .processing-steps .processing-summary-row .icon-box p {
-      font-size: 13px;
-      line-height: 1.25;
-      margin: 4px 0 0;
+      font-size: 12px;
+      line-height: 1.2;
+      margin: 1px 0 0;
+    }
+    .test-processing-page .processing-steps .processing-summary-row .summary-secondary {
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    .test-processing-page .processing-steps .processing-summary-row .summary-primary {
+      align-items: center !important;
+      justify-content: center !important;
     }
     .test-processing-page .processing-outline-title {
       font-size: 24px;
@@ -766,9 +784,9 @@ require_once __DIR__ . '/asset-version.php';
             </div>
           </div>
        </div>
-		<div class="row gy-4 mb-4 processing-summary-row">
+		<div class="row gy-4 mb-4 processing-summary-row align-items-stretch">
 		 <div class="col-12 col-lg-7">
-            <div class="icon-box d-flex position-relative h-100 summary-with-icon">
+            <div class="icon-box d-flex position-relative h-100 summary-with-icon summary-primary">
                
 			    <div class="step-icon"><i class="bi bi-book"></i></div>
 				<div><div class="step-head">
@@ -779,7 +797,7 @@ require_once __DIR__ . '/asset-version.php';
             </div>
           </div>
 		   <div class="col-12 col-lg-5">
-            <div class="icon-box d-flex position-relative h-100">
+            <div class="icon-box d-flex position-relative h-100 summary-secondary">
                
 			    <div class="summary-logo"><img src="assets/img/gra/gra_test_processing logo.jpg" alt="GRA Test Processing logo" loading="lazy"></div>
 					<div><div class="step-head">
