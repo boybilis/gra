@@ -101,16 +101,49 @@ require_once __DIR__ . '/asset-version.php';
     .test-processing-page .processing-checklist span {
       line-height: 1.5;
     }
-    .test-processing-page .trust-stack .learning-mode-card i {
-      display: none !important;
+    .test-processing-page .trust-stack {
+      justify-content: center;
+      --bs-gutter-x: 12px;
+      --bs-gutter-y: 12px;
+    }
+    .test-processing-page .trust-stack > [class*="col-"] {
+      display: flex;
     }
     .test-processing-page .trust-stack .learning-mode-card {
       padding: 12px 10px;
       gap: 8px;
-      align-items: flex-start;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
       border: 1px solid #b6bcc6 !important;
       border-radius: 8px;
       box-shadow: none !important;
+      width: 100%;
+    }
+    .test-processing-page .trust-stack .learning-mode-card .trust-card-icon {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: 1px solid #d6dbe3;
+      display: grid !important;
+      place-items: center;
+      position: relative;
+      margin: 0 auto 8px;
+      color: #003057;
+      background: #fff;
+      overflow: hidden;
+    }
+    .test-processing-page .trust-stack .learning-mode-card .trust-card-icon i {
+      font-size: 20px !important;
+      font-weight: 900 !important;
+      line-height: 1 !important;
+      display: inline-block !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      position: absolute !important;
+      top: 50% !important;
+      left: 50% !important;
+      transform: translate(-50%, -50%) !important;
     }
     .test-processing-page .trust-stack .learning-mode-card h6 {
       font-size: 16px;
@@ -846,6 +879,7 @@ require_once __DIR__ . '/asset-version.php';
           <div class="col-6 col-md-4 col-lg-2">
             <div class="learning-mode-card">
               <div>
+                <div><i class="fas fa-user-check"></i></div>
                 <h6>Expert Guidance</h6>
                 <p><small>Every step backed by expeerience.</small></p>
               </div>
@@ -854,6 +888,7 @@ require_once __DIR__ . '/asset-version.php';
 		   <div class="col-6 col-md-4 col-lg-2">
             <div class="learning-mode-card">
               <div>
+                <div><i class="fas fa-shield-alt"></i></div>
                 <h6>Fast and Reliable</h6>
                 <p><small>Consistent handling with clear and timely coordination.</small></p>
               </div>
@@ -862,6 +897,7 @@ require_once __DIR__ . '/asset-version.php';
           <div class="col-6 col-md-4 col-lg-2">
             <div class="learning-mode-card">
               <div>
+                <div><i class="fas fa-project-diagram"></i></div>
                 <h6>End-to-End Support</h6>
                 <p><small>From application to exam readiness.</small></p>
               </div>
@@ -871,6 +907,7 @@ require_once __DIR__ . '/asset-version.php';
 		  <div class="col-6 col-md-4 col-lg-2">
             <div class="learning-mode-card">
               <div>
+                <div><i class="fas fa-clock"></i></div>
                 <h6>Timely Updates</h6>
                 <p><small>Stay informed at every stage of the process.</small></p>
               </div>
@@ -880,17 +917,9 @@ require_once __DIR__ . '/asset-version.php';
           <div class="col-6 col-md-4 col-lg-2">
             <div class="learning-mode-card">
               <div>
+                <div><i class="fas fa-layer-group"></i></div>
                 <h6>One stop shop</h6>
                 <p><small>Review + Processing in One Place.</small></p>
-              </div>
-            </div>
-          </div>
-		  
-		   <div class="col-6 col-md-4 col-lg-2">
-            <div class="learning-mode-card">
-              <div>
-                <h6>Ready to Begin your Journey</h6>
-				<p><small>Let's take the first step together.</small></p>
               </div>
             </div>
           </div>
