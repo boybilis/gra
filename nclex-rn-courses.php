@@ -21,6 +21,34 @@
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="<?php echo versioned_asset('assets/css/main.css'); ?>" rel="stylesheet">
   <link href="<?php echo versioned_asset('assets/css/gra-content.css'); ?>" rel="stylesheet">
+  <style>
+    @media (min-width: 992px) {
+      #course-package .nclex-package-grid > [class*="col-"] {
+        width: 50% !important;
+        flex: 0 0 auto !important;
+      }
+    }
+    #course-package .nclex-package-grid .service-item,
+    #course-package .nclex-package-grid .service-item h2,
+    #course-package .nclex-package-grid .service-item h3,
+    #course-package .nclex-package-grid .service-item h4,
+    #course-package .nclex-package-grid .service-item h5,
+    #course-package .nclex-package-grid .service-item p,
+    #course-package .nclex-package-grid .service-item ul,
+    #course-package .nclex-package-grid .service-item li {
+      text-align: left !important;
+    }
+    #course-package .nclex-package-grid .service-item .row {
+      justify-content: flex-start !important;
+    }
+    #course-package .nclex-package-grid .list-unstyled li {
+      font-size: .875em;
+      line-height: 2;
+    }
+    #course-package .nclex-package-grid .col-8.col-md-9.p-3 {
+      background: #d9dee4;
+    }
+  </style>
 </head>
 
 <body class="index-page gra-page">
@@ -124,17 +152,113 @@
     
 
 
-    <section id="course-package" class="services section">
+    <section id="course-package" class="services section light-background">
       <div class="container section-title" data-aos="fade-up">
         <h2>Course Package</h2>
-        <p>A 360-degree review approach for focused preparation.</p>
       </div>
-      <div class="container">
-        <div class="row gy-4">
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100"><div class="service-item position-relative"><div class="icon"><i class="fas fa-stethoscope"></i></div><h3>Program Access</h3><p>3 months review access with comprehensive lectures, review materials, and guided study direction.</p></div></div>
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200"><div class="service-item position-relative"><div class="icon"><i class="fas fa-video"></i></div><h3>Live Online Review</h3><p>Attend live online sessions, intensive coaching, consultations, and exam-focused discussions.</p></div></div>
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300"><div class="service-item position-relative"><div class="icon"><i class="fas fa-laptop"></i></div><h3>Artemis360 Tools</h3><p>Use online practice tests, recorded lessons, test banks, study guides, and progress support.</p></div></div>
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400"><div class="service-item position-relative"><div class="icon"><i class="fas fa-user-doctor"></i></div><h3>PassEasy NCLEX System</h3><p>Apply NCLEX-focused test-taking strategy, clinical judgment drills, and guided readiness checkpoints.</p></div></div>
+      <div class="container" data-aos="fade-up">
+        <div class="row gy-4 nclex-package-grid">
+          <div class="col-lg-6">
+            <div class="service-item position-relative h-100">
+              <h4 class="mb-2">REVIEW PLANS &amp; FEES</h4>
+              <p class="mb-3">Choose the review package that fits your needs and goals.</p>
+
+              <div class="border rounded-3 mb-3 overflow-hidden">
+                <div class="row g-0">
+                  <div class="col-4 col-md-3 d-flex align-items-center justify-content-center text-white" style="background:#2583f6;">
+                    <div class="text-center py-3"><i class="bi bi-calendar-event fs-3 d-block mb-1"></i><strong>OPTION A</strong></div>
+                  </div>
+                  <div class="col-8 col-md-9 p-3">
+                    <h6>NGN FLEXIBLE REVIEW PACKAGE (3 MONTHS PROGRAM)</h6>
+                    <ul class="mb-0 small">
+                      <li>1 review cycle</li>
+                      <li>Includes all the items listed in the “Inclusions”</li>
+                      <li>WITH ACCESS TO RECORDED VIDEOS</li>
+                      <li>Unlimited sit in for Live Zoom Classes until you pass or for 1 year, whichever comes first.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="border rounded-3 mb-3 overflow-hidden">
+                <div class="row g-0">
+                  <div class="col-4 col-md-3 d-flex align-items-center justify-content-center text-white" style="background:#1eb980;">
+                    <div class="text-center py-3"><i class="bi bi-calendar2-check fs-3 d-block mb-1"></i><strong>OPTION B</strong></div>
+                  </div>
+                  <div class="col-8 col-md-9 p-3">
+                    <h6>NGN FLEXIBLE REVIEW PACKAGE (6 MONTHS PROGRAM)</h6>
+                    <ul class="mb-0 small">
+                      <li>2 review cycles</li>
+                      <li>Includes all the items listed in the “Inclusions”</li>
+                      <li>WITH ACCESS TO RECORDED VIDEOS</li>
+                      <li>Unlimited sit in for Live Zoom Classes until you pass or for 1 year, whichever comes first.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="border rounded-3 mb-3 overflow-hidden">
+                <div class="row g-0">
+                  <div class="col-4 col-md-3 d-flex align-items-center justify-content-center text-white" style="background:#f4b126;">
+                    <div class="text-center py-3"><i class="bi bi-calendar-minus fs-3 d-block mb-1"></i><strong>OPTION C</strong></div>
+                  </div>
+                  <div class="col-8 col-md-9 p-3">
+                    <h6>NGN PREMIUM REVIEW PACKAGE (3 MONTHS PROGRAM)</h6>
+                    <ul class="mb-0 small">
+                      <li>1 review cycle</li>
+                      <li>Includes all the items listed in the “Inclusions”</li>
+                      <li>WITH NO ACCESS TO RECORDED VIDEOS</li>
+                      <li>Unlimited sit in for Live Zoom Classes until you pass or for 6 months, whichever comes first.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div class="border rounded-3 overflow-hidden">
+                <div class="row g-0">
+                  <div class="col-4 col-md-3 d-flex align-items-center justify-content-center text-white" style="background:#7c52d9;">
+                    <div class="text-center py-3"><i class="bi bi-infinity fs-3 d-block mb-1"></i><strong>OPTION D</strong></div>
+                  </div>
+                  <div class="col-8 col-md-9 p-3">
+                    <h6>UNLIMITED REVIEW + TEST PROCESSING PACKAGE</h6>
+                    <ul class="mb-0 small">
+                      <li>Includes all the items listed in the “Inclusions”</li>
+                      <li>Unlimited Flexible Review</li>
+                      <li>Processing Assistance</li>
+                      <li>WITH ACCESS TO RECORDED VIDEOS</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="service-item position-relative h-100">
+              <h4 class="mb-3">WHAT'S INCLUDED</h4>
+              <ul class="list-unstyled mb-0">
+                <li class="py-2 border-bottom"><i class="bi bi-mortarboard me-2"></i>Over 110+ hours of NGN-focused lectures (per cycle)</li>
+                <li class="py-2 border-bottom"><i class="bi bi-play-circle me-2"></i>Phase 1: Comprehensive (live online via zoom &amp; video on demand via Artemis360)</li>
+                <li class="py-2 border-bottom"><i class="bi bi-people me-2"></i>Phase 2: Final coaching sessions (live online via zoom &amp; video on demand via Artemis360)</li>
+                <li class="py-2 border-bottom"><i class="bi bi-bullseye me-2"></i>Phase 3: Mentoring/ Quick Fix sessions (live online via zoom &amp; video on demand via Artemis360)</li>
+                <li class="py-2 border-bottom"><i class="bi bi-chat-dots me-2"></i>Test Master consultations</li>
+                <li class="py-2 border-bottom"><i class="bi bi-display me-2"></i>Artemis360 Access</li>
+                <li class="py-2 border-bottom"><i class="bi bi-file-earmark-text me-2"></i>24/7 access to NGN practice tests &amp; downloadable materials via Artemis360 platform</li>
+                <li class="py-2 border-bottom"><i class="bi bi-cloud-arrow-down me-2"></i>24/7 access to recordings of lectures via Artemis360 platform</li>
+                <li class="py-2 border-bottom"><i class="bi bi-bar-chart-line me-2"></i>Next Gen NCLEX Simulations via Artemis360 platform</li>
+                <li class="py-2 border-bottom"><i class="bi bi-graph-up-arrow me-2"></i>NGN readiness tests with progress tracking via Artemis360 platform</li>
+                <li class="py-2"><i class="bi bi-ui-checks me-2"></i>All practice tests in NGN formats (Cloze, SATA, BowTie, etc.) via Artemis360 platform</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-item position-relative mt-4">
+          <div class="row gy-3 align-items-center">
+            <div class="col-lg-3"><h3 class="mb-0"><i class="bi bi-gift-fill me-2"></i>FREEBIES</h3></div>
+            <div class="col-lg-5"><i class="bi bi-check-circle-fill me-2"></i>3 months free access to NGN test bank of over 2000+ high-yield NGN questions</div>
+            <div class="col-lg-4"><i class="bi bi-check-circle-fill me-2"></i>FREE NCLEX Review Book for the first 5 enrollees per batch</div>
+          </div>
         </div>
       </div>
     </section>
