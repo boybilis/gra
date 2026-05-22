@@ -29,11 +29,16 @@ require_once __DIR__ . '/asset-version.php';
       transform: none !important;
     }
     .test-processing-page .processing-services .service-item {
-      border: 0;
+      border: 1px solid #f37507;
+      border-bottom-width: 5px;
       box-shadow: none;
-      color: #fff;
+      color: #1f2d3d;
       min-height: 100%;
       text-align: left;
+      background: #fff;
+    }
+    .test-processing-page .processing-services .row > div:nth-child(even) .service-item {
+      border-color: #003057;
     }
     .test-processing-page .processing-services .service-item:before {
       display: none;
@@ -42,16 +47,18 @@ require_once __DIR__ . '/asset-version.php';
     .test-processing-page .processing-services .row > div:nth-child(even) .service-item h3:after {
       background: #003057 !important;
     }
-    .test-processing-page .processing-services .row > div:nth-child(odd) .service-item {
-      background: #003057;
-    }
-    .test-processing-page .processing-services .row > div:nth-child(even) .service-item {
-      background: #ff6e11;
-    }
     .test-processing-page .processing-services .service-item h3,
     .test-processing-page .processing-services .service-item p,
     .test-processing-page .processing-services .service-item .icon i {
-      color: #fff;
+      color: #1f2d3d;
+    }
+    .test-processing-page .processing-services .service-item h3 {
+      color: #003057;
+    }
+    .test-processing-page .processing-services .service-item .processing-checklist span,
+    .test-processing-page .processing-services .service-item .processing-checklist i,
+    .test-processing-page .processing-services .service-item p small {
+      color: #1f2d3d;
     }
     .test-processing-page .processing-services .processing-flag {
       display: inline-block;
@@ -85,6 +92,8 @@ require_once __DIR__ . '/asset-version.php';
     }
     .test-processing-page .processing-checklist li {
       margin-bottom: 8px;
+      font-size: 14px;
+      line-height: 1.35;
     }
     .test-processing-page .processing-checklist li:last-child {
       margin-bottom: 0;
@@ -560,11 +569,15 @@ require_once __DIR__ . '/asset-version.php';
               <div class="processing-flag" aria-label="United States">🇺🇸</div>
               <h3>NCLEX USA</h3>
               <ul class="processing-checklist">
-                <li><i class="bi bi-check2-all"></i> <span>State board application</span></li>
-                <li><i class="bi bi-check2-all"></i> <span>CES / CGFNS guidance</span></li>
-                <li><i class="bi bi-check2-all"></i> <span>Pearson VUE registration</span></li>
-                <li><i class="bi bi-check2-all"></i> <span>ATT assistance</span></li>
-                <li><i class="bi bi-check2-all"></i> <span>License endorsement guidance</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>State Board Application</span></li>
+				<li><i class="bi bi-check2-all"></i> <span>Exam Eligibility</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>Trumerit / CGFNS Guidance</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>NCSBN Registration</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>ATT Assistance</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>License Endorsement</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>License Renewal</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>License Reactivation</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>Jurisprudence Exam</span></li>
               </ul>
             </div>
           </div>
@@ -573,9 +586,11 @@ require_once __DIR__ . '/asset-version.php';
               <div class="processing-flag" aria-label="Canada">🇨🇦</div>
               <h3>NCLEX Canada</h3>
               <ul class="processing-checklist">
-                <li><i class="bi bi-check2-all"></i> <span>NNAS guidance</span></li>
-                <li><i class="bi bi-check2-all"></i> <span>Provincial licensing pathways</span></li>
-                <li><i class="bi bi-check2-all"></i> <span>Jurisprudence exam guidance (where applicable)</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>NNAS Guidance</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>WES Guidance</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>Exam Eligibility</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>Provincial Licensing Pathways</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>Jurisprudence Exam</span></li>
               </ul>
             </div>
           </div>
@@ -584,21 +599,26 @@ require_once __DIR__ . '/asset-version.php';
               <div class="processing-flag" aria-label="Middle East">🇦🇪</div>
               <h3>Middle East Licensing</h3>
               <ul class="processing-checklist">
-                <li><i class="bi bi-check2-all"></i> <span>DHA</span></li>
-                <li><i class="bi bi-check2-all"></i> <span>DOH Abu Dhabi</span></li>
-                <li><i class="bi bi-check2-all"></i> <span>HAAD equivalency guidance</span></li>
-                <li><i class="bi bi-check2-all"></i> <span>PROMETRIC pathways</span></li>
-                <li><i class="bi bi-check2-all"></i> <span>DataFlow guidance</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>by DATAFLOW GROUP</span></li>
               </ul>
+			  <BR><hr>
+              <p><small>Note:Our Middle East test processing is under our partner for Middle East. The Data Flow Group.</small></p>
             </div>
           </div>
           <div class="col-lg-3 col-md-6">
             <div class="service-item position-relative">
-              <div class="processing-flag" aria-label="United Kingdom">🇬🇧</div>
+              <div class="processing-flag" aria-label="Great Britain">🇬🇧</div>
               <h3>UK / Other Pathways</h3>
               <ul class="processing-checklist">
-                <li><i class="bi bi-check2-all"></i> <span>NMC guidance</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>NMC Guidance</span></li>
                 <li><i class="bi bi-check2-all"></i> <span>CBT / OSCE pathway support</span></li>
+              </ul>
+			  <br>
+			   <div class="processing-flag" aria-label="Philippines">🇵🇭</div>
+              <h3>Philippines</h3>
+			   <ul class="processing-checklist">
+                <li><i class="bi bi-check2-all"></i> <span>PHRN renewal assistance</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>School Documents Processing Assistance</span></li>
               </ul>
             </div>
           </div>
