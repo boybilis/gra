@@ -235,6 +235,56 @@
         </div>
       </div>
     </section>
+	
+	<section id="courses" class="services section light-background">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Test Prep Courses</h2>
+        <p>Expert Led. Convenient. Exam- focused.</p>
+      </div>
+      <div class="container">
+        <div class="row justify-content-center gy-4 mb-5 learning-mode-cards" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-4 col-md-6">
+            <div class="learning-mode-card">
+              <i class="fa-solid fa-video"></i>
+              <div>
+                <h3>Live Online</h3>
+                <p>Attend classes in real time with expert lecturers via Zoom.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="learning-mode-card">
+              <i class="fa-solid fa-laptop"></i>
+              <div>
+                <h3>Fully Online</h3>
+                <p>Study at your own pace with recorded lectures and 24/7 access.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <div class="learning-mode-card">
+              <i class="fa-solid fa-chalkboard-user"></i>
+              <div>
+                <h3>Live / In Person</h3>
+                <p>Attend classes in person at specific GRA locations.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row gy-4">
+          <div class="col-6 col-md-6 col-lg-4 col-xl-3" data-aos="fade-up" data-aos-delay="100"><div class="service-item position-relative"><div class="icon"><i class="fas fa-stethoscope"></i></div><a href="nclex-rn-courses.php" class="stretched-link"><h3>NCLEX</h3></a><p>Next Generation NCLEX-RN test preparation for nurses pursuing nursing licensure for the U.S., Canada, Australia and others.</p></div></div>
+          <div class="col-6 col-md-6 col-lg-4 col-xl-3" data-aos="fade-up" data-aos-delay="200"><div class="service-item position-relative"><div class="icon"><i class="fas fa-user-nurse"></i></div><a href="dha-rn-courses.php" class="stretched-link"><h3>DHA</h3></a><p>Dubai Health Authority licensure exam test preparation for nurses pursuing DHA licensing in Dubai, UAE.</p></div></div>
+          <div class="col-6 col-md-6 col-lg-4 col-xl-3" data-aos="fade-up" data-aos-delay="300"><div class="service-item position-relative"><div class="icon"><i class="fas fa-hospital-user"></i></div><a href="doh-haad-rn-courses.php" class="stretched-link"><h3>HAAD (DOH)</h3></a><p>Department of Health - Abu Dhabi licensure exam test preparation for nurses pursuing DOH Abu Dhabi licensing.</p></div></div>
+          <div class="col-6 col-md-6 col-lg-4 col-xl-3" data-aos="fade-up" data-aos-delay="400"><div class="service-item position-relative"><div class="icon"><i class="fas fa-globe"></i></div><a href="prometric-rn-courses.php" class="stretched-link"><h3>Prometric</h3></a><p>Prometric licensure exam test preparation for nurses seeking professional licensure in Saudi Arabia, Qatar, Bahrain, Oman, and other GCC countries.</p></div></div>
+          <div class="col-6 col-md-6 col-lg-4 col-xl-3" data-aos="fade-up" data-aos-delay="500"><div class="service-item position-relative"><div class="icon"><i class="fas fa-plane-departure"></i></div><a href="sple-courses.php" class="stretched-link"><h3>SPLE</h3></a><p>Special Professional Licensure Examination test preparation for overseas Filipino nurses and professionals seeking Philippine licensure in PRC testing centers in the Middle East countries, Singapore and Taiwan.</p></div></div>
+          <div class="col-6 col-md-6 col-lg-4 col-xl-3" data-aos="fade-up" data-aos-delay="600"><div class="service-item position-relative"><div class="icon"><i class="fas fa-notes-medical"></i></div><a href="pnle-courses.php" class="stretched-link"><h3>PNLE</h3></a><p>Philippine Nurses Licensure Examination test preparation.</p></div></div>
+          <div class="col-6 col-md-6 col-lg-4 col-xl-3" data-aos="fade-up" data-aos-delay="700"><div class="service-item position-relative"><div class="icon"><i class="fas fa-file-lines"></i></div><a href="civil-service-courses.php" class="stretched-link"><h3>Civil Service</h3></a><p>Philippine Civil Service Examination test preparation for professional and sub-professional government eligibility.</p></div></div>
+          <div class="col-6 col-md-6 col-lg-4 col-xl-3" data-aos="fade-up" data-aos-delay="800"><div class="service-item position-relative"><div class="icon"><i class="fas fa-chalkboard-teacher"></i></div><a href="lept-courses.php" class="stretched-link"><h3>LEPT</h3></a><p>Philippine Licensure Exam for Professional Teachers Test Preparation (Elementary and Secondary).</p></div></div>
+        </div>
+      </div>
+    </section>
+	
+	
 
     <section id="featured-testimonials" class="featured-passers section light-background">
       <div class="container section-title" data-aos="fade-up">
@@ -314,53 +364,7 @@
       </div>
     </section>
 
-    <section id="courses" class="services section light-background">
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Test Prep Courses</h2>
-        <p>Expert Led. Convenient. Exam- focused.</p>
-      </div>
-      <div class="container">
-        <div class="row justify-content-center gy-4 mb-5 learning-mode-cards" data-aos="fade-up" data-aos-delay="100">
-          <div class="col-lg-4 col-md-6">
-            <div class="learning-mode-card">
-              <i class="fa-solid fa-video"></i>
-              <div>
-                <h3>Live Online</h3>
-                <p>Attend classes in real time with expert lecturers via Zoom.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="learning-mode-card">
-              <i class="fa-solid fa-laptop"></i>
-              <div>
-                <h3>Fully Online</h3>
-                <p>Study at your own pace with recorded lectures and 24/7 access.</p>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="learning-mode-card">
-              <i class="fa-solid fa-chalkboard-user"></i>
-              <div>
-                <h3>Live / In Person</h3>
-                <p>Attend classes in person at specific GRA locations.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row gy-4">
-          <div class="col-6 col-md-6 col-lg-4 col-xl-3" data-aos="fade-up" data-aos-delay="100"><div class="service-item position-relative"><div class="icon"><i class="fas fa-stethoscope"></i></div><a href="nclex-rn-courses.php" class="stretched-link"><h3>NCLEX</h3></a><p>Next Generation NCLEX-RN test preparation for nurses pursuing nursing licensure for the U.S., Canada, Australia and others.</p></div></div>
-          <div class="col-6 col-md-6 col-lg-4 col-xl-3" data-aos="fade-up" data-aos-delay="200"><div class="service-item position-relative"><div class="icon"><i class="fas fa-user-nurse"></i></div><a href="dha-rn-courses.php" class="stretched-link"><h3>DHA</h3></a><p>Dubai Health Authority licensure exam test preparation for nurses pursuing DHA licensing in Dubai, UAE.</p></div></div>
-          <div class="col-6 col-md-6 col-lg-4 col-xl-3" data-aos="fade-up" data-aos-delay="300"><div class="service-item position-relative"><div class="icon"><i class="fas fa-hospital-user"></i></div><a href="doh-haad-rn-courses.php" class="stretched-link"><h3>HAAD (DOH)</h3></a><p>Department of Health - Abu Dhabi licensure exam test preparation for nurses pursuing DOH Abu Dhabi licensing.</p></div></div>
-          <div class="col-6 col-md-6 col-lg-4 col-xl-3" data-aos="fade-up" data-aos-delay="400"><div class="service-item position-relative"><div class="icon"><i class="fas fa-globe"></i></div><a href="prometric-rn-courses.php" class="stretched-link"><h3>Prometric</h3></a><p>Prometric licensure exam test preparation for nurses seeking professional licensure in Saudi Arabia, Qatar, Bahrain, Oman, and other GCC countries.</p></div></div>
-          <div class="col-6 col-md-6 col-lg-4 col-xl-3" data-aos="fade-up" data-aos-delay="500"><div class="service-item position-relative"><div class="icon"><i class="fas fa-plane-departure"></i></div><a href="sple-courses.php" class="stretched-link"><h3>SPLE</h3></a><p>Special Professional Licensure Examination test preparation for overseas Filipino nurses and professionals seeking Philippine licensure in PRC testing centers in the Middle East countries, Singapore and Taiwan.</p></div></div>
-          <div class="col-6 col-md-6 col-lg-4 col-xl-3" data-aos="fade-up" data-aos-delay="600"><div class="service-item position-relative"><div class="icon"><i class="fas fa-notes-medical"></i></div><a href="pnle-courses.php" class="stretched-link"><h3>PNLE</h3></a><p>Philippine Nurses Licensure Examination test preparation.</p></div></div>
-          <div class="col-6 col-md-6 col-lg-4 col-xl-3" data-aos="fade-up" data-aos-delay="700"><div class="service-item position-relative"><div class="icon"><i class="fas fa-file-lines"></i></div><a href="civil-service-courses.php" class="stretched-link"><h3>Civil Service</h3></a><p>Philippine Civil Service Examination test preparation for professional and sub-professional government eligibility.</p></div></div>
-          <div class="col-6 col-md-6 col-lg-4 col-xl-3" data-aos="fade-up" data-aos-delay="800"><div class="service-item position-relative"><div class="icon"><i class="fas fa-chalkboard-teacher"></i></div><a href="lept-courses.php" class="stretched-link"><h3>LEPT</h3></a><p>Philippine Licensure Exam for Professional Teachers Test Preparation (Elementary and Secondary).</p></div></div>
-        </div>
-      </div>
-    </section>
+    
 
     <section id="passeasy" class="features section">
       <div class="container">
