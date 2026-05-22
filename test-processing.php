@@ -548,7 +548,7 @@ require_once __DIR__ . '/asset-version.php';
     <div class="topbar d-flex align-items-center">
       <div class="container d-flex justify-content-between">
         <div class="d-flex align-items-center gap-2"><span class="d-none d-md-inline">Learn With Confidence.</span><a class="online-campus-link" href="online-campus.php">ONLINE CAMPUS</a></div>
-        <div class="d-flex align-items-center gap-3"><span><i class="bi bi-telephone me-1"></i> 0285599060 / 85599062</span><span class="d-none d-lg-inline"><i class="bi bi-envelope me-1"></i> Inquire@gratestprepworldwide.com</span></div>
+        <div class="d-flex align-items-center gap-3"><span><i class="bi bi-telephone me-1"></i> +639695036350</span><span class="d-none d-lg-inline"><i class="bi bi-envelope me-1"></i> Inquire@gratestprepworldwide.com</span></div>
       </div>
     </div>
     <div class="branding d-flex align-items-center">
@@ -992,7 +992,7 @@ require_once __DIR__ . '/asset-version.php';
           <div class="footer-contact pt-3">
             <p>Ground Floor RA Gapuz Bldg., 1128 Alhambra St. corner United Nations Ave.</p>
             <p>Ermita Manila, Philippines</p>
-            <p class="mt-3"><strong>Phone:</strong> <span>0285599060 / 85599062</span></p><p><strong>Email:</strong> <span>Inquire@gratestprepworldwide.com</span></p>
+            <p class="mt-3"><strong>Phone:</strong> <span>+639695036350</span></p><p><strong>Email:</strong> <span>Inquire@gratestprepworldwide.com</span></p>
           </div>
           <div class="social-links d-flex mt-4"><a href="https://www.facebook.com/gapuzreviewacademyofficial"><i class="bi bi-facebook"></i></a></div>
         </div>
@@ -1008,8 +1008,8 @@ require_once __DIR__ . '/asset-version.php';
 
   <div class="floating-contact-stack" id="floating-contact-stack" aria-label="Floating contact actions">
     <div class="floating-contact-actions" id="floating-contact-actions">
-      <a href="tel:0285599060" aria-label="Call GRA"><i class="bi bi-telephone"></i></a>
-      <a href="https://wa.me/639285599060" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="bi bi-whatsapp"></i></a>
+      <a href="tel:+639695036350" aria-label="Call GRA"><i class="bi bi-telephone"></i></a>
+      <a href="https://wa.me/639695036350" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="bi bi-whatsapp"></i></a>
       <a href="https://m.me/100525636196739" target="_blank" rel="noopener" aria-label="Open Messenger"><i class="bi bi-messenger"></i></a>
       <a href="#processing-consultation" aria-label="Book consultation"><i class="bi bi-calendar-check"></i></a>
     </div>
