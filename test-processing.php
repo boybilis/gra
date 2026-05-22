@@ -1010,7 +1010,7 @@ require_once __DIR__ . '/asset-version.php';
     <div class="floating-contact-actions" id="floating-contact-actions">
       <a href="tel:0285599060" aria-label="Call GRA"><i class="bi bi-telephone"></i></a>
       <a href="https://wa.me/639285599060" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="bi bi-whatsapp"></i></a>
-      <a href="https://m.me/gapuzreviewacademyofficial" target="_blank" rel="noopener" aria-label="Open Messenger"><i class="bi bi-messenger"></i></a>
+      <a href="https://m.me/100525636196739" target="_blank" rel="noopener" aria-label="Open Messenger"><i class="bi bi-messenger"></i></a>
       <a href="#processing-consultation" aria-label="Book consultation"><i class="bi bi-calendar-check"></i></a>
     </div>
     <button type="button" class="floating-contact-toggle" id="floating-contact-toggle" aria-label="Open contact actions" aria-expanded="false">
