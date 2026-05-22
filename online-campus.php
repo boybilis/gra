@@ -169,14 +169,18 @@
     }
     @media (max-width: 767px) {
       .campus-wrap { padding: 12px 0 24px; }
-      .campus-card { padding: 14px; }
-      .campus-card .row {
-        margin-left: 4px;
-        margin-right: 4px;
+      .campus-card {
+        padding: 14px;
+        margin-left: 12px;
+        margin-right: 12px;
       }
-      #free-resources .container.px-0 {
-        padding-left: 8px !important;
-        padding-right: 8px !important;
+      .campus-card .row {
+        margin-left: 0;
+        margin-right: 0;
+      }
+      .campus-card .row > [class*="col-"] {
+        padding-left: 6px;
+        padding-right: 6px;
       }
       .campus-title { font-size: 2rem; line-height: 1.15; }
       .campus-sub { font-size: 1.15rem; line-height: 1.4; }
