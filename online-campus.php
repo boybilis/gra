@@ -414,5 +414,12 @@
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="<?php echo versioned_asset('assets/js/main.js'); ?>"></script>
   <script src="<?php echo versioned_asset('assets/js/gra-content.js'); ?>"></script>
+  <script>
+    window.addEventListener('load', function () {
+      if (!window.location.hash) {
+        window.scrollTo(0, 0);
+      }
+    });
+  </script>
 </body>
 </html>
