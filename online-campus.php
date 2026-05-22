@@ -305,7 +305,7 @@
                 <div class="d-flex flex-column gap-2 mt-3 campus-hero-actions">
                   <a class="campus-btn b1 mb-0" href="https://artemis360.gapuzreview.com" target="_blank" rel="noopener"><i class="bi bi-rocket-takeoff-fill"></i>Launch Artemis360</a>
                   <a class="campus-btn b2 mb-0" href="https://zoom.us/" target="_blank" rel="noopener"><i class="bi bi-camera-video-fill"></i>Join Live Zoom Class</a>
-                  <a class="campus-btn b3 mb-0" href="#support-form" target="_blank" rel="noopener"><i class="bi bi-headset"></i>Book Student Support</a>
+                  <a class="campus-btn b3 mb-0" href="#support-form"><i class="bi bi-headset"></i>Book Student Support</a>
                 </div>
               </div>
             </div>
@@ -350,8 +350,7 @@
           </div>
           <div class="col-xl-8">
             <div class="support-form">
-              <form action="submit.php" method="post" class="gra-medicio-form site-form">
-                <input type="hidden" name="form_type" value="booking">
+              <form action="online-campus-support-submit.php" method="post" class="gra-medicio-form site-form">
                 <div class="row g-3">
                   <div class="col-md-6"><label>Full Name *</label><input type="text" class="form-control" name="name" required></div>
                   <div class="col-md-6"><label>Email Address *</label><input type="email" class="form-control" name="email" required></div>
