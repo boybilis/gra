@@ -68,37 +68,37 @@
       content: none !important;
       display: none !important;
     }
-    .campus-title { font-size: clamp(2.4rem, 4vw, 5.6rem); line-height: 1.08; color: #003057; font-weight: 800; margin: 10px 0 14px; }
+    .campus-title { font-size: clamp(2rem, 2.7vw, 3.6rem); line-height: 1.1; color: #003057; font-weight: 800; margin: 10px 0 14px; }
     .campus-title .accent { color: #ff6e11; }
-    .campus-sub { font-size: clamp(1.3rem, 1.4vw, 2.2rem); line-height: 1.5; color: #1f2d3d; margin-bottom: 16px; max-width: 520px; }
-    .campus-btn { border-radius: 10px; font-weight: 700; font-size: 1.28rem; padding: 9px 14px; display: flex; align-items: center; gap: 8px; text-decoration: none; margin-bottom: 8px; justify-content: center; white-space: nowrap; }
+    .campus-sub { font-size: clamp(1rem, 1.05vw, 1.35rem); line-height: 1.45; color: #1f2d3d; margin-bottom: 16px; max-width: 520px; }
+    .campus-btn { border-radius: 10px; font-weight: 700; font-size: 1rem; padding: 8px 12px; display: flex; align-items: center; gap: 8px; text-decoration: none; margin-bottom: 8px; justify-content: center; white-space: nowrap; }
     .campus-btn.b1 { background: #ff7a12; color: #fff; }
     .campus-btn.b2 { background: #1d5ed9; color: #fff; }
     .campus-btn.b3 { background: #fff; color: #1d5ed9; border: 1px solid #1d5ed9; }
     .campus-media { min-height: 360px; height: 100%; border-radius: 14px; overflow: hidden; position: relative; }
     .campus-media img { width: 100%; height: 100%; object-fit: cover; }
     .campus-media-tag { position: absolute; right: 14px; bottom: 14px; background: #fff; color: #003057; border-radius: 10px; border: 1px solid #d9e3ef; padding: 8px 12px; font-weight: 700; font-size: 1.35rem; }
-    .oc-title { text-align: center; color: #0b1e4b; font-size: 2.2rem; font-weight: 700; margin-bottom: 4px; letter-spacing: 0; text-transform: none; }
-    .oc-sub { text-align: center; color: #475569; font-size: 1.5rem; margin-bottom: 16px; }
+    .oc-title { text-align: center; color: #0b1e4b; font-size: 1.55rem; font-weight: 700; margin-bottom: 4px; letter-spacing: 0; text-transform: none; }
+    .oc-sub { text-align: center; color: #475569; font-size: 1rem; margin-bottom: 16px; }
     .social-box, .chat-box { border: 1px solid #e1e7f0; border-radius: 12px; background: #fff; text-align: center; padding: 14px 10px; height: 100%; text-decoration: none !important; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
     .social-box:hover { transform: translateY(-2px); border-color: #cdd9e8; box-shadow: 0 8px 18px rgba(15, 23, 42, .08); }
     .social-icon { width: 54px; height: 54px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; color: #fff; font-size: 2.3rem; margin-bottom: 8px; }
     .s1{background:#1877f2}.s2{background:#ff0000}.s3{background:#e1306c}.s4{background:#111827}.s5{background:#0a7cff}.s6{background:#1e40af}
-    .social-name { display:block; margin-top: 2px; color:#0b1e4b; font-size: 1.32rem; font-weight: 600; line-height: 1.25; }
-    .chat-link { border-radius: 12px; color: #fff; text-decoration: none; padding: 16px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.9rem; font-weight: 700; }
+    .social-name { display:block; margin-top: 2px; color:#0b1e4b; font-size: .92rem; font-weight: 600; line-height: 1.25; }
+    .chat-link { border-radius: 12px; color: #fff; text-decoration: none; padding: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.05rem; font-weight: 700; }
     .cwa{background:linear-gradient(135deg,#0cae5d,#25d366)} .ctg{background:linear-gradient(135deg,#188bdc,#40a9ff)} .cvb{background:linear-gradient(135deg,#6b3ec9,#8a63e6)}
     .support-left { border: 1px solid #e1e7f0; border-radius: 12px; padding: 16px; height: 100%; }
     .support-icon { width: 84px; height: 84px; border-radius: 50%; background: #eaf1ff; color: #1d4ed8; display: inline-flex; align-items: center; justify-content: center; font-size: 3.3rem; margin-bottom: 10px; }
-    .support-left h3 { font-size: 2.2rem; color: #0b1e4b; font-weight: 700; margin-bottom: 8px; }
-    .support-left p { font-size: 1.5rem; color: #334155; }
-    .support-hours { margin-top: 10px; border: 1px solid #e1e7f0; border-radius: 10px; padding: 10px 12px; color: #334155; font-size: 1.3rem; background: #f8fafc; }
+    .support-left h3 { font-size: 1.45rem; color: #0b1e4b; font-weight: 700; margin-bottom: 8px; }
+    .support-left p { font-size: .98rem; color: #334155; }
+    .support-hours { margin-top: 10px; border: 1px solid #e1e7f0; border-radius: 10px; padding: 10px 12px; color: #334155; font-size: .9rem; background: #f8fafc; }
     .support-form { border: 1px solid #e1e7f0; border-radius: 12px; padding: 16px; }
-    .support-form label { font-size: 1.15rem; font-weight: 600; color: #0b1e4b; margin-bottom: 4px; line-height: 1.2; }
+    .support-form label { font-size: .9rem; font-weight: 600; color: #0b1e4b; margin-bottom: 4px; line-height: 1.2; }
     .support-form .form-control,
     .support-form .form-select {
       height: auto;
       min-height: 42px;
-      font-size: 1.2rem;
+      font-size: .92rem;
       line-height: 1.35;
       padding: 9px 12px;
       border-color: #d8e1ec;
@@ -109,14 +109,14 @@
     }
     .support-form textarea.form-control {
       height: 96px;
-      font-size: 1.2rem;
+      font-size: .92rem;
       line-height: 1.35;
       padding-top: 10px;
     }
-    .support-form button[type=submit] { width: 100%; border: 0; border-radius: 10px; background: #1d5ed9; color: #fff; font-size: 1.75rem; font-weight: 700; padding: 10px; }
-    .oc-note { text-align: center; color: #64748b; font-size: 1.3rem; margin-top: 10px; }
-    .oc-end { border: 1px solid #dfe7f1; background: #f2f6fc; border-radius: 14px; padding: 14px; text-align: center; color: #0b1e4b; font-size: 2.2rem; font-weight: 700; }
-    .oc-end small { display: block; margin-top: 4px; font-weight: 500; color: #334155; font-size: 1.5rem; }
+    .support-form button[type=submit] { width: 100%; border: 0; border-radius: 10px; background: #1d5ed9; color: #fff; font-size: .98rem; font-weight: 700; padding: 9px; }
+    .oc-note { text-align: center; color: #64748b; font-size: .88rem; margin-top: 10px; }
+    .oc-end { border: 1px solid #dfe7f1; background: #f2f6fc; border-radius: 14px; padding: 14px; text-align: center; color: #0b1e4b; font-size: 1.3rem; font-weight: 700; }
+    .oc-end small { display: block; margin-top: 4px; font-weight: 500; color: #334155; font-size: .9rem; }
     #free-resources .row > div:nth-child(odd) .service-item:hover {
       background: #003057 !important;
       border-color: #003057 !important;
@@ -135,7 +135,44 @@
     @media (max-width: 767px) {
       .campus-wrap { padding: 12px 0 24px; }
       .campus-card { padding: 14px; }
-      .campus-btn { font-size: 1.6rem; }
+      .campus-title { font-size: 2rem; line-height: 1.15; }
+      .campus-sub { font-size: 1.15rem; line-height: 1.4; }
+      .campus-btn { font-size: 1.15rem; padding: 8px 12px; }
+      .oc-title { font-size: 1.75rem; }
+      .oc-sub { font-size: 1.18rem; margin-bottom: 12px; }
+      .social-name { font-size: 1.08rem; }
+      .social-icon { width: 44px; height: 44px; font-size: 1.9rem; margin-bottom: 6px; }
+      .chat-link {
+        padding: 12px 8px;
+        font-size: 0;
+        gap: 0;
+      }
+      .chat-link i {
+        font-size: 2rem;
+      }
+      .chat-link::after {
+        content: "";
+      }
+      .support-left h3 { font-size: 1.75rem; }
+      .support-left p,
+      .support-hours,
+      .support-form label,
+      .support-form .form-control,
+      .support-form .form-select,
+      .support-form textarea.form-control,
+      .oc-note,
+      .campus-resource-card p {
+        font-size: 1.08rem !important;
+        line-height: 1.35;
+      }
+      .campus-resource-card h4 { font-size: 1.2rem; }
+      .campus-resource-link { font-size: 1.05rem; }
+      .support-form button[type=submit],
+      #campus-access-submit {
+        font-size: 1.1rem !important;
+        padding-top: 8px !important;
+        padding-bottom: 8px !important;
+      }
       .campus-page #online-campus-hero .hero-copy { padding-top: 0 !important; }
       .campus-page #online-campus-hero.section {
         padding: 0 !important;
@@ -162,9 +199,14 @@
       .campus-page #online-campus-hero .campus-hero-actions {
         margin-top: 14px !important;
       }
+      .campus-card .row.row-cols-1.row-cols-md-3 {
+        --bs-columns: 3;
+      }
+      .campus-card .row.row-cols-1.row-cols-md-3 > .col {
+        width: 33.333333%;
+        flex: 0 0 auto;
+      }
       .campus-media { min-height: 230px; }
-      .oc-title { font-size: 2rem; }
-      .oc-sub { font-size: 1.35rem; }
     }
   </style>
 </head>
@@ -224,7 +266,7 @@
       <section class="campus-card" data-aos="fade-up" data-aos-delay="80">
         <h2 class="oc-title">Stay Connected - Follow GRA</h2>
         <p class="oc-sub">Get updates, announcements, tips, and inspiration.</p>
-        <div class="row g-3 row-cols-2 row-cols-md-3 row-cols-xl-6">
+        <div class="row g-3 row-cols-3 row-cols-md-3 row-cols-xl-6">
           <div class="col"><a class="social-box d-block" href="https://www.facebook.com/gapuzreviewacademyofficial"><span class="social-icon s1"><i class="bi bi-facebook"></i></span><span class="social-name">Facebook</span></a></div>
           <div class="col"><a class="social-box d-block" href="https://www.youtube.com/"><span class="social-icon s2"><i class="bi bi-youtube"></i></span><span class="social-name">YouTube</span></a></div>
           <div class="col"><a class="social-box d-block" href="https://www.instagram.com/"><span class="social-icon s3"><i class="bi bi-instagram"></i></span><span class="social-name">Instagram</span></a></div>
