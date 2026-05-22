@@ -133,6 +133,72 @@ require_once __DIR__ . '/asset-version.php';
       line-height: 1.25;
       margin: 4px 0 0;
     }
+    .test-processing-page .processing-steps .processing-summary-row .icon-box {
+      padding: 12px 10px;
+      gap: 8px;
+      align-items: flex-start;
+      border: 1px solid #b6bcc6 !important;
+      border-radius: 8px;
+      box-shadow: none !important;
+      background: #fff;
+      border-left-width: 1px;
+    }
+    .test-processing-page .processing-steps .processing-summary-row .step-icon {
+      display: none !important;
+    }
+    .test-processing-page .processing-steps .processing-summary-row .summary-with-icon .step-icon {
+      display: inline-flex !important;
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      min-height: 44px;
+      margin-right: 8px;
+      background: #fff;
+      color: #003057;
+    }
+    .test-processing-page .processing-steps .processing-summary-row .summary-with-icon .step-icon i {
+      display: block !important;
+      font-size: 22px !important;
+      color: #003057 !important;
+      line-height: 1 !important;
+    }
+    .test-processing-page .processing-steps .processing-summary-row .summary-logo {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      min-height: 44px;
+      margin-right: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #fff;
+    }
+    .test-processing-page .processing-steps .processing-summary-row .summary-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+    .test-processing-page .processing-steps .processing-summary-row .step-head {
+      margin-bottom: 0;
+    }
+    .test-processing-page .processing-steps .processing-summary-row .icon-box h4 {
+      font-size: 16px;
+      line-height: 1.2;
+      margin: 0;
+      font-weight: 700;
+      color: #003057;
+    }
+    .test-processing-page .processing-steps .processing-summary-row > [class*="col-"]:nth-child(even) .icon-box h4 {
+      color: #ff6e11;
+    }
+    .test-processing-page .processing-steps .processing-summary-row .icon-box p {
+      font-size: 13px;
+      line-height: 1.25;
+      margin: 4px 0 0;
+    }
     .test-processing-page .processing-outline-title {
       font-size: 24px;
       line-height: 1.25;
@@ -381,9 +447,17 @@ require_once __DIR__ . '/asset-version.php';
         font-size: 14px;
         line-height: 1.25;
       }
-      .test-processing-page .processing-steps .row > [class*="col-"] {
+      .test-processing-page .processing-steps .journey-grid > [class*="col-"] {
         width: 50%;
         flex: 0 0 50%;
+      }
+      .test-processing-page .processing-steps .processing-summary-row > [class*="col-"] {
+        width: 100%;
+        flex: 0 0 100%;
+      }
+      .test-processing-page .processing-steps .journey-grid > .step-nine-col {
+        width: 100%;
+        flex: 0 0 100%;
       }
       .test-processing-page .processing-steps .row {
         --bs-gutter-x: 12px;
@@ -391,6 +465,9 @@ require_once __DIR__ . '/asset-version.php';
       }
       .test-processing-page .processing-steps .step-icon {
         display: none !important;
+      }
+      .test-processing-page .processing-steps .processing-summary-row .summary-with-icon .step-icon {
+        display: inline-flex !important;
       }
       .test-processing-page .processing-steps .step-no {
         width: 24px;
@@ -466,7 +543,7 @@ require_once __DIR__ . '/asset-version.php';
               <div class="text-center">
                 <span class="eyebrow">GRA TEST PROCESSING</span>
                 <h2>Your Fast, Reliable Path to NCLEX &amp; International Nursing Licensure</h2>
-                <p>From credential evaluation to exam eligibility, <b> GRA Test Processing </b>guides you every step of the way&#8212;so you can focus on passing.</p>
+                <p>From credential evaluation, to test preparation, to obtaining your license. <b> GRA Test Processing </b>guides you every step of the way&#8212;so you can focus on passing.</p>
                 <div class="d-flex flex-column flex-md-row justify-content-center gap-2 gap-md-3 mt-3 processing-hero-actions">
                   <a href="#processing-consultation" class="btn btn-primary">Book a Free Consultation</a>
                   <a href="test-processing.php#processing-packages" class="btn btn-processing-blue">View Processing Packages</a>
@@ -633,7 +710,7 @@ require_once __DIR__ . '/asset-version.php';
         <p>A guided step-by-step path from application to exam readiness.</p>
       </div>
       <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <div class="row gy-4">
+        <div class="row gy-4 mb-4 journey-grid">
           <div class="col-lg-4 col-md-6">
             <div class="icon-box d-flex position-relative h-100">
               <div class="step-icon"><i class="bi bi-calendar-check"></i></div>
@@ -682,13 +759,36 @@ require_once __DIR__ . '/asset-version.php';
               <div><div class="step-head"><span class="step-no">8</span><h4>ATT and Exam Booking</h4></div><p>Receive your ATT and book your exam with confidence.</p></div>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6">
+          <div class="col-lg-4 col-md-12 col-sm-12 step-nine-col">
             <div class="icon-box d-flex position-relative h-100">
               <div class="step-icon"><i class="bi bi-mortarboard"></i></div>
               <div><div class="step-head"><span class="step-no">9</span><h4>Sit for the NCLEX</h4></div><p>The final step. Show your readiness and go for succes!.</p></div>
             </div>
           </div>
-        </div>
+       </div>
+		<div class="row gy-4 mb-4 processing-summary-row">
+		 <div class="col-12 col-lg-7">
+            <div class="icon-box d-flex position-relative h-100 summary-with-icon">
+               
+			    <div class="step-icon"><i class="bi bi-book"></i></div>
+				<div><div class="step-head">
+                <h4>You can start your review anytime</h4></div>
+                <p>You don't have to wait for any step to be completed. Start your GRA review anytime and
+				gain the edge you need while we take care of your processing.</p></div>
+              
+            </div>
+          </div>
+		   <div class="col-12 col-lg-5">
+            <div class="icon-box d-flex position-relative h-100">
+               
+			    <div class="summary-logo"><img src="assets/img/gra/processing/gra_test_processing-logo.jpg" alt="GRA Test Processing logo" loading="lazy"></div>
+					<div><div class="step-head">
+                <h4>Processing with Confidence.</h4></div>
+                <p>Review with purpose.</p></div>
+              
+            </div>
+          </div>
+		</div>
       </div>
     </section>
 	
