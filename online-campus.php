@@ -72,7 +72,8 @@
     .campus-title .accent { color: #ff6e11; }
     .campus-sub { font-size: clamp(1rem, 1.05vw, 1.35rem); line-height: 1.45; color: #1f2d3d; margin-bottom: 16px; max-width: 520px; }
     .campus-btn { border-radius: 10px; font-weight: 700; font-size: 1rem; padding: 8px 12px; display: flex; align-items: center; gap: 8px; text-decoration: none; margin-bottom: 8px; justify-content: center; white-space: nowrap; }
-    .campus-btn.b1 { background: #ff7a12; color: #fff; }
+    .campus-btn.b1 { background: #00b89c; color: #fff; }
+    .campus-btn.b1:hover { background: #009f87; color: #fff; }
     .campus-btn.b2 { background: #003057; color: #fff; }
     .campus-btn.b3 { background: #fff; color: #003057; border: 1px solid #003057; }
     .campus-media { min-height: 360px; height: 100%; border-radius: 14px; overflow: hidden; position: relative; }
