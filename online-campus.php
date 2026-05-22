@@ -213,7 +213,12 @@
         line-height: 1.35;
       }
       .campus-resource-card h4 { font-size: 1.2rem; }
-      .campus-resource-link { font-size: 1.05rem; }
+      .campus-resource-link {
+        font-size: .82rem;
+        line-height: 1.2;
+        padding-left: 8px;
+        padding-right: 8px;
+      }
       .support-form button[type=submit],
       #campus-access-submit {
         font-size: 1.1rem !important;
