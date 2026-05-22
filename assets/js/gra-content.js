@@ -169,6 +169,8 @@
       if (kind === 'success') campusStatus.classList.add('is-success');
     };
 
+    const disableCampusAutoScroll = document.body.classList.contains('campus-page');
+
     const focusFreeResources = () => {
       const resourcesSection = document.getElementById('free-resources');
       const firstResourceLink = document.querySelector('#free-resources [data-campus-resource]');
@@ -240,7 +242,9 @@
         .then((result) => {
           setResourcesUnlocked(rememberedEmail);
           setCampusStatus(result.message || 'Email verified. Resources unlocked.', 'success');
-          focusFreeResources();
+          if (!disableCampusAutoScroll) {
+            focusFreeResources();
+          }
         })
         .catch(() => {
           window.localStorage.removeItem(storageKey);

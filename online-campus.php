@@ -415,11 +415,19 @@
   <script src="<?php echo versioned_asset('assets/js/main.js'); ?>"></script>
   <script src="<?php echo versioned_asset('assets/js/gra-content.js'); ?>"></script>
   <script>
-    window.addEventListener('load', function () {
-      if (!window.location.hash) {
-        window.scrollTo(0, 0);
+    (function () {
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
       }
-    });
+      function resetTop() {
+        if (!window.location.hash) {
+          window.scrollTo(0, 0);
+        }
+      }
+      window.addEventListener('DOMContentLoaded', resetTop);
+      window.addEventListener('load', resetTop);
+      window.addEventListener('pageshow', resetTop);
+    })();
   </script>
 </body>
 </html>
