@@ -57,7 +57,7 @@ if ($accessGranted) {
         <a href="index.php" class="logo d-flex align-items-center me-auto">
           <img src="assets/img/gra/gra-logo.png" alt="Gapuz Review Academy logo">
         </a>
-        <a class="cta-btn" href="free-course.php">Back to Online Campus</a>
+        <a class="cta-btn" href="online-campus.php">Back to Online Campus</a>
       </div>
     </div>
   </header>
@@ -67,7 +67,7 @@ if ($accessGranted) {
     <section class="campus-gate">
       <h2>Email Verification Needed</h2>
       <p>Please unlock resources from Online Campus first using your registered email.</p>
-      <a class="btn btn-primary" href="free-course.php#campus-access">Go to Email Verification</a>
+      <a class="btn btn-primary" href="online-campus.php#campus-access">Go to Email Verification</a>
     </section>
     <?php else: ?>
     <section class="campus-video-shell">

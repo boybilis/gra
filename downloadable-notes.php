@@ -25,7 +25,7 @@ $accessGranted = is_booking_email_registered($email);
         <a href="index.php" class="logo d-flex align-items-center me-auto">
           <img src="assets/img/gra/gra-logo.png" alt="Gapuz Review Academy logo">
         </a>
-        <a class="cta-btn" href="free-course.php">Back to Online Campus</a>
+        <a class="cta-btn" href="online-campus.php">Back to Online Campus</a>
       </div>
     </div>
   </header>
@@ -33,7 +33,7 @@ $accessGranted = is_booking_email_registered($email);
     <?php if (!$accessGranted): ?>
       <h2>Email Verification Needed</h2>
       <p>Please unlock resources from Online Campus first.</p>
-      <a class="btn btn-primary" href="free-course.php#campus-access">Go to Online Campus</a>
+      <a class="btn btn-primary" href="online-campus.php#campus-access">Go to Online Campus</a>
     <?php else: ?>
       <h2>Downloadable Notes</h2>
       <p>Access your quick-reference notes below.</p>
@@ -42,7 +42,7 @@ $accessGranted = is_booking_email_registered($email);
         <li><a href="assets/img/gra/artemis-platform.jpg" target="_blank" rel="noopener">Online Campus Guide</a></li>
         <li><a href="assets/img/gra/nclex-course.jpg" target="_blank" rel="noopener">NCLEX Checklist Snapshot</a></li>
       </ul>
-      <a class="btn btn-outline-primary" href="free-course.php">Back to Online Campus</a>
+      <a class="btn btn-outline-primary" href="online-campus.php">Back to Online Campus</a>
     <?php endif; ?>
   </main>
   <footer id="footer" class="footer dark-background">
