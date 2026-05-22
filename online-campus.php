@@ -170,6 +170,14 @@
     @media (max-width: 767px) {
       .campus-wrap { padding: 12px 0 24px; }
       .campus-card { padding: 14px; }
+      .campus-card .row {
+        margin-left: 4px;
+        margin-right: 4px;
+      }
+      #free-resources .container.px-0 {
+        padding-left: 8px !important;
+        padding-right: 8px !important;
+      }
       .campus-title { font-size: 2rem; line-height: 1.15; }
       .campus-sub { font-size: 1.15rem; line-height: 1.4; }
       .campus-btn { font-size: 1.15rem; padding: 8px 12px; }
@@ -302,12 +310,12 @@
         <h2 class="oc-title">Stay Connected - Follow GRA</h2>
         <p class="oc-sub">Get updates, announcements, tips, and inspiration.</p>
         <div class="row g-3 row-cols-3 row-cols-md-3 row-cols-xl-6">
-          <div class="col"><a class="social-box d-block" href="https://www.facebook.com/gapuzreviewacademyofficial"><span class="social-icon s1"><i class="bi bi-facebook"></i></span><span class="social-name">Facebook</span></a></div>
-          <div class="col"><a class="social-box d-block" href="https://www.youtube.com/"><span class="social-icon s2"><i class="bi bi-youtube"></i></span><span class="social-name">YouTube</span></a></div>
-          <div class="col"><a class="social-box d-block" href="https://www.instagram.com/"><span class="social-icon s3"><i class="bi bi-instagram"></i></span><span class="social-name">Instagram</span></a></div>
-          <div class="col"><a class="social-box d-block" href="https://www.tiktok.com/"><span class="social-icon s4"><i class="bi bi-tiktok"></i></span><span class="social-name">TikTok</span></a></div>
-          <div class="col"><a class="social-box d-block" href="https://m.me/gapuzreviewacademyofficial"><span class="social-icon s5"><i class="bi bi-messenger"></i></span><span class="social-name">Messenger</span></a></div>
-          <div class="col"><a class="social-box d-block" href="https://gratestprepworldwide.com/"><span class="social-icon s6"><i class="bi bi-globe2"></i></span><span class="social-name">Website</span></a></div>
+          <div class="col"><a class="social-box d-block" href="https://www.facebook.com/gapuzreviewacademyofficial" target="_blank" rel="noopener"><span class="social-icon s1"><i class="bi bi-facebook"></i></span><span class="social-name">Facebook</span></a></div>
+          <div class="col"><a class="social-box d-block" href="https://www.youtube.com/" target="_blank" rel="noopener"><span class="social-icon s2"><i class="bi bi-youtube"></i></span><span class="social-name">YouTube</span></a></div>
+          <div class="col"><a class="social-box d-block" href="https://www.instagram.com/" target="_blank" rel="noopener"><span class="social-icon s3"><i class="bi bi-instagram"></i></span><span class="social-name">Instagram</span></a></div>
+          <div class="col"><a class="social-box d-block" href="https://www.tiktok.com/" target="_blank" rel="noopener"><span class="social-icon s4"><i class="bi bi-tiktok"></i></span><span class="social-name">TikTok</span></a></div>
+          <div class="col"><a class="social-box d-block" href="https://m.me/gapuzreviewacademyofficial" target="_blank" rel="noopener"><span class="social-icon s5"><i class="bi bi-messenger"></i></span><span class="social-name">Messenger</span></a></div>
+          <div class="col"><a class="social-box d-block" href="https://gratestprepworldwide.com/" target="_blank" rel="noopener"><span class="social-icon s6"><i class="bi bi-globe2"></i></span><span class="social-name">Website</span></a></div>
         </div>
       </section>
 
