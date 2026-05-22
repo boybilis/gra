@@ -49,6 +49,7 @@
                 <li><a href="pnle-courses.php">PNLE</a></li>
                 <li><a href="sple-courses.php">SPLE</a></li>
                 <li><a href="civil-service-courses.php">Civil Service</a></li>
+                <li><a href="lept-courses.php">LEPT</a></li>
               </ul>
             </li>
             <li><a href="index.php#free-courses">Free Courses</a></li>

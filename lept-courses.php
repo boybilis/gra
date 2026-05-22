@@ -5,7 +5,7 @@
   <?php require_once __DIR__ . '/asset-version.php'; ?>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>PNLE PassEasy Course | Gapuz Review Academy</title>
+  <title>LEPT PassEasy Course | Gapuz Review Academy</title>
   <meta name="description" content="Gapuz Review Academy review programs for NCLEX, DHA, HAAD, Prometric, PNLE, SPLE, Civil Service, and online learning.">
   <meta name="keywords" content="Gapuz Review Academy, PassEasy, NCLEX, DHA, HAAD, Prometric, PNLE, SPLE, Civil Service">
   <link href="assets/img/gra/gra-logo.png" rel="icon">
@@ -69,17 +69,17 @@
 
     <section id="course-overview" class="about section light-background">
       <div class="container section-title" data-aos="fade-up">
-        <h2>PNLE</h2>
-        <p>Philippine Nursing Licensure Examination preparation with structured online review support.</p>
+        <h2>LEPT</h2>
+        <p>Philippine Licensure Exam for Professional Teachers test preparation (Elementary and Secondary).</p>
       </div>
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-6 position-relative align-self-start" data-aos="fade-up" data-aos-delay="100">
-            <img src="assets/img/gra/pnle-course.jpg" class="img-fluid" alt="PNLE review course">
+            <img src="assets/img/gra/civil-service-course.png" class="img-fluid" alt="LEPT review course">
           </div>
           <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
-            <h3>Prepare for the Philippine Nursing Licensure Examination with a guided review plan.</h3>
-            <p class="fst-italic">GRA's PNLE PassEasy course combines expert instruction, flexible learning access, practice support, and review guidance for students preparing for exam day.</p>
+            <h3>Prepare for LEPT with focused coaching and smart strategy.</h3>
+            <p class="fst-italic">GRA's LEPT PassEasy course combines expert instruction, flexible learning access, practice support, and review guidance for future professional teachers preparing for exam day.</p>
             <ul>
               <li><i class="bi bi-check2-all"></i> <span>Live online classes via Zoom with expert lecturers.</span></li>
               <li><i class="bi bi-check2-all"></i> <span>Recorded lessons, review materials, and test bank access.</span></li>
@@ -93,13 +93,13 @@
 
     <?php
       require_once __DIR__ . DIRECTORY_SEPARATOR . 'passer-library.php';
-      $coursePassers = get_latest_passer_images(8, 'pnle');
+      $coursePassers = get_latest_passer_images(8, 'lept');
       if (count($coursePassers) > 0):
     ?>
     <section id="course-passers" class="featured-passers course-passers section light-background">
       <div class="container section-title" data-aos="fade-up">
-        <h2>PNLE Passer Stories</h2>
-        <p>Successful PNLE passers from the GRA community.</p>
+        <h2>LEPT Passer Stories</h2>
+        <p>Successful LEPT passers from the GRA community.</p>
       </div>
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="swiper init-swiper featured-passers-swiper">
@@ -108,7 +108,7 @@
             <?php foreach ($coursePassers as $passerImage): $passerAlt = htmlspecialchars(($passerImage['name'] ?? 'GRA passer') . ' testimonial poster', ENT_QUOTES, 'UTF-8'); $passerUrl = htmlspecialchars($passerImage['url'], ENT_QUOTES, 'UTF-8'); ?>
             <div class="swiper-slide">
               <article class="featured-passer-card">
-                <a href="<?php echo $passerUrl; ?>" class="glightbox" data-gallery="pnle-passers">
+                <a href="<?php echo $passerUrl; ?>" class="glightbox" data-gallery="lept-passers">
                   <img src="<?php echo $passerUrl; ?>" alt="<?php echo $passerAlt; ?>" loading="lazy" decoding="async">
                 </a>
               </article>
@@ -131,10 +131,10 @@
       </div>
       <div class="container">
         <div class="row gy-4">
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100"><div class="service-item position-relative"><div class="icon"><i class="fas fa-notes-medical"></i></div><h3>Program Access</h3><p>3 months review access with comprehensive lectures, review materials, and guided study direction.</p></div></div>
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100"><div class="service-item position-relative"><div class="icon"><i class="fas fa-file-lines"></i></div><h3>Program Access</h3><p>3 months review access with comprehensive lectures, review materials, and guided study direction.</p></div></div>
           <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200"><div class="service-item position-relative"><div class="icon"><i class="fas fa-video"></i></div><h3>Live Online Review</h3><p>Attend live online sessions, intensive coaching, consultations, and exam-focused discussions.</p></div></div>
           <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300"><div class="service-item position-relative"><div class="icon"><i class="fas fa-laptop"></i></div><h3>Artemis360 Tools</h3><p>Use online practice tests, recorded lessons, test banks, study guides, and progress support.</p></div></div>
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400"><div class="service-item position-relative"><div class="icon"><i class="fas fa-clipboard-check"></i></div><h3>PassEasy PNLE Track</h3><p>Build PNLE confidence through local-board style drills, nursing fundamentals refreshers, and answer strategy.</p></div></div>
+          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400"><div class="service-item position-relative"><div class="icon"><i class="fas fa-chalkboard-teacher"></i></div><h3>PassEasy LEPT Track</h3><p>Master LEPT exam sections with targeted drills, teaching-focused strategy, and structured progress checks.</p></div></div>
         </div>
       </div>
     </section>
@@ -154,7 +154,7 @@
     </section><section id="testmasters" class="doctors section">
       <div class="container section-title" data-aos="fade-up">
         <h2>Testmasters</h2>
-        <p>Lead Testmasters for PNLE preparation.</p>
+        <p>LEPT Review Lead Testmaster.</p>
       </div>
       <div class="container">
         <div class="row gy-4">
@@ -175,7 +175,7 @@
         <form action="submit.php" method="post" role="form" class="site-form gra-medicio-form">
           <input type="hidden" name="form_type" value="enrollment">
           <div class="row"><div class="col-md-4 form-group"><input type="text" name="name" class="form-control" placeholder="Full Name" required></div><div class="col-md-4 form-group mt-3 mt-md-0"><input type="email" class="form-control" name="email" placeholder="Email" required></div><div class="col-md-4 form-group mt-3 mt-md-0"><input type="tel" class="form-control" name="phone" placeholder="Mobile / Messaging App" required></div></div>
-          <div class="row"><div class="col-md-6 form-group mt-3"><input type="text" name="course" class="form-control" value="PNLE PassEasy" readonly></div><div class="col-md-6 form-group mt-3"><select name="review_setup" class="form-select"><option>Live online via Zoom</option><option>Recorded lectures and test bank access</option><option>Processing assistance</option></select></div></div>
+          <div class="row"><div class="col-md-6 form-group mt-3"><input type="text" name="course" class="form-control" value="LEPT PassEasy" readonly></div><div class="col-md-6 form-group mt-3"><select name="review_setup" class="form-select"><option>Live online via Zoom</option><option>Recorded lectures and test bank access</option><option>Processing assistance</option></select></div></div>
           <div class="form-group mt-3"><textarea class="form-control" name="message" rows="5" placeholder="Questions or notes"></textarea></div>
           <div class="mt-3 text-center"><button type="submit">Submit Inquiry</button><p class="form-note mt-3">Your inquiry will be saved for adviser review.</p></div>
         </form>
