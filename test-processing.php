@@ -781,7 +781,7 @@ require_once __DIR__ . '/asset-version.php';
 		   <div class="col-12 col-lg-5">
             <div class="icon-box d-flex position-relative h-100">
                
-			    <div class="summary-logo"><img src="assets/img/gra/gra_test_processing-logo.jpg" alt="GRA Test Processing logo" loading="lazy"></div>
+			    <div class="summary-logo"><img src="assets/img/gra/gra_test_processing logo.jpg" alt="GRA Test Processing logo" loading="lazy"></div>
 					<div><div class="step-head">
                 <h4>Processing with Confidence.</h4></div>
                 <p>Review with purpose.</p></div>
