@@ -525,8 +525,8 @@
 
   <div class="floating-contact-stack" id="floating-contact-stack" aria-label="Floating contact actions">
     <div class="floating-contact-actions" id="floating-contact-actions">
-      <a href="tel:+639292135926" aria-label="Call GRA"><i class="bi bi-telephone"></i></a>
-      <a href="https://wa.me/639292135926" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="bi bi-whatsapp"></i></a>
+      <a href="tel:+639292135296" aria-label="Call GRA"><i class="bi bi-telephone"></i></a>
+      <a href="https://wa.me/639292135296" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="bi bi-whatsapp"></i></a>
       <a href="https://m.me/gapuzreviewacademyofficial" target="_blank" rel="noopener" aria-label="Open Messenger"><i class="bi bi-messenger"></i></a>
       <a href="test-processing.php#processing-consultation" aria-label="Book consultation"><i class="bi bi-calendar-check"></i></a>
     </div>
@@ -546,4 +546,6 @@
   <script src="<?php echo versioned_asset('assets/js/gra-content.js'); ?>"></script>
 </body>
 </html>
+
+
 

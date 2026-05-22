@@ -308,7 +308,7 @@
               <div class="row align-items-center gy-3">
               <div class="hero-copy">
                 <span class="eyebrow">ONLINE CAMPUS</span>
-                <h2 class="campus-title">Welcome Back,<br><span class="accent">Future Passer!</span></h2>
+                <h2 class="campus-title">Welcome Back,<br><span class="accent">GRA Students an Faculty!</span></h2>
                 <p class="campus-sub">Access your learning tools, live classes, study materials, and stay connected with Gapuz Review Academy.</p>
                 <div class="d-flex flex-column gap-2 mt-3 campus-hero-actions">
                   <a class="campus-btn b1 mb-0" href="https://artemis360.gapuzreview.com" target="_blank" rel="noopener"><i class="bi bi-rocket-takeoff-fill"></i>Launch Artemis360</a>
@@ -340,9 +340,9 @@
         <h2 class="oc-title">MESSAGE US - WE'RE HERE TO HELP!</h2>
         <p class="oc-sub">Chat with us anytime through your preferred app.</p>
         <div class="row g-3 row-cols-1 row-cols-md-3">
-          <div class="col"><a class="chat-link cwa" href="https://wa.me/639292135926"><i class="bi bi-whatsapp"></i>WhatsApp</a></div>
-          <div class="col"><a class="chat-link ctg" href="https://t.me/+639292135926"> <i class="bi bi-telegram"></i>Telegram</a></div>
-          <div class="col"><a class="chat-link cvb" href="viber://chat?number=%2B639292135926"><i class="bi bi-telephone-inbound"></i>Viber</a></div>
+          <div class="col"><a class="chat-link cwa" href="https://wa.me/639292135296"><i class="bi bi-whatsapp"></i>WhatsApp</a></div>
+          <div class="col"><a class="chat-link ctg" href="https://t.me/+639292135296"> <i class="bi bi-telegram"></i>Telegram</a></div>
+          <div class="col"><a class="chat-link cvb" href="viber://chat?number=%2B639292135296"><i class="bi bi-telephone-inbound"></i>Viber</a></div>
         </div>
       </section>
 
@@ -353,7 +353,7 @@
               <div class="support-icon"><i class="bi bi-headset"></i></div>
               <h3>Book Student Support</h3>
               <p>We're here to help you! Fill out the form and our support team will get back to you as soon as possible.</p>
-              <div class="support-hours"><i class="bi bi-clock me-2"></i>Support is available<br>Monday - Sunday | 8:00 AM - 8:00 PM</div>
+              <div class="support-hours"><i class="bi bi-clock me-2"></i>Support is available<br>Monday - Sunday | 8:00 AM - 5:00 PM</div>
             </div>
           </div>
           <div class="col-xl-8">
@@ -363,7 +363,7 @@
                   <div class="col-md-6"><label>Full Name *</label><input type="text" class="form-control" name="name" required></div>
                   <div class="col-md-6"><label>Email Address *</label><input type="email" class="form-control" name="email" required></div>
                   <div class="col-md-6"><label>Course / Program *</label><select class="form-select" name="course" required><option value="">Select your course</option><option>NCLEX</option><option>DHA</option><option>HAAD (DOH)</option><option>Prometric</option><option>PNLE</option><option>SPLE</option><option>Civil Service</option><option>LEPT</option></select></div>
-                  <div class="col-md-6"><label>Student ID / Registration No. *</label><input type="text" class="form-control" name="student_id" required></div>
+                  <div class="col-md-6"><label>Student ID / Registration No. </label><input type="text" class="form-control" name="student_id"></div>
                   <div class="col-md-6"><label>Concern / Category *</label><select class="form-select" name="concern" required><option value="">Select concern</option><option>Account Access</option><option>Schedule</option><option>Billing</option><option>Technical Support</option><option>Course Inquiry</option></select></div>
                   <div class="col-md-6"><label>Preferred Contact Method *</label><select class="form-select" name="preferred_contact" required><option value="">Select preferred method</option><option>Email</option><option>Phone</option><option>Messenger</option><option>WhatsApp</option></select></div>
                   <div class="col-12"><label>Message / Details *</label><textarea class="form-control" name="message" required></textarea></div>
@@ -424,8 +424,8 @@
 
   <div class="floating-contact-stack" id="floating-contact-stack" aria-label="Floating contact actions">
     <div class="floating-contact-actions" id="floating-contact-actions">
-      <a href="tel:+639292135926" aria-label="Call GRA"><i class="bi bi-telephone"></i></a>
-      <a href="https://wa.me/639292135926" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="bi bi-whatsapp"></i></a>
+      <a href="tel:+639292135296" aria-label="Call GRA"><i class="bi bi-telephone"></i></a>
+      <a href="https://wa.me/639292135296" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="bi bi-whatsapp"></i></a>
       <a href="https://m.me/gapuzreviewacademyofficial" target="_blank" rel="noopener" aria-label="Open Messenger"><i class="bi bi-messenger"></i></a>
       <a href="#support-form" aria-label="Book consultation"><i class="bi bi-calendar-check"></i></a>
     </div>
@@ -455,3 +455,5 @@
   </script>
 </body>
 </html>
+
+

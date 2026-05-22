@@ -251,9 +251,9 @@ h6 {
   margin-left: 48px;
   height: 28px;
   padding: 0 10px;
-  background: var(--accent-color);
+  background: #00b89c;
   color: #fff;
-  border: 1px solid var(--accent-color);
+  border: 1px solid #00b89c;
   font-size: 12px;
   font-weight: 700;
   line-height: 1;
@@ -295,9 +295,9 @@ h6 {
 
 .header .topbar .online-campus-link:hover,
 .header .topbar .online-campus-link:focus {
-  background: #f37507;
+  background: #009f87;
   color: #fff;
-  border-color: #f37507;
+  border-color: #009f87;
 }
 
 .header .branding {
