@@ -694,11 +694,19 @@ require_once __DIR__ . '/asset-version.php';
             <div class="service-item position-relative">
               <div class="processing-flag" aria-label="Middle East">🇦🇪</div>
               <h3>Middle East Licensing</h3>
+			  <p>Licensing pathways for:</p>
               <ul class="processing-checklist">
-                <li><i class="bi bi-check2-all"></i> <span>by DATAFLOW GROUP</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>Saudi Arabia (SCFHS)</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>Dubai (DHA)</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>Abu Dhabi (DOH)</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>Qatar (DHP)</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>Bahrain (NHRA)</span></li>
+                <li><i class="bi bi-check2-all"></i> <span>Oman</span></li>
               </ul>
-			  <BR><hr>
-              <p><small>Note:Our Middle East test processing is under our partner for Middle East. The Data Flow Group.</small></p>
+			  <p>In partnership with <b>DataFlow Group</b>. A recognized provider of primary source verification services across the region.</p><hr>
+              <div class="text-center my-2">
+                <img src="assets/img/gra/dataflow.jpg" alt="DataFlow logo" style="max-width: 170px; width: 100%; height: auto;">
+              </div>
             </div>
           </div>
           <div class="col-lg-3 col-md-6">
