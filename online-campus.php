@@ -16,7 +16,7 @@
   <style>
     .campus-page { background: #eef2f7; }
     .campus-wrap { max-width: 1240px; margin: 0 auto; padding: 16px 0 30px; }
-    .campus-card { background: #fff; border: 1px solid #e1e7f0; border-radius: 14px; padding: 20px; margin-bottom: 16px; }
+    .campus-card { background: #fff; border: 1px solid #e1e7f0; border-radius: 14px; padding: 16px; margin-bottom: 14px; }
     .campus-cover-hero { margin-bottom: 16px; }
     .campus-hero-actions { position: relative; z-index: 3; pointer-events: auto; }
     .campus-hero-actions a { pointer-events: auto; }
@@ -80,19 +80,19 @@
     .campus-media-tag { position: absolute; right: 14px; bottom: 14px; background: #fff; color: #003057; border-radius: 10px; border: 1px solid #d9e3ef; padding: 8px 12px; font-weight: 700; font-size: 1.35rem; }
     .oc-title { text-align: center; color: #0b1e4b; font-size: 1.55rem; font-weight: 700; margin-bottom: 4px; letter-spacing: 0; text-transform: none; }
     .oc-sub { text-align: center; color: #475569; font-size: 1rem; margin-bottom: 16px; }
-    .social-box, .chat-box { border: 1px solid #e1e7f0; border-radius: 12px; background: #fff; text-align: center; padding: 14px 10px; height: 100%; text-decoration: none !important; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+    .social-box, .chat-box { border: 1px solid #e1e7f0; border-radius: 12px; background: #fff; text-align: center; padding: 12px 8px; height: 100%; text-decoration: none !important; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
     .social-box:hover { transform: translateY(-2px); border-color: #cdd9e8; box-shadow: 0 8px 18px rgba(15, 23, 42, .08); }
-    .social-icon { width: 54px; height: 54px; border-radius: 12px; display: inline-flex; align-items: center; justify-content: center; color: #fff; font-size: 2.3rem; margin-bottom: 8px; }
+    .social-icon { width: 46px; height: 46px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; color: #fff; font-size: 1.9rem; margin-bottom: 6px; }
     .s1{background:#1877f2}.s2{background:#ff0000}.s3{background:#e1306c}.s4{background:#111827}.s5{background:#0a7cff}.s6{background:#1e40af}
     .social-name { display:block; margin-top: 2px; color:#0b1e4b; font-size: .92rem; font-weight: 600; line-height: 1.25; }
     .chat-link { border-radius: 12px; color: #fff; text-decoration: none; padding: 12px; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.05rem; font-weight: 700; }
     .cwa{background:linear-gradient(135deg,#0cae5d,#25d366)} .ctg{background:linear-gradient(135deg,#188bdc,#40a9ff)} .cvb{background:linear-gradient(135deg,#6b3ec9,#8a63e6)}
     .support-left { border: 1px solid #e1e7f0; border-radius: 12px; padding: 16px; height: 100%; }
-    .support-icon { width: 84px; height: 84px; border-radius: 50%; background: #eaf1ff; color: #1d4ed8; display: inline-flex; align-items: center; justify-content: center; font-size: 3.3rem; margin-bottom: 10px; }
+    .support-icon { width: 70px; height: 70px; border-radius: 50%; background: #eaf1ff; color: #1d4ed8; display: inline-flex; align-items: center; justify-content: center; font-size: 2.6rem; margin-bottom: 8px; }
     .support-left h3 { font-size: 1.45rem; color: #0b1e4b; font-weight: 700; margin-bottom: 8px; }
     .support-left p { font-size: .98rem; color: #334155; }
     .support-hours { margin-top: 10px; border: 1px solid #e1e7f0; border-radius: 10px; padding: 10px 12px; color: #334155; font-size: .9rem; background: #f8fafc; }
-    .support-form { border: 1px solid #e1e7f0; border-radius: 12px; padding: 16px; }
+    .support-form { border: 1px solid #e1e7f0; border-radius: 12px; padding: 14px; }
     .support-form label { font-size: .9rem; font-weight: 600; color: #0b1e4b; margin-bottom: 4px; line-height: 1.2; }
     .support-form .form-control,
     .support-form .form-select {
@@ -117,20 +117,55 @@
     .oc-note { text-align: center; color: #64748b; font-size: .88rem; margin-top: 10px; }
     .oc-end { border: 1px solid #dfe7f1; background: #f2f6fc; border-radius: 14px; padding: 14px; text-align: center; color: #0b1e4b; font-size: 1.3rem; font-weight: 700; }
     .oc-end small { display: block; margin-top: 4px; font-weight: 500; color: #334155; font-size: .9rem; }
-    #free-resources .row > div:nth-child(odd) .service-item:hover {
+    #free-resources .service-item {
+      border: 1px solid #003057 !important;
+      box-shadow: none !important;
+      transition: none !important;
+    }
+    #free-resources .campus-resource-card.is-locked {
+      opacity: 1 !important;
+    }
+    #free-resources .service-item:before,
+    #free-resources .service-item:after,
+    #free-resources .service-item .icon:before,
+    #free-resources .service-item .icon:after {
+      display: none !important;
+      content: none !important;
+      background: transparent !important;
+      opacity: 0 !important;
+    }
+    #free-resources .service-item:hover {
       background: #003057 !important;
       border-color: #003057 !important;
-    }
-    #free-resources .row > div:nth-child(even) .service-item:hover {
-      background: #ff6e11 !important;
-      border-color: #ff6e11 !important;
+      box-shadow: none !important;
+      transform: none !important;
     }
     #free-resources .service-item:hover h4,
     #free-resources .service-item:hover h4 a,
     #free-resources .service-item:hover p,
-    #free-resources .service-item:hover .campus-resource-link,
     #free-resources .service-item:hover .icon i {
-      color: #fff !important;
+      color: #ffffff !important;
+    }
+    #free-resources .campus-resource-link {
+      background: #ff6e11 !important;
+      border: 1px solid #ff6e11 !important;
+      color: #ffffff !important;
+      box-shadow: none !important;
+      transition: none !important;
+    }
+    #free-resources .campus-resource-card.is-locked .campus-resource-link {
+      background: #9daab6 !important;
+      border-color: #9daab6 !important;
+      color: #ffffff !important;
+      pointer-events: none !important;
+      cursor: not-allowed;
+    }
+    #free-resources .campus-resource-card:not(.is-locked) .campus-resource-link {
+      background: #ff6e11 !important;
+      border-color: #ff6e11 !important;
+      color: #ffffff !important;
+      pointer-events: auto !important;
+      cursor: pointer;
     }
     @media (max-width: 767px) {
       .campus-wrap { padding: 12px 0 24px; }
