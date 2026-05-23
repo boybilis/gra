@@ -527,8 +527,8 @@
             </div>
           </div>
           <div class="col-lg-4">
-            <div class="p-3 bg-white package-card-orange d-flex flex-column justify-content-center align-items-center text-center">
-              <h4 class="mb-2">Powered by Artemis360</h4>
+            <h4 class="mb-3">Powered by Artemis360</h4>
+            <div class="d-flex justify-content-center align-items-center text-center">
               <img src="assets/img/gra/artemis-platform.jpg" alt="Artemis360" class="img-fluid" style="max-width: 220px;">
             </div>
           </div>
