@@ -343,7 +343,7 @@
               <li><i class="bi bi-check2-all"></i> <span>Recorded lessons, review materials, and test bank access.</span></li>
               <li><i class="bi bi-check2-all"></i> <span>Artemis360 learning tools for practice, tracking, and self-paced study.</span></li>
             </ul>
-            <p><a href="#course-enroll" class="btn course-overview-btn course-overview-btn-primary">Enroll Now</a> <a href="index.php#courses" class="btn course-overview-btn course-overview-btn-secondary ms-2">Back to Courses</a></p>
+            <p><a href="#course-package" class="btn course-overview-btn course-overview-btn-primary">View Packages</a> <a href="index.php#courses" class="btn course-overview-btn course-overview-btn-secondary ms-2">Back to Courses</a></p>
           </div>
         </div>
       </div>
@@ -537,9 +537,12 @@
     </section>
 
     <section id="course-details" class="features section light-background">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Upcoming Schedules</h2>
+      </div>
       <div class="container">
         <div class="row justify-content-around gy-4">
-          <div class="features-image col-lg-6" data-aos="fade-up" data-aos-delay="100"><img src="assets/img/gra/artemis-platform.jpg" alt="Artemis360 learning platform"></div>
+          <div class="features-image col-lg-6" data-aos="fade-up" data-aos-delay="100"><img src="assets/img/gra/nclex_upcoming.jpg" alt="NCLEX upcoming schedules"></div>
           <div class="col-lg-5 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
             <h3>Study support from content to confidence.</h3>
             <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="300"><i class="fa-solid fa-list-check flex-shrink-0"></i><div><h4>Course inclusions</h4><p>Exam pathway orientation, study pacing, high-yield concept review, and question analysis techniques.</p></div></div>
