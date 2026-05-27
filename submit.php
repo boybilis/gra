@@ -104,11 +104,20 @@ $phone = clean_value('phone');
 $course = clean_value('course');
 $preferredDate = clean_value('preferred_date');
 $reviewSetup = clean_value('review_setup');
+$inquiryType = clean_value('inquiry_type');
+$packageInterest = clean_value('package_interest');
 $message = clean_value('message');
 $otpVerificationToken = clean_value('otp_verification_token');
 $submittedAt = date('c');
 $ipAddress = $_SERVER['REMOTE_ADDR'] ?? '';
 $userAgent = isset($_SERVER['HTTP_USER_AGENT']) ? substr((string) $_SERVER['HTTP_USER_AGENT'], 0, 255) : '';
+$messageForStorage = $message;
+if ($inquiryType !== '') {
+    $messageForStorage .= ($messageForStorage !== '' ? "\n" : '') . 'Inquiry Type: ' . $inquiryType;
+}
+if ($packageInterest !== '') {
+    $messageForStorage .= ($messageForStorage !== '' ? "\n" : '') . 'Package Interest: ' . $packageInterest;
+}
 
 if (!in_array($formType, ['booking', 'enrollment'], true)) {
     http_response_code(422);
@@ -176,7 +185,7 @@ try {
             ':course' => $course !== '' ? $course : null,
             ':preferred_date' => $preferredDate !== '' ? $preferredDate : null,
             ':review_setup' => $reviewSetup !== '' ? $reviewSetup : null,
-            ':message' => $message !== '' ? $message : null,
+            ':message' => $messageForStorage !== '' ? $messageForStorage : null,
             ':ip_address' => $ipAddress !== '' ? $ipAddress : null,
             ':user_agent' => $userAgent !== '' ? $userAgent : null,
         ]);
@@ -189,7 +198,7 @@ try {
             ':course' => $course !== '' ? $course : null,
             ':preferred_date' => $preferredDate !== '' ? $preferredDate : null,
             ':review_setup' => $reviewSetup !== '' ? $reviewSetup : null,
-            ':message' => $message !== '' ? $message : null,
+            ':message' => $messageForStorage !== '' ? $messageForStorage : null,
             ':ip_address' => $ipAddress !== '' ? $ipAddress : null,
             ':user_agent' => $userAgent !== '' ? $userAgent : null,
         ]);
@@ -216,6 +225,8 @@ try {
         'course' => $course,
         'preferred_date' => $preferredDate,
         'review_setup' => $reviewSetup,
+        'inquiry_type' => $inquiryType,
+        'package_interest' => $packageInterest,
         'message' => $message,
         'ip_address' => $ipAddress,
     ]);
