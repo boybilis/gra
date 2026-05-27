@@ -755,6 +755,7 @@
             <h4 class="mb-3">Inquire / Enroll</h4>
             <div class="d-flex justify-content-center align-items-center text-center h-100 bg-white p-4 package-card-orange">
               <div>
+                <div class="mb-3"><i class="fa-solid fa-file-signature" style="font-size: 32px; color: #003057;"></i></div>
                 <p class="mb-3 small">Please select your preferred package before submitting the inquiry form.</p>
                 <button type="button" class="btn course-overview-btn course-overview-btn-primary" data-bs-toggle="modal" data-bs-target="#nclexInquireEnrollModal">Inquire / Enroll</button>
               </div>
