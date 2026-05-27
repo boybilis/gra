@@ -114,7 +114,7 @@
 
     <section id="course-inclusions" class="section">
       <div class="container section-title" data-aos="fade-up">
-        <h2>Inclusions &amp; <span class="accent">Feaures</span></h2>
+        <h2>Inclusions &amp; <span class="accent">Features</span></h2>
       </div>
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="row g-3">
