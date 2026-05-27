@@ -171,14 +171,29 @@
     <section id="course-package" class="services section">
       <div class="container section-title" data-aos="fade-up">
         <h2>Course Package</h2>
-        <p>A 360-degree review approach for focused preparation.</p>
+        <p>Choose the review package that fits your needs.</p>
       </div>
       <div class="container">
-        <div class="row gy-4">
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="100"><div class="service-item position-relative"><div class="icon"><i class="fas fa-file-lines"></i></div><h3>Program Access</h3><p>3 months review access with comprehensive lectures, review materials, and guided study direction.</p></div></div>
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200"><div class="service-item position-relative"><div class="icon"><i class="fas fa-video"></i></div><h3>Live Online Review</h3><p>Attend live online sessions, intensive coaching, consultations, and exam-focused discussions.</p></div></div>
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="300"><div class="service-item position-relative"><div class="icon"><i class="fas fa-laptop"></i></div><h3>Artemis360 Tools</h3><p>Use online practice tests, recorded lessons, test banks, study guides, and progress support.</p></div></div>
-          <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400"><div class="service-item position-relative"><div class="icon"><i class="fas fa-chalkboard-teacher"></i></div><h3>PassEasy LEPT Track</h3><p>Master LEPT exam sections with targeted drills, teaching-focused strategy, and structured progress checks.</p></div></div>
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="row">
+              <div class="col-6" data-aos="fade-up" data-aos-delay="100">
+                <div class="service-item position-relative h-100">
+                  <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+                  <h3>1. Complete Test Prep Package</h3>
+                  <p>Our flagship LEPT review program.</p>
+                  <p>Perfect for first-time takers and repeat test takers who want a full structured review.</p>
+                </div>
+              </div>
+              <div class="col-6" data-aos="fade-up" data-aos-delay="200">
+                <div class="service-item position-relative h-100">
+                  <div class="icon"><i class="fas fa-bolt"></i></div>
+                  <h3>2. Intensive Final Coaching</h3>
+                  <p>A focused final coaching program designed for examinees who need rapid reinforcement, high-yield discussions, test-taking strategies, and intensive practice before the actual exam.</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
