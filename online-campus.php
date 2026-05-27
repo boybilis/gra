@@ -308,7 +308,7 @@
               <div class="row align-items-center gy-3">
               <div class="hero-copy">
                 <span class="eyebrow">ONLINE CAMPUS</span>
-                <h2 class="campus-title">Welcome Back,<br><span class="accent">GRA Students an Faculty!</span></h2>
+                <h2 class="campus-title">Welcome Back,<br><span class="accent">GRA Students and Faculty!</span></h2>
                 <p class="campus-sub">Access your learning tools, live classes, study materials, and stay connected with Gapuz Review Academy.</p>
                 <div class="d-flex flex-column gap-2 mt-3 campus-hero-actions">
                   <a class="campus-btn b1 mb-0" href="https://artemis360.gapuzreview.com" target="_blank" rel="noopener"><i class="bi bi-rocket-takeoff-fill"></i>Launch Artemis360</a>

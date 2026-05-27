@@ -22,6 +22,103 @@
   <link href="<?php echo versioned_asset('assets/css/main.css'); ?>" rel="stylesheet">
   <link href="<?php echo versioned_asset('assets/css/gra-content.css'); ?>" rel="stylesheet">
   <style>
+    #nclex-inclusions {
+      background: #fff;
+    }
+    #nclex-inclusions .section-title h2 {
+      letter-spacing: .2px;
+    }
+    #nclex-inclusions .section-title h2 .accent {
+      color: var(--accent-color);
+    }
+    #nclex-inclusions .inclusion-card {
+      background: #fff;
+      border: 1px solid #d7e3f2;
+      padding: 20px 18px;
+      height: 100%;
+    }
+    #nclex-inclusions .inclusion-icon {
+      width: 66px;
+      height: 66px;
+      border-radius: 50%;
+      background: #003057;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      flex: 0 0 66px;
+      margin-right: 16px;
+    }
+    #nclex-inclusions .row > div:nth-child(odd) .inclusion-icon {
+      background: #003057;
+    }
+    #nclex-inclusions .row > div:nth-child(even) .inclusion-icon {
+      background: var(--accent-color);
+    }
+    #nclex-inclusions .inclusion-title {
+      margin: 0 0 8px;
+      color: #003057;
+      font-size: 1.125rem;
+      font-weight: 700;
+      line-height: 1.25;
+      text-transform: uppercase;
+    }
+    #nclex-inclusions .inclusion-copy {
+      margin: 0;
+      font-size: .875rem;
+      line-height: 1.45;
+    }
+    #nclex-inclusions .inclusion-strip {
+      margin-top: 18px;
+      background: #e5e7eb !important;
+      border: 0 !important;
+      padding: 16px 18px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      text-align: left;
+    }
+    #nclex-inclusions .inclusion-strip .strip-icon {
+      color: #003057;
+      font-size: 44px;
+      margin-right: 14px;
+      line-height: 1;
+    }
+    #nclex-inclusions .inclusion-strip h4 {
+      margin: 0 0 8px;
+      color: #003057;
+      text-transform: none;
+      font-size: 1.25rem;
+      font-weight: 700;
+      line-height: 1.25;
+      font-family: var(--heading-font);
+    }
+    #nclex-inclusions .inclusion-strip h4 .accent {
+      color: var(--accent-color);
+    }
+    #nclex-inclusions .inclusion-strip h4 .teal {
+      color: #00b89c;
+    }
+    #nclex-inclusions .inclusion-strip p {
+      margin: 0;
+      font-size: .875rem;
+      line-height: 1.45;
+      font-family: var(--default-font);
+    }
+    #nclex-inclusions .inclusion-strip > div { text-align: left; }
+    @media (max-width: 767.98px) {
+      #nclex-inclusions .inclusion-icon {
+        width: 56px;
+        height: 56px;
+        font-size: 22px;
+        margin-right: 12px;
+      }
+      #nclex-inclusions .inclusion-title { font-size: 1rem; }
+      #nclex-inclusions .inclusion-strip h4 {
+        font-size: 1.1rem;
+      }
+    }
     @media (min-width: 992px) {
       #course-package .nclex-package-grid > [class*="col-"] {
         width: 50% !important;
@@ -82,10 +179,6 @@
     #course-package .col-md-6 {
       overflow: visible !important;
     }
-    #course-package .package-card-navy h5,
-    #course-package .package-card-orange h5 {
-      font-weight: 800;
-    }
     #course-package h2,
     #course-package h4,
     #course-package h5,
@@ -133,20 +226,66 @@
       position: relative;
       z-index: 1 !important;
     }
+    #course-details .features-image img {
+      border-radius: 12px;
+    }
+    #course-details {
+      background: #fff !important;
+    }
+    #course-details .col-lg-5 .icon-box {
+      box-shadow: none !important;
+      border: 0 !important;
+      background: transparent !important;
+      transition: none !important;
+      transform: none !important;
+    }
+    #course-details .col-lg-5 .icon-box:hover,
+    #course-details .col-lg-5 .icon-box:focus,
+    #course-details .col-lg-5 .icon-box:focus-within {
+      box-shadow: none !important;
+      border: 0 !important;
+      background: transparent !important;
+      transform: none !important;
+    }
+    #course-details .col-lg-5 .icon-box i,
+    #course-details .col-lg-5 .icon-box:hover i,
+    #course-details .col-lg-5 .icon-box:focus i,
+    #course-details .col-lg-5 .icon-box:focus-within i {
+      box-shadow: none !important;
+      border: 0 !important;
+      background: transparent !important;
+      transform: none !important;
+      transition: none !important;
+      color: #003057 !important;
+    }
     #course-package .inclusion-toggle {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: #003057;
-      color: #fff;
-      border: 1px solid #003057;
-      padding: 6px 10px;
-      font-size: 13px;
-      font-weight: 700;
-      line-height: 1;
-      cursor: pointer;
       margin-top: auto;
       align-self: flex-start;
+    }
+    #course-package .package-card-navy .inclusion-toggle {
+      background: #003057;
+      border-color: #003057;
+      color: #fff;
+    }
+    #course-package .package-card-navy .inclusion-toggle:hover,
+    #course-package .package-card-navy .inclusion-toggle:focus {
+      background: #0b2f52;
+      border-color: #0b2f52;
+      color: #fff;
+    }
+    #course-package .package-card-orange .inclusion-toggle {
+      background: var(--accent-color);
+      border-color: var(--accent-color);
+      color: #fff;
+    }
+    #course-package .package-card-orange .inclusion-toggle:hover,
+    #course-package .package-card-orange .inclusion-toggle:focus {
+      background: #d96600;
+      border-color: #d96600;
+      color: #fff;
     }
     #course-package .card-bottom-meta {
       margin-top: auto;
@@ -180,10 +319,6 @@
       font-weight: 700;
       text-transform: uppercase;
       margin-left: 4px;
-    }
-    #course-package .package-card-orange .inclusion-toggle {
-      background: var(--accent-color);
-      border-color: var(--accent-color);
     }
     #course-package .inclusion-panel {
       position: absolute;
@@ -242,9 +377,24 @@
     }
     #course-package .inclusion-panel ul {
       margin: 0;
-      padding-left: 18px;
-      font-size: 13px;
-      line-height: 1.45;
+      padding-left: 0;
+      list-style: none;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    #course-package .inclusion-panel ul li {
+      position: relative;
+      padding-left: 22px;
+      margin-bottom: 4px;
+    }
+    #course-package .inclusion-panel ul li::before {
+      content: "\f058";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      color: #003057;
+      position: absolute;
+      left: 0;
+      top: 0;
     }
     @media (max-width: 767.98px) {
       #course-package .inclusion-close {
@@ -327,7 +477,7 @@
 
     <section id="course-overview" class="about section light-background">
       <div class="container section-title" data-aos="fade-up">
-        <h2>NCLEX - RN</h2>
+        <h2>NCLEX - <span class="accent"> RN </span></h2>
         <p>Next Generation NCLEX-RN review preparation for nurses preparing for US and Canadian registered nurse licensure.</p>
       </div>
       <div class="container">
@@ -336,14 +486,86 @@
             <img src="assets/img/gra/nclex-course.jpg" class="img-fluid" alt="NCLEX - RN review course">
           </div>
           <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
-            <h3>Prepare for the Next Generation NCLEX with focused coaching.</h3>
-            <p class="fst-italic">GRA's NCLEX PassEasy course combines expert instruction, flexible learning access, practice support, and review guidance for students preparing for exam day.</p>
+            <h4>Prepare for the Next Generation NCLEX with focused coaching and practice tests that are closely similar to the real thing.</h4>
+            <p class="fst-italic">GRA's NCLEX PassEasy course combines expert instruction, flexible learning access, NGN test taking skills enhancement and powerful mentoring that prepares each examinies to sit  and pass the NCLEX confidently.</p>
             <ul>
               <li><i class="bi bi-check2-all"></i> <span>Live online classes via Zoom with expert lecturers.</span></li>
               <li><i class="bi bi-check2-all"></i> <span>Recorded lessons, review materials, and test bank access.</span></li>
               <li><i class="bi bi-check2-all"></i> <span>Artemis360 learning tools for practice, tracking, and self-paced study.</span></li>
             </ul>
             <p><a href="#course-package" class="btn course-overview-btn course-overview-btn-primary">View Packages</a> <a href="index.php#courses" class="btn course-overview-btn course-overview-btn-secondary ms-2">Back to Courses</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="nclex-inclusions" class="section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Inclusions &amp; <span class="accent">Features</span></h2>
+      </div>
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row g-3">
+          <div class="col-lg-4 col-md-6">
+            <article class="inclusion-card d-flex">
+              <span class="inclusion-icon"><i class="bi bi-display"></i></span>
+              <div>
+                <h3 class="inclusion-title">Live Online Classes Via Zoom</h3>
+                <p class="inclusion-copy">Interactive sessions with experienced educators covering high-yield topics, clinical reasoning, and test-taking strategies.</p>
+              </div>
+            </article>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <article class="inclusion-card d-flex">
+              <span class="inclusion-icon"><i class="bi bi-book"></i></span>
+              <div>
+                <h3 class="inclusion-title">Self-Paced Review Via Artemis360</h3>
+                <p class="inclusion-copy">Access recorded lectures, review modules, and study materials anytime, anywhere. Learn at your own pace.</p>
+              </div>
+            </article>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <article class="inclusion-card d-flex">
+              <span class="inclusion-icon"><i class="bi bi-people"></i></span>
+              <div>
+                <h3 class="inclusion-title">Mentoring Via Zoom</h3>
+                <p class="inclusion-copy">Get personalized guidance, motivation, and academic support from mentors who are with you every step of the way.</p>
+              </div>
+            </article>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <article class="inclusion-card d-flex">
+              <span class="inclusion-icon"><i class="bi bi-journal-check"></i></span>
+              <div>
+                <h3 class="inclusion-title">Test Bank Access Via Artemis360</h3>
+                <p class="inclusion-copy">Practice with a wide range of NCLEX-style questions designed to strengthen critical thinking and improve accuracy.</p>
+              </div>
+            </article>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <article class="inclusion-card d-flex">
+              <span class="inclusion-icon"><i class="bi bi-graph-up-arrow"></i></span>
+              <div>
+                <h3 class="inclusion-title">Progress Tracking Via Artemis360</h3>
+                <p class="inclusion-copy">Monitor your performance, identify areas for improvement, and stay on track with built-in progress reports.</p>
+              </div>
+            </article>
+          </div>
+          <div class="col-lg-4 col-md-6">
+            <article class="inclusion-card d-flex">
+              <span class="inclusion-icon"><i class="bi bi-clipboard2-check"></i></span>
+              <div>
+                <h3 class="inclusion-title">Assessments &amp; Practice Tests Via Artemis360</h3>
+                <p class="inclusion-copy">Take comprehensive assessments and realistic practice tests that simulate the real NCLEX exam.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="inclusion-strip d-flex align-items-start">
+          <span class="strip-icon"><i class="fas fa-shield-alt"></i></span>
+          <div>
+            <h4><span class="teal">Structured Review.</span> Strong Foundation. <span class="accent">Real Results.</span></h4>
+            <p>Our program is carefully designed to strengthen every learner's nursing foundation and build the confidence you need to pass the NCLEX exam.</p>
           </div>
         </div>
       </div>
@@ -356,7 +578,7 @@
     ?>
     <section id="course-passers" class="featured-passers course-passers section light-background">
       <div class="container section-title" data-aos="fade-up">
-        <h2>NCLEX Passer Stories</h2>
+        <h2><span class="accent">NCLEX </span> Passer Stories</h2>
         <p>Successful NCLEX passers from the GRA community.</p>
       </div>
       <div class="container" data-aos="fade-up" data-aos-delay="100">
@@ -400,7 +622,7 @@
                   <p class="mb-2 small text-primary fw-semibold">Our flagship comprehensive NCLEX review program.</p>
                   <p class="mb-3 small">Perfect for first-time takers and repeat test takers who want a full structured review.</p>
                   <div class="card-bottom-meta">
-                    <button type="button" class="inclusion-toggle" data-inclusion-toggle><i class="bi bi-chevron-down"></i>See inclusion</button>
+                    <button type="button" class="btn btn-sm btn-primary inclusion-toggle" data-inclusion-toggle><i class="bi bi-chevron-down"></i>See inclusion</button>
                     <div class="plans-available">
                       <div class="label">Plans Available</div>
                       <div class="values">3 <span>Months</span></div>
@@ -412,13 +634,15 @@
                     <p class="inclusion-card-title"></p>
                     <p class="inclusion-title">Includes:</p>
                     <ul>
-                      <li>Live Online Zoom Classes</li>
-                      <li>24/7 Recorded Lectures</li>
-                      <li>NGN Practice Tests via Artemis360</li>
+                      <li>Live Online Zoom Classes with expert Testmasters</li>
+                      <li>24/7 access to recorded lectures</li>
+                      <li>NGN Practice Tests and simulation with progress tracking</li>
                       <li>Test-Taking Strategies</li>
                       <li>Clinical Judgment Training</li>
                       <li>Mentoring &amp; Coaching</li>
+					  <li>Free access to NGN Test Bank of 2000+ questions</li>
                     </ul>
+					
                   </div>
                 </div>
               </div>
@@ -429,19 +653,20 @@
                     <h5>Unlimited Test Prep + Test Processing Combo</h5>
                   </div>
                   <p class="mb-2 small text-warning fw-semibold">The all-in-one NCLEX solution - from application to exam readiness.</p>
-                  <p class="mb-3 small">Best for candidates who want both expert review and guided NCLEX processing support.</p>
-                  <button type="button" class="inclusion-toggle" data-inclusion-toggle><i class="bi bi-chevron-down"></i>See inclusion</button>
+                  <p class="mb-3 small">Best for candidates who want both expert review and Test Processing.</p>
+                  <button type="button" class="btn btn-sm btn-primary inclusion-toggle" data-inclusion-toggle><i class="bi bi-chevron-down"></i>See inclusion</button>
                   <div class="inclusion-panel" data-inclusion-panel>
                     <button type="button" class="inclusion-close" data-inclusion-close aria-label="Close inclusion"><i class="bi bi-x-lg"></i></button>
                     <p class="inclusion-card-title"></p>
                     <p class="inclusion-title">Includes:</p>
                     <ul>
-                      <li>1-Year Unlimited NCLEX Review Access</li>
-                      <li>Live Zoom Review Sessions</li>
-                      <li>Recorded Lectures</li>
-                      <li>NGN Practice Tests</li>
-                      <li>Exam Readiness Coaching</li>
+                      <li>1-Year Unlimited NCLEX Review</li>
+                      <li>Live Zoom Review Sessions by expert Testmasters</li>
+                      <li>24/7 access to recorded lectures</li>
+                      <li>NGN Practice Tests and simulations</li>
+                      <li>Exam readiness coaching and mentoring</li>
                       <li>NCLEX Test Processing Assistance</li>
+					  <li>Free access to NGN Test Bank of 2000+ questions</li>
                     </ul>
                   </div>
                 </div>
@@ -456,15 +681,15 @@
                 <h5>Refresher Course</h5>
               </div>
               <p class="mb-2 small text-success fw-semibold">Rebuild your nursing foundation with confidence.</p>
-              <p class="mb-3 small">Ideal for internationally educated nurses, repeat takers, or those away from nursing practice.</p>
-              <button type="button" class="inclusion-toggle" data-inclusion-toggle><i class="bi bi-chevron-down"></i>See inclusion</button>
+              <p class="mb-3 small">Ideal for repeat takers, or those away from nursing practice for a long time and plans to sit for the NCLEX in the near future.</p>
+              <button type="button" class="btn btn-sm btn-primary inclusion-toggle" data-inclusion-toggle><i class="bi bi-chevron-down"></i>See inclusion</button>
               <div class="inclusion-panel" data-inclusion-panel>
                 <button type="button" class="inclusion-close" data-inclusion-close aria-label="Close inclusion"><i class="bi bi-x-lg"></i></button>
                 <p class="inclusion-card-title"></p>
                 <p class="inclusion-title">Includes:</p>
                 <ul>
-                  <li>Comprehensive Refresher Lectures</li>
-                  <li>Recorded Access</li>
+                  <li>Comprehensive Refresher Lectures by expert Testmasters</li>
+                  <li>Access to recorded lectures</li>
                   <li>NGN Practice Questions</li>
                   <li>Core Nursing Reinforcement</li>
                   <li>Clinical Review &amp; Rationalization</li>
@@ -486,7 +711,7 @@
                   </div>
                   <p class="mb-2 small fw-semibold">Intensive high-impact preparation for quick exam readiness.</p>
                   <p class="mb-3 small">Designed for candidates preparing to take the NCLEX soon.</p>
-                  <button type="button" class="inclusion-toggle" data-inclusion-toggle><i class="bi bi-chevron-down"></i>See inclusion</button>
+                  <button type="button" class="btn btn-sm btn-primary inclusion-toggle" data-inclusion-toggle><i class="bi bi-chevron-down"></i>See inclusion</button>
                   <div class="inclusion-panel" data-inclusion-panel>
                     <button type="button" class="inclusion-close" data-inclusion-close aria-label="Close inclusion"><i class="bi bi-x-lg"></i></button>
                     <p class="inclusion-card-title"></p>
@@ -509,7 +734,7 @@
                   </div>
                   <p class="mb-2 small fw-semibold">Focused final coaching to sharpen your test-taking skills.</p>
                   <p class="mb-3 small">Best for final-stage candidates needing targeted mentoring before exam day.</p>
-                  <button type="button" class="inclusion-toggle" data-inclusion-toggle><i class="bi bi-chevron-down"></i>See inclusion</button>
+                  <button type="button" class="btn btn-sm btn-primary inclusion-toggle" data-inclusion-toggle><i class="bi bi-chevron-down"></i>See inclusion</button>
                   <div class="inclusion-panel" data-inclusion-panel>
                     <button type="button" class="inclusion-close" data-inclusion-close aria-label="Close inclusion"><i class="bi bi-x-lg"></i></button>
                     <p class="inclusion-card-title"></p>
@@ -542,9 +767,9 @@
       </div>
       <div class="container">
         <div class="row justify-content-around gy-4">
-          <div class="features-image col-lg-6" data-aos="fade-up" data-aos-delay="100"><img src="assets/img/gra/nclex_upcoming.jpg" alt="NCLEX upcoming schedules"></div>
+          <div class="features-image col-lg-7" data-aos="fade-up" data-aos-delay="100"><img src="assets/img/gra/upcoming_nclex.png" alt="NCLEX upcoming schedules"></div>
           <div class="col-lg-5 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
-            <h3>Study support from content to confidence.</h3>
+            <h4>Study support from content to confidence.</h4>
             <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="300"><i class="fa-solid fa-list-check flex-shrink-0"></i><div><h4>Course inclusions</h4><p>Exam pathway orientation, study pacing, high-yield concept review, and question analysis techniques.</p></div></div>
             <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="400"><i class="fa-solid fa-chalkboard-user flex-shrink-0"></i><div><h4>Expert coaching</h4><p>Experienced Testmasters guide students through common exam challenges and readiness planning.</p></div></div>
             <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="500"><i class="fa-solid fa-clock flex-shrink-0"></i><div><h4>Flexible access</h4><p>Recorded lectures and 24/7 review materials help students prepare around work, school, and family schedules.</p></div></div>
@@ -701,6 +926,7 @@
   </script>
 </body>
 </html>
+
 
 
 
