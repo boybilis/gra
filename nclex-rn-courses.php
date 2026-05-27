@@ -486,7 +486,7 @@
             <img src="assets/img/gra/nclex-course.jpg" class="img-fluid" alt="NCLEX - RN review course">
           </div>
           <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
-            <h4>Prepare for the Next Generation NCLEX with focused coaching and practice tests that are closely similar to the real thing.</h4>
+            <h4><b>Prepare for the Next Generation NCLEX with focused coaching and practice tests that are closely similar to the real thing.</b></h4>
             <p class="fst-italic">GRA's NCLEX PassEasy course combines expert instruction, flexible learning access, NGN test taking skills enhancement and powerful mentoring that prepares each examinies to sit  and pass the NCLEX confidently.</p>
             <ul>
               <li><i class="bi bi-check2-all"></i> <span>Live online classes via Zoom with expert lecturers.</span></li>
@@ -801,7 +801,7 @@
         <p>Submit your details and a GRA adviser can follow up with schedules and enrollment assistance.</p>
       </div>
       <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <form action="submit.php" method="post" role="form" class="site-form gra-medicio-form">
+        <form id="nclex-support-form" action="submit.php" method="post" role="form" class="site-form gra-medicio-form">
           <input type="hidden" name="form_type" value="enrollment">
           <div class="row"><div class="col-md-4 form-group"><input type="text" name="name" class="form-control" placeholder="Full Name" required></div><div class="col-md-4 form-group mt-3 mt-md-0"><input type="email" class="form-control" name="email" placeholder="Email" required></div><div class="col-md-4 form-group mt-3 mt-md-0"><input type="tel" class="form-control" name="phone" placeholder="Mobile / Messaging App" required></div></div>
           <div class="row"><div class="col-md-6 form-group mt-3"><input type="text" name="course" class="form-control" value="NCLEX PassEasy" readonly></div><div class="col-md-6 form-group mt-3"><select name="review_setup" class="form-select"><option>Live online via Zoom</option><option>Recorded lectures and test bank access</option><option>Processing assistance</option></select></div></div>
@@ -838,7 +838,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form action="submit.php" method="post" role="form" class="site-form gra-medicio-form">
+            <form id="nclex-inquire-enroll-form" action="submit.php" method="post" role="form" class="site-form gra-medicio-form">
               <input type="hidden" name="form_type" value="enrollment">
               <div class="row">
                 <div class="col-md-4 form-group"><input type="text" name="name" class="form-control" placeholder="Full Name" required></div>
@@ -880,6 +880,22 @@
                 <p class="form-note mt-3">Your inquiry will be saved for adviser review.</p>
               </div>
             </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="nclexInquireEnrollResultModal" tabindex="-1" aria-labelledby="nclexInquireEnrollResultModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="nclexInquireEnrollResultModalLabel">Inquiry / Enrollment Status</h5>
+          </div>
+          <div class="modal-body">
+            <p id="nclexInquireEnrollResultMessage" class="mb-0" style="white-space: pre-line;"></p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn course-overview-btn course-overview-btn-primary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
@@ -1000,6 +1016,50 @@
       window.addEventListener('load', equalizePackageCards);
       window.addEventListener('resize', equalizePackageCards);
       equalizePackageCards();
+    })();
+
+    (function () {
+      const modalForm = document.getElementById('nclex-inquire-enroll-form');
+      const supportForm = document.getElementById('nclex-support-form');
+      const messageEl = document.getElementById('nclexInquireEnrollResultMessage');
+      const sourceModalEl = document.getElementById('nclexInquireEnrollModal');
+      const resultModalEl = document.getElementById('nclexInquireEnrollResultModal');
+
+      if ((!modalForm && !supportForm) || !messageEl || !resultModalEl || typeof bootstrap === 'undefined') return;
+
+      const sourceModal = sourceModalEl ? bootstrap.Modal.getOrCreateInstance(sourceModalEl) : null;
+      const resultModal = bootstrap.Modal.getOrCreateInstance(resultModalEl);
+
+      const successMessage = [
+        'We have successfully received your message.',
+        '',
+        'Our team from Gapuz Review Academy will review your inquiry and get back to you as soon as possible.',
+        '',
+        'Please keep an eye on your email or mobile number for our response. We usually reply within 24 hours.',
+        '',
+        'We appreciate your interest and look forward to helping you with your review journey!',
+        '',
+        '— Gapuz Review Academy Team'
+      ].join('\n');
+
+      document.addEventListener('gra:form-submit-result', function (event) {
+        const detail = event && event.detail ? event.detail : null;
+        if (!detail || !detail.form) return;
+        const isModalForm = modalForm && detail.form === modalForm;
+        const isSupportForm = supportForm && detail.form === supportForm;
+        if (!isModalForm && !isSupportForm) return;
+
+        if (detail.ok) {
+          messageEl.textContent = successMessage;
+        } else {
+          messageEl.textContent = detail.message || 'Unable to submit inquiry. Please try again.';
+        }
+
+        if (isModalForm && sourceModal) {
+          sourceModal.hide();
+        }
+        resultModal.show();
+      });
     })();
   </script>
 </body>

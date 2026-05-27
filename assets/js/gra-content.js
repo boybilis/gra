@@ -96,9 +96,26 @@
             campusAccessSection.focus();
           }, 350);
         }
+
+        document.dispatchEvent(new CustomEvent('gra:form-submit-result', {
+          detail: {
+            ok: true,
+            form,
+            message: (result && result.message) ? String(result.message) : 'Submission received.',
+            result,
+          },
+        }));
       } catch (error) {
         formOtpState.delete(form);
-        button.textContent = error instanceof Error ? error.message : 'Please try again';
+        const errorMessage = error instanceof Error ? error.message : 'Please try again';
+        button.textContent = errorMessage;
+        document.dispatchEvent(new CustomEvent('gra:form-submit-result', {
+          detail: {
+            ok: false,
+            form,
+            message: errorMessage,
+          },
+        }));
       } finally {
         window.setTimeout(() => { button.textContent = originalText; button.disabled = false; }, 2400);
       }

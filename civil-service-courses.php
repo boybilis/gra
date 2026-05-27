@@ -21,6 +21,27 @@
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
   <link href="<?php echo versioned_asset('assets/css/main.css'); ?>" rel="stylesheet">
   <link href="<?php echo versioned_asset('assets/css/gra-content.css'); ?>" rel="stylesheet">
+  <style>
+    #course-inclusions { background: #fff; }
+    #course-inclusions .section-title h2 .accent { color: var(--accent-color); }
+    #course-inclusions .inclusion-card { background: #fff; border: 1px solid #d7e3f2; padding: 20px 18px; height: 100%; }
+    #course-inclusions .inclusion-icon { width: 66px; height: 66px; border-radius: 50%; color: #fff; display: inline-flex; align-items: center; justify-content: center; font-size: 26px; flex: 0 0 66px; margin-right: 16px; }
+    #course-inclusions .row > div:nth-child(odd) .inclusion-icon { background: #003057; }
+    #course-inclusions .row > div:nth-child(even) .inclusion-icon { background: var(--accent-color); }
+    #course-inclusions .inclusion-title { margin: 0 0 8px; color: #003057; font-size: 1.05rem; font-weight: 700; line-height: 1.25; text-transform: none; }
+    #course-inclusions .inclusion-copy { margin: 0; font-size: .875rem; line-height: 1.45; }
+    #course-inclusions .inclusion-strip { margin-top: 18px; background: #e5e7eb; border: 0; padding: 16px 18px; display: flex; align-items: flex-start; text-align: left; }
+    #course-inclusions .inclusion-strip .strip-icon { color: #003057; font-size: 40px; margin-right: 14px; line-height: 1; }
+    #course-inclusions .inclusion-strip h4 { margin: 0 0 8px; color: #003057; text-transform: none; font-size: 1.15rem; font-weight: 700; line-height: 1.25; font-family: var(--heading-font); }
+    #course-inclusions .inclusion-strip h4 .accent { color: var(--accent-color); }
+    #course-inclusions .inclusion-strip h4 .teal { color: #00b89c; }
+    #course-inclusions .inclusion-strip p { margin: 0; font-size: .875rem; line-height: 1.45; font-family: var(--default-font); }
+    @media (max-width: 767.98px) {
+      #course-inclusions .inclusion-icon { width: 56px; height: 56px; font-size: 22px; margin-right: 12px; }
+      #course-inclusions .inclusion-title { font-size: .98rem; }
+      #course-inclusions .inclusion-strip h4 { font-size: 1.05rem; }
+    }
+  </style>
 </head>
 
 <body class="index-page gra-page">
@@ -86,6 +107,29 @@
               <li><i class="bi bi-check2-all"></i> <span>Artemis360 learning tools for practice, tracking, and self-paced study.</span></li>
             </ul>
             <p><a href="#course-enroll" class="btn course-overview-btn course-overview-btn-primary">Enroll Now</a> <a href="index.php#courses" class="btn course-overview-btn course-overview-btn-secondary ms-2">Back to Courses</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="course-inclusions" class="section">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Inclusions &amp; <span class="accent">Feaures</span></h2>
+      </div>
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="row g-3">
+          <div class="col-lg-4 col-md-6"><article class="inclusion-card d-flex"><span class="inclusion-icon"><i class="bi bi-display"></i></span><div><h3 class="inclusion-title">Live Online Classes Via Zoom</h3><p class="inclusion-copy">Interactive sessions with experienced educators covering high-yield topics, clinical reasoning, and test-taking strategies.</p></div></article></div>
+          <div class="col-lg-4 col-md-6"><article class="inclusion-card d-flex"><span class="inclusion-icon"><i class="bi bi-book"></i></span><div><h3 class="inclusion-title">Self-Paced Review Via Artemis360</h3><p class="inclusion-copy">Access recorded lectures, review modules, and study materials anytime, anywhere. Learn at your own pace.</p></div></article></div>
+          <div class="col-lg-4 col-md-6"><article class="inclusion-card d-flex"><span class="inclusion-icon"><i class="bi bi-people"></i></span><div><h3 class="inclusion-title">Mentoring Via Zoom</h3><p class="inclusion-copy">Get personalized guidance, motivation, and academic support from mentors through each step of your review journey.</p></div></article></div>
+          <div class="col-lg-4 col-md-6"><article class="inclusion-card d-flex"><span class="inclusion-icon"><i class="bi bi-journal-check"></i></span><div><h3 class="inclusion-title">Test Bank Access Via Artemis360</h3><p class="inclusion-copy">Practice with exam-style questions designed to strengthen critical thinking, analysis, and decision making.</p></div></article></div>
+          <div class="col-lg-4 col-md-6"><article class="inclusion-card d-flex"><span class="inclusion-icon"><i class="bi bi-graph-up-arrow"></i></span><div><h3 class="inclusion-title">Progress Tracking Via Artemis360</h3><p class="inclusion-copy">Monitor your performance, identify improvement areas, and stay on track with built-in progress reports.</p></div></article></div>
+          <div class="col-lg-4 col-md-6"><article class="inclusion-card d-flex"><span class="inclusion-icon"><i class="bi bi-clipboard2-check"></i></span><div><h3 class="inclusion-title">Assessments &amp; Practice Tests</h3><p class="inclusion-copy">Take comprehensive assessments and realistic practice tests that simulate the actual Civil Service exam.</p></div></article></div>
+        </div>
+        <div class="inclusion-strip">
+          <span class="strip-icon"><i class="bi bi-shield-check"></i></span>
+          <div>
+            <h4><span class="teal">Structured Review.</span> Strong Foundation. <span class="accent">Real Results.</span></h4>
+            <p>Our program is designed to strengthen foundational skills and build confidence to pass the Civil Service exam.</p>
           </div>
         </div>
       </div>
