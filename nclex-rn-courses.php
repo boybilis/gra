@@ -752,9 +752,12 @@
             </div>
           </div>
           <div class="col-lg-4">
-            <h4 class="mb-3">Powered by Artemis360</h4>
-            <div class="d-flex justify-content-center align-items-center text-center">
-              <img src="assets/img/gra/artemis-platform.jpg" alt="Artemis360" class="img-fluid" style="max-width: 220px;">
+            <h4 class="mb-3">Inquire / Enroll</h4>
+            <div class="d-flex justify-content-center align-items-center text-center h-100 bg-white p-4 package-card-orange">
+              <div>
+                <p class="mb-3 small">Please select your preferred package before submitting the inquiry form.</p>
+                <button type="button" class="btn course-overview-btn course-overview-btn-primary" data-bs-toggle="modal" data-bs-target="#nclexInquireEnrollModal">Inquire / Enroll</button>
+              </div>
             </div>
           </div>
         </div>
@@ -825,6 +828,61 @@
         </form>
       </div>
     </section>
+
+    <div class="modal fade" id="nclexInquireEnrollModal" tabindex="-1" aria-labelledby="nclexInquireEnrollModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="nclexInquireEnrollModalLabel">Inquire / Enroll</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="submit.php" method="post" role="form" class="site-form gra-medicio-form">
+              <input type="hidden" name="form_type" value="enrollment">
+              <div class="row">
+                <div class="col-md-4 form-group"><input type="text" name="name" class="form-control" placeholder="Full Name" required></div>
+                <div class="col-md-4 form-group mt-3 mt-md-0"><input type="email" class="form-control" name="email" placeholder="Email" required></div>
+                <div class="col-md-4 form-group mt-3 mt-md-0"><input type="tel" class="form-control" name="phone" placeholder="Mobile / Messaging App" required></div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 form-group mt-3"><input type="text" name="course" class="form-control" value="NCLEX PassEasy" readonly></div>
+                <div class="col-md-6 form-group mt-3">
+                  <select name="review_setup" class="form-select">
+                    <option>Live online via Zoom</option>
+                    <option>Recorded lectures and test bank access</option>
+                    <option>Processing assistance</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 form-group mt-3">
+                  <select name="inquiry_type" class="form-select" required>
+                    <option value="">Select Request Type</option>
+                    <option value="Inquire">Inquire</option>
+                    <option value="Enroll">Enroll</option>
+                  </select>
+                </div>
+                <div class="col-md-6 form-group mt-3">
+                  <select name="package_interest" class="form-select" required>
+                    <option value="">Select NCLEX Package to Inquire / Enroll</option>
+                    <option value="Complete Test Prep Package">Complete Test Prep Package</option>
+                    <option value="Unlimited Test Prep + Test Processing Combo">Unlimited Test Prep + Test Processing Combo</option>
+                    <option value="Refresher Course">Refresher Course</option>
+                    <option value="10-Day Crash Course">10-Day Crash Course</option>
+                    <option value="3-Day Mentoring Course">3-Day Mentoring Course</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group mt-3"><textarea class="form-control" name="message" rows="5" placeholder="Questions or notes"></textarea></div>
+              <div class="mt-3 text-center">
+                <button type="submit">Submit Inquiry</button>
+                <p class="form-note mt-3">Your inquiry will be saved for adviser review.</p>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 
   <footer id="footer" class="footer dark-background">
