@@ -48,3 +48,5 @@ echo json_encode([
     'registered' => true,
     'message' => 'Email verified. Free resources are now unlocked.',
 ]);
+
+

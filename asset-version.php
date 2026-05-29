@@ -6,3 +6,5 @@ function versioned_asset($path)
 
     return htmlspecialchars($path . '?v=' . $version, ENT_QUOTES, 'UTF-8');
 }
+
+

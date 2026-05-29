@@ -30,3 +30,5 @@ function is_booking_email_registered(string $email): bool
 
     return $statement->fetchColumn() !== false;
 }
+
+

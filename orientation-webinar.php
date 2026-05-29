@@ -49,3 +49,5 @@ $accessGranted = is_booking_email_registered($email);
 </body>
 </html>
 
+
+

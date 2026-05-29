@@ -98,3 +98,5 @@ function delete_mini_lesson(int $id): void
     $statement = $database->prepare('DELETE FROM mini_lessons WHERE id = :id LIMIT 1');
     $statement->execute([':id' => $id]);
 }
+
+

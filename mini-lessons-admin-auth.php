@@ -32,3 +32,5 @@ function mini_lessons_admin_logout(): void
 {
     unset($_SESSION['mini_lessons_admin_logged_in']);
 }
+
+

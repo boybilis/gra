@@ -6,6 +6,7 @@
   const testimonialDots = document.querySelector('.testimonial-dots');
   const formModalTriggers = Array.from(document.querySelectorAll('[data-open-form-modal]'));
   const formModals = Array.from(document.querySelectorAll('.form-modal'));
+  const teamProfileImages = Array.from(document.querySelectorAll('.team-member .member-img img'));
 
   const formOtpState = new WeakMap();
   const parseJsonSafe = async (response) => {
@@ -169,6 +170,193 @@
       Array.from({ length: slideCount }).forEach((_, index) => { const dot = document.createElement('button'); dot.className = 'testimonial-dot'; dot.type = 'button'; dot.setAttribute('aria-label', `Show testimonial slide ${index + 1}`); dot.setAttribute('aria-pressed', 'false'); dot.addEventListener('click', () => showTestimonialSlide(index)); testimonialDots.append(dot); });
     }
     showTestimonialSlide(0);
+  }
+
+  if (teamProfileImages.length && typeof bootstrap !== 'undefined') {
+    if (!document.getElementById('testmaster-profile-modal-style')) {
+      const style = document.createElement('style');
+      style.id = 'testmaster-profile-modal-style';
+      style.textContent = `
+        #testmaster-profile-modal .modal-dialog { max-width: 940px; }
+        .clickable-testmaster-wrap {
+          width: 170px;
+          height: 170px;
+          margin: 0 auto;
+          border-radius: 50%;
+          overflow: hidden;
+          transition: transform .25s ease, box-shadow .25s ease;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, .12);
+        }
+        .clickable-testmaster-wrap:hover,
+        .clickable-testmaster-wrap:focus-within {
+          transform: translateY(-4px) scale(1.04);
+          box-shadow: 0 12px 24px rgba(0, 0, 0, .2);
+        }
+        .clickable-testmaster-photo {
+          width: 100%;
+          height: 100%;
+          border-radius: 50% !important;
+          object-fit: cover;
+          display: block;
+        }
+        #testmaster-profile-modal .modal-content { border: 0; border-radius: 14px; border-top: 6px solid var(--accent-color, #ff6a00); overflow: hidden; }
+        #testmaster-profile-modal .modal-header { border-bottom: 0; padding: 10px 14px 0; }
+        #testmaster-profile-modal .modal-title { font-size: 0; line-height: 0; }
+        #testmaster-profile-modal .btn-close { width: 38px; height: 38px; border: 1px solid #d9e1ea; border-radius: 50%; opacity: 1; box-shadow: none; }
+        #testmaster-profile-modal .modal-body { padding: 10px 24px 24px; }
+        #testmaster-profile-modal .profile-badge { display: inline-block; padding: 4px 10px; border-radius: 999px; background: #f4eee5; color: #a55b00; font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; margin-bottom: 8px; }
+        #testmaster-profile-modal .profile-name { margin: 0 0 8px; color: #003057; font-size: clamp(1.55rem, 2vw, 2.15rem); line-height: 1.15; font-weight: 700; font-family: var(--heading-font); }
+        #testmaster-profile-modal .profile-summary { margin-bottom: 14px; font-size: 1rem; line-height: 1.5; font-family: var(--default-font); }
+        #testmaster-profile-modal .profile-cred-title { margin: 0 0 8px; color: #003057; font-size: 1.05rem; font-weight: 700; text-transform: uppercase; font-family: var(--heading-font); }
+        #testmaster-profile-modal .profile-credentials { margin: 0; padding-left: 0; list-style: none; }
+        #testmaster-profile-modal .profile-credentials li { position: relative; padding-left: 18px; margin-bottom: 7px; font-size: .95rem; line-height: 1.45; font-family: var(--default-font); }
+        #testmaster-profile-modal .profile-credentials li::before { content: ""; position: absolute; left: 0; top: .62em; width: 8px; height: 8px; border-radius: 50%; background: var(--accent-color, #ff6a00); }
+        #testmaster-profile-modal .modal-footer { border-top: 0; padding: 0 24px 20px; }
+        #testmaster-profile-modal .modal-footer .btn { min-width: 110px; }
+        #testmaster-profile-photo { width: 100%; border-radius: 10px; object-fit: cover; }
+        @media (max-width: 991.98px) {
+          #testmaster-profile-modal .profile-name { font-size: 1.8rem; }
+          #testmaster-profile-modal .profile-summary { font-size: .97rem; }
+          #testmaster-profile-modal .profile-cred-title { font-size: 1rem; }
+          #testmaster-profile-modal .profile-credentials li { font-size: .92rem; }
+        }
+        @media (max-width: 767.98px) {
+          #testmaster-profile-modal .modal-dialog { margin: 0.75rem; max-width: none; }
+          #testmaster-profile-modal .modal-header { padding: 8px 10px 0; }
+          #testmaster-profile-modal .modal-body { padding: 10px 14px 16px; }
+          #testmaster-profile-modal .profile-badge { font-size: 11px; margin-bottom: 6px; }
+          #testmaster-profile-modal .profile-name { font-size: 1.35rem; line-height: 1.2; margin-bottom: 8px; }
+          #testmaster-profile-modal .profile-summary { font-size: .93rem; line-height: 1.45; margin-bottom: 10px; }
+          #testmaster-profile-modal .profile-cred-title { font-size: .95rem; margin-bottom: 6px; }
+          #testmaster-profile-modal .profile-credentials li { font-size: .88rem; line-height: 1.4; margin-bottom: 5px; padding-left: 16px; }
+          #testmaster-profile-modal .profile-credentials li::before { width: 7px; height: 7px; top: .58em; }
+          #testmaster-profile-photo { max-height: 300px; object-fit: cover; }
+          #testmaster-profile-modal .modal-footer { padding: 0 14px 14px; }
+          #testmaster-profile-modal .modal-footer .btn { width: 100%; }
+        }
+      `;
+      document.head.appendChild(style);
+    }
+
+    const profileData = {
+      'mia_g.png': {
+        name: 'Dr. Mia A. Gapuz, ME, MM',
+        role: 'President and CEO',
+        summary: 'A business leader and educator, with over two decades of experience in teaching and running test preparation centers in the Philippines.',
+        details: [
+          'Education: University of the Philippines - Manila; Asian Institute of Management (Makati, Philippines); Instituto de Empresa (Madrid, Spain); WED Technologies, Harvard (ongoing).',
+          'Academic Awards: Board Topnotcher (Rank #2, Nationwide); Most Outstanding Clinician (Endodontics), University of the Philippines - Manila; Highest Distinction, Asian Institute of Management.',
+          'International Award: Top 10 Asian Institute of Management Philippines Alumni Leaders 2024 (CEO Insights Asia).',
+          'Previous Work: President and CEO, RA Gapuz Review Center, Inc.'
+        ]
+      },
+      'liz_1.png': {
+        name: 'Prof. Liz Gapuz Iciano, USRN, MBA, CNOR',
+        role: 'Lead Testmaster, GRA - USA & Middle East',
+        summary: 'An experienced clinical educator and nurse leader in the USA and the Middle East for more than 25 years in perioperative services, clinical supply chain, and clinical quality practice.',
+        details: [
+          'Licensed RN in New York, New Jersey, and Florida.',
+          'Education: Hofstra University (New York); BS Nursing, St. Louis University.',
+          'Work: Director of Clinical Resource, Miami Beach, Florida; Assistant Director of Perioperative Surgery, Palm Beach, Florida.',
+          'Previous Work: Vice President, RA Gapuz Review Center, Inc.'
+        ]
+      },
+      'jeni-iciano.jpg': {
+        name: 'Prof. Jeni Gapuz-Iciano, USRN',
+        role: 'International Bilingual Testmaster, GRA - USA & Latin America',
+        summary: 'An experienced bilingual clinical educator, double summa cum laude graduate, and nurse leader with 12 years of experience in direct patient care, staff supervision, and department operations.',
+        details: [
+          'Licensed as a Registered Nurse in all 50 US states and Washington, DC.',
+          'Education: BS Nursing, Seminole State College of Florida (Summa Cum Laude).',
+          'Education: BS in Information Systems Technology, Seminole State College of Florida (Summa Cum Laude).'
+        ]
+      },
+      'belviz_1.png': {
+        name: 'Prof. Clement C. Belvis, USRN, RM, MPH',
+        role: 'Senior Test Master / Adviser',
+        summary: 'A nurse leader, licensed nurse, midwife, and educator; a double board topnotcher with a Master in Public Health and extensive teaching experience in major universities in the Philippines and in various international NCLEX bootcamps.',
+        details: [
+          'Licensed nurse, registered midwife, and educator.',
+          'Double board topnotcher.',
+          'Master in Public Health (MPH).',
+          'Extensive teaching experience in major universities in the Philippines.',
+          'Extensive teaching experience in international NCLEX bootcamps.'
+        ]
+      }
+    };
+
+    let profileModalEl = document.getElementById('testmaster-profile-modal');
+    if (!profileModalEl) {
+      profileModalEl = document.createElement('div');
+      profileModalEl.className = 'modal fade';
+      profileModalEl.id = 'testmaster-profile-modal';
+      profileModalEl.tabIndex = -1;
+      profileModalEl.setAttribute('aria-hidden', 'true');
+      profileModalEl.innerHTML = `
+        <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">&nbsp;</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row g-3 align-items-start">
+                <div class="col-md-4">
+                  <img id="testmaster-profile-photo" src="" alt="" class="img-fluid rounded">
+                </div>
+                <div class="col-md-8">
+                  <span id="testmaster-profile-role" class="profile-badge"></span>
+                  <h4 id="testmaster-profile-name" class="profile-name"></h4>
+                  <p id="testmaster-profile-summary" class="profile-summary"></p>
+                  <h5 class="profile-cred-title">Credentials and Achievements</h5>
+                  <ul id="testmaster-profile-details" class="profile-credentials"></ul>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>`;
+      document.body.appendChild(profileModalEl);
+    }
+
+    const profileModal = bootstrap.Modal.getOrCreateInstance(profileModalEl);
+    const nameEl = profileModalEl.querySelector('#testmaster-profile-name');
+    const roleEl = profileModalEl.querySelector('#testmaster-profile-role');
+    const summaryEl = profileModalEl.querySelector('#testmaster-profile-summary');
+    const detailsEl = profileModalEl.querySelector('#testmaster-profile-details');
+    const photoEl = profileModalEl.querySelector('#testmaster-profile-photo');
+
+    teamProfileImages.forEach((img) => {
+      const src = (img.getAttribute('src') || '').toLowerCase();
+      const key = Object.keys(profileData).find((file) => src.includes(file));
+      if (!key) return;
+
+      img.style.cursor = 'pointer';
+      img.setAttribute('title', 'View profile');
+
+      img.addEventListener('click', () => {
+        const profile = profileData[key];
+        if (!profile) return;
+
+        if (nameEl) nameEl.textContent = profile.name;
+        if (roleEl) roleEl.textContent = profile.role;
+        if (summaryEl) summaryEl.textContent = profile.summary;
+        if (detailsEl) {
+          detailsEl.innerHTML = profile.details.map((item) => `<li>${item}</li>`).join('');
+        }
+        if (photoEl) {
+          photoEl.src = img.getAttribute('src') || '';
+          photoEl.alt = profile.name;
+        }
+
+        profileModal.show();
+      });
+      img.classList.add('clickable-testmaster-photo');
+      const wrap = img.closest('.member-img');
+      if (wrap) wrap.classList.add('clickable-testmaster-wrap');
+    });
   }
 
   const campusAccessForm = document.getElementById('campus-access-form');

@@ -133,3 +133,5 @@ try {
 }
 
 echo json_encode(['ok' => true, 'message' => $inquiryType . ' request submitted.']);
+
+

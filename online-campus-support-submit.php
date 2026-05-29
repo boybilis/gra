@@ -114,3 +114,5 @@ try {
 }
 
 echo json_encode(['ok' => true, 'message' => 'Support request sent successfully.']);
+
+

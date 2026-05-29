@@ -66,3 +66,5 @@ function get_featured_passer_images_by_course(): array
 
     return $images;
 }
+
+

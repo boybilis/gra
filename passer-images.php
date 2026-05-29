@@ -9,3 +9,5 @@ echo json_encode([
     'ok' => true,
     'images' => get_latest_passer_images(8, isset($_GET['course']) ? (string) $_GET['course'] : null),
 ]);
+
+

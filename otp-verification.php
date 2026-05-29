@@ -133,3 +133,5 @@ function consume_email_verification_token(PDO $database, string $email, string $
 
     return $statement->rowCount() > 0;
 }
+
+
