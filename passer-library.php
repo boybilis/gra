@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-function get_latest_passer_images(int $limit = 8, ?string $course = null): array
+function get_latest_passer_images(int $limit = 8, ?string $course = null, int $offset = 0): array
 {
     $baseDir = __DIR__ . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'gra' . DIRECTORY_SEPARATOR . 'passers';
     $baseUrl = 'assets/img/gra/passers/';
     $allowedExtensions = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
-    $allowedCourses = ['pnle', 'nclex', 'dha', 'haad-doh', 'prometric', 'sple', 'civil-service'];
+    $allowedCourses = ['pnle', 'nclex', 'dha', 'haad-doh', 'prometric', 'sple', 'civil-service', 'lept'];
     $images = [];
 
     if ($course !== null) {
@@ -46,7 +46,15 @@ function get_latest_passer_images(int $limit = 8, ?string $course = null): array
 
     usort($images, static fn (array $a, array $b): int => $b['modified'] <=> $a['modified']);
 
-    return array_slice($images, 0, $limit);
+    if ($limit < 1) {
+        return [];
+    }
+
+    if ($offset < 0) {
+        $offset = 0;
+    }
+
+    return array_slice($images, $offset, $limit);
 }
 
 function get_featured_passer_images_by_course(): array

@@ -567,6 +567,84 @@
     }
   };
 
+  const coursePasserSwipers = Array.from(document.querySelectorAll('.course-passers .featured-passers-swiper'));
+  if (coursePasserSwipers.length) {
+    coursePasserSwipers.forEach((swiperEl) => {
+      const course = (swiperEl.dataset.course || '').trim();
+      if (!course) return;
+
+      const initialLimit = Number.parseInt(swiperEl.dataset.initialLimit || '8', 10);
+      const nextLimit = Number.parseInt(swiperEl.dataset.nextLimit || '4', 10);
+      const state = {
+        offset: Number.isFinite(initialLimit) ? initialLimit : 8,
+        batch: Number.isFinite(nextLimit) ? nextLimit : 4,
+        loading: false,
+        done: false,
+      };
+
+      const fetchNextBatch = async () => {
+        if (state.loading || state.done) return;
+        const swiper = swiperEl.swiper;
+        if (!swiper || typeof swiper.appendSlide !== 'function') return;
+
+        state.loading = true;
+        try {
+          const response = await fetch(`passer-images.php?course=${encodeURIComponent(course)}&offset=${state.offset}&limit=${state.batch}`, {
+            headers: { Accept: 'application/json' },
+          });
+          const result = await parseJsonSafe(response);
+          const images = result && result.ok && Array.isArray(result.images) ? result.images : [];
+          if (images.length === 0) {
+            state.done = true;
+            return;
+          }
+
+          const slidesHtml = images.map((item) => {
+            const url = item && item.url ? String(item.url) : '';
+            const rawName = item && item.name ? String(item.name) : 'GRA passer';
+            const escapedUrl = url.replace(/"/g, '&quot;');
+            const escapedAlt = `${rawName} testimonial poster`.replace(/"/g, '&quot;');
+            return `<div class="swiper-slide"><article class="featured-passer-card"><a href="${escapedUrl}" class="glightbox" data-gallery="${course}-passers"><img src="${escapedUrl}" alt="${escapedAlt}" loading="lazy" decoding="async"></a></article></div>`;
+          });
+
+          swiper.appendSlide(slidesHtml);
+          swiper.update();
+          state.offset += images.length;
+          if (images.length < state.batch) {
+            state.done = true;
+          }
+        } catch (_error) {
+          // Keep silent in UI; retry on next threshold reach.
+        } finally {
+          state.loading = false;
+        }
+      };
+
+      const bindWhenReady = () => {
+        const swiper = swiperEl.swiper;
+        if (!swiper) {
+          window.setTimeout(bindWhenReady, 180);
+          return;
+        }
+
+        const maybeLoad = () => {
+          const totalSlides = swiper.slides ? swiper.slides.length : 0;
+          const visibleSlides = Number.isFinite(swiper.params.slidesPerView) ? Number(swiper.params.slidesPerView) : 1;
+          const thresholdIndex = Math.max(0, totalSlides - Math.max(visibleSlides, 1) - 1);
+          if (swiper.activeIndex >= thresholdIndex) {
+            fetchNextBatch();
+          }
+        };
+
+        swiper.on('slideChange', maybeLoad);
+        swiper.on('reachEnd', maybeLoad);
+        maybeLoad();
+      };
+
+      bindWhenReady();
+    });
+  }
+
   mobileCourseCards();
   window.addEventListener('resize', mobileCourseCards);
 

@@ -146,8 +146,8 @@
         <p>Successful Prometric passers from the GRA community.</p>
       </div>
       <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <div class="swiper init-swiper featured-passers-swiper">
-          <script type="application/json" class="swiper-config">{"loop":true,"speed":600,"autoplay":{"delay":4500},"slidesPerView":1,"grid":{"rows":1,"fill":"row"},"pagination":{"el":".swiper-pagination","type":"bullets","clickable":true},"breakpoints":{"320":{"slidesPerView":1,"spaceBetween":18,"grid":{"rows":1}},"768":{"slidesPerView":2,"spaceBetween":20,"grid":{"rows":2}},"1200":{"slidesPerView":4,"spaceBetween":20,"grid":{"rows":2}}}}</script>
+        <div class="swiper init-swiper featured-passers-swiper" data-course="prometric" data-initial-limit="8" data-next-limit="4">
+          <script type="application/json" class="swiper-config">{"loop":true,"speed":600,"autoplay":{"delay":4500},"slidesPerView":1,"grid":{"rows":1,"fill":"row"},"pagination":{"el":".swiper-pagination","type":"bullets","clickable":true},"breakpoints":{"320":{"slidesPerView":1,"spaceBetween":18,"grid":{"rows":1}},"768":{"slidesPerView":2,"spaceBetween":20,"grid":{"rows":1}},"1200":{"slidesPerView":4,"spaceBetween":20,"grid":{"rows":1}}}}</script>
           <div class="swiper-wrapper">
             <?php foreach ($coursePassers as $passerImage): $passerAlt = htmlspecialchars(($passerImage['name'] ?? 'GRA passer') . ' testimonial poster', ENT_QUOTES, 'UTF-8'); $passerUrl = htmlspecialchars($passerImage['url'], ENT_QUOTES, 'UTF-8'); ?>
             <div class="swiper-slide">
