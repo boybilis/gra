@@ -1580,13 +1580,16 @@ section,
 }
 
 .testimonials .testimonial-item .testimonial-img {
-  width: 96px;
+  width: 112px;
+  height: 112px;
   border-radius: 50%;
-  margin: 14px auto 0 auto;
+  margin: 16px auto 0 auto;
   display: block;
+  object-fit: cover;
+  background-color: #d9dee4;
   position: relative;
   z-index: 2;
-  border: 6px solid var(--background-color);
+  border: 6px solid #d9dee4;
 }
 
 .testimonials .testimonial-item h3 {
