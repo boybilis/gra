@@ -18,7 +18,8 @@ $testimonialFolderOptions = [
     'prometric' => 'Prometric',
     'pnle' => 'PNLE',
     'sple' => 'SPLE',
-    'civil-service' => 'Civil Service',
+    'lept' => 'LEPT',
+	
 ];
 $testimonialBaseDir = __DIR__ . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'gra' . DIRECTORY_SEPARATOR . 'passers';
 
