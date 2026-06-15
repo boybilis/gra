@@ -229,6 +229,11 @@
     }
     #course-details .features-image img {
       border-radius: 12px;
+      width: 100%;
+      height: auto;
+      max-height: 330px;
+      object-fit: contain;
+      display: block;
     }
     #course-details {
       background: #fff !important;
