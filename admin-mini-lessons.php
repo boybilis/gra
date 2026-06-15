@@ -4,6 +4,7 @@ declare(strict_types=1);
 require_once __DIR__ . '/asset-version.php';
 require_once __DIR__ . '/mini-lessons-library.php';
 require_once __DIR__ . '/mini-lessons-admin-auth.php';
+require_once __DIR__ . '/course-schedule-library.php';
 
 $feedback = '';
 $error = '';
@@ -19,9 +20,10 @@ $testimonialFolderOptions = [
     'pnle' => 'PNLE',
     'sple' => 'SPLE',
     'lept' => 'LEPT',
-	
+    'civil-service' => 'Civil Service',
 ];
 $testimonialBaseDir = __DIR__ . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'gra' . DIRECTORY_SEPARATOR . 'passers';
+$courseScheduleOptions = get_course_schedule_options();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && (string) ($_POST['action'] ?? '') === 'login') {
     $username = (string) ($_POST['username'] ?? '');
@@ -145,6 +147,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_mini_lessons_admin_logged_in()) 
             if ($skippedCount > 0) {
                 $feedback .= ' ' . $skippedCount . ' file(s) were skipped due to invalid format/size or upload error.';
             }
+        } elseif ($action === 'upload_schedule') {
+            $selectedCourse = trim((string) ($_POST['schedule_course'] ?? ''));
+            if (!isset($_FILES['schedule_image']) || !is_array($_FILES['schedule_image'])) {
+                throw new InvalidArgumentException('Please choose an upcoming schedule image to upload.');
+            }
+
+            save_course_schedule_image($selectedCourse, $_FILES['schedule_image']);
+            $feedback = 'Upcoming schedule image uploaded for ' . ($courseScheduleOptions[$selectedCourse] ?? strtoupper($selectedCourse)) . '.';
         }
     } catch (Throwable $exception) {
         $error = $exception->getMessage();
@@ -201,6 +211,13 @@ try {
 } catch (Throwable $exception) {
     $error = $error !== '' ? $error : 'Unable to load lessons.';
 }
+
+$scheduleImages = [];
+try {
+    $scheduleImages = get_all_course_schedule_images();
+} catch (Throwable $exception) {
+    $error = $error !== '' ? $error : 'Unable to load upcoming schedule images.';
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -230,8 +247,8 @@ try {
 
   <main class="container py-5">
     <div class="section-title">
-      <h2>Admin Mini Lessons</h2>
-      <p>Add YouTube lessons to the Online Campus mini lessons page.</p>
+      <h2>Admin Dashboard</h2>
+      <p>Manage mini lessons, testimonial uploads, and upcoming schedule images.</p>
     </div>
 
     <?php if ($feedback !== ''): ?>
@@ -303,6 +320,31 @@ try {
       </form>
     </section>
 
+    <section class="mb-4 p-3 border rounded bg-white">
+      <h3 class="h5">Upload Upcoming Schedule</h3>
+      <p class="mb-3">Upload one feature image per course. This image replaces the default Artemis image in the course Upcoming Schedules section.</p>
+      <form method="post" action="admin-mini-lessons.php" enctype="multipart/form-data">
+        <input type="hidden" name="action" value="upload_schedule">
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="schedule_course" class="form-label">Course</label>
+            <select id="schedule_course" name="schedule_course" class="form-select" required>
+              <option value="">Select course</option>
+              <?php foreach ($courseScheduleOptions as $courseKey => $courseLabel): ?>
+                <option value="<?php echo htmlspecialchars($courseKey, ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($courseLabel, ENT_QUOTES, 'UTF-8'); ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="col-md-8 mb-3">
+            <label for="schedule_image" class="form-label">Upcoming Schedule Image</label>
+            <input id="schedule_image" name="schedule_image" type="file" class="form-control" accept=".jpg,.jpeg,.png,.webp,.gif" required>
+            <div class="form-text">Allowed formats: JPG, JPEG, PNG, WEBP, GIF (max 8MB).</div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Upload Schedule Image</button>
+      </form>
+    </section>
+
     <section class="p-3 border rounded bg-white">
       <h3 class="h5">Saved Lessons</h3>
       <?php if (count($lessons) === 0): ?>
@@ -341,6 +383,30 @@ try {
           </table>
         </div>
       <?php endif; ?>
+    </section>
+
+    <section class="mt-4 p-3 border rounded bg-white">
+      <h3 class="h5">Current Upcoming Schedule Images</h3>
+      <div class="table-responsive">
+        <table class="table align-middle">
+          <thead>
+            <tr>
+              <th>Course</th>
+              <th>Image</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php foreach ($scheduleImages as $scheduleImage): ?>
+            <tr>
+              <td><?php echo htmlspecialchars($scheduleImage['label'], ENT_QUOTES, 'UTF-8'); ?></td>
+              <td><a href="<?php echo htmlspecialchars($scheduleImage['image_path'], ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener"><?php echo htmlspecialchars($scheduleImage['image_path'], ENT_QUOTES, 'UTF-8'); ?></a></td>
+              <td><?php echo $scheduleImage['is_default'] ? 'Default Artemis image' : 'Uploaded image'; ?></td>
+            </tr>
+            <?php endforeach; ?>
+          </tbody>
+        </table>
+      </div>
     </section>
   </main>
 </body>

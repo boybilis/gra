@@ -3,6 +3,7 @@
 
 <head>
   <?php require_once __DIR__ . '/asset-version.php'; ?>
+  <?php require_once __DIR__ . '/course-schedule-library.php'; ?>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>PNLE PassEasy Course | Gapuz Review Academy</title>
@@ -139,7 +140,9 @@
       require_once __DIR__ . DIRECTORY_SEPARATOR . 'passer-library.php';
       $coursePassers = get_latest_passer_images(8, 'pnle');
       if (count($coursePassers) > 0):
-    ?>
+  $courseSchedule = get_course_schedule_image('pnle');
+  $courseScheduleAlt = $courseSchedule['label'] . ' upcoming schedules';
+?>
     <section id="course-passers" class="featured-passers course-passers section light-background">
       <div class="container section-title" data-aos="fade-up">
         <h2>PNLE Passer Stories</h2>
@@ -199,11 +202,14 @@
     </section>
 
     <section id="course-details" class="features section light-background">
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Upcoming Schedules</h2>
+      </div>
       <div class="container">
         <div class="row justify-content-around gy-4">
-          <div class="features-image col-lg-6" data-aos="fade-up" data-aos-delay="100"><img src="assets/img/gra/artemis-platform.jpg" alt="Artemis360 learning platform"></div>
+          <div class="features-image col-lg-7" data-aos="fade-up" data-aos-delay="100"><img src="<?php echo htmlspecialchars($courseSchedule['image_path'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($courseScheduleAlt, ENT_QUOTES, 'UTF-8'); ?>"></div>
           <div class="col-lg-5 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
-            <h3>Study support from content to confidence.</h3>
+            <h4>Study support from content to confidence.</h4>
             <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="300"><i class="fa-solid fa-list-check flex-shrink-0"></i><div><h4>Course inclusions</h4><p>Exam pathway orientation, study pacing, high-yield concept review, and question analysis techniques.</p></div></div>
             <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="400"><i class="fa-solid fa-chalkboard-user flex-shrink-0"></i><div><h4>Expert coaching</h4><p>Experienced Testmasters guide students through common exam challenges and readiness planning.</p></div></div>
             <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="500"><i class="fa-solid fa-clock flex-shrink-0"></i><div><h4>Flexible access</h4><p>Recorded lectures and 24/7 review materials help students prepare around work, school, and family schedules.</p></div></div>

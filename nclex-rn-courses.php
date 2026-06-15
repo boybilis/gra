@@ -3,6 +3,7 @@
 
 <head>
   <?php require_once __DIR__ . '/asset-version.php'; ?>
+  <?php require_once __DIR__ . '/course-schedule-library.php'; ?>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>NCLEX RN PassEasy Course | Gapuz Review Academy</title>
@@ -575,7 +576,9 @@
       require_once __DIR__ . DIRECTORY_SEPARATOR . 'passer-library.php';
       $coursePassers = get_latest_passer_images(8, 'nclex');
       if (count($coursePassers) > 0):
-    ?>
+  $courseSchedule = get_course_schedule_image('nclex');
+  $courseScheduleAlt = $courseSchedule['label'] . ' upcoming schedules';
+?>
     <section id="course-passers" class="featured-passers course-passers section light-background">
       <div class="container section-title" data-aos="fade-up">
         <h2><span class="accent">NCLEX </span> Passer Stories</h2>
@@ -771,7 +774,7 @@
       </div>
       <div class="container">
         <div class="row justify-content-around gy-4">
-          <div class="features-image col-lg-7" data-aos="fade-up" data-aos-delay="100"><img src="assets/img/gra/upcoming_nclex.png" alt="NCLEX upcoming schedules"></div>
+          <div class="features-image col-lg-7" data-aos="fade-up" data-aos-delay="100"><img src="<?php echo htmlspecialchars($courseSchedule['image_path'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($courseScheduleAlt, ENT_QUOTES, 'UTF-8'); ?>"></div>
           <div class="col-lg-5 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
             <h4>Study support from content to confidence.</h4>
             <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="300"><i class="fa-solid fa-list-check flex-shrink-0"></i><div><h4>Course inclusions</h4><p>Exam pathway orientation, study pacing, high-yield concept review, and question analysis techniques.</p></div></div>
