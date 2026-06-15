@@ -3,12 +3,36 @@ declare(strict_types=1);
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'database.php';
 
+function get_mini_lesson_course_options(): array
+{
+    return [
+        'all' => 'All Courses',
+        'nclex' => 'NCLEX',
+        'dha' => 'DHA',
+        'haad-doh' => 'HAAD / DOH',
+        'prometric' => 'Prometric',
+        'pnle' => 'PNLE',
+        'sple' => 'SPLE',
+        'civil-service' => 'Civil Service',
+        'lept' => 'LEPT',
+    ];
+}
+
+function normalize_mini_lesson_course(?string $course): string
+{
+    $course = strtolower(trim((string) $course));
+    $options = get_mini_lesson_course_options();
+
+    return array_key_exists($course, $options) ? $course : 'all';
+}
+
 function ensure_mini_lessons_table(PDO $database): void
 {
     $database->exec(
         'CREATE TABLE IF NOT EXISTS mini_lessons (
             id INT UNSIGNED NOT NULL AUTO_INCREMENT,
             title VARCHAR(200) NOT NULL,
+            course VARCHAR(50) NOT NULL DEFAULT "all",
             description TEXT DEFAULT NULL,
             youtube_url VARCHAR(500) NOT NULL,
             youtube_video_id VARCHAR(32) NOT NULL,
@@ -20,6 +44,11 @@ function ensure_mini_lessons_table(PDO $database): void
             INDEX idx_mini_lessons_active_sort (is_active, sort_order, id)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci'
     );
+
+    $columnStatement = $database->query("SHOW COLUMNS FROM mini_lessons LIKE 'course'");
+    if ($columnStatement instanceof PDOStatement && $columnStatement->fetch() === false) {
+        $database->exec('ALTER TABLE mini_lessons ADD COLUMN course VARCHAR(50) NOT NULL DEFAULT "all" AFTER title');
+    }
 }
 
 function extract_youtube_video_id(string $url): ?string
@@ -37,17 +66,31 @@ function extract_youtube_video_id(string $url): ?string
     return null;
 }
 
-function get_active_mini_lessons(): array
+function get_active_mini_lessons(?string $course = null): array
 {
     $database = get_database();
     ensure_mini_lessons_table($database);
 
-    $statement = $database->query(
-        'SELECT id, title, description, youtube_url, youtube_video_id
+    $normalizedCourse = normalize_mini_lesson_course($course);
+
+    if ($normalizedCourse === 'all') {
+        $statement = $database->query(
+            'SELECT id, title, course, description, youtube_url, youtube_video_id
+             FROM mini_lessons
+             WHERE is_active = 1
+             ORDER BY sort_order ASC, id ASC'
+        );
+
+        return $statement->fetchAll();
+    }
+
+    $statement = $database->prepare(
+        'SELECT id, title, course, description, youtube_url, youtube_video_id
          FROM mini_lessons
-         WHERE is_active = 1
+         WHERE is_active = 1 AND course = :course
          ORDER BY sort_order ASC, id ASC'
     );
+    $statement->execute([':course' => $normalizedCourse]);
 
     return $statement->fetchAll();
 }
@@ -58,7 +101,7 @@ function get_all_mini_lessons(): array
     ensure_mini_lessons_table($database);
 
     $statement = $database->query(
-        'SELECT id, title, description, youtube_url, youtube_video_id, sort_order, is_active, created_at
+        'SELECT id, title, course, description, youtube_url, youtube_video_id, sort_order, is_active, created_at
          FROM mini_lessons
          ORDER BY sort_order ASC, id ASC'
     );
@@ -66,7 +109,7 @@ function get_all_mini_lessons(): array
     return $statement->fetchAll();
 }
 
-function add_mini_lesson(string $title, string $description, string $youtubeUrl, int $sortOrder = 0): void
+function add_mini_lesson(string $title, string $course, string $description, string $youtubeUrl, int $sortOrder = 0): void
 {
     $database = get_database();
     ensure_mini_lessons_table($database);
@@ -76,13 +119,16 @@ function add_mini_lesson(string $title, string $description, string $youtubeUrl,
         throw new InvalidArgumentException('Invalid YouTube URL.');
     }
 
+    $normalizedCourse = normalize_mini_lesson_course($course);
+
     $statement = $database->prepare(
-        'INSERT INTO mini_lessons (title, description, youtube_url, youtube_video_id, sort_order, is_active)
-         VALUES (:title, :description, :youtube_url, :youtube_video_id, :sort_order, 1)'
+        'INSERT INTO mini_lessons (title, course, description, youtube_url, youtube_video_id, sort_order, is_active)
+         VALUES (:title, :course, :description, :youtube_url, :youtube_video_id, :sort_order, 1)'
     );
 
     $statement->execute([
         ':title' => trim($title),
+        ':course' => $normalizedCourse,
         ':description' => trim($description) !== '' ? trim($description) : null,
         ':youtube_url' => trim($youtubeUrl),
         ':youtube_video_id' => $videoId,

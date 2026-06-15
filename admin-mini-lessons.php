@@ -8,6 +8,9 @@ require_once __DIR__ . '/mini-lessons-admin-auth.php';
 $feedback = '';
 $error = '';
 $loginError = '';
+$miniLessonCourseOptions = get_mini_lesson_course_options();
+$miniLessonCourseOptionsForAdmin = $miniLessonCourseOptions;
+unset($miniLessonCourseOptionsForAdmin['all']);
 $testimonialFolderOptions = [
     'nclex' => 'NCLEX',
     'dha' => 'DHA',
@@ -42,15 +45,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_mini_lessons_admin_logged_in()) 
     try {
         if ($action === 'add') {
             $title = trim((string) ($_POST['title'] ?? ''));
+            $course = trim((string) ($_POST['course'] ?? ''));
             $description = trim((string) ($_POST['description'] ?? ''));
             $youtubeUrl = trim((string) ($_POST['youtube_url'] ?? ''));
             $sortOrder = (int) ($_POST['sort_order'] ?? 0);
 
-            if ($title === '' || $youtubeUrl === '') {
-                throw new InvalidArgumentException('Title and YouTube URL are required.');
+            if ($title === '' || $course === '' || $youtubeUrl === '') {
+                throw new InvalidArgumentException('Title, course, and YouTube URL are required.');
             }
 
-            add_mini_lesson($title, $description, $youtubeUrl, $sortOrder);
+            add_mini_lesson($title, $course, $description, $youtubeUrl, $sortOrder);
             $feedback = 'Mini lesson added successfully.';
         } elseif ($action === 'delete') {
             $id = (int) ($_POST['id'] ?? 0);
@@ -251,7 +255,16 @@ try {
           </div>
         </div>
         <div class="row">
-          <div class="col-md-9 mb-3">
+          <div class="col-md-4 mb-3">
+            <label for="course" class="form-label">Course</label>
+            <select id="course" name="course" class="form-select" required>
+              <option value="">Select course</option>
+              <?php foreach ($miniLessonCourseOptionsForAdmin as $courseKey => $courseLabel): ?>
+                <option value="<?php echo htmlspecialchars($courseKey, ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($courseLabel, ENT_QUOTES, 'UTF-8'); ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="col-md-5 mb-3">
             <label for="description" class="form-label">Description</label>
             <textarea id="description" name="description" class="form-control" rows="4"></textarea>
           </div>
@@ -300,6 +313,7 @@ try {
               <tr>
                 <th>ID</th>
                 <th>Title</th>
+                <th>Course</th>
                 <th>YouTube URL</th>
                 <th>Sort</th>
                 <th>Action</th>
@@ -310,6 +324,7 @@ try {
               <tr>
                 <td><?php echo (int) $lesson['id']; ?></td>
                 <td><?php echo htmlspecialchars($lesson['title'], ENT_QUOTES, 'UTF-8'); ?></td>
+                <td><?php echo htmlspecialchars($miniLessonCourseOptions[$lesson['course']] ?? strtoupper((string) $lesson['course']), ENT_QUOTES, 'UTF-8'); ?></td>
                 <td><a href="<?php echo htmlspecialchars($lesson['youtube_url'], ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener"><?php echo htmlspecialchars($lesson['youtube_url'], ENT_QUOTES, 'UTF-8'); ?></a></td>
                 <td><?php echo (int) $lesson['sort_order']; ?></td>
                 <td>

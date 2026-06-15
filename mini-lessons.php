@@ -7,11 +7,13 @@ require_once __DIR__ . '/mini-lessons-library.php';
 
 $email = trim((string) ($_GET['email'] ?? ''));
 $accessGranted = is_booking_email_registered($email);
+$courseOptions = get_mini_lesson_course_options();
+$selectedCourse = normalize_mini_lesson_course((string) ($_GET['course'] ?? 'all'));
 $lessons = [];
 $loadError = null;
 if ($accessGranted) {
     try {
-        $lessons = get_active_mini_lessons();
+        $lessons = get_active_mini_lessons($selectedCourse);
     } catch (Throwable $exception) {
         $loadError = 'Unable to load mini lessons right now.';
     }
@@ -31,6 +33,8 @@ if ($accessGranted) {
   <style>
     .campus-video-page { background: #f4f7fb; min-height: 100vh; }
     .campus-video-shell { max-width: 1200px; margin: 0 auto; padding: 28px 16px 48px; }
+    .campus-video-filter { display: flex; justify-content: flex-end; margin: 0 0 18px; }
+    .campus-video-filter form { width: min(100%, 320px); }
     .campus-video-grid { display: grid; gap: 18px; grid-template-columns: minmax(0, 1.8fr) minmax(290px, 1fr); }
     .campus-video-player, .campus-video-list { background: #fff; border: 1px solid rgba(0,48,87,.16); border-radius: 8px; }
     .campus-video-player { padding: 16px; }
@@ -75,6 +79,17 @@ if ($accessGranted) {
         <h2>Mini Lessons</h2>
         <p>Watch free lessons from the GRA online campus channel.</p>
       </div>
+      <div class="campus-video-filter">
+        <form method="get" action="mini-lessons.php">
+          <input type="hidden" name="email" value="<?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?>">
+          <label for="course" class="form-label">Filter by course</label>
+          <select id="course" name="course" class="form-select" onchange="this.form.submit()">
+            <?php foreach ($courseOptions as $courseKey => $courseLabel): ?>
+              <option value="<?php echo htmlspecialchars($courseKey, ENT_QUOTES, 'UTF-8'); ?>" <?php echo $selectedCourse === $courseKey ? 'selected' : ''; ?>><?php echo htmlspecialchars($courseLabel, ENT_QUOTES, 'UTF-8'); ?></option>
+            <?php endforeach; ?>
+          </select>
+        </form>
+      </div>
       <?php if ($loadError !== null): ?>
       <div class="campus-gate">
         <h3>Mini Lessons</h3>
@@ -83,7 +98,7 @@ if ($accessGranted) {
       <?php elseif (count($lessons) === 0): ?>
       <div class="campus-gate">
         <h3>No Lessons Yet</h3>
-        <p>Mini lessons will appear here once added by admin.</p>
+        <p>Mini lessons for this course will appear here once added by admin.</p>
       </div>
       <?php else: ?>
       <?php $firstLesson = $lessons[0]; ?>
