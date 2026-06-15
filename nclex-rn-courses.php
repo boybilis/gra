@@ -231,7 +231,7 @@
       border-radius: 12px;
       width: 100%;
       height: auto;
-      max-height: 330px;
+      max-height: 450px;
       object-fit: contain;
       display: block;
     }
