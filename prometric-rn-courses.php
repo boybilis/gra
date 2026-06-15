@@ -137,12 +137,12 @@
     </section>
 
     <?php
+      $courseSchedule = get_course_schedule_image('prometric');
+      $courseScheduleAlt = $courseSchedule['label'] . ' upcoming schedules';
       require_once __DIR__ . DIRECTORY_SEPARATOR . 'passer-library.php';
       $coursePassers = get_latest_passer_images(8, 'prometric');
       if (count($coursePassers) > 0):
-  $courseSchedule = get_course_schedule_image('prometric');
-  $courseScheduleAlt = $courseSchedule['label'] . ' upcoming schedules';
-?>
+    ?>
     <section id="course-passers" class="featured-passers course-passers section light-background">
       <div class="container section-title" data-aos="fade-up">
         <h2>Prometric Passer Stories</h2>
