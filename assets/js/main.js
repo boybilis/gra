@@ -152,6 +152,11 @@
     selector: '.glightbox'
   });
 
+  window.refreshGRALightbox = function() {
+    glightbox.elements = glightbox.getElements();
+    glightbox.fullElementsList = false;
+  };
+
   /**
    * Initiate Pure Counter
    */

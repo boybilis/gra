@@ -609,6 +609,9 @@
 
           swiper.appendSlide(slidesHtml);
           swiper.update();
+          if (typeof window.refreshGRALightbox === 'function') {
+            window.refreshGRALightbox();
+          }
           state.offset += images.length;
           if (images.length < state.batch) {
             state.done = true;
