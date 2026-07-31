@@ -229,7 +229,7 @@
               <div class="icon"><i class="fas fa-user-plus icon"></i></div>
               <h4>Start learning for free!</h4>
               <p>Experience the GRA difference with free learning resources.</p>
-              <a href="online-campus.php" class="free-register-btn stretched-link">Register free account</a>
+              <a href="online-campus.php#campus-access" class="free-register-btn stretched-link">View Free Course</a>
             </div>
           </div>
         </div>
