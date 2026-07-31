@@ -735,6 +735,58 @@
   position: relative;
   margin-top: 28px;
 }
+.course-passers .passer-carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 28px;
+}
+.course-passers .passer-carousel-controls .swiper-pagination {
+  position: static;
+  width: auto;
+  min-width: 120px;
+  margin: 0;
+}
+.course-passers .passer-carousel-controls .swiper-button-prev,
+.course-passers .passer-carousel-controls .swiper-button-next {
+  position: static;
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  flex: 0 0 44px;
+  border: 1px solid color-mix(in srgb, var(--gra-navy), transparent 72%);
+  border-radius: 50%;
+  background: #fff;
+  color: var(--gra-navy);
+  box-shadow: 0 8px 20px color-mix(in srgb, var(--gra-navy), transparent 88%);
+  transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+.course-passers .passer-carousel-controls .swiper-button-prev::after,
+.course-passers .passer-carousel-controls .swiper-button-next::after {
+  font-size: 17px;
+  font-weight: 800;
+}
+.course-passers .passer-carousel-controls .swiper-button-prev:hover,
+.course-passers .passer-carousel-controls .swiper-button-next:hover {
+  border-color: var(--accent-color);
+  background: var(--accent-color);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.course-passers .passer-carousel-controls .swiper-button-disabled {
+  cursor: not-allowed;
+  opacity: 0.35;
+  transform: none;
+}
+@media (max-width: 575px) {
+  .course-passers .passer-carousel-controls {
+    gap: 12px;
+  }
+  .course-passers .passer-carousel-controls .swiper-pagination {
+    min-width: 90px;
+  }
+}
 @media (max-width: 575px) {
   .featured-passers .featured-passer-meta {
     padding: 14px 12px 16px;

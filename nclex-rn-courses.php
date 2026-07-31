@@ -591,7 +591,7 @@
       </div>
       <div class="container" data-aos="fade-up" data-aos-delay="100">
         <div class="swiper init-swiper featured-passers-swiper" data-course="nclex" data-initial-limit="16" data-next-limit="8">
-          <script type="application/json" class="swiper-config">{"loop":false,"rewind":false,"speed":500,"autoplay":false,"slidesPerView":1,"slidesPerGroup":1,"grid":{"rows":2,"fill":"row"},"pagination":{"el":".swiper-pagination","type":"bullets","clickable":true},"breakpoints":{"320":{"slidesPerView":1,"slidesPerGroup":1,"spaceBetween":14,"grid":{"rows":2,"fill":"row"}},"768":{"slidesPerView":2,"slidesPerGroup":2,"spaceBetween":18,"grid":{"rows":2,"fill":"row"}},"1200":{"slidesPerView":4,"slidesPerGroup":4,"spaceBetween":20,"grid":{"rows":2,"fill":"row"}}}}</script>
+          <script type="application/json" class="swiper-config">{"loop":false,"rewind":false,"speed":500,"autoplay":false,"slidesPerView":1,"slidesPerGroup":1,"grid":{"rows":2,"fill":"row"},"navigation":{"nextEl":".course-passer-next","prevEl":".course-passer-prev"},"pagination":{"el":".swiper-pagination","type":"bullets","clickable":true},"breakpoints":{"320":{"slidesPerView":1,"slidesPerGroup":1,"spaceBetween":14,"grid":{"rows":2,"fill":"row"}},"768":{"slidesPerView":2,"slidesPerGroup":2,"spaceBetween":18,"grid":{"rows":2,"fill":"row"}},"1200":{"slidesPerView":4,"slidesPerGroup":4,"spaceBetween":20,"grid":{"rows":2,"fill":"row"}}}}</script>
           <div class="swiper-wrapper">
             <?php foreach ($coursePassers as $passerImage): $passerAlt = htmlspecialchars(($passerImage['name'] ?? 'GRA passer') . ' testimonial poster', ENT_QUOTES, 'UTF-8'); $passerUrl = htmlspecialchars($passerImage['url'], ENT_QUOTES, 'UTF-8'); ?>
             <div class="swiper-slide">
@@ -603,7 +603,11 @@
             </div>
             <?php endforeach; ?>
           </div>
-          <div class="swiper-pagination"></div>
+          <div class="passer-carousel-controls">
+            <button type="button" class="swiper-button-prev course-passer-prev" aria-label="Show previous NCLEX passers"></button>
+            <div class="swiper-pagination"></div>
+            <button type="button" class="swiper-button-next course-passer-next" aria-label="Show next NCLEX passers"></button>
+          </div>
         </div>
       </div>
     </section>
