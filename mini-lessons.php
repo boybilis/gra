@@ -2,21 +2,16 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/asset-version.php';
-require_once __DIR__ . '/campus-access.php';
 require_once __DIR__ . '/mini-lessons-library.php';
 
-$email = trim((string) ($_GET['email'] ?? ''));
-$accessGranted = is_booking_email_registered($email);
 $courseOptions = get_mini_lesson_course_options();
 $selectedCourse = normalize_mini_lesson_course((string) ($_GET['course'] ?? 'all'));
 $lessons = [];
 $loadError = null;
-if ($accessGranted) {
-    try {
-        $lessons = get_active_mini_lessons($selectedCourse);
-    } catch (Throwable $exception) {
-        $loadError = 'Unable to load mini lessons right now.';
-    }
+try {
+    $lessons = get_active_mini_lessons($selectedCourse);
+} catch (Throwable $exception) {
+    $loadError = 'Unable to load mini lessons right now.';
 }
 ?>
 <!DOCTYPE html>
@@ -67,13 +62,6 @@ if ($accessGranted) {
   </header>
 
   <main class="main">
-    <?php if (!$accessGranted): ?>
-    <section class="campus-gate">
-      <h2>Email Verification Needed</h2>
-      <p>Please unlock resources from Online Campus first using your registered email.</p>
-      <a class="btn btn-primary" href="online-campus.php#campus-access">Go to Email Verification</a>
-    </section>
-    <?php else: ?>
     <section class="campus-video-shell">
       <div class="section-title">
         <h2>Mini Lessons</h2>
@@ -81,7 +69,6 @@ if ($accessGranted) {
       </div>
       <div class="campus-video-filter">
         <form method="get" action="mini-lessons.php">
-          <input type="hidden" name="email" value="<?php echo htmlspecialchars($email, ENT_QUOTES, 'UTF-8'); ?>">
           <label for="course" class="form-label">Filter by course</label>
           <select id="course" name="course" class="form-select" onchange="this.form.submit()">
             <?php foreach ($courseOptions as $courseKey => $courseLabel): ?>
@@ -120,7 +107,6 @@ if ($accessGranted) {
       </div>
       <?php endif; ?>
     </section>
-    <?php endif; ?>
   </main>
   <footer id="footer" class="footer dark-background">
     <div class="container copyright text-center mt-4"><p><span>Copyright</span> <strong class="px-1 sitename">Gapuz Review Academy</strong> <span>All Rights Reserved</span></p></div>

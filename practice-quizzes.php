@@ -2,10 +2,6 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/asset-version.php';
-require_once __DIR__ . '/campus-access.php';
-
-$email = trim((string) ($_GET['email'] ?? ''));
-$accessGranted = is_booking_email_registered($email);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,11 +26,6 @@ $accessGranted = is_booking_email_registered($email);
     </div>
   </header>
   <main class="container py-5">
-    <?php if (!$accessGranted): ?>
-      <h2>Email Verification Needed</h2>
-      <p>Please unlock resources from Online Campus first.</p>
-      <a class="btn btn-primary" href="online-campus.php#campus-access">Go to Online Campus</a>
-    <?php else: ?>
       <h2>Practice Quizzes</h2>
       <p>Choose a quiz set and test your readiness.</p>
       <ul>
@@ -43,7 +34,6 @@ $accessGranted = is_booking_email_registered($email);
         <li><a href="https://forms.gle/" target="_blank" rel="noopener">DHA/HAAD Mixed Questions</a></li>
       </ul>
       <a class="btn btn-outline-primary" href="online-campus.php">Back to Online Campus</a>
-    <?php endif; ?>
   </main>
   <footer id="footer" class="footer dark-background">
     <div class="container copyright text-center mt-4"><p><span>Copyright</span> <strong class="px-1 sitename">Gapuz Review Academy</strong> <span>All Rights Reserved</span></p></div>
