@@ -573,11 +573,11 @@
       const course = (swiperEl.dataset.course || '').trim();
       if (!course) return;
 
-      const initialLimit = Number.parseInt(swiperEl.dataset.initialLimit || '8', 10);
-      const nextLimit = Number.parseInt(swiperEl.dataset.nextLimit || '4', 10);
+      const initialLimit = Number.parseInt(swiperEl.dataset.initialLimit || '16', 10);
+      const nextLimit = Number.parseInt(swiperEl.dataset.nextLimit || '8', 10);
       const state = {
-        offset: Number.isFinite(initialLimit) ? initialLimit : 8,
-        batch: Number.isFinite(nextLimit) ? nextLimit : 4,
+        offset: Number.isFinite(initialLimit) ? initialLimit : 16,
+        batch: Number.isFinite(nextLimit) ? nextLimit : 8,
         loading: false,
         done: false,
       };
@@ -627,18 +627,8 @@
           return;
         }
 
-        const maybeLoad = () => {
-          const totalSlides = swiper.slides ? swiper.slides.length : 0;
-          const visibleSlides = Number.isFinite(swiper.params.slidesPerView) ? Number(swiper.params.slidesPerView) : 1;
-          const thresholdIndex = Math.max(0, totalSlides - Math.max(visibleSlides, 1) - 1);
-          if (swiper.activeIndex >= thresholdIndex) {
-            fetchNextBatch();
-          }
-        };
-
-        swiper.on('slideChange', maybeLoad);
-        swiper.on('reachEnd', maybeLoad);
-        maybeLoad();
+        swiper.on('slideChange', fetchNextBatch);
+        swiper.on('reachEnd', fetchNextBatch);
       };
 
       bindWhenReady();

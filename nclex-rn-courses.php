@@ -581,7 +581,7 @@
       $courseSchedule = get_course_schedule_image('nclex');
       $courseScheduleAlt = $courseSchedule['label'] . ' upcoming schedules';
       require_once __DIR__ . DIRECTORY_SEPARATOR . 'passer-library.php';
-      $coursePassers = get_latest_passer_images(8, 'nclex');
+      $coursePassers = get_latest_passer_images(16, 'nclex');
       if (count($coursePassers) > 0):
     ?>
     <section id="course-passers" class="featured-passers course-passers section light-background">
@@ -590,14 +590,14 @@
         <p>Successful NCLEX passers from the GRA community.</p>
       </div>
       <div class="container" data-aos="fade-up" data-aos-delay="100">
-        <div class="swiper init-swiper featured-passers-swiper" data-course="nclex" data-initial-limit="8" data-next-limit="4">
-          <script type="application/json" class="swiper-config">{"loop":true,"speed":600,"autoplay":{"delay":4500},"slidesPerView":1,"grid":{"rows":1,"fill":"row"},"pagination":{"el":".swiper-pagination","type":"bullets","clickable":true},"breakpoints":{"320":{"slidesPerView":1,"spaceBetween":18,"grid":{"rows":1}},"768":{"slidesPerView":2,"spaceBetween":20,"grid":{"rows":1}},"1200":{"slidesPerView":4,"spaceBetween":20,"grid":{"rows":1}}}}</script>
+        <div class="swiper init-swiper featured-passers-swiper" data-course="nclex" data-initial-limit="16" data-next-limit="8">
+          <script type="application/json" class="swiper-config">{"loop":false,"rewind":false,"speed":500,"autoplay":false,"slidesPerView":1,"slidesPerGroup":1,"grid":{"rows":2,"fill":"row"},"pagination":{"el":".swiper-pagination","type":"bullets","clickable":true},"breakpoints":{"320":{"slidesPerView":1,"slidesPerGroup":1,"spaceBetween":14,"grid":{"rows":2,"fill":"row"}},"768":{"slidesPerView":2,"slidesPerGroup":2,"spaceBetween":18,"grid":{"rows":2,"fill":"row"}},"1200":{"slidesPerView":4,"slidesPerGroup":4,"spaceBetween":20,"grid":{"rows":2,"fill":"row"}}}}</script>
           <div class="swiper-wrapper">
             <?php foreach ($coursePassers as $passerImage): $passerAlt = htmlspecialchars(($passerImage['name'] ?? 'GRA passer') . ' testimonial poster', ENT_QUOTES, 'UTF-8'); $passerUrl = htmlspecialchars($passerImage['url'], ENT_QUOTES, 'UTF-8'); ?>
             <div class="swiper-slide">
               <article class="featured-passer-card">
                 <a href="<?php echo $passerUrl; ?>" class="glightbox" data-gallery="nclex-passers">
-                  <img src="<?php echo $passerUrl; ?>" alt="<?php echo $passerAlt; ?>" loading="lazy" decoding="async">
+                  <img src="<?php echo $passerUrl; ?>" alt="<?php echo $passerAlt; ?>" loading="eager" decoding="async">
                 </a>
               </article>
             </div>
