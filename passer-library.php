@@ -37,14 +37,46 @@ function get_latest_passer_images(int $limit = 8, ?string $course = null, int $o
 
         $relativePath = str_replace('\\', '/', substr($file->getPathname(), strlen($baseDir) + 1));
         $urlPath = implode('/', array_map('rawurlencode', explode('/', $relativePath)));
+        $displayName = pathinfo($file->getFilename(), PATHINFO_FILENAME);
+        $priority = null;
+
+        if (preg_match('/^(\d{3})-(.+)$/', $displayName, $matches) === 1) {
+            $priority = (int) $matches[1];
+            $displayName = $matches[2];
+        }
+
         $images[] = [
-            'name' => pathinfo($file->getFilename(), PATHINFO_FILENAME),
+            'name' => $displayName,
             'url' => $baseUrl . $urlPath,
             'modified' => $file->getMTime(),
+            '_priority' => $priority,
         ];
     }
 
-    usort($images, static fn (array $a, array $b): int => $b['modified'] <=> $a['modified']);
+    usort($images, static function (array $a, array $b): int {
+        $aPriority = $a['_priority'];
+        $bPriority = $b['_priority'];
+
+        if ($aPriority !== null || $bPriority !== null) {
+            if ($aPriority === null) {
+                return 1;
+            }
+
+            if ($bPriority === null) {
+                return -1;
+            }
+
+            if ($aPriority !== $bPriority) {
+                return $aPriority <=> $bPriority;
+            }
+        }
+
+        $modifiedComparison = $b['modified'] <=> $a['modified'];
+
+        return $modifiedComparison !== 0
+            ? $modifiedComparison
+            : strnatcasecmp($a['name'], $b['name']);
+    });
 
     if ($limit < 1) {
         return [];
@@ -54,7 +86,14 @@ function get_latest_passer_images(int $limit = 8, ?string $course = null, int $o
         $offset = 0;
     }
 
-    return array_slice($images, $offset, $limit);
+    $selectedImages = array_slice($images, $offset, $limit);
+
+    foreach ($selectedImages as &$image) {
+        unset($image['_priority']);
+    }
+    unset($image);
+
+    return $selectedImages;
 }
 
 function get_featured_passer_images_by_course(): array
