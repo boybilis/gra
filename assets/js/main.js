@@ -157,6 +157,23 @@
     glightbox.fullElementsList = false;
   };
 
+  document.addEventListener('click', function(event) {
+    const target = event.target;
+    if (!(target instanceof Element)) {
+      return;
+    }
+
+    const trigger = target.closest('.course-passers .glightbox');
+    if (!trigger) {
+      return;
+    }
+
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    window.refreshGRALightbox();
+    glightbox.open(trigger);
+  }, true);
+
   /**
    * Initiate Pure Counter
    */
