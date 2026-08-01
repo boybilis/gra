@@ -54,13 +54,8 @@ require_once __DIR__ . '/asset-version.php';
     .quiz-option:hover { border-color: #5d94be; background: #f8fbfe; transform: translateY(-1px); }
     .quiz-option input { width: 20px; height: 20px; margin-top: 2px; accent-color: #1769aa; flex: 0 0 auto; }
     .quiz-option.is-selected { border-color: #1769aa; background: #eef7fd; }
-    .quiz-option.is-correct { border-color: #188754; background: #eefaf4; }
-    .quiz-option.is-incorrect { border-color: #c64040; background: #fff1f1; }
     .quiz-option-letter { min-width: 25px; color: #003057; font-weight: 800; }
-    .quiz-feedback { display: none; margin-top: 22px; padding: 16px 18px; border-radius: 10px; }
-    .quiz-feedback.is-visible { display: block; }
-    .quiz-feedback.is-correct { border: 1px solid #8bd2ae; background: #effaf4; color: #176b45; }
-    .quiz-feedback.is-incorrect { border: 1px solid #e4a6a6; background: #fff3f3; color: #8c2e2e; }
+    .quiz-answer-recorded { margin-top: 20px; padding: 12px 15px; border: 1px solid #b8d5e9; border-radius: 9px; background: #f0f8fd; color: #07568e; font-weight: 700; }
     .quiz-modal-footer { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 14px clamp(16px, 3vw, 36px); border-top: 1px solid #dce4ec; background: #fff; }
     .quiz-nav-group { display: flex; gap: 10px; }
     .quiz-btn { min-height: 44px; padding: 10px 18px; border-radius: 9px; font-weight: 750; }
@@ -68,8 +63,23 @@ require_once __DIR__ . '/asset-version.php';
     .quiz-btn-primary { border: 1px solid #1769aa; background: #1769aa; color: #fff; }
     .quiz-btn-submit { border: 1px solid #f26522; background: #f26522; color: #fff; }
     .quiz-btn:disabled { cursor: not-allowed; opacity: .45; }
-    .quiz-results { max-width: 700px; margin: 5vh auto; padding: clamp(28px, 5vw, 54px); border: 1px solid #dce4ec; border-radius: 20px; background: #fff; text-align: center; box-shadow: 0 15px 45px rgba(0, 48, 87, .1); }
+    .quiz-results { max-width: 1280px; margin: 2vh auto; padding: clamp(24px, 4vw, 46px); border: 1px solid #dce4ec; border-radius: 20px; background: #fff; text-align: center; box-shadow: 0 15px 45px rgba(0, 48, 87, .1); }
     .quiz-score { width: 110px; height: 110px; margin: 0 auto 22px; display: grid; place-items: center; border: 9px solid #dcecf8; border-radius: 50%; color: #003057; font-size: 1.7rem; font-weight: 850; }
+    .quiz-score-summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; max-width: 820px; margin: 24px auto 0; }
+    .quiz-score-stat { padding: 15px 12px; border: 1px solid #d7e0e9; border-radius: 11px; background: #f8fafc; }
+    .quiz-score-stat strong { display: block; color: #003057; font-size: 1.45rem; line-height: 1.2; }
+    .quiz-score-stat span { display: block; margin-top: 4px; color: #687789; font-size: .82rem; font-weight: 700; text-transform: uppercase; }
+    .quiz-review-wrap { margin: 28px 0; overflow-x: auto; border: 1px solid #d7e0e9; border-radius: 12px; text-align: left; }
+    .quiz-review-table { width: 100%; min-width: 900px; border-collapse: collapse; }
+    .quiz-review-table th { padding: 13px 15px; background: #003057; color: #fff; font-size: .88rem; letter-spacing: .02em; }
+    .quiz-review-table td { padding: 16px 15px; border-top: 1px solid #d7e0e9; vertical-align: top; color: #314457; line-height: 1.5; }
+    .quiz-review-table tbody tr:nth-child(even) { background: #f7f9fb; }
+    .quiz-review-question { width: 24%; font-weight: 750; color: #172b3d !important; }
+    .quiz-review-answer { width: 22%; }
+    .quiz-review-rationale { width: 32%; }
+    .quiz-result-badge { display: inline-block; margin-top: 8px; padding: 4px 8px; border-radius: 999px; font-size: .75rem; font-weight: 800; }
+    .quiz-result-badge.correct { background: #e6f7ee; color: #177048; }
+    .quiz-result-badge.incorrect { background: #fdecec; color: #9d3030; }
     body.quiz-modal-open { overflow: hidden; }
     @media (max-width: 700px) {
       .quiz-modal-header { gap: 10px; }
@@ -83,6 +93,7 @@ require_once __DIR__ . '/asset-version.php';
       .quiz-modal-footer { align-items: stretch; flex-direction: column; }
       .quiz-nav-group { width: 100%; }
       .quiz-btn { flex: 1; }
+      .quiz-score-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
   </style>
 </head>
@@ -217,20 +228,17 @@ require_once __DIR__ . '/asset-version.php';
         const options = question.choices.map((choice, index) => {
           const checked = answers[currentIndex].includes(index) ? ' checked' : '';
           const disabled = submitted[currentIndex] ? ' disabled' : '';
-          const correctClass = submitted[currentIndex] && question.correct.includes(index) ? ' is-correct' : '';
-          const incorrectClass = submitted[currentIndex] && answers[currentIndex].includes(index) && !question.correct.includes(index) ? ' is-incorrect' : '';
-          return `<label class="quiz-option${checked ? ' is-selected' : ''}${correctClass}${incorrectClass}"><input type="${inputType}" name="quiz-answer" value="${index}"${checked}${disabled}><span class="quiz-option-letter">${String.fromCharCode(65 + index)}.</span><span>${choice}</span></label>`;
+          return `<label class="quiz-option${checked ? ' is-selected' : ''}"><input type="${inputType}" name="quiz-answer" value="${index}"${checked}${disabled}><span class="quiz-option-letter">${String.fromCharCode(65 + index)}.</span><span>${choice}</span></label>`;
         }).join('');
 
-        const isCorrect = submitted[currentIndex] && sameAnswers(answers[currentIndex], question.correct);
-        const feedback = submitted[currentIndex]
-          ? `<div class="quiz-feedback is-visible ${isCorrect ? 'is-correct' : 'is-incorrect'}" role="status"><strong>${isCorrect ? 'Correct.' : 'Not quite.'}</strong> ${question.explanation}</div>`
-          : '<div class="quiz-feedback" role="status"></div>';
+        const recordedMessage = submitted[currentIndex]
+          ? '<div class="quiz-answer-recorded" role="status"><i class="bi bi-check-circle me-1"></i>Answer recorded. Correct answers and rationales will be shown after the test.</div>'
+          : '';
 
         const chartSections = question.chartSections.map((section) => `<section class="quiz-chart-section"><div class="quiz-chart-heading">${section.heading}</div><div class="quiz-chart-content">${section.content}</div></section>`).join('');
         const chart = `<section class="quiz-chart" aria-label="${question.chartTitle}"><div class="quiz-chart-title"><i class="bi bi-clipboard2-data"></i>${question.chartTitle}</div><div class="quiz-chart-grid" style="--chart-columns:${question.chartSections.length}">${chartSections}</div></section>`;
 
-        modalBody.innerHTML = `<div class="quiz-question-shell"><article class="quiz-question-card"><span class="quiz-type"><i class="bi ${question.type === 'single' ? 'bi-ui-radios' : 'bi-ui-checks'}"></i>${question.label}</span><h2 id="quiz-question-title" class="quiz-question">${currentIndex + 1}. ${question.question}</h2>${chart}<p class="quiz-instruction">${question.instruction}</p><div class="quiz-options">${options}</div>${feedback}</article></div>`;
+        modalBody.innerHTML = `<div class="quiz-question-shell"><article class="quiz-question-card"><span class="quiz-type"><i class="bi ${question.type === 'single' ? 'bi-ui-radios' : 'bi-ui-checks'}"></i>${question.label}</span><h2 id="quiz-question-title" class="quiz-question">${currentIndex + 1}. ${question.question}</h2>${chart}<p class="quiz-instruction">${question.instruction}</p><div class="quiz-options">${options}</div>${recordedMessage}</article></div>`;
 
         modalBody.querySelectorAll('input[name="quiz-answer"]').forEach((input) => input.addEventListener('change', () => {
           answers[currentIndex] = selectedValues();
@@ -248,11 +256,20 @@ require_once __DIR__ . '/asset-version.php';
 
       const renderResults = () => {
         const score = questions.reduce((total, question, index) => total + (sameAnswers(answers[index], question.correct) ? 1 : 0), 0);
+        const incorrect = questions.length - score;
+        const percentage = Math.round((score / questions.length) * 100);
+        const formatAnswers = (question, selected) => selected.length
+          ? selected.map((choiceIndex) => `<div><strong>${String.fromCharCode(65 + choiceIndex)}.</strong> ${question.choices[choiceIndex]}</div>`).join('')
+          : '<em>No answer selected</em>';
+        const reviewRows = questions.map((question, index) => {
+          const isCorrect = sameAnswers(answers[index], question.correct);
+          return `<tr><td class="quiz-review-question"><div>Question ${index + 1}</div><div class="mt-1">${question.question}</div><span class="quiz-result-badge ${isCorrect ? 'correct' : 'incorrect'}">${isCorrect ? 'Correct' : 'Incorrect'}</span></td><td class="quiz-review-answer">${formatAnswers(question, answers[index])}</td><td class="quiz-review-answer">${formatAnswers(question, question.correct)}</td><td class="quiz-review-rationale">${question.explanation}</td></tr>`;
+        }).join('');
         progressLabel.textContent = 'Quiz Complete';
         progressPercent.textContent = '100%';
         progressBar.style.width = '100%';
         modalFooter.hidden = true;
-        modalBody.innerHTML = `<section class="quiz-results"><div class="quiz-score">${score}/${questions.length}</div><h2>Practice Quiz Complete</h2><p>You answered ${score} out of ${questions.length} questions correctly. Review the feedback and try again to strengthen your test-taking skills.</p><button id="restart-quiz" class="quiz-start-btn mt-2" type="button">Try Again</button></section>`;
+        modalBody.innerHTML = `<section class="quiz-results"><div class="quiz-score">${score}/${questions.length}</div><h2>Practice Quiz Complete</h2><p>You answered ${score} out of ${questions.length} questions correctly. Compare your responses with the correct answers and review the complete rationale for each item.</p><div class="quiz-score-summary" aria-label="Score summary"><div class="quiz-score-stat"><strong>${questions.length}</strong><span>Total Questions</span></div><div class="quiz-score-stat"><strong>${score}</strong><span>Correct</span></div><div class="quiz-score-stat"><strong>${incorrect}</strong><span>Incorrect</span></div><div class="quiz-score-stat"><strong>${percentage}%</strong><span>Score</span></div></div><div class="quiz-review-wrap"><table class="quiz-review-table"><thead><tr><th scope="col">Question</th><th scope="col">Your Answer</th><th scope="col">Correct Answer</th><th scope="col">Complete Solution / Rationale</th></tr></thead><tbody>${reviewRows}</tbody></table></div><button id="restart-quiz" class="quiz-start-btn mt-2" type="button">Try Again</button></section>`;
         document.getElementById('restart-quiz').addEventListener('click', () => {
           currentIndex = 0;
           answers = questions.map(() => []);
