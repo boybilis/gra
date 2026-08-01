@@ -56,6 +56,15 @@ require_once __DIR__ . '/asset-version.php';
     .quiz-btn-primary { border: 1px solid #1769aa; background: #1769aa; color: #fff; }
     .quiz-btn-submit { border: 1px solid #f26522; background: #f26522; color: #fff; }
     .quiz-btn:disabled { cursor: not-allowed; opacity: .45; }
+    .quiz-answer-review { max-width: 1050px; margin: 2vh auto; padding: clamp(24px, 4vw, 44px); border: 1px solid #dce4ec; border-radius: 20px; background: #fff; text-align: center; box-shadow: 0 15px 45px rgba(0, 48, 87, .1); }
+    .quiz-answer-review p { max-width: 720px; margin: 0 auto 24px; color: #687789; }
+    .quiz-review-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin: 28px 0; text-align: left; }
+    .quiz-review-item { display: flex; align-items: center; gap: 11px; min-height: 74px; padding: 12px; border: 1px solid #b9d4e7; border-radius: 11px; background: #f4faff; color: #173c59; text-align: left; }
+    .quiz-review-item:hover { border-color: #1769aa; background: #eaf5fc; }
+    .quiz-review-number { width: 34px; height: 34px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 50%; background: #1769aa; color: #fff; font-weight: 800; }
+    .quiz-review-item-copy { min-width: 0; }
+    .quiz-review-item-copy strong, .quiz-review-item-copy span { display: block; }
+    .quiz-review-item-copy span { margin-top: 3px; overflow: hidden; color: #687789; font-size: .78rem; text-overflow: ellipsis; white-space: nowrap; }
     .quiz-results { max-width: 1280px; margin: 2vh auto; padding: clamp(24px, 4vw, 46px); border: 1px solid #dce4ec; border-radius: 20px; background: #fff; text-align: center; box-shadow: 0 15px 45px rgba(0, 48, 87, .1); }
     .quiz-score { width: 110px; height: 110px; margin: 0 auto 22px; display: grid; place-items: center; border: 9px solid #dcecf8; border-radius: 50%; color: #003057; font-size: 1.7rem; font-weight: 850; }
     .quiz-score-summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; max-width: 820px; margin: 24px auto 0; }
@@ -85,6 +94,7 @@ require_once __DIR__ . '/asset-version.php';
       .quiz-nav-group { width: 100%; }
       .quiz-btn { flex: 1; }
       .quiz-score-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .quiz-review-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
   </style>
 </head>
@@ -117,7 +127,7 @@ require_once __DIR__ . '/asset-version.php';
     <header class="quiz-modal-header">
       <div class="quiz-modal-brand"><img src="assets/img/gra/gra-logo.png" alt=""><span>GRA Practice Quiz</span></div>
       <div class="quiz-progress-wrap">
-        <div class="quiz-progress-copy"><span id="quiz-progress-label">Question 1 of 2</span><span id="quiz-progress-percent">50%</span></div>
+        <div class="quiz-progress-copy"><span id="quiz-progress-label">Question 1 of 15</span><span id="quiz-progress-percent">7%</span></div>
         <div class="quiz-progress" aria-hidden="true"><div id="quiz-progress-bar" class="quiz-progress-bar"></div></div>
       </div>
       <button id="close-quiz" class="quiz-close" type="button" aria-label="Close quiz">&times;</button>
@@ -365,6 +375,7 @@ require_once __DIR__ . '/asset-version.php';
       let currentIndex = 0;
       let answers = questions.map(() => []);
       let submitted = questions.map(() => false);
+      let reviewMode = false;
       let lastFocusedElement = null;
 
       const sameAnswers = (selected, correct) => selected.length === correct.length && selected.every((value) => correct.includes(value));
@@ -389,11 +400,11 @@ require_once __DIR__ . '/asset-version.php';
         const inputType = question.type === 'single' ? 'radio' : 'checkbox';
         const options = question.choices.map((choice, index) => {
           const checked = answers[currentIndex].includes(index) ? ' checked' : '';
-          const disabled = submitted[currentIndex] ? ' disabled' : '';
+          const disabled = submitted[currentIndex] && !reviewMode ? ' disabled' : '';
           return `<label class="quiz-option${checked ? ' is-selected' : ''}"><input type="${inputType}" name="quiz-answer" value="${index}"${checked}${disabled}><span class="quiz-option-letter">${String.fromCharCode(65 + index)}.</span><span>${choice}</span></label>`;
         }).join('');
 
-        const recordedMessage = submitted[currentIndex]
+        const recordedMessage = submitted[currentIndex] && !reviewMode
           ? '<div class="quiz-answer-recorded" role="status"><i class="bi bi-check-circle me-1"></i>Answer recorded. Correct answers and rationales will be shown after the test.</div>'
           : '';
 
@@ -405,11 +416,34 @@ require_once __DIR__ . '/asset-version.php';
           submitButton.disabled = answers[currentIndex].length === 0;
         }));
 
-        previousButton.disabled = currentIndex === 0;
-        submitButton.hidden = submitted[currentIndex];
+        previousButton.disabled = !reviewMode && currentIndex === 0;
+        previousButton.innerHTML = reviewMode ? '<i class="bi bi-grid-3x3-gap me-1"></i>Back to Review' : '<i class="bi bi-chevron-left me-1"></i>Previous';
+        submitButton.hidden = submitted[currentIndex] && !reviewMode;
         submitButton.disabled = answers[currentIndex].length === 0;
-        nextButton.hidden = !submitted[currentIndex];
+        submitButton.textContent = reviewMode ? 'Save Answer' : 'Submit Answer';
+        nextButton.hidden = reviewMode || !submitted[currentIndex];
         nextButton.innerHTML = currentIndex === questions.length - 1 ? 'View Results<i class="bi bi-flag ms-1"></i>' : 'Next<i class="bi bi-chevron-right ms-1"></i>';
+        modalBody.scrollTop = 0;
+      };
+
+      const renderAnswerReview = () => {
+        reviewMode = false;
+        progressLabel.textContent = 'Review Your Answers';
+        progressPercent.textContent = '100%';
+        progressBar.style.width = '100%';
+        modalFooter.hidden = true;
+        const reviewItems = questions.map((question, index) => {
+          const answerCount = answers[index].length;
+          const answerLabel = answerCount === 1 ? '1 answer selected' : `${answerCount} answers selected`;
+          return `<button class="quiz-review-item" type="button" data-review-question="${index}" aria-label="Review question ${index + 1}"><span class="quiz-review-number">${index + 1}</span><span class="quiz-review-item-copy"><strong>${question.label}</strong><span>${answerLabel}</span></span></button>`;
+        }).join('');
+        modalBody.innerHTML = `<section class="quiz-answer-review"><i class="bi bi-clipboard2-check fs-1 text-primary"></i><h2 class="mt-3">Review Your Answers</h2><p>Select any question below to review or change your response. Your score and the correct answers will remain hidden until you finish the exam.</p><div class="quiz-review-grid">${reviewItems}</div><button id="finish-quiz" class="quiz-start-btn" type="button">Finish and View Results</button></section>`;
+        modalBody.querySelectorAll('[data-review-question]').forEach((button) => button.addEventListener('click', () => {
+          currentIndex = Number(button.dataset.reviewQuestion);
+          reviewMode = true;
+          renderQuestion();
+        }));
+        document.getElementById('finish-quiz').addEventListener('click', renderResults);
         modalBody.scrollTop = 0;
       };
 
@@ -433,8 +467,33 @@ require_once __DIR__ . '/asset-version.php';
           currentIndex = 0;
           answers = questions.map(() => []);
           submitted = questions.map(() => false);
+          reviewMode = false;
           renderQuestion();
         });
+      };
+
+      const enterQuizFullscreen = async () => {
+        try {
+          if (modal.requestFullscreen) {
+            await modal.requestFullscreen();
+          } else if (modal.webkitRequestFullscreen) {
+            modal.webkitRequestFullscreen();
+          }
+        } catch (error) {
+          // The full-window quiz remains available when a browser blocks fullscreen.
+        }
+      };
+
+      const leaveQuizFullscreen = async () => {
+        try {
+          if (document.fullscreenElement && document.exitFullscreen) {
+            await document.exitFullscreen();
+          } else if (document.webkitFullscreenElement && document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+          }
+        } catch (error) {
+          // Closing the modal must still work if the browser rejects the request.
+        }
       };
 
       const openQuiz = () => {
@@ -442,14 +501,17 @@ require_once __DIR__ . '/asset-version.php';
         currentIndex = 0;
         answers = questions.map(() => []);
         submitted = questions.map(() => false);
+        reviewMode = false;
         modal.classList.add('is-open');
         modal.setAttribute('aria-hidden', 'false');
         document.body.classList.add('quiz-modal-open');
         renderQuestion();
         closeButton.focus();
+        enterQuizFullscreen();
       };
 
-      const closeQuiz = () => {
+      const closeQuiz = async () => {
+        await leaveQuizFullscreen();
         modal.classList.remove('is-open');
         modal.setAttribute('aria-hidden', 'true');
         document.body.classList.remove('quiz-modal-open');
@@ -459,6 +521,10 @@ require_once __DIR__ . '/asset-version.php';
       startButton.addEventListener('click', openQuiz);
       closeButton.addEventListener('click', closeQuiz);
       previousButton.addEventListener('click', () => {
+        if (reviewMode) {
+          renderAnswerReview();
+          return;
+        }
         if (currentIndex > 0) {
           currentIndex -= 1;
           renderQuestion();
@@ -468,12 +534,21 @@ require_once __DIR__ . '/asset-version.php';
         answers[currentIndex] = selectedValues();
         if (answers[currentIndex].length === 0) return;
         submitted[currentIndex] = true;
+        if (reviewMode) {
+          renderAnswerReview();
+          return;
+        }
+        if (currentIndex === questions.length - 1) {
+          renderAnswerReview();
+          return;
+        }
+        currentIndex += 1;
         renderQuestion();
       });
       nextButton.addEventListener('click', () => {
         if (!submitted[currentIndex]) return;
         if (currentIndex === questions.length - 1) {
-          renderResults();
+          renderAnswerReview();
           return;
         }
         currentIndex += 1;
