@@ -40,13 +40,6 @@ require_once __DIR__ . '/asset-version.php';
     .quiz-question-shell { max-width: 1050px; margin: 0 auto; }
     .quiz-question-card { padding: clamp(22px, 4vw, 42px); border: 1px solid #dce4ec; border-radius: 18px; background: #fff; box-shadow: 0 10px 34px rgba(0, 48, 87, .08); }
     .quiz-type { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 16px; padding: 6px 11px; border-radius: 999px; background: #e8f2fb; color: #07568e; font-size: .78rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
-    .quiz-chart { margin-bottom: 24px; overflow: hidden; border: 1px solid #9eb5cc; border-radius: 8px; background: #eef3fa; }
-    .quiz-chart-title { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: #003057; color: #fff; font-size: .9rem; font-weight: 800; }
-    .quiz-chart-grid { display: grid; grid-template-columns: repeat(var(--chart-columns, 1), minmax(0, 1fr)); }
-    .quiz-chart-section { min-width: 0; }
-    .quiz-chart-section + .quiz-chart-section { border-left: 1px solid #9eb5cc; }
-    .quiz-chart-heading { padding: 9px 12px; border-bottom: 1px solid #9eb5cc; background: #3f76bd; color: #fff; font-size: .83rem; font-weight: 800; }
-    .quiz-chart-content { min-height: 92px; padding: 13px 14px; color: #25384a; font-size: .94rem; line-height: 1.55; white-space: pre-line; }
     .quiz-question { margin: 0 0 8px; color: #172b3d; font-size: clamp(1.1rem, 2vw, 1.38rem); font-weight: 750; line-height: 1.5; }
     .quiz-instruction { margin-bottom: 22px; color: #687789; }
     .quiz-options { display: grid; gap: 11px; }
@@ -88,8 +81,6 @@ require_once __DIR__ . '/asset-version.php';
       .quiz-modal-brand img { width: 38px; height: 38px; }
       .quiz-modal-body { padding: 16px 12px; }
       .quiz-question-card { padding: 20px 15px; }
-      .quiz-chart-grid { grid-template-columns: 1fr; }
-      .quiz-chart-section + .quiz-chart-section { border-left: 0; border-top: 1px solid #9eb5cc; }
       .quiz-modal-footer { align-items: stretch; flex-direction: column; }
       .quiz-nav-group { width: 100%; }
       .quiz-btn { flex: 1; }
@@ -112,11 +103,11 @@ require_once __DIR__ . '/asset-version.php';
     <section class="quiz-launch-card" aria-labelledby="quiz-page-title">
       <div class="quiz-launch-icon"><i class="bi bi-clipboard2-pulse"></i></div>
       <h1 id="quiz-page-title">Practice Quiz</h1>
-      <p>Try a short nursing readiness quiz featuring multiple-choice and select-all-that-apply questions. Submit each answer to see immediate feedback.</p>
+      <p>Try a short nursing readiness quiz featuring multiple-choice and select-all-that-apply questions. Correct answers and rationales appear after the test.</p>
       <div class="quiz-meta" aria-label="Quiz information">
-        <span><i class="bi bi-list-check me-1"></i>2 Questions</span>
+        <span><i class="bi bi-list-check me-1"></i>15 Questions</span>
         <span><i class="bi bi-clock me-1"></i>Untimed</span>
-        <span><i class="bi bi-lightning-charge me-1"></i>Instant Feedback</span>
+        <span><i class="bi bi-card-checklist me-1"></i>End-of-Test Review</span>
       </div>
       <button id="start-quiz" class="quiz-start-btn" type="button">Start Quiz</button>
     </section>
@@ -149,10 +140,6 @@ require_once __DIR__ . '/asset-version.php';
         {
           type: 'single',
           label: 'Multiple Choice',
-          chartTitle: 'Client Chart 1',
-          chartSections: [
-            { heading: "Nurses' Notes", content: "Review the client's information in the nurses' notes before selecting the nurse's priority response." }
-          ],
           question: "Based on the client information provided, what is the nurse's first action?",
           instruction: 'Select the best answer.',
           choices: [
@@ -169,11 +156,6 @@ require_once __DIR__ . '/asset-version.php';
         {
           type: 'multiple',
           label: 'Select All That Apply',
-          chartTitle: 'Client Chart 1',
-          chartSections: [
-            { heading: 'RN Notes', content: 'A 58-year-old male client arrives at the emergency department with chest pain.' },
-            { heading: 'Assessment', content: 'The nurse reviews the RN notes and assessment to determine the appropriate dependent and independent interventions.' }
-          ],
           question: 'Which interventions are immediate? Select all that apply.',
           instruction: 'Choose every option that should be performed immediately.',
           choices: [
@@ -186,6 +168,186 @@ require_once __DIR__ . '/asset-version.php';
           ],
           correct: [1, 3, 5],
           explanation: 'Immediate priorities are supplemental oxygen, prescribed sublingual nitroglycerin, and continuous ECG monitoring. Assessment of response follows treatment, while activity and diet teaching are not immediate priorities.'
+        },
+        {
+          type: 'multiple',
+          label: 'Select All That Apply',
+          question: 'A 25-year-old client presents to the urgent care clinic due to painful urination and reported blood in the urine. The nurse is preparing to speak with the physician about the client\'s plan of care. For the column “Indicated,” select all that apply.',
+          instruction: 'Choose every indicated intervention.',
+          choices: [
+            'Vital signs monitoring every 15–30 minutes.',
+            'IV hydration.',
+            'Antibiotic therapy.',
+            'Complete blood count.',
+            'Urinalysis.',
+            'Ultrasound of the KUB.',
+            'Oxygen therapy.',
+            'Intermittent catheterization.'
+          ],
+          correct: [2, 3, 4, 5],
+          explanation: 'No complete solution or rationale was provided in the source workbook.'
+        },
+        {
+          type: 'single',
+          label: 'Multiple Choice',
+          question: 'The client with chronic renal failure returns to the nursing unit following a hemodialysis treatment. On assessment, the nurse notes that the client\'s temperature is 100.2°F. Which action is appropriate?',
+          instruction: 'Select the best answer.',
+          choices: [
+            'Encourage fluids.',
+            'Notify the physician.',
+            'Monitor the site of the shunt for infection.',
+            'Continue to monitor vital signs.'
+          ],
+          correct: [3],
+          explanation: 'No complete solution or rationale was provided in the source workbook.'
+        },
+        {
+          type: 'multiple',
+          label: 'Select All That Apply',
+          question: 'Reviewing the RN notes and laboratory report, the nurse determines the findings that are of immediate concern. For RN notes, select all findings that are of immediate concern.',
+          instruction: 'Choose every applicable finding.',
+          choices: ['Chest pain.', 'Last medication taken.', 'BMI.', 'Heart rate.'],
+          correct: [0, 1, 3],
+          explanation: 'No complete solution or rationale was provided in the source workbook.'
+        },
+        {
+          type: 'single',
+          label: 'Multiple Choice',
+          question: 'The nurse is planning to auscultate a client\'s heart at the point of maximal impulse. Where should the nurse place the stethoscope?',
+          instruction: 'Select the best answer.',
+          choices: [
+            '1st intercostal space, right midclavicular line.',
+            '5th intercostal space, left midclavicular line.',
+            '3rd intercostal space, left sternal border.',
+            '2nd intercostal space, right sternal border.'
+          ],
+          correct: [1],
+          explanation: 'No complete solution or rationale was provided in the source workbook.'
+        },
+        {
+          type: 'multiple',
+          label: 'Select All That Apply',
+          question: 'The client was diagnosed with PTSD, anxiety, and suicidal risk. Which physician orders would the nurse anticipate at this time? Select all that apply.',
+          instruction: 'Choose every applicable order.',
+          choices: [
+            'Begin antidepressant drug therapy.',
+            'Admit to an acute psychiatric unit.',
+            'Refer to a case manager.',
+            'Refer to a spiritual advisor.',
+            'Begin intense psychotherapy.',
+            'Place on suicide precautions.',
+            'Limit visitors to immediate family.'
+          ],
+          correct: [0, 1, 4, 5, 6],
+          explanation: 'No complete solution or rationale was provided in the source workbook.'
+        },
+        {
+          type: 'single',
+          label: 'Multiple Choice',
+          question: 'A client tells the nurse that people from Mars are going to invade the Earth. Which response by the nurse would be most therapeutic?',
+          instruction: 'Select the best answer.',
+          choices: [
+            '“That must be frightening to you. Can you tell me how you feel about it?”',
+            '“There are no people living on Mars.”',
+            '“What do you mean when you say they\'re going to invade the Earth?”',
+            '“I know you believe the Earth is going to be invaded, but I don\'t believe that.”'
+          ],
+          correct: [0],
+          explanation: 'No complete solution or rationale was provided in the source workbook.'
+        },
+        {
+          type: 'multiple',
+          label: 'Select All That Apply',
+          question: 'The nurse is caring for a hospitalized client with thyrotoxicosis. Which actions can be delegated to unlicensed assistive personnel? Select all that apply.',
+          instruction: 'Choose every action that can be delegated.',
+          choices: [
+            'Administer artificial tears if the client reports eye dryness.',
+            'Assist the client to bathe and change the bed linens to maintain comfort.',
+            'Lower the room temperature and provide cool cloths on request.',
+            'Reinforce to the client that fever is expected with thyrotoxicosis.',
+            'Return a call to the client\'s family and tell them the client\'s condition is unchanged.'
+          ],
+          correct: [1, 2],
+          explanation: 'No complete solution or rationale was provided in the source workbook.'
+        },
+        {
+          type: 'single',
+          label: 'Multiple Choice',
+          question: 'The nurse receives report for a client at 36 weeks’ gestation who is being transferred for labor induction with an intrauterine fetal demise of unknown duration. Which intervention is most important when receiving care of the client?',
+          instruction: 'Select the best answer.',
+          choices: [
+            'Apply a tocodynamometer and evaluate the current contraction pattern.',
+            'Ask about the family\'s desire to speak with a chaplain.',
+            'Draw coagulation tests, fibrinogen, and a complete blood count with platelets.',
+            'Initiate the oxytocin prescription to begin induction of labor.'
+          ],
+          correct: [2],
+          explanation: 'No complete solution or rationale was provided in the source workbook.'
+        },
+        {
+          type: 'multiple',
+          label: 'Select All That Apply',
+          question: 'Which conditions require positioning the client in Semi-Fowler\'s position? Select all that apply.',
+          instruction: 'Choose every applicable condition.',
+          choices: [
+            'Abdominal aneurysm surgery.',
+            'Ruptured appendicitis.',
+            'Cataract surgery.',
+            'Cleft lip.',
+            'Infratentorial craniotomy.',
+            'Laryngectomy.',
+            'Lobectomy.',
+            'Thyroidectomy.'
+          ],
+          correct: [0, 1, 2, 5, 6, 7],
+          explanation: 'No complete solution or rationale was provided in the source workbook.'
+        },
+        {
+          type: 'single',
+          label: 'Multiple Choice',
+          question: 'A client with untreated diabetes mellitus may lapse into a coma because of acidosis. This acidosis is directly caused by an increased serum concentration of:',
+          instruction: 'Select the best answer.',
+          choices: ['Ketones.', 'Glucose.', 'Lactic acid.', 'Glutamic acid.'],
+          correct: [0],
+          explanation: 'No complete solution or rationale was provided in the source workbook.'
+        },
+        {
+          type: 'single',
+          label: 'Multiple Choice',
+          question: 'After noticing fetal bradycardia on the external fetal monitor, the labor and delivery nurse performs a vaginal examination and discovers a pulsatile mass outside the vagina. What is the nurse\'s initial action?',
+          instruction: 'Select the best answer.',
+          choices: [
+            'Prepare the client for a Cesarean section.',
+            'Tell the client not to push until a contraction arrives.',
+            'Escort the client\'s significant other out of the room.',
+            'Place the client in Trendelenburg position.'
+          ],
+          correct: [3],
+          explanation: 'No complete solution or rationale was provided in the source workbook.'
+        },
+        {
+          type: 'single',
+          label: 'Multiple Choice',
+          question: 'Sheynnis was admitted to the emergency room after fainting during a beauty pageant. She was fasting and following a strict weight-loss diet. Her urine test showed ketones. Which acid-base imbalance is she experiencing?',
+          instruction: 'Select the best answer.',
+          choices: ['Metabolic acidosis.', 'Metabolic alkalosis.', 'Respiratory alkalosis.', 'Respiratory acidosis.'],
+          correct: [0],
+          explanation: 'No complete solution or rationale was provided in the source workbook.'
+        },
+        {
+          type: 'multiple',
+          label: 'Select All That Apply',
+          question: 'A client with Guillain-Barré syndrome\'s respiratory outcomes are being assessed. Which results are deemed acceptable? Select all that apply.',
+          instruction: 'Choose every acceptable result.',
+          choices: [
+            'Spontaneous breathing.',
+            '98% oxygen saturation.',
+            'Adventitious breath sounds.',
+            'Normal arterial blood gas levels.',
+            'Vital capacity within normal range.'
+          ],
+          correct: [0, 1, 3, 4],
+          explanation: 'No complete solution or rationale was provided in the source workbook.'
         }
       ];
 
@@ -235,10 +397,7 @@ require_once __DIR__ . '/asset-version.php';
           ? '<div class="quiz-answer-recorded" role="status"><i class="bi bi-check-circle me-1"></i>Answer recorded. Correct answers and rationales will be shown after the test.</div>'
           : '';
 
-        const chartSections = question.chartSections.map((section) => `<section class="quiz-chart-section"><div class="quiz-chart-heading">${section.heading}</div><div class="quiz-chart-content">${section.content}</div></section>`).join('');
-        const chart = `<section class="quiz-chart" aria-label="${question.chartTitle}"><div class="quiz-chart-title"><i class="bi bi-clipboard2-data"></i>${question.chartTitle}</div><div class="quiz-chart-grid" style="--chart-columns:${question.chartSections.length}">${chartSections}</div></section>`;
-
-        modalBody.innerHTML = `<div class="quiz-question-shell"><article class="quiz-question-card"><span class="quiz-type"><i class="bi ${question.type === 'single' ? 'bi-ui-radios' : 'bi-ui-checks'}"></i>${question.label}</span><h2 id="quiz-question-title" class="quiz-question">${currentIndex + 1}. ${question.question}</h2>${chart}<p class="quiz-instruction">${question.instruction}</p><div class="quiz-options">${options}</div>${recordedMessage}</article></div>`;
+        modalBody.innerHTML = `<div class="quiz-question-shell"><article class="quiz-question-card"><span class="quiz-type"><i class="bi ${question.type === 'single' ? 'bi-ui-radios' : 'bi-ui-checks'}"></i>${question.label}</span><h2 id="quiz-question-title" class="quiz-question">${currentIndex + 1}. ${question.question}</h2><p class="quiz-instruction">${question.instruction}</p><div class="quiz-options">${options}</div>${recordedMessage}</article></div>`;
 
         modalBody.querySelectorAll('input[name="quiz-answer"]').forEach((input) => input.addEventListener('change', () => {
           answers[currentIndex] = selectedValues();
