@@ -30,7 +30,7 @@ require_once __DIR__ . '/asset-version.php';
     .quiz-modal.is-open { display: flex; flex-direction: column; }
     .quiz-modal-header { flex: 0 0 auto; display: flex; align-items: center; gap: 18px; padding: 14px clamp(16px, 3vw, 36px); border-bottom: 1px solid #164d78; background: #003057; color: #fff; box-shadow: 0 4px 16px rgba(0, 24, 45, .2); }
     .quiz-modal-brand { display: flex; align-items: center; gap: 12px; min-width: 210px; color: #fff; font-weight: 800; }
-    .quiz-modal-brand img { width: 44px; height: 44px; padding: 4px; border-radius: 8px; background: #fff; object-fit: contain; }
+    .quiz-modal-brand img { width: 44px; height: 44px; object-fit: contain; }
     .quiz-progress-wrap { flex: 1; }
     .quiz-progress-copy { display: flex; justify-content: space-between; gap: 12px; margin-bottom: 7px; color: #fff; font-size: .9rem; font-weight: 750; }
     .quiz-progress { height: 9px; overflow: hidden; border: 1px solid rgba(255, 255, 255, .35); border-radius: 999px; background: rgba(255, 255, 255, .22); }
