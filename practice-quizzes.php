@@ -387,6 +387,18 @@ require_once __DIR__ . '/asset-version.php';
       const markReviewInput = document.getElementById('mark-for-review');
       const nextButton = document.getElementById('next-question');
       const submitButton = document.getElementById('submit-answer');
+
+      const shuffleQuestions = () => {
+        const previousOrder = questions.slice();
+        for (let index = questions.length - 1; index > 0; index -= 1) {
+          const randomIndex = Math.floor(Math.random() * (index + 1));
+          [questions[index], questions[randomIndex]] = [questions[randomIndex], questions[index]];
+        }
+        const orderDidNotChange = questions.length > 1 && questions.every((question, index) => question === previousOrder[index]);
+        if (orderDidNotChange) questions.push(questions.shift());
+      };
+
+      shuffleQuestions();
       let currentIndex = 0;
       let answers = questions.map(() => []);
       let submitted = questions.map(() => false);
@@ -483,6 +495,7 @@ require_once __DIR__ . '/asset-version.php';
         modalFooter.hidden = true;
         modalBody.innerHTML = `<section class="quiz-results"><div class="quiz-score">${score}/${questions.length}</div><h2>Practice Quiz Complete</h2><p>You answered ${score} out of ${questions.length} questions correctly. Compare your responses with the correct answers and review the complete rationale for each item.</p><div class="quiz-score-summary" aria-label="Score summary"><div class="quiz-score-stat"><strong>${questions.length}</strong><span>Total Questions</span></div><div class="quiz-score-stat"><strong>${score}</strong><span>Correct</span></div><div class="quiz-score-stat"><strong>${incorrect}</strong><span>Incorrect</span></div><div class="quiz-score-stat"><strong>${percentage}%</strong><span>Score</span></div></div><div class="quiz-review-wrap"><table class="quiz-review-table"><thead><tr><th scope="col">Question</th><th scope="col">Your Answer</th><th scope="col">Correct Answer</th><th scope="col">Complete Solution / Rationale</th></tr></thead><tbody>${reviewRows}</tbody></table></div><button id="restart-quiz" class="quiz-start-btn mt-2" type="button">Try Again</button></section>`;
         document.getElementById('restart-quiz').addEventListener('click', () => {
+          shuffleQuestions();
           currentIndex = 0;
           answers = questions.map(() => []);
           submitted = questions.map(() => false);
@@ -518,6 +531,7 @@ require_once __DIR__ . '/asset-version.php';
 
       const openQuiz = () => {
         lastFocusedElement = document.activeElement;
+        shuffleQuestions();
         currentIndex = 0;
         answers = questions.map(() => []);
         submitted = questions.map(() => false);
