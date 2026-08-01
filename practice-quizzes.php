@@ -15,7 +15,9 @@ require_once __DIR__ . '/asset-version.php';
   <link href="<?php echo versioned_asset('assets/css/main.css'); ?>" rel="stylesheet">
   <link href="<?php echo versioned_asset('assets/css/gra-content.css'); ?>" rel="stylesheet">
   <style>
+    .quiz-page, .quiz-modal { font-family: var(--default-font); }
     .quiz-page { background: #f4f7fb; }
+    .quiz-launch-card h1, .quiz-question, .quiz-answer-review h2, .quiz-results h2 { font-family: var(--heading-font); }
     .quiz-launch-shell { max-width: 920px; min-height: calc(100vh - 210px); display: grid; place-items: center; }
     .quiz-launch-card { width: 100%; padding: clamp(28px, 5vw, 56px); border: 1px solid rgba(0, 48, 87, .14); border-radius: 22px; background: #fff; box-shadow: 0 18px 50px rgba(0, 48, 87, .1); text-align: center; }
     .quiz-launch-icon { width: 76px; height: 76px; margin: 0 auto 20px; display: grid; place-items: center; border-radius: 22px; background: linear-gradient(135deg, #003057, #1769aa); color: #fff; font-size: 34px; }
@@ -28,7 +30,7 @@ require_once __DIR__ . '/asset-version.php';
 
     .quiz-modal { position: fixed; inset: 0; z-index: 10000; display: none; background: #f4f7fb; }
     .quiz-modal.is-open { display: flex; flex-direction: column; }
-    .quiz-modal-header { flex: 0 0 auto; display: flex; align-items: center; gap: 18px; padding: 14px clamp(16px, 3vw, 36px); border-bottom: 1px solid #164d78; background: #003057; color: #fff; box-shadow: 0 4px 16px rgba(0, 24, 45, .2); }
+    .quiz-modal-header { flex: 0 0 auto; display: flex; align-items: center; gap: 18px; padding: 14px clamp(16px, 3vw, 36px); border-bottom: 1px solid #164d78; background: #003057; color: #fff; font-family: var(--nav-font); box-shadow: 0 4px 16px rgba(0, 24, 45, .2); }
     .quiz-modal-brand { display: flex; align-items: center; gap: 12px; min-width: 210px; color: #fff; font-weight: 800; }
     .quiz-modal-brand img { width: 44px; height: 44px; object-fit: contain; }
     .quiz-progress-wrap { flex: 1; }
