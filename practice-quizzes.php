@@ -54,6 +54,9 @@ require_once __DIR__ . '/asset-version.php';
     .quiz-option > span:last-child { line-height: 1.5; }
     .quiz-answer-recorded { margin-top: 20px; padding: 12px 15px; border: 1px solid #b8d5e9; border-radius: 9px; background: #f0f8fd; color: #07568e; font-weight: 700; }
     .quiz-modal-footer { flex: 0 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 14px clamp(16px, 3vw, 36px); border-top: 1px solid #dce4ec; background: #fff; }
+    .quiz-footer-left { display: flex; align-items: center; gap: 16px; }
+    .quiz-page label.quiz-review-toggle { display: inline-flex; align-items: center; gap: 9px; margin: 0; color: #003057; font-weight: 750; cursor: pointer; white-space: nowrap; }
+    .quiz-review-toggle input { width: 19px; height: 19px; margin: 0; accent-color: #f26522; }
     .quiz-nav-group { display: flex; gap: 10px; }
     .quiz-btn { min-height: 44px; padding: 10px 18px; border-radius: 9px; font-weight: 750; }
     .quiz-btn-secondary { border: 1px solid #cbd6e0; background: #fff; color: #23415c; }
@@ -65,6 +68,9 @@ require_once __DIR__ . '/asset-version.php';
     .quiz-review-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; margin: 28px 0; text-align: left; }
     .quiz-review-item { display: flex; align-items: center; gap: 11px; min-height: 74px; padding: 12px; border: 1px solid #b9d4e7; border-radius: 11px; background: #f4faff; color: #173c59; text-align: left; }
     .quiz-review-item:hover { border-color: #1769aa; background: #eaf5fc; }
+    .quiz-review-item.is-marked { border: 2px solid #f26522; background: #fff4ed; box-shadow: 0 5px 14px rgba(242, 101, 34, .16); }
+    .quiz-review-item.is-marked:hover { background: #ffeadc; }
+    .quiz-review-item.is-marked .quiz-review-number { background: #f26522; }
     .quiz-review-number { width: 34px; height: 34px; flex: 0 0 auto; display: grid; place-items: center; border-radius: 50%; background: #1769aa; color: #fff; font-weight: 800; }
     .quiz-review-item-copy { min-width: 0; }
     .quiz-review-item-copy strong, .quiz-review-item-copy span { display: block; }
@@ -95,6 +101,7 @@ require_once __DIR__ . '/asset-version.php';
       .quiz-modal-body { padding: 16px 12px; }
       .quiz-question-card { padding: 20px 15px; }
       .quiz-modal-footer { align-items: stretch; flex-direction: column; }
+      .quiz-footer-left { width: 100%; justify-content: space-between; }
       .quiz-nav-group { width: 100%; }
       .quiz-btn { flex: 1; }
       .quiz-score-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -138,7 +145,10 @@ require_once __DIR__ . '/asset-version.php';
     </header>
     <div id="quiz-modal-body" class="quiz-modal-body"></div>
     <footer id="quiz-modal-footer" class="quiz-modal-footer">
-      <button id="previous-question" class="quiz-btn quiz-btn-secondary" type="button"><i class="bi bi-chevron-left me-1"></i>Previous</button>
+      <div class="quiz-footer-left">
+        <button id="previous-question" class="quiz-btn quiz-btn-secondary" type="button"><i class="bi bi-chevron-left me-1"></i>Previous</button>
+        <label class="quiz-review-toggle" for="mark-for-review"><input id="mark-for-review" type="checkbox">Mark for Review</label>
+      </div>
       <div class="quiz-nav-group">
         <button id="submit-answer" class="quiz-btn quiz-btn-submit" type="button">Submit Answer</button>
         <button id="next-question" class="quiz-btn quiz-btn-primary" type="button">Next<i class="bi bi-chevron-right ms-1"></i></button>
@@ -374,11 +384,13 @@ require_once __DIR__ . '/asset-version.php';
       const startButton = document.getElementById('start-quiz');
       const closeButton = document.getElementById('close-quiz');
       const previousButton = document.getElementById('previous-question');
+      const markReviewInput = document.getElementById('mark-for-review');
       const nextButton = document.getElementById('next-question');
       const submitButton = document.getElementById('submit-answer');
       let currentIndex = 0;
       let answers = questions.map(() => []);
       let submitted = questions.map(() => false);
+      let markedForReview = questions.map(() => false);
       let reviewMode = false;
       let lastFocusedElement = null;
 
@@ -400,6 +412,7 @@ require_once __DIR__ . '/asset-version.php';
         progressPercent.textContent = `${percent}%`;
         progressBar.style.width = `${percent}%`;
         modalFooter.hidden = false;
+        markReviewInput.checked = markedForReview[currentIndex];
 
         const inputType = question.type === 'single' ? 'radio' : 'checkbox';
         const options = question.choices.map((choice, index) => {
@@ -439,9 +452,11 @@ require_once __DIR__ . '/asset-version.php';
         const reviewItems = questions.map((question, index) => {
           const answerCount = answers[index].length;
           const answerLabel = answerCount === 1 ? '1 answer selected' : `${answerCount} answers selected`;
-          return `<button class="quiz-review-item" type="button" data-review-question="${index}" aria-label="Review question ${index + 1}"><span class="quiz-review-number">${index + 1}</span><span class="quiz-review-item-copy"><strong>${question.label}</strong><span>${answerLabel}</span></span></button>`;
+          const markedClass = markedForReview[index] ? ' is-marked' : '';
+          const markedLabel = markedForReview[index] ? ' · Marked for review' : '';
+          return `<button class="quiz-review-item${markedClass}" type="button" data-review-question="${index}" aria-label="Review question ${index + 1}${markedForReview[index] ? ', marked for review' : ''}"><span class="quiz-review-number">${index + 1}</span><span class="quiz-review-item-copy"><strong>${question.label}</strong><span>${answerLabel}${markedLabel}</span></span></button>`;
         }).join('');
-        modalBody.innerHTML = `<section class="quiz-answer-review"><i class="bi bi-clipboard2-check fs-1 text-primary"></i><h2 class="mt-3">Review Your Answers</h2><p>Select any question below to review or change your response. Your score and the correct answers will remain hidden until you finish the exam.</p><div class="quiz-review-grid">${reviewItems}</div><button id="finish-quiz" class="quiz-start-btn" type="button">Finish and View Results</button></section>`;
+        modalBody.innerHTML = `<section class="quiz-answer-review"><i class="bi bi-clipboard2-check fs-1 text-primary"></i><h2 class="mt-3">Review Your Answers</h2><p>Select any question below to review or change your response. Questions marked for review are highlighted in orange. Your score and the correct answers will remain hidden until you finish the exam.</p><div class="quiz-review-grid">${reviewItems}</div><button id="finish-quiz" class="quiz-start-btn" type="button">Finish and View Results</button></section>`;
         modalBody.querySelectorAll('[data-review-question]').forEach((button) => button.addEventListener('click', () => {
           currentIndex = Number(button.dataset.reviewQuestion);
           reviewMode = true;
@@ -471,6 +486,7 @@ require_once __DIR__ . '/asset-version.php';
           currentIndex = 0;
           answers = questions.map(() => []);
           submitted = questions.map(() => false);
+          markedForReview = questions.map(() => false);
           reviewMode = false;
           renderQuestion();
         });
@@ -505,6 +521,7 @@ require_once __DIR__ . '/asset-version.php';
         currentIndex = 0;
         answers = questions.map(() => []);
         submitted = questions.map(() => false);
+        markedForReview = questions.map(() => false);
         reviewMode = false;
         modal.classList.add('is-open');
         modal.setAttribute('aria-hidden', 'false');
@@ -524,6 +541,9 @@ require_once __DIR__ . '/asset-version.php';
 
       startButton.addEventListener('click', openQuiz);
       closeButton.addEventListener('click', closeQuiz);
+      markReviewInput.addEventListener('change', () => {
+        markedForReview[currentIndex] = markReviewInput.checked;
+      });
       previousButton.addEventListener('click', () => {
         if (reviewMode) {
           renderAnswerReview();
