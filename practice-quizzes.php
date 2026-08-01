@@ -44,7 +44,7 @@ require_once __DIR__ . '/asset-version.php';
     .quiz-question { margin: 0 0 8px; color: #172b3d; font-size: clamp(1.1rem, 2vw, 1.38rem); font-weight: 750; line-height: 1.5; }
     .quiz-instruction { margin-bottom: 22px; color: #687789; }
     .quiz-options { display: grid; gap: 11px; }
-    .quiz-option { position: relative; display: grid; grid-template-columns: 22px 30px minmax(0, 1fr); align-items: flex-start; column-gap: 14px; padding: 15px 17px; border: 1px solid #d7e0e9; border-radius: 11px; background: #fff; cursor: pointer; transition: border-color .18s ease, background-color .18s ease, transform .18s ease; }
+    .quiz-page label.quiz-option { position: relative; display: grid; grid-template-columns: 22px 30px minmax(0, 1fr); align-items: flex-start; column-gap: 16px; margin-bottom: 0; padding: 15px 17px; border: 1px solid #d7e0e9; border-radius: 11px; background: #fff; cursor: pointer; transition: border-color .18s ease, background-color .18s ease, transform .18s ease; }
     .quiz-option:hover { border-color: #5d94be; background: #f8fbfe; transform: translateY(-1px); }
     .quiz-option input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: #1769aa; }
     .quiz-option.is-selected { border-color: #1769aa; background: #eef7fd; }
