@@ -402,6 +402,7 @@ endif;
     .admin-data-table-wrap .dt-container .dt-search input { min-width: min(260px, 60vw); padding: .45rem .7rem; }
     .admin-data-table-wrap .dt-container .dt-length select { padding: .35rem 2rem .35rem .55rem; }
     .admin-data-table-wrap table.dataTable tbody td { vertical-align: middle; }
+    #saved-lessons-table tbody td { vertical-align: top; }
     .admin-data-table-wrap .lesson-url { display: inline-block; max-width: 360px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: middle; }
     .admin-data-table-wrap .lesson-title-column { min-width: 420px; width: 52%; }
     .lesson-title-cell strong { display: block; color: #173c59; font-size: 1rem; line-height: 1.45; }
