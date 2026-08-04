@@ -540,6 +540,7 @@ endif;
       <noscript><p class="alert alert-warning mt-3 mb-0">JavaScript is required to view and search schedule images.</p></noscript>
     </section>
   </main>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.datatables.net/2.3.5/js/dataTables.min.js"></script>
   <script>
     (() => {
