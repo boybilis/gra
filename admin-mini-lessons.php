@@ -24,6 +24,11 @@ $testimonialFolderOptions = [
 ];
 $testimonialBaseDir = __DIR__ . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'gra' . DIRECTORY_SEPARATOR . 'passers';
 $courseScheduleOptions = get_course_schedule_options();
+$testimonialCsrfToken = (string) ($_SESSION['testimonial_csrf_token'] ?? '');
+if ($testimonialCsrfToken === '') {
+    $testimonialCsrfToken = bin2hex(random_bytes(32));
+    $_SESSION['testimonial_csrf_token'] = $testimonialCsrfToken;
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && (string) ($_POST['action'] ?? '') === 'login') {
     $username = (string) ($_POST['username'] ?? '');
@@ -64,6 +69,125 @@ function send_admin_datatable_response(array $payload, int $statusCode = 200): v
     header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
     echo json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
     exit;
+}
+
+function get_testimonial_gallery_folders(string $baseDir): array
+{
+    if (!is_dir($baseDir)) {
+        return [];
+    }
+
+    $folders = [];
+    foreach (new DirectoryIterator($baseDir) as $entry) {
+        if ($entry->isDot() || !$entry->isDir()) {
+            continue;
+        }
+        $folders[] = $entry->getFilename();
+    }
+    natcasesort($folders);
+    return array_values($folders);
+}
+
+function send_admin_json_response(array $payload, int $statusCode = 200): void
+{
+    http_response_code($statusCode);
+    header('Content-Type: application/json; charset=utf-8');
+    header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+    echo json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+    exit;
+}
+
+$testimonialGalleryFolders = get_testimonial_gallery_folders($testimonialBaseDir);
+
+if (isset($_GET['ajax_testimonials'])) {
+    if (!is_mini_lessons_admin_logged_in()) {
+        send_admin_json_response(['error' => 'Your admin session has expired. Please sign in again.'], 401);
+    }
+
+    try {
+        $selectedFolder = trim((string) ($_GET['folder'] ?? ''));
+        if (!in_array($selectedFolder, $testimonialGalleryFolders, true)) {
+            throw new InvalidArgumentException('Please select a valid testimonial folder.');
+        }
+
+        $folderPath = $testimonialBaseDir . DIRECTORY_SEPARATOR . $selectedFolder;
+        $allowedExtensions = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+        $images = [];
+        foreach (new DirectoryIterator($folderPath) as $entry) {
+            if ($entry->isDot() || !$entry->isFile()) {
+                continue;
+            }
+            $extension = strtolower($entry->getExtension());
+            if (!in_array($extension, $allowedExtensions, true)) {
+                continue;
+            }
+            $images[] = $entry->getFilename();
+        }
+        natcasesort($images);
+        $images = array_values($images);
+
+        $perPage = 12;
+        $total = count($images);
+        $totalPages = max(1, (int) ceil($total / $perPage));
+        $page = min($totalPages, max(1, (int) ($_GET['page'] ?? 1)));
+        $pageImages = array_slice($images, ($page - 1) * $perPage, $perPage);
+        $data = array_map(static fn (string $filename): array => [
+            'filename' => $filename,
+            'url' => 'assets/img/gra/passers/' . rawurlencode($selectedFolder) . '/' . rawurlencode($filename),
+        ], $pageImages);
+
+        send_admin_json_response([
+            'folder' => $selectedFolder,
+            'page' => $page,
+            'per_page' => $perPage,
+            'total' => $total,
+            'total_pages' => $totalPages,
+            'images' => $data,
+        ]);
+    } catch (Throwable $exception) {
+        send_admin_json_response(['error' => $exception->getMessage()], 400);
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && (string) ($_POST['ajax_action'] ?? '') === 'delete_testimonial') {
+    if (!is_mini_lessons_admin_logged_in()) {
+        send_admin_json_response(['error' => 'Your admin session has expired. Please sign in again.'], 401);
+    }
+
+    try {
+        if (!hash_equals($testimonialCsrfToken, (string) ($_POST['csrf_token'] ?? ''))) {
+            throw new RuntimeException('The request could not be verified. Please reload the page and try again.');
+        }
+
+        $selectedFolder = trim((string) ($_POST['folder'] ?? ''));
+        $filename = basename(trim((string) ($_POST['filename'] ?? '')));
+        if (!in_array($selectedFolder, $testimonialGalleryFolders, true) || $filename === '') {
+            throw new InvalidArgumentException('Invalid testimonial image selection.');
+        }
+
+        $extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+        if (!in_array($extension, ['jpg', 'jpeg', 'png', 'webp', 'gif'], true)) {
+            throw new InvalidArgumentException('Only testimonial image files can be deleted.');
+        }
+
+        $folderPath = realpath($testimonialBaseDir . DIRECTORY_SEPARATOR . $selectedFolder);
+        $imagePath = realpath(($folderPath ?: '') . DIRECTORY_SEPARATOR . $filename);
+        $basePath = realpath($testimonialBaseDir);
+        if ($basePath === false || $folderPath === false || $imagePath === false
+            || !str_starts_with($folderPath, $basePath . DIRECTORY_SEPARATOR)
+            || dirname($imagePath) !== $folderPath
+            || !is_file($imagePath)) {
+            throw new RuntimeException('The selected testimonial image was not found.');
+        }
+
+        if (!unlink($imagePath)) {
+            throw new RuntimeException('Unable to delete the selected testimonial image.');
+        }
+
+        send_admin_json_response(['success' => true, 'message' => 'Testimonial image deleted.']);
+    } catch (Throwable $exception) {
+        send_admin_json_response(['error' => $exception->getMessage()], 400);
+    }
 }
 
 if (isset($_GET['ajax_table'])) {
@@ -340,6 +464,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_mini_lessons_admin_logged_in()) 
     }
 }
 
+$testimonialGalleryFolders = get_testimonial_gallery_folders($testimonialBaseDir);
+
 if (!is_mini_lessons_admin_logged_in()):
 ?>
 <!DOCTYPE html>
@@ -410,6 +536,14 @@ endif;
     .lesson-title-cell hr { margin: .65rem 0; border-color: #d8e1e9; opacity: 1; }
     .lesson-title-cell .lesson-url { max-width: 100%; font-size: .86rem; }
     .lesson-action-buttons { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .testimonial-gallery-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+    .testimonial-gallery-card { display: flex; min-width: 0; flex-direction: column; overflow: hidden; border: 1px solid #d8e1e9; border-radius: .65rem; background: #fff; }
+    .testimonial-gallery-card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: #eef2f5; }
+    .testimonial-gallery-card-body { display: flex; flex: 1; flex-direction: column; gap: .65rem; padding: .75rem; }
+    .testimonial-gallery-filename { margin: 0; overflow-wrap: anywhere; color: #343a40; font-size: .82rem; line-height: 1.4; }
+    .testimonial-gallery-card .btn { margin-top: auto; align-self: flex-start; }
+    .testimonial-gallery-status { min-height: 1.5rem; }
+    .testimonial-gallery-pagination { display: flex; align-items: center; justify-content: center; gap: .75rem; margin-top: 1.25rem; }
     .admin-tabs { display: flex; gap: .5rem; margin-bottom: 1.5rem; padding: .45rem; overflow-x: auto; border: 1px solid #d8e1e9; border-radius: .75rem; background: #fff; }
     .admin-tab-button { flex: 1 0 auto; min-height: 44px; padding: .65rem 1rem; border: 0; border-radius: .5rem; background: transparent; color: #003057; font-weight: 750; white-space: nowrap; }
     .admin-tab-button:hover { background: #eef5fb; }
@@ -418,7 +552,9 @@ endif;
     @media (max-width: 767.98px) {
       .admin-data-table-wrap .dt-container .dt-layout-row { gap: .75rem; align-items: stretch; }
       .admin-data-table-wrap .dt-container .dt-search input { min-width: 0; width: 100%; margin: .35rem 0 0; }
+      .testimonial-gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
+    @media (max-width: 479.98px) { .testimonial-gallery-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body class="index-page gra-page">
@@ -519,6 +655,29 @@ endif;
         </div>
         <button type="submit" class="btn btn-primary">Upload Images</button>
       </form>
+
+      <hr class="my-4">
+      <section aria-labelledby="testimonial-gallery-heading">
+        <h3 id="testimonial-gallery-heading" class="h5">Manage Uploaded Testimonials</h3>
+        <div class="row align-items-end mb-3">
+          <div class="col-md-6">
+            <label for="testimonial-gallery-folder" class="form-label">Passer Folder</label>
+            <select id="testimonial-gallery-folder" class="form-select">
+              <option value="">Select folder to view images</option>
+              <?php foreach ($testimonialGalleryFolders as $folderName): ?>
+                <option value="<?php echo htmlspecialchars($folderName, ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($testimonialFolderOptions[$folderName] ?? ucwords(str_replace(['-', '_'], ' ', $folderName)), ENT_QUOTES, 'UTF-8'); ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+        </div>
+        <div id="testimonial-gallery-status" class="testimonial-gallery-status text-muted" role="status" aria-live="polite">Select a folder to load its images.</div>
+        <div id="testimonial-gallery-grid" class="testimonial-gallery-grid mt-3"></div>
+        <nav id="testimonial-gallery-pagination" class="testimonial-gallery-pagination" aria-label="Testimonial image pages" hidden>
+          <button id="testimonial-gallery-previous" type="button" class="btn btn-outline-primary">Previous</button>
+          <span id="testimonial-gallery-page" aria-live="polite"></span>
+          <button id="testimonial-gallery-next" type="button" class="btn btn-outline-primary">Next</button>
+        </nav>
+      </section>
     </section>
 
     <section id="admin-panel-schedules" class="mb-4 p-3 border rounded bg-white" role="tabpanel" aria-labelledby="admin-tab-schedules" data-admin-panel="schedules" hidden>
@@ -593,6 +752,107 @@ endif;
         "'": '&#039;',
         '"': '&quot;'
       })[character]);
+
+      const testimonialCsrfToken = <?php echo json_encode($testimonialCsrfToken, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>;
+      const testimonialGalleryFolder = document.getElementById('testimonial-gallery-folder');
+      const testimonialGalleryStatus = document.getElementById('testimonial-gallery-status');
+      const testimonialGalleryGrid = document.getElementById('testimonial-gallery-grid');
+      const testimonialGalleryPagination = document.getElementById('testimonial-gallery-pagination');
+      const testimonialGalleryPrevious = document.getElementById('testimonial-gallery-previous');
+      const testimonialGalleryNext = document.getElementById('testimonial-gallery-next');
+      const testimonialGalleryPage = document.getElementById('testimonial-gallery-page');
+      let testimonialCurrentPage = 1;
+      let testimonialTotalPages = 1;
+      let testimonialGalleryRequest = null;
+
+      const loadTestimonialGallery = async (page = 1) => {
+        const folder = testimonialGalleryFolder.value;
+        if (!folder) {
+          testimonialGalleryGrid.replaceChildren();
+          testimonialGalleryPagination.hidden = true;
+          testimonialGalleryStatus.textContent = 'Select a folder to load its images.';
+          return;
+        }
+
+        if (testimonialGalleryRequest) testimonialGalleryRequest.abort();
+        testimonialGalleryRequest = new AbortController();
+        testimonialGalleryStatus.textContent = 'Loading images…';
+        testimonialGalleryGrid.setAttribute('aria-busy', 'true');
+
+        try {
+          const parameters = new URLSearchParams({ ajax_testimonials: '1', folder, page: String(page) });
+          const response = await fetch(`admin-mini-lessons.php?${parameters}`, {
+            credentials: 'same-origin',
+            signal: testimonialGalleryRequest.signal
+          });
+          const result = await response.json();
+          if (!response.ok || result.error) throw new Error(result.error || 'Unable to load testimonial images.');
+
+          testimonialCurrentPage = result.page;
+          testimonialTotalPages = result.total_pages;
+          testimonialGalleryGrid.innerHTML = result.images.map((image) => `
+            <article class="testimonial-gallery-card">
+              <a href="${escapeHtml(image.url)}" target="_blank" rel="noopener">
+                <img src="${escapeHtml(image.url)}" alt="${escapeHtml(image.filename)}" loading="lazy" decoding="async">
+              </a>
+              <div class="testimonial-gallery-card-body">
+                <p class="testimonial-gallery-filename">${escapeHtml(image.filename)}</p>
+                <button type="button" class="btn btn-sm btn-outline-danger" data-delete-testimonial="${escapeHtml(image.filename)}">Delete</button>
+              </div>
+            </article>`).join('');
+
+          testimonialGalleryStatus.textContent = result.total === 0
+            ? 'No testimonial images found in this folder.'
+            : `Showing ${result.images.length} of ${result.total} image${result.total === 1 ? '' : 's'}.`;
+          testimonialGalleryPage.textContent = `Page ${result.page} of ${result.total_pages}`;
+          testimonialGalleryPrevious.disabled = result.page <= 1;
+          testimonialGalleryNext.disabled = result.page >= result.total_pages;
+          testimonialGalleryPagination.hidden = result.total === 0;
+        } catch (error) {
+          if (error.name === 'AbortError') return;
+          testimonialGalleryGrid.replaceChildren();
+          testimonialGalleryPagination.hidden = true;
+          testimonialGalleryStatus.textContent = error.message || 'Unable to load testimonial images.';
+        } finally {
+          testimonialGalleryGrid.removeAttribute('aria-busy');
+        }
+      };
+
+      testimonialGalleryFolder.addEventListener('change', () => loadTestimonialGallery(1));
+      testimonialGalleryPrevious.addEventListener('click', () => loadTestimonialGallery(Math.max(1, testimonialCurrentPage - 1)));
+      testimonialGalleryNext.addEventListener('click', () => loadTestimonialGallery(Math.min(testimonialTotalPages, testimonialCurrentPage + 1)));
+
+      testimonialGalleryGrid.addEventListener('click', async (event) => {
+        const deleteButton = event.target.closest('[data-delete-testimonial]');
+        if (!deleteButton) return;
+
+        const filename = deleteButton.dataset.deleteTestimonial;
+        const folder = testimonialGalleryFolder.value;
+        if (!window.confirm(`Delete ${filename}? This cannot be undone.`)) return;
+
+        deleteButton.disabled = true;
+        deleteButton.textContent = 'Deleting…';
+        try {
+          const formData = new FormData();
+          formData.set('ajax_action', 'delete_testimonial');
+          formData.set('csrf_token', testimonialCsrfToken);
+          formData.set('folder', folder);
+          formData.set('filename', filename);
+          const response = await fetch('admin-mini-lessons.php', {
+            method: 'POST',
+            credentials: 'same-origin',
+            body: formData
+          });
+          const result = await response.json();
+          if (!response.ok || result.error) throw new Error(result.error || 'Unable to delete testimonial image.');
+          testimonialGalleryStatus.textContent = result.message;
+          await loadTestimonialGallery(testimonialCurrentPage);
+        } catch (error) {
+          testimonialGalleryStatus.textContent = error.message || 'Unable to delete testimonial image.';
+          deleteButton.disabled = false;
+          deleteButton.textContent = 'Delete';
+        }
+      });
 
       const lessonsTable = new DataTable('#saved-lessons-table', {
         processing: true,

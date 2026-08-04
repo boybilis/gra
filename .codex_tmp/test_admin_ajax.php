@@ -9,13 +9,22 @@ session_save_path($sessionPath);
 session_start();
 $_SESSION['mini_lessons_admin_logged_in'] = true;
 $_SERVER['REQUEST_METHOD'] = 'GET';
-$_GET = [
-    'ajax_table' => (string) ($argv[1] ?? 'lessons'),
-    'draw' => '7',
-    'start' => '0',
-    'length' => '10',
-    'search' => ['value' => (string) ($argv[2] ?? '')],
-    'order' => [['column' => '0', 'dir' => 'asc']],
-];
+$requestType = (string) ($argv[1] ?? 'lessons');
+if ($requestType === 'testimonials') {
+    $_GET = [
+        'ajax_testimonials' => '1',
+        'folder' => (string) ($argv[2] ?? 'nclex'),
+        'page' => (string) ($argv[3] ?? '1'),
+    ];
+} else {
+    $_GET = [
+        'ajax_table' => $requestType,
+        'draw' => '7',
+        'start' => '0',
+        'length' => '10',
+        'search' => ['value' => (string) ($argv[2] ?? '')],
+        'order' => [['column' => '0', 'dir' => 'asc']],
+    ];
+}
 
 require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'admin-mini-lessons.php';
