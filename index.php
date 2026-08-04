@@ -298,6 +298,15 @@
           $featuredPasserCount = count($featuredPassers);
           $featuredDesktopSlides = max(1, min(4, $featuredPasserCount));
           $featuredTabletSlides = max(1, min(2, $featuredPasserCount));
+          $featuredPasserCourseLinks = [
+            'nclex' => 'nclex-rn-courses.php#course-passers',
+            'dha' => 'dha-rn-courses.php#course-passers',
+            'haad-doh' => 'doh-haad-rn-courses.php#course-passers',
+            'prometric' => 'prometric-rn-courses.php#course-passers',
+            'sple' => 'sple-courses.php#course-passers',
+            'pnle' => 'pnle-courses.php#course-passers',
+            'civil-service' => 'civil-service-courses.php#course-passers',
+          ];
           $featuredSwiperConfig = [
             'loop' => $featuredPasserCount > $featuredDesktopSlides,
             'speed' => 600,
@@ -324,12 +333,17 @@
               foreach ($featuredPassers as $passerImage):
                 $passerAlt = htmlspecialchars(($passerImage['name'] ?? 'GRA passer') . ' testimonial poster', ENT_QUOTES, 'UTF-8');
                 $passerUrl = htmlspecialchars($passerImage['url'], ENT_QUOTES, 'UTF-8');
+                $passerCourse = (string) ($passerImage['course'] ?? '');
+                $passerCourseLink = htmlspecialchars($featuredPasserCourseLinks[$passerCourse] ?? 'index.php#courses', ENT_QUOTES, 'UTF-8');
             ?>
             <div class="swiper-slide">
               <article class="featured-passer-card">
                 <a href="<?php echo $passerUrl; ?>" class="glightbox" data-gallery="featured-passers">
                   <img src="<?php echo $passerUrl; ?>" alt="<?php echo $passerAlt; ?>" loading="lazy" decoding="async">
                 </a>
+                <div class="featured-passer-actions">
+                  <a href="<?php echo $passerCourseLink; ?>" class="btn featured-more-link">View More Testimonials</a>
+                </div>
               </article>
             </div>
             <?php endforeach; ?>
