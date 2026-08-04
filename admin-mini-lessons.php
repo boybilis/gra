@@ -519,6 +519,7 @@ endif;
   <title>Admin Mini Lessons | Gapuz Review Academy</title>
   <link href="assets/img/gra/gra-logo.png" rel="icon">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="https://cdn.datatables.net/2.3.5/css/dataTables.dataTables.min.css" rel="stylesheet">
   <link href="<?php echo versioned_asset('assets/css/main.css'); ?>" rel="stylesheet">
   <link href="<?php echo versioned_asset('assets/css/gra-content.css'); ?>" rel="stylesheet">
@@ -743,6 +744,7 @@ endif;
   </main>
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.datatables.net/2.3.5/js/dataTables.min.js"></script>
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
   <script>
     (() => {
       const escapeHtml = (value) => String(value ?? '').replace(/[&<>'"]/g, (character) => ({
@@ -761,6 +763,7 @@ endif;
       const testimonialGalleryPrevious = document.getElementById('testimonial-gallery-previous');
       const testimonialGalleryNext = document.getElementById('testimonial-gallery-next');
       const testimonialGalleryPage = document.getElementById('testimonial-gallery-page');
+      const testimonialLightbox = GLightbox({ elements: [] });
       let testimonialCurrentPage = 1;
       let testimonialTotalPages = 1;
       let testimonialGalleryRequest = null;
@@ -792,7 +795,7 @@ endif;
           testimonialTotalPages = result.total_pages;
           testimonialGalleryGrid.innerHTML = result.images.map((image) => `
             <article class="testimonial-gallery-card">
-              <a href="${escapeHtml(image.url)}" target="_blank" rel="noopener">
+              <a href="${escapeHtml(image.url)}" data-testimonial-lightbox data-title="${escapeHtml(image.filename)}">
                 <img src="${escapeHtml(image.url)}" alt="${escapeHtml(image.filename)}" loading="lazy" decoding="async">
               </a>
               <div class="testimonial-gallery-card-body">
@@ -823,6 +826,19 @@ endif;
       testimonialGalleryNext.addEventListener('click', () => loadTestimonialGallery(Math.min(testimonialTotalPages, testimonialCurrentPage + 1)));
 
       testimonialGalleryGrid.addEventListener('click', async (event) => {
+        const imageTrigger = event.target.closest('[data-testimonial-lightbox]');
+        if (imageTrigger) {
+          event.preventDefault();
+          const imageTriggers = Array.from(testimonialGalleryGrid.querySelectorAll('[data-testimonial-lightbox]'));
+          testimonialLightbox.setElements(imageTriggers.map((trigger) => ({
+            href: trigger.href,
+            type: 'image',
+            title: trigger.dataset.title || ''
+          })));
+          testimonialLightbox.openAt(Math.max(0, imageTriggers.indexOf(imageTrigger)));
+          return;
+        }
+
         const deleteButton = event.target.closest('[data-delete-testimonial]');
         if (!deleteButton) return;
 
