@@ -12,7 +12,6 @@ $loginError = '';
 $activeAdminTab = 'free-course';
 $miniLessonCourseOptions = get_mini_lesson_course_options();
 $miniLessonCourseOptionsForAdmin = $miniLessonCourseOptions;
-unset($miniLessonCourseOptionsForAdmin['all']);
 $testimonialFolderOptions = [
     'nclex' => 'NCLEX',
     'dha' => 'DHA',
@@ -85,7 +84,7 @@ if (isset($_GET['ajax_table'])) {
         if ($table === 'lessons') {
             $database = get_database();
             $courseLabels = get_mini_lesson_course_options();
-            $orderColumns = ['id', 'title', 'course', 'youtube_url', 'sort_order'];
+            $orderColumns = ['id', 'title', 'course', 'sort_order'];
             $orderColumn = $orderColumns[$request['order_column']] ?? 'sort_order';
             $where = '';
             $parameters = [];
@@ -113,7 +112,7 @@ if (isset($_GET['ajax_table'])) {
                 $recordsFiltered = (int) $countStatement->fetchColumn();
             }
 
-            $query = 'SELECT id, title, course, youtube_url, sort_order
+            $query = 'SELECT id, title, course, description, youtube_url, sort_order
                       FROM mini_lessons' . $where . '
                       ORDER BY ' . $orderColumn . ' ' . $request['order_direction'] . ', id ASC
                       LIMIT :limit OFFSET :offset';
@@ -130,7 +129,9 @@ if (isset($_GET['ajax_table'])) {
                 return [
                     'id' => (int) $lesson['id'],
                     'title' => (string) $lesson['title'],
+                    'course_key' => $course,
                     'course' => $courseLabels[$course] ?? strtoupper($course),
+                    'description' => (string) ($lesson['description'] ?? ''),
                     'youtube_url' => (string) $lesson['youtube_url'],
                     'sort_order' => (int) $lesson['sort_order'],
                 ];
@@ -223,6 +224,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_mini_lessons_admin_logged_in()) 
 
             add_mini_lesson($title, $course, $description, $youtubeUrl, $sortOrder);
             $feedback = 'Mini lesson added successfully.';
+        } elseif ($action === 'update') {
+            $id = (int) ($_POST['id'] ?? 0);
+            $title = trim((string) ($_POST['title'] ?? ''));
+            $course = trim((string) ($_POST['course'] ?? ''));
+            $description = trim((string) ($_POST['description'] ?? ''));
+            $youtubeUrl = trim((string) ($_POST['youtube_url'] ?? ''));
+            $sortOrder = (int) ($_POST['sort_order'] ?? 0);
+
+            if ($id <= 0 || $title === '' || $course === '' || $youtubeUrl === '') {
+                throw new InvalidArgumentException('Lesson ID, title, course, and YouTube URL are required.');
+            }
+
+            update_mini_lesson($id, $title, $course, $description, $youtubeUrl, $sortOrder);
+            $feedback = 'Mini lesson updated successfully.';
         } elseif ($action === 'delete') {
             $id = (int) ($_POST['id'] ?? 0);
             if ($id <= 0) {
@@ -388,6 +403,11 @@ endif;
     .admin-data-table-wrap .dt-container .dt-length select { padding: .35rem 2rem .35rem .55rem; }
     .admin-data-table-wrap table.dataTable tbody td { vertical-align: middle; }
     .admin-data-table-wrap .lesson-url { display: inline-block; max-width: 360px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: middle; }
+    .admin-data-table-wrap .lesson-title-column { min-width: 420px; width: 52%; }
+    .lesson-title-cell strong { display: block; color: #173c59; font-size: 1rem; line-height: 1.45; }
+    .lesson-title-cell hr { margin: .65rem 0; border-color: #d8e1e9; opacity: 1; }
+    .lesson-title-cell .lesson-url { max-width: 100%; font-size: .86rem; }
+    .lesson-action-buttons { display: flex; flex-wrap: wrap; gap: .4rem; }
     .admin-tabs { display: flex; gap: .5rem; margin-bottom: 1.5rem; padding: .45rem; overflow-x: auto; border: 1px solid #d8e1e9; border-radius: .75rem; background: #fff; }
     .admin-tab-button { flex: 1 0 auto; min-height: 44px; padding: .65rem 1rem; border: 0; border-radius: .5rem; background: transparent; color: #003057; font-weight: 750; white-space: nowrap; }
     .admin-tab-button:hover { background: #eef5fb; }
@@ -434,9 +454,10 @@ endif;
     </nav>
 
     <section id="admin-panel-free-course" class="mb-4 p-3 border rounded bg-white" role="tabpanel" aria-labelledby="admin-tab-free-course" data-admin-panel="free-course">
-      <h3 class="h5">Add Mini Lesson</h3>
-      <form method="post" action="admin-mini-lessons.php">
-        <input type="hidden" name="action" value="add">
+      <h3 id="lesson-form-heading" class="h5">Add Mini Lesson</h3>
+      <form id="lesson-form" method="post" action="admin-mini-lessons.php">
+        <input id="lesson-form-action" type="hidden" name="action" value="add">
+        <input id="lesson-id" type="hidden" name="id" value="">
         <div class="row">
           <div class="col-md-6 mb-3">
             <label for="title" class="form-label">Lesson Title</label>
@@ -466,7 +487,10 @@ endif;
             <input id="sort_order" name="sort_order" type="number" class="form-control" value="0">
           </div>
         </div>
-        <button type="submit" class="btn btn-primary">Save Lesson</button>
+        <div class="d-flex flex-wrap gap-2">
+          <button id="lesson-submit-button" type="submit" class="btn btn-primary">Save Lesson</button>
+          <button id="cancel-lesson-edit" type="button" class="btn btn-outline-secondary" hidden>Cancel Edit</button>
+        </div>
       </form>
     </section>
 
@@ -529,7 +553,6 @@ endif;
                 <th>ID</th>
                 <th>Title</th>
                 <th>Course</th>
-                <th>YouTube URL</th>
                 <th>Sort</th>
                 <th>Action</th>
               </tr>
@@ -576,7 +599,7 @@ endif;
         pageLength: 10,
         lengthMenu: [10, 25, 50, 100],
         searchDelay: 350,
-        order: [[4, 'asc']],
+        order: [[3, 'asc']],
         language: {
           search: 'Quick search:',
           emptyTable: 'No lessons saved yet.',
@@ -584,21 +607,21 @@ endif;
         },
         columns: [
           { data: 'id' },
-          { data: 'title', render: (data) => escapeHtml(data) },
-          { data: 'course', render: (data) => escapeHtml(data) },
           {
-            data: 'youtube_url',
-            render: (data, type) => type === 'display'
-              ? `<a class="lesson-url" href="${escapeHtml(data)}" target="_blank" rel="noopener">${escapeHtml(data)}</a>`
+            data: 'title',
+            className: 'lesson-title-column',
+            render: (data, type, row) => type === 'display'
+              ? `<div class="lesson-title-cell"><strong>${escapeHtml(data)}</strong><hr><a class="lesson-url" href="${escapeHtml(row.youtube_url)}" target="_blank" rel="noopener">${escapeHtml(row.youtube_url)}</a></div>`
               : data
           },
+          { data: 'course', render: (data) => escapeHtml(data) },
           { data: 'sort_order' },
           {
             data: 'id',
             orderable: false,
             searchable: false,
             render: (data, type) => type === 'display'
-              ? `<form method="post" action="admin-mini-lessons.php" onsubmit="return confirm('Delete this lesson?');"><input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="${Number(data)}"><button type="submit" class="btn btn-sm btn-outline-danger">Delete</button></form>`
+              ? `<div class="lesson-action-buttons"><button type="button" class="btn btn-sm btn-outline-primary" data-edit-lesson="${Number(data)}">Edit</button><form method="post" action="admin-mini-lessons.php" onsubmit="return confirm('Delete this lesson?');"><input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="${Number(data)}"><button type="submit" class="btn btn-sm btn-outline-danger">Delete</button></form></div>`
               : data
           }
         ]
@@ -633,6 +656,22 @@ endif;
       const tabPanels = Array.from(document.querySelectorAll('[data-admin-panel]'));
       const validTabs = tabButtons.map((button) => button.dataset.adminTab);
 
+      const lessonForm = document.getElementById('lesson-form');
+      const lessonFormHeading = document.getElementById('lesson-form-heading');
+      const lessonFormAction = document.getElementById('lesson-form-action');
+      const lessonIdInput = document.getElementById('lesson-id');
+      const lessonSubmitButton = document.getElementById('lesson-submit-button');
+      const cancelLessonEdit = document.getElementById('cancel-lesson-edit');
+
+      const resetLessonForm = () => {
+        lessonForm.reset();
+        lessonFormAction.value = 'add';
+        lessonIdInput.value = '';
+        lessonFormHeading.textContent = 'Add Mini Lesson';
+        lessonSubmitButton.textContent = 'Save Lesson';
+        cancelLessonEdit.hidden = true;
+      };
+
       const activateAdminTab = (tabName, updateHash = false) => {
         const selectedTab = validTabs.includes(tabName) ? tabName : 'free-course';
         tabButtons.forEach((button) => {
@@ -658,6 +697,33 @@ endif;
       tabButtons.forEach((button) => button.addEventListener('click', () => {
         activateAdminTab(button.dataset.adminTab, true);
       }));
+
+      document.addEventListener('click', (event) => {
+        const editButton = event.target.closest('[data-edit-lesson]');
+        if (!editButton) return;
+
+        const lesson = lessonsTable.row(editButton.closest('tr')).data();
+        if (!lesson) return;
+
+        document.getElementById('title').value = lesson.title || '';
+        document.getElementById('youtube_url').value = lesson.youtube_url || '';
+        document.getElementById('course').value = lesson.course_key || '';
+        document.getElementById('description').value = lesson.description || '';
+        document.getElementById('sort_order').value = lesson.sort_order ?? 0;
+        lessonFormAction.value = 'update';
+        lessonIdInput.value = lesson.id;
+        lessonFormHeading.textContent = 'Update Lesson';
+        lessonSubmitButton.textContent = 'Update Lesson';
+        cancelLessonEdit.hidden = false;
+        activateAdminTab('free-course', true);
+        lessonForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.getElementById('title').focus({ preventScroll: true });
+      });
+
+      cancelLessonEdit.addEventListener('click', () => {
+        resetLessonForm();
+        lessonForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
 
       const hashTab = window.location.hash.startsWith('#admin-')
         ? window.location.hash.slice('#admin-'.length)

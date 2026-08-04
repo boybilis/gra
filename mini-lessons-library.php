@@ -136,6 +136,51 @@ function add_mini_lesson(string $title, string $course, string $description, str
     ]);
 }
 
+function update_mini_lesson(int $id, string $title, string $course, string $description, string $youtubeUrl, int $sortOrder = 0): void
+{
+    if ($id <= 0) {
+        throw new InvalidArgumentException('Invalid lesson ID.');
+    }
+
+    $database = get_database();
+    ensure_mini_lessons_table($database);
+
+    $videoId = extract_youtube_video_id($youtubeUrl);
+    if ($videoId === null) {
+        throw new InvalidArgumentException('Invalid YouTube URL.');
+    }
+
+    $normalizedCourse = normalize_mini_lesson_course($course);
+    $statement = $database->prepare(
+        'UPDATE mini_lessons
+         SET title = :title,
+             course = :course,
+             description = :description,
+             youtube_url = :youtube_url,
+             youtube_video_id = :youtube_video_id,
+             sort_order = :sort_order
+         WHERE id = :id
+         LIMIT 1'
+    );
+    $statement->execute([
+        ':id' => $id,
+        ':title' => trim($title),
+        ':course' => $normalizedCourse,
+        ':description' => trim($description) !== '' ? trim($description) : null,
+        ':youtube_url' => trim($youtubeUrl),
+        ':youtube_video_id' => $videoId,
+        ':sort_order' => $sortOrder,
+    ]);
+
+    if ($statement->rowCount() === 0) {
+        $existsStatement = $database->prepare('SELECT COUNT(*) FROM mini_lessons WHERE id = :id');
+        $existsStatement->execute([':id' => $id]);
+        if ((int) $existsStatement->fetchColumn() === 0) {
+            throw new RuntimeException('The selected mini lesson no longer exists.');
+        }
+    }
+}
+
 function delete_mini_lesson(int $id): void
 {
     $database = get_database();
