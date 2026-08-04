@@ -9,6 +9,7 @@ require_once __DIR__ . '/course-schedule-library.php';
 $feedback = '';
 $error = '';
 $loginError = '';
+$activeAdminTab = 'free-course';
 $miniLessonCourseOptions = get_mini_lesson_course_options();
 $miniLessonCourseOptionsForAdmin = $miniLessonCourseOptions;
 unset($miniLessonCourseOptionsForAdmin['all']);
@@ -202,6 +203,11 @@ if (isset($_GET['ajax_table'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_mini_lessons_admin_logged_in()) {
     $action = trim((string) ($_POST['action'] ?? ''));
+    if ($action === 'upload_testimonials') {
+        $activeAdminTab = 'testimonials';
+    } elseif ($action === 'upload_schedule') {
+        $activeAdminTab = 'schedules';
+    }
 
     try {
         if ($action === 'add') {
@@ -382,6 +388,11 @@ endif;
     .admin-data-table-wrap .dt-container .dt-length select { padding: .35rem 2rem .35rem .55rem; }
     .admin-data-table-wrap table.dataTable tbody td { vertical-align: middle; }
     .admin-data-table-wrap .lesson-url { display: inline-block; max-width: 360px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: middle; }
+    .admin-tabs { display: flex; gap: .5rem; margin-bottom: 1.5rem; padding: .45rem; overflow-x: auto; border: 1px solid #d8e1e9; border-radius: .75rem; background: #fff; }
+    .admin-tab-button { flex: 1 0 auto; min-height: 44px; padding: .65rem 1rem; border: 0; border-radius: .5rem; background: transparent; color: #003057; font-weight: 750; white-space: nowrap; }
+    .admin-tab-button:hover { background: #eef5fb; }
+    .admin-tab-button.active { background: #003057; color: #fff; box-shadow: 0 5px 14px rgba(0, 48, 87, .18); }
+    .admin-tab-button:focus-visible { outline: 3px solid rgba(242, 101, 34, .35); outline-offset: 2px; }
     @media (max-width: 767.98px) {
       .admin-data-table-wrap .dt-container .dt-layout-row { gap: .75rem; align-items: stretch; }
       .admin-data-table-wrap .dt-container .dt-search input { min-width: 0; width: 100%; margin: .35rem 0 0; }
@@ -403,7 +414,7 @@ endif;
     </div>
   </header>
 
-  <main class="container py-5">
+  <main class="container py-5" data-default-admin-tab="<?php echo htmlspecialchars($activeAdminTab, ENT_QUOTES, 'UTF-8'); ?>">
     <div class="section-title">
       <h2>Admin Dashboard</h2>
       <p>Manage mini lessons, testimonial uploads, and upcoming schedule images.</p>
@@ -416,7 +427,13 @@ endif;
       <div class="alert alert-danger"><?php echo htmlspecialchars($error, ENT_QUOTES, 'UTF-8'); ?></div>
     <?php endif; ?>
 
-    <section class="mb-4 p-3 border rounded bg-white">
+    <nav class="admin-tabs" role="tablist" aria-label="Admin dashboard sections">
+      <button id="admin-tab-free-course" class="admin-tab-button active" type="button" role="tab" aria-selected="true" aria-controls="admin-panel-free-course" data-admin-tab="free-course">Free Course</button>
+      <button id="admin-tab-testimonials" class="admin-tab-button" type="button" role="tab" aria-selected="false" aria-controls="admin-panel-testimonials" data-admin-tab="testimonials" tabindex="-1">Testimonials</button>
+      <button id="admin-tab-schedules" class="admin-tab-button" type="button" role="tab" aria-selected="false" aria-controls="admin-panel-schedules" data-admin-tab="schedules" tabindex="-1">Schedules</button>
+    </nav>
+
+    <section id="admin-panel-free-course" class="mb-4 p-3 border rounded bg-white" role="tabpanel" aria-labelledby="admin-tab-free-course" data-admin-panel="free-course">
       <h3 class="h5">Add Mini Lesson</h3>
       <form method="post" action="admin-mini-lessons.php">
         <input type="hidden" name="action" value="add">
@@ -453,7 +470,7 @@ endif;
       </form>
     </section>
 
-    <section class="mb-4 p-3 border rounded bg-white">
+    <section id="admin-panel-testimonials" class="mb-4 p-3 border rounded bg-white" role="tabpanel" aria-labelledby="admin-tab-testimonials" data-admin-panel="testimonials" hidden>
       <h3 class="h5">Upload Testimonials (Bulk)</h3>
       <p class="mb-3">Upload multiple images to a course folder under <code>assets/img/gra/passers</code>.</p>
       <form method="post" action="admin-mini-lessons.php" enctype="multipart/form-data">
@@ -478,7 +495,7 @@ endif;
       </form>
     </section>
 
-    <section class="mb-4 p-3 border rounded bg-white">
+    <section id="admin-panel-schedules" class="mb-4 p-3 border rounded bg-white" role="tabpanel" aria-labelledby="admin-tab-schedules" data-admin-panel="schedules" hidden>
       <h3 class="h5">Upload Upcoming Schedule</h3>
       <p class="mb-3">Upload one feature image per course. This image replaces the default Artemis image in the course Upcoming Schedules section.</p>
       <form method="post" action="admin-mini-lessons.php" enctype="multipart/form-data">
@@ -503,7 +520,7 @@ endif;
       </form>
     </section>
 
-    <section class="p-3 border rounded bg-white admin-data-table-wrap">
+    <section class="p-3 border rounded bg-white admin-data-table-wrap" role="tabpanel" aria-labelledby="admin-tab-free-course" data-admin-panel="free-course">
       <h3 class="h5">Saved Lessons</h3>
       <div class="table-responsive">
           <table id="saved-lessons-table" class="table align-middle w-100">
@@ -523,7 +540,7 @@ endif;
       <noscript><p class="alert alert-warning mt-3 mb-0">JavaScript is required to view and search saved lessons.</p></noscript>
     </section>
 
-    <section class="mt-4 p-3 border rounded bg-white admin-data-table-wrap">
+    <section class="mt-4 p-3 border rounded bg-white admin-data-table-wrap" role="tabpanel" aria-labelledby="admin-tab-schedules" data-admin-panel="schedules" hidden>
       <h3 class="h5">Current Upcoming Schedule Images</h3>
       <div class="table-responsive">
         <table id="schedule-images-table" class="table align-middle w-100">
@@ -552,7 +569,7 @@ endif;
         '"': '&quot;'
       })[character]);
 
-      new DataTable('#saved-lessons-table', {
+      const lessonsTable = new DataTable('#saved-lessons-table', {
         processing: true,
         serverSide: true,
         ajax: 'admin-mini-lessons.php?ajax_table=lessons',
@@ -587,7 +604,7 @@ endif;
         ]
       });
 
-      new DataTable('#schedule-images-table', {
+      const scheduleTable = new DataTable('#schedule-images-table', {
         processing: true,
         serverSide: true,
         ajax: 'admin-mini-lessons.php?ajax_table=schedules',
@@ -611,6 +628,42 @@ endif;
           { data: 'status', render: (data) => escapeHtml(data) }
         ]
       });
+
+      const tabButtons = Array.from(document.querySelectorAll('[data-admin-tab]'));
+      const tabPanels = Array.from(document.querySelectorAll('[data-admin-panel]'));
+      const validTabs = tabButtons.map((button) => button.dataset.adminTab);
+
+      const activateAdminTab = (tabName, updateHash = false) => {
+        const selectedTab = validTabs.includes(tabName) ? tabName : 'free-course';
+        tabButtons.forEach((button) => {
+          const isActive = button.dataset.adminTab === selectedTab;
+          button.classList.toggle('active', isActive);
+          button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+          button.tabIndex = isActive ? 0 : -1;
+        });
+        tabPanels.forEach((panel) => {
+          panel.hidden = panel.dataset.adminPanel !== selectedTab;
+        });
+
+        window.requestAnimationFrame(() => {
+          if (selectedTab === 'free-course') lessonsTable.columns.adjust();
+          if (selectedTab === 'schedules') scheduleTable.columns.adjust();
+        });
+
+        if (updateHash && window.history.replaceState) {
+          window.history.replaceState(null, '', `#admin-${selectedTab}`);
+        }
+      };
+
+      tabButtons.forEach((button) => button.addEventListener('click', () => {
+        activateAdminTab(button.dataset.adminTab, true);
+      }));
+
+      const hashTab = window.location.hash.startsWith('#admin-')
+        ? window.location.hash.slice('#admin-'.length)
+        : '';
+      const defaultTab = document.querySelector('main[data-default-admin-tab]')?.dataset.defaultAdminTab || 'free-course';
+      activateAdminTab(validTabs.includes(hashTab) ? hashTab : defaultTab);
     })();
   </script>
 </body>
