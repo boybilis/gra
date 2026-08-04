@@ -45,6 +45,7 @@ require_once __DIR__ . '/asset-version.php';
     .quiz-type { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 16px; padding: 6px 11px; border-radius: 999px; background: #e8f2fb; color: #07568e; font-size: .78rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
     .quiz-question { margin: 0 0 8px; color: #172b3d; font-size: clamp(1.1rem, 2vw, 1.38rem); font-weight: 750; line-height: 1.5; }
     .quiz-instruction { margin-bottom: 22px; color: #687789; }
+    .quiz-chart-prompt { margin: 0 0 12px; color: #003057; font-weight: 750; }
     .quiz-question-chart { max-width: 920px; margin: 0 auto 24px; overflow: hidden; border: 1px solid #c6d3df; border-radius: 10px; background: #fff; box-shadow: 0 6px 18px rgba(0, 48, 87, .08); }
     .quiz-question-chart img { display: block; width: 100%; height: auto; }
     .quiz-options { display: grid; gap: 11px; }
@@ -450,10 +451,10 @@ Visitors would likely be limited to a small number of immediate family members t
           ? '<div class="quiz-answer-recorded" role="status"><i class="bi bi-check-circle me-1"></i>Answer recorded. Correct answers and rationales will be shown after the test.</div>'
           : '';
         const chart = question.chartImage
-          ? `<figure class="quiz-question-chart"><img src="${question.chartImage}" alt="${question.chartAlt}" loading="eager" decoding="async"></figure>`
+          ? `<p class="quiz-chart-prompt">Please refer to the chart image below.</p><figure class="quiz-question-chart"><img src="${question.chartImage}" alt="${question.chartAlt}" loading="eager" decoding="async"></figure>`
           : '';
 
-        modalBody.innerHTML = `<div class="quiz-question-shell"><article class="quiz-question-card"><span class="quiz-type"><i class="bi ${question.type === 'single' ? 'bi-ui-radios' : 'bi-ui-checks'}"></i>${question.label}</span><h2 id="quiz-question-title" class="quiz-question">${currentIndex + 1}. ${question.question}</h2><p class="quiz-instruction">${question.instruction}</p>${chart}<div class="quiz-options">${options}</div>${recordedMessage}</article></div>`;
+        modalBody.innerHTML = `<div class="quiz-question-shell"><article class="quiz-question-card"><span class="quiz-type"><i class="bi ${question.type === 'single' ? 'bi-ui-radios' : 'bi-ui-checks'}"></i>${question.label}</span>${chart}<h2 id="quiz-question-title" class="quiz-question">${currentIndex + 1}. ${question.question}</h2><p class="quiz-instruction">${question.instruction}</p><div class="quiz-options">${options}</div>${recordedMessage}</article></div>`;
 
         modalBody.querySelectorAll('input[name="quiz-answer"]').forEach((input) => input.addEventListener('change', () => {
           answers[currentIndex] = selectedValues();
