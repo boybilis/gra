@@ -405,6 +405,7 @@ endif;
     .admin-data-table-wrap .lesson-url { display: inline-block; max-width: 360px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: middle; }
     .admin-data-table-wrap .lesson-title-column { min-width: 420px; width: 52%; }
     .lesson-title-cell strong { display: block; color: #173c59; font-size: 1rem; line-height: 1.45; }
+    .lesson-title-cell .lesson-description { margin: .45rem 0 0; color: #343a40; font-size: .92rem; font-weight: 400; line-height: 1.55; white-space: pre-line; }
     .lesson-title-cell hr { margin: .65rem 0; border-color: #d8e1e9; opacity: 1; }
     .lesson-title-cell .lesson-url { max-width: 100%; font-size: .86rem; }
     .lesson-action-buttons { display: flex; flex-wrap: wrap; gap: .4rem; }
@@ -611,7 +612,7 @@ endif;
             data: 'title',
             className: 'lesson-title-column',
             render: (data, type, row) => type === 'display'
-              ? `<div class="lesson-title-cell"><strong>${escapeHtml(data)}</strong><hr><a class="lesson-url" href="${escapeHtml(row.youtube_url)}" target="_blank" rel="noopener">${escapeHtml(row.youtube_url)}</a></div>`
+              ? `<div class="lesson-title-cell"><strong>${escapeHtml(data)}</strong>${row.description ? `<p class="lesson-description">${escapeHtml(row.description)}</p>` : ''}<hr><a class="lesson-url" href="${escapeHtml(row.youtube_url)}" target="_blank" rel="noopener">${escapeHtml(row.youtube_url)}</a></div>`
               : data
           },
           { data: 'course', render: (data) => escapeHtml(data) },
