@@ -42,6 +42,164 @@ if (isset($_GET['logout']) && $_GET['logout'] === '1') {
     exit;
 }
 
+function admin_datatable_request(): array
+{
+    $order = isset($_GET['order'][0]) && is_array($_GET['order'][0]) ? $_GET['order'][0] : [];
+    $search = isset($_GET['search']) && is_array($_GET['search']) ? $_GET['search'] : [];
+
+    return [
+        'draw' => max(0, (int) ($_GET['draw'] ?? 0)),
+        'start' => max(0, (int) ($_GET['start'] ?? 0)),
+        'length' => min(100, max(10, (int) ($_GET['length'] ?? 10))),
+        'search' => trim((string) ($search['value'] ?? '')),
+        'order_column' => max(0, (int) ($order['column'] ?? 0)),
+        'order_direction' => strtolower((string) ($order['dir'] ?? 'asc')) === 'desc' ? 'DESC' : 'ASC',
+    ];
+}
+
+function send_admin_datatable_response(array $payload, int $statusCode = 200): void
+{
+    http_response_code($statusCode);
+    header('Content-Type: application/json; charset=utf-8');
+    header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+    echo json_encode($payload, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
+    exit;
+}
+
+if (isset($_GET['ajax_table'])) {
+    $request = admin_datatable_request();
+    if (!is_mini_lessons_admin_logged_in()) {
+        send_admin_datatable_response([
+            'draw' => $request['draw'],
+            'recordsTotal' => 0,
+            'recordsFiltered' => 0,
+            'data' => [],
+            'error' => 'Your admin session has expired. Please sign in again.',
+        ], 401);
+    }
+
+    try {
+        $table = strtolower(trim((string) $_GET['ajax_table']));
+
+        if ($table === 'lessons') {
+            $database = get_database();
+            $courseLabels = get_mini_lesson_course_options();
+            $orderColumns = ['id', 'title', 'course', 'youtube_url', 'sort_order'];
+            $orderColumn = $orderColumns[$request['order_column']] ?? 'sort_order';
+            $where = '';
+            $parameters = [];
+
+            if ($request['search'] !== '') {
+                $where = ' WHERE title LIKE :search_title
+                           OR course LIKE :search_course
+                           OR youtube_url LIKE :search_url
+                           OR CAST(id AS CHAR) LIKE :search_id';
+                $searchValue = '%' . $request['search'] . '%';
+                $parameters = [
+                    ':search_title' => $searchValue,
+                    ':search_course' => $searchValue,
+                    ':search_url' => $searchValue,
+                    ':search_id' => $searchValue,
+                ];
+            }
+
+            $recordsTotal = (int) $database->query('SELECT COUNT(*) FROM mini_lessons')->fetchColumn();
+            if ($where === '') {
+                $recordsFiltered = $recordsTotal;
+            } else {
+                $countStatement = $database->prepare('SELECT COUNT(*) FROM mini_lessons' . $where);
+                $countStatement->execute($parameters);
+                $recordsFiltered = (int) $countStatement->fetchColumn();
+            }
+
+            $query = 'SELECT id, title, course, youtube_url, sort_order
+                      FROM mini_lessons' . $where . '
+                      ORDER BY ' . $orderColumn . ' ' . $request['order_direction'] . ', id ASC
+                      LIMIT :limit OFFSET :offset';
+            $statement = $database->prepare($query);
+            foreach ($parameters as $name => $value) {
+                $statement->bindValue($name, $value, PDO::PARAM_STR);
+            }
+            $statement->bindValue(':limit', $request['length'], PDO::PARAM_INT);
+            $statement->bindValue(':offset', $request['start'], PDO::PARAM_INT);
+            $statement->execute();
+
+            $rows = array_map(static function (array $lesson) use ($courseLabels): array {
+                $course = (string) $lesson['course'];
+                return [
+                    'id' => (int) $lesson['id'],
+                    'title' => (string) $lesson['title'],
+                    'course' => $courseLabels[$course] ?? strtoupper($course),
+                    'youtube_url' => (string) $lesson['youtube_url'],
+                    'sort_order' => (int) $lesson['sort_order'],
+                ];
+            }, $statement->fetchAll());
+
+            send_admin_datatable_response([
+                'draw' => $request['draw'],
+                'recordsTotal' => $recordsTotal,
+                'recordsFiltered' => $recordsFiltered,
+                'data' => $rows,
+            ]);
+        }
+
+        if ($table === 'schedules') {
+            $rows = get_all_course_schedule_images();
+            $recordsTotal = count($rows);
+            $searchTerm = strtolower($request['search']);
+
+            if ($searchTerm !== '') {
+                $rows = array_values(array_filter($rows, static function (array $row) use ($searchTerm): bool {
+                    $haystack = strtolower(implode(' ', [
+                        (string) $row['label'],
+                        (string) $row['image_path'],
+                        $row['is_default'] ? 'Default Artemis image' : 'Uploaded image',
+                    ]));
+                    return str_contains($haystack, $searchTerm);
+                }));
+            }
+
+            $recordsFiltered = count($rows);
+            $scheduleOrderColumns = ['label', 'image_path', 'status'];
+            $scheduleOrderColumn = $scheduleOrderColumns[$request['order_column']] ?? 'label';
+            usort($rows, static function (array $left, array $right) use ($scheduleOrderColumn, $request): int {
+                $leftValue = $scheduleOrderColumn === 'status'
+                    ? ($left['is_default'] ? 'Default Artemis image' : 'Uploaded image')
+                    : (string) $left[$scheduleOrderColumn];
+                $rightValue = $scheduleOrderColumn === 'status'
+                    ? ($right['is_default'] ? 'Default Artemis image' : 'Uploaded image')
+                    : (string) $right[$scheduleOrderColumn];
+                $comparison = strnatcasecmp($leftValue, $rightValue);
+                return $request['order_direction'] === 'DESC' ? -$comparison : $comparison;
+            });
+
+            $pageRows = array_slice($rows, $request['start'], $request['length']);
+            $data = array_map(static fn (array $row): array => [
+                'course' => (string) $row['label'],
+                'image_path' => (string) $row['image_path'],
+                'status' => $row['is_default'] ? 'Default Artemis image' : 'Uploaded image',
+            ], $pageRows);
+
+            send_admin_datatable_response([
+                'draw' => $request['draw'],
+                'recordsTotal' => $recordsTotal,
+                'recordsFiltered' => $recordsFiltered,
+                'data' => $data,
+            ]);
+        }
+
+        throw new InvalidArgumentException('Unknown table requested.');
+    } catch (Throwable $exception) {
+        send_admin_datatable_response([
+            'draw' => $request['draw'],
+            'recordsTotal' => 0,
+            'recordsFiltered' => 0,
+            'data' => [],
+            'error' => 'Unable to load table data.',
+        ], 500);
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_mini_lessons_admin_logged_in()) {
     $action = trim((string) ($_POST['action'] ?? ''));
 
@@ -205,19 +363,6 @@ if (!is_mini_lessons_admin_logged_in()):
 exit;
 endif;
 
-$lessons = [];
-try {
-    $lessons = get_all_mini_lessons();
-} catch (Throwable $exception) {
-    $error = $error !== '' ? $error : 'Unable to load lessons.';
-}
-
-$scheduleImages = [];
-try {
-    $scheduleImages = get_all_course_schedule_images();
-} catch (Throwable $exception) {
-    $error = $error !== '' ? $error : 'Unable to load upcoming schedule images.';
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -227,8 +372,21 @@ try {
   <title>Admin Mini Lessons | Gapuz Review Academy</title>
   <link href="assets/img/gra/gra-logo.png" rel="icon">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.datatables.net/2.3.5/css/dataTables.dataTables.min.css" rel="stylesheet">
   <link href="<?php echo versioned_asset('assets/css/main.css'); ?>" rel="stylesheet">
   <link href="<?php echo versioned_asset('assets/css/gra-content.css'); ?>" rel="stylesheet">
+  <style>
+    .admin-data-table-wrap .dt-container .dt-search input,
+    .admin-data-table-wrap .dt-container .dt-length select { border: 1px solid #ced4da; border-radius: .375rem; background-color: #fff; }
+    .admin-data-table-wrap .dt-container .dt-search input { min-width: min(260px, 60vw); padding: .45rem .7rem; }
+    .admin-data-table-wrap .dt-container .dt-length select { padding: .35rem 2rem .35rem .55rem; }
+    .admin-data-table-wrap table.dataTable tbody td { vertical-align: middle; }
+    .admin-data-table-wrap .lesson-url { display: inline-block; max-width: 360px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: middle; }
+    @media (max-width: 767.98px) {
+      .admin-data-table-wrap .dt-container .dt-layout-row { gap: .75rem; align-items: stretch; }
+      .admin-data-table-wrap .dt-container .dt-search input { min-width: 0; width: 100%; margin: .35rem 0 0; }
+    }
+  </style>
 </head>
 <body class="index-page gra-page">
   <header id="header" class="header sticky-top">
@@ -345,13 +503,10 @@ try {
       </form>
     </section>
 
-    <section class="p-3 border rounded bg-white">
+    <section class="p-3 border rounded bg-white admin-data-table-wrap">
       <h3 class="h5">Saved Lessons</h3>
-      <?php if (count($lessons) === 0): ?>
-        <p class="mb-0">No lessons saved yet.</p>
-      <?php else: ?>
-        <div class="table-responsive">
-          <table class="table align-middle">
+      <div class="table-responsive">
+          <table id="saved-lessons-table" class="table align-middle w-100">
             <thead>
               <tr>
                 <th>ID</th>
@@ -362,33 +517,16 @@ try {
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody>
-              <?php foreach ($lessons as $lesson): ?>
-              <tr>
-                <td><?php echo (int) $lesson['id']; ?></td>
-                <td><?php echo htmlspecialchars($lesson['title'], ENT_QUOTES, 'UTF-8'); ?></td>
-                <td><?php echo htmlspecialchars($miniLessonCourseOptions[$lesson['course']] ?? strtoupper((string) $lesson['course']), ENT_QUOTES, 'UTF-8'); ?></td>
-                <td><a href="<?php echo htmlspecialchars($lesson['youtube_url'], ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener"><?php echo htmlspecialchars($lesson['youtube_url'], ENT_QUOTES, 'UTF-8'); ?></a></td>
-                <td><?php echo (int) $lesson['sort_order']; ?></td>
-                <td>
-                  <form method="post" action="admin-mini-lessons.php" onsubmit="return confirm('Delete this lesson?');">
-                    <input type="hidden" name="action" value="delete">
-                    <input type="hidden" name="id" value="<?php echo (int) $lesson['id']; ?>">
-                    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
-                  </form>
-                </td>
-              </tr>
-              <?php endforeach; ?>
-            </tbody>
+            <tbody></tbody>
           </table>
-        </div>
-      <?php endif; ?>
+      </div>
+      <noscript><p class="alert alert-warning mt-3 mb-0">JavaScript is required to view and search saved lessons.</p></noscript>
     </section>
 
-    <section class="mt-4 p-3 border rounded bg-white">
+    <section class="mt-4 p-3 border rounded bg-white admin-data-table-wrap">
       <h3 class="h5">Current Upcoming Schedule Images</h3>
       <div class="table-responsive">
-        <table class="table align-middle">
+        <table id="schedule-images-table" class="table align-middle w-100">
           <thead>
             <tr>
               <th>Course</th>
@@ -396,19 +534,84 @@ try {
               <th>Status</th>
             </tr>
           </thead>
-          <tbody>
-            <?php foreach ($scheduleImages as $scheduleImage): ?>
-            <tr>
-              <td><?php echo htmlspecialchars($scheduleImage['label'], ENT_QUOTES, 'UTF-8'); ?></td>
-              <td><a href="<?php echo htmlspecialchars($scheduleImage['image_path'], ENT_QUOTES, 'UTF-8'); ?>" target="_blank" rel="noopener"><?php echo htmlspecialchars($scheduleImage['image_path'], ENT_QUOTES, 'UTF-8'); ?></a></td>
-              <td><?php echo $scheduleImage['is_default'] ? 'Default Artemis image' : 'Uploaded image'; ?></td>
-            </tr>
-            <?php endforeach; ?>
-          </tbody>
+          <tbody></tbody>
         </table>
       </div>
+      <noscript><p class="alert alert-warning mt-3 mb-0">JavaScript is required to view and search schedule images.</p></noscript>
     </section>
   </main>
+  <script src="https://cdn.datatables.net/2.3.5/js/dataTables.min.js"></script>
+  <script>
+    (() => {
+      const escapeHtml = (value) => String(value ?? '').replace(/[&<>'"]/g, (character) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&#039;',
+        '"': '&quot;'
+      })[character]);
+
+      new DataTable('#saved-lessons-table', {
+        processing: true,
+        serverSide: true,
+        ajax: 'admin-mini-lessons.php?ajax_table=lessons',
+        pageLength: 10,
+        lengthMenu: [10, 25, 50, 100],
+        searchDelay: 350,
+        order: [[4, 'asc']],
+        language: {
+          search: 'Quick search:',
+          emptyTable: 'No lessons saved yet.',
+          zeroRecords: 'No matching lessons found.'
+        },
+        columns: [
+          { data: 'id' },
+          { data: 'title', render: (data) => escapeHtml(data) },
+          { data: 'course', render: (data) => escapeHtml(data) },
+          {
+            data: 'youtube_url',
+            render: (data, type) => type === 'display'
+              ? `<a class="lesson-url" href="${escapeHtml(data)}" target="_blank" rel="noopener">${escapeHtml(data)}</a>`
+              : data
+          },
+          { data: 'sort_order' },
+          {
+            data: 'id',
+            orderable: false,
+            searchable: false,
+            render: (data, type) => type === 'display'
+              ? `<form method="post" action="admin-mini-lessons.php" onsubmit="return confirm('Delete this lesson?');"><input type="hidden" name="action" value="delete"><input type="hidden" name="id" value="${Number(data)}"><button type="submit" class="btn btn-sm btn-outline-danger">Delete</button></form>`
+              : data
+          }
+        ]
+      });
+
+      new DataTable('#schedule-images-table', {
+        processing: true,
+        serverSide: true,
+        ajax: 'admin-mini-lessons.php?ajax_table=schedules',
+        pageLength: 10,
+        lengthMenu: [10, 25, 50, 100],
+        searchDelay: 350,
+        order: [[0, 'asc']],
+        language: {
+          search: 'Quick search:',
+          emptyTable: 'No schedule images found.',
+          zeroRecords: 'No matching schedule images found.'
+        },
+        columns: [
+          { data: 'course', render: (data) => escapeHtml(data) },
+          {
+            data: 'image_path',
+            render: (data, type) => type === 'display'
+              ? `<a class="lesson-url" href="${escapeHtml(data)}" target="_blank" rel="noopener">${escapeHtml(data)}</a>`
+              : data
+          },
+          { data: 'status', render: (data) => escapeHtml(data) }
+        ]
+      });
+    })();
+  </script>
 </body>
 </html>
 
