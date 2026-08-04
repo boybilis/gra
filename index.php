@@ -199,28 +199,28 @@
           <div class="col-6 col-md-6 col-xl d-flex" data-aos="fade-up" data-aos-delay="100">
             <div class="service-item position-relative">
               <div class="icon"><i class="fas fa-book-open icon"></i></div>
-              <h4><a href="online-campus.php" class="stretched-link">Free Mini Lessons</a></h4>
+              <h4><a href="online-campus.php#campus-access" class="stretched-link">Free Mini Lessons</a></h4>
               <p>Start with guided lessons that introduce the GRA approach before enrolling in a full review program.</p>
             </div>
           </div>
           <div class="col-6 col-md-6 col-xl d-flex" data-aos="fade-up" data-aos-delay="200">
             <div class="service-item position-relative">
               <div class="icon"><i class="fas fa-clipboard-question icon"></i></div>
-              <h4><a href="online-campus.php" class="stretched-link">Practice Quizzes</a></h4>
+              <h4><a href="online-campus.php#campus-access" class="stretched-link">Practice Quizzes</a></h4>
               <p>Build exam confidence with review questions designed for active recall and readiness checks.</p>
             </div>
           </div>
           <div class="col-6 col-md-6 col-xl d-flex" data-aos="fade-up" data-aos-delay="300">
             <div class="service-item position-relative">
               <div class="icon"><i class="fas fa-file-arrow-down icon"></i></div>
-              <h4><a href="online-campus.php" class="stretched-link">Downloadable Notes</a></h4>
+              <h4><a href="online-campus.php#campus-access" class="stretched-link">Downloadable Notes</a></h4>
               <p>Use compact learning notes to organize your first steps and reinforce high-yield review topics.</p>
             </div>
           </div>
           <div class="col-6 col-md-6 col-xl d-flex" data-aos="fade-up" data-aos-delay="400">
             <div class="service-item position-relative">
               <div class="icon"><i class="fas fa-display icon"></i></div>
-              <h4><a href="online-campus.php" class="stretched-link">Orientation Webinar</a></h4>
+              <h4><a href="online-campus.php#campus-access" class="stretched-link">Orientation Webinar</a></h4>
               <p>Learn how GRA, PassEasy, and Artemis360 work together for flexible online preparation.</p>
             </div>
           </div>
