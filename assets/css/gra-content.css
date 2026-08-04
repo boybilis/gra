@@ -729,9 +729,9 @@
   min-height: 42px;
   padding: 9px 14px;
   border: 1px solid var(--gra-navy);
-  border-radius: 4px;
-  background: var(--gra-navy);
-  color: #fff;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--gra-navy);
   cursor: pointer;
   font-size: 14px;
   font-weight: 700;
@@ -741,8 +741,8 @@
 .featured-passers .featured-passer-card .featured-more-link:hover,
 .featured-passers .featured-passer-card .featured-more-link:focus {
   border-color: var(--accent-color);
-  background: var(--accent-color);
-  color: #fff;
+  background: transparent;
+  color: var(--accent-color);
 }
 .featured-passers .featured-passer-meta {
   display: none;
