@@ -15,4 +15,7 @@ console.log(JSON.stringify({
   keysMatch,
   invalidAnswerKeys: invalidAnswers.length,
   chartProperties: questions.filter((question) => "chartImage" in question).length,
+  charts: questions.filter((question) => question.chartImage).map((question) => question.chartImage),
+  rationalesProvided: questions.filter((question) => !question.explanation.startsWith("No complete solution")).length,
+  rationalePreviews: questions.map((question, index) => ({ question: index + 1, rationale: question.explanation.slice(0, 70) })),
 }, null, 2));

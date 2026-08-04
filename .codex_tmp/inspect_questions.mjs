@@ -1,8 +1,8 @@
 import fs from "node:fs/promises";
 import { FileBlob, SpreadsheetFile } from "@oai/artifact-tool";
 
-const sourcePath = "C:/Users/yzza/Documents/boybi websites/gra/NCLEX SAMPLE QUESTIONNAIRES more.xlsx";
-const outputDir = "C:/xampp/htdocs/gra/.codex_tmp/question_previews";
+const sourcePath = "C:/Users/yzza/Documents/boybi websites/gra/NCLEX SAMPLE QUESTIONNAIRES (1).xlsx";
+const outputDir = "C:/xampp/htdocs/gra/.codex_tmp/updated_question_previews";
 await fs.mkdir(outputDir, { recursive: true });
 
 const workbook = await SpreadsheetFile.importXlsx(await FileBlob.load(sourcePath));

@@ -45,6 +45,8 @@ require_once __DIR__ . '/asset-version.php';
     .quiz-type { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 16px; padding: 6px 11px; border-radius: 999px; background: #e8f2fb; color: #07568e; font-size: .78rem; font-weight: 800; letter-spacing: .04em; text-transform: uppercase; }
     .quiz-question { margin: 0 0 8px; color: #172b3d; font-size: clamp(1.1rem, 2vw, 1.38rem); font-weight: 750; line-height: 1.5; }
     .quiz-instruction { margin-bottom: 22px; color: #687789; }
+    .quiz-question-chart { max-width: 920px; margin: 0 auto 24px; overflow: hidden; border: 1px solid #c6d3df; border-radius: 10px; background: #fff; box-shadow: 0 6px 18px rgba(0, 48, 87, .08); }
+    .quiz-question-chart img { display: block; width: 100%; height: auto; }
     .quiz-options { display: grid; gap: 11px; }
     .quiz-page label.quiz-option { position: relative; display: grid; grid-template-columns: 22px 30px minmax(0, 1fr); align-items: flex-start; column-gap: 16px; margin-bottom: 0; padding: 15px 17px; border: 1px solid #d7e0e9; border-radius: 11px; background: #fff; cursor: pointer; transition: border-color .18s ease, background-color .18s ease, transform .18s ease; }
     .quiz-option:hover { border-color: #5d94be; background: #f8fbfe; transform: translateY(-1px); }
@@ -88,7 +90,7 @@ require_once __DIR__ . '/asset-version.php';
     .quiz-review-table tbody tr:nth-child(even) { background: #f7f9fb; }
     .quiz-review-question { width: 24%; font-weight: 750; color: #172b3d !important; }
     .quiz-review-answer { width: 22%; }
-    .quiz-review-rationale { width: 32%; }
+    .quiz-review-rationale { width: 32%; white-space: pre-line; }
     .quiz-result-badge { display: inline-block; margin-top: 8px; padding: 4px 8px; border-radius: 999px; font-size: .75rem; font-weight: 800; }
     .quiz-result-badge.correct { background: #e6f7ee; color: #177048; }
     .quiz-result-badge.incorrect { background: #fdecec; color: #9d3030; }
@@ -175,7 +177,7 @@ require_once __DIR__ . '/asset-version.php';
             'Distract the client and guide the client to practice skills.'
           ],
           correct: [3],
-          explanation: "Allowing the client to express feelings is the priority therapeutic response and helps the nurse assess the client's immediate emotional needs."
+          explanation: 'No complete solution or rationale was provided in the source workbook.'
         },
         {
           type: 'multiple',
@@ -191,13 +193,15 @@ require_once __DIR__ . '/asset-version.php';
             'Prepare and attach ECG leads to the client for monitoring.'
           ],
           correct: [1, 3, 5],
-          explanation: 'Immediate priorities are supplemental oxygen, prescribed sublingual nitroglycerin, and continuous ECG monitoring. Assessment of response follows treatment, while activity and diet teaching are not immediate priorities.'
+          explanation: 'No complete solution or rationale was provided in the source workbook.'
         },
         {
           type: 'multiple',
           label: 'Select All That Apply',
           question: 'A 25-year-old client presents to the urgent care clinic due to painful urination and reported blood in the urine. The nurse is preparing to speak with the physician about the client\'s plan of care. For the column “Indicated,” select all that apply.',
           instruction: 'Choose every indicated intervention.',
+          chartImage: 'assets/img/gra/quizzes/renal-sata-chart.png',
+          chartAlt: 'Renal client chart showing health history, nurses notes, assessment, lab results, and potential interventions.',
           choices: [
             'Vital signs monitoring every 15–30 minutes.',
             'IV hydration.',
@@ -223,13 +227,15 @@ require_once __DIR__ . '/asset-version.php';
             'Continue to monitor vital signs.'
           ],
           correct: [3],
-          explanation: 'No complete solution or rationale was provided in the source workbook.'
+          explanation: '4. Fever post hemodialysis is expected and common'
         },
         {
           type: 'multiple',
           label: 'Select All That Apply',
           question: 'Reviewing the RN notes and laboratory report, the nurse determines the findings that are of immediate concern. For RN notes, select all findings that are of immediate concern.',
           instruction: 'Choose every applicable finding.',
+          chartImage: 'assets/img/gra/quizzes/cardio-sata-chart.png',
+          chartAlt: 'Cardio client chart showing RN notes, laboratory report, reference ranges, and findings for review.',
           choices: ['Chest pain.', 'Last medication taken.', 'BMI.', 'Heart rate.'],
           correct: [0, 1, 3],
           explanation: 'No complete solution or rationale was provided in the source workbook.'
@@ -263,7 +269,14 @@ require_once __DIR__ . '/asset-version.php';
             'Limit visitors to immediate family.'
           ],
           correct: [0, 1, 4, 5, 6],
-          explanation: 'No complete solution or rationale was provided in the source workbook.'
+          explanation: `The desired outcome for this client’s care is to ensure safety because of potential suicide. The orders would be focused on ways to keep the client safe, including admission to the acute psychiatric unit for one-on-one observation and treatment with medication and psychotherapy. The client would also be placed on suicide precautions, which usually include:
+
+■ Observing the client swallow each dose of medication
+■ Removing glass and knives from meal trays to prevent self-injury
+■ One-on-one observation of the client at all times
+■ Documentation of client’s behaviors and verbal statements every 15 to 30 minutes
+
+Visitors would likely be limited to a small number of immediate family members to prevent the client from obtaining devices from others that could cause self-harm. Immediate family members could provide support and encouragement for the client during the hospital stay. A case manager can help plan for the client’s discharge to ensure continuity of care to keep the client safe at home or in another setting but would not help ensure immediate safety. A spiritual advisor may be requested by the client but is not usually ordered.`
         },
         {
           type: 'single',
@@ -277,7 +290,7 @@ require_once __DIR__ . '/asset-version.php';
             '“I know you believe the Earth is going to be invaded, but I don\'t believe that.”'
           ],
           correct: [0],
-          explanation: 'No complete solution or rationale was provided in the source workbook.'
+          explanation: 'The most therapeutic is to acknowledge the clients feelings.'
         },
         {
           type: 'multiple',
@@ -292,7 +305,7 @@ require_once __DIR__ . '/asset-version.php';
             'Return a call to the client\'s family and tell them the client\'s condition is unchanged.'
           ],
           correct: [1, 2],
-          explanation: 'No complete solution or rationale was provided in the source workbook.'
+          explanation: 'Thyrotoxicosis (thyroid storm), a complication of hyperthyroidism that occurs when excessive amounts of thyroid hormone are released into the circulation, requires monitoring (eg, telemetry) and supportive care for symptoms (eg, fever, tachycardia, hypertension, gastrointestinal distress).'
         },
         {
           type: 'single',
@@ -306,7 +319,7 @@ require_once __DIR__ . '/asset-version.php';
             'Initiate the oxytocin prescription to begin induction of labor.'
           ],
           correct: [2],
-          explanation: 'No complete solution or rationale was provided in the source workbook.'
+          explanation: 'Pregnant clients, especially those with placental abruption and intrauterine fetal demise, are at risk for disseminated intravascular coagulation (DIC). Thromboplastin from the retained dead fetus activates the clotting cascade, followed by consumption of clotting factors and platelets that leads quickly to life-threatening external and internal bleeding'
         },
         {
           type: 'multiple',
@@ -347,7 +360,7 @@ require_once __DIR__ . '/asset-version.php';
             'Place the client in Trendelenburg position.'
           ],
           correct: [3],
-          explanation: 'No complete solution or rationale was provided in the source workbook.'
+          explanation: 'The nurse saw that the cord is prolapsed. It should be suspected when there is a non-reassuring fetal heart rate tracing and absent membranes. The nurse should initially reposition the patient to Trendelenburg to prevent further descent of umbilical cord.'
         },
         {
           type: 'single',
@@ -356,7 +369,7 @@ require_once __DIR__ . '/asset-version.php';
           instruction: 'Select the best answer.',
           choices: ['Metabolic acidosis.', 'Metabolic alkalosis.', 'Respiratory alkalosis.', 'Respiratory acidosis.'],
           correct: [0],
-          explanation: 'No complete solution or rationale was provided in the source workbook.'
+          explanation: 'The breakdown of fat into energy produces acid called Ketones which can build up in your urine and blood. Acidosis because it is acidic and metabollic because it is from the kidneys.'
         },
         {
           type: 'multiple',
@@ -436,8 +449,11 @@ require_once __DIR__ . '/asset-version.php';
         const recordedMessage = submitted[currentIndex] && !reviewMode
           ? '<div class="quiz-answer-recorded" role="status"><i class="bi bi-check-circle me-1"></i>Answer recorded. Correct answers and rationales will be shown after the test.</div>'
           : '';
+        const chart = question.chartImage
+          ? `<figure class="quiz-question-chart"><img src="${question.chartImage}" alt="${question.chartAlt}" loading="eager" decoding="async"></figure>`
+          : '';
 
-        modalBody.innerHTML = `<div class="quiz-question-shell"><article class="quiz-question-card"><span class="quiz-type"><i class="bi ${question.type === 'single' ? 'bi-ui-radios' : 'bi-ui-checks'}"></i>${question.label}</span><h2 id="quiz-question-title" class="quiz-question">${currentIndex + 1}. ${question.question}</h2><p class="quiz-instruction">${question.instruction}</p><div class="quiz-options">${options}</div>${recordedMessage}</article></div>`;
+        modalBody.innerHTML = `<div class="quiz-question-shell"><article class="quiz-question-card"><span class="quiz-type"><i class="bi ${question.type === 'single' ? 'bi-ui-radios' : 'bi-ui-checks'}"></i>${question.label}</span><h2 id="quiz-question-title" class="quiz-question">${currentIndex + 1}. ${question.question}</h2><p class="quiz-instruction">${question.instruction}</p>${chart}<div class="quiz-options">${options}</div>${recordedMessage}</article></div>`;
 
         modalBody.querySelectorAll('input[name="quiz-answer"]').forEach((input) => input.addEventListener('change', () => {
           answers[currentIndex] = selectedValues();
