@@ -307,6 +307,15 @@
             'pnle' => 'pnle-courses.php#course-passers',
             'civil-service' => 'civil-service-courses.php#course-passers',
           ];
+          $featuredPasserCourseLabels = [
+            'nclex' => 'NCLEX',
+            'dha' => 'DHA',
+            'haad-doh' => 'HAAD / DOH',
+            'prometric' => 'Prometric',
+            'sple' => 'SPLE',
+            'pnle' => 'PNLE',
+            'civil-service' => 'Civil Service',
+          ];
           $featuredSwiperConfig = [
             'loop' => $featuredPasserCount > $featuredDesktopSlides,
             'speed' => 600,
@@ -335,6 +344,7 @@
                 $passerUrl = htmlspecialchars($passerImage['url'], ENT_QUOTES, 'UTF-8');
                 $passerCourse = (string) ($passerImage['course'] ?? '');
                 $passerCourseLink = htmlspecialchars($featuredPasserCourseLinks[$passerCourse] ?? 'index.php#courses', ENT_QUOTES, 'UTF-8');
+                $passerCourseLabel = htmlspecialchars($featuredPasserCourseLabels[$passerCourse] ?? 'Course', ENT_QUOTES, 'UTF-8');
             ?>
             <div class="swiper-slide">
               <article class="featured-passer-card">
@@ -342,7 +352,7 @@
                   <img src="<?php echo $passerUrl; ?>" alt="<?php echo $passerAlt; ?>" loading="lazy" decoding="async">
                 </a>
                 <div class="featured-passer-actions">
-                  <a href="<?php echo $passerCourseLink; ?>" class="btn featured-more-link">View More Testimonials</a>
+                  <a href="<?php echo $passerCourseLink; ?>" class="btn featured-more-link">View More <?php echo $passerCourseLabel; ?> Testimonials</a>
                 </div>
               </article>
             </div>

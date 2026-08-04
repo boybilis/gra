@@ -725,7 +725,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: auto;
   min-height: 42px;
   padding: 9px 14px;
   border: 1px solid var(--gra-navy);
@@ -736,6 +736,7 @@
   font-size: 14px;
   font-weight: 700;
   line-height: 1.25;
+  white-space: nowrap;
   text-decoration: none;
 }
 .featured-passers .featured-passer-card .featured-more-link:hover,
