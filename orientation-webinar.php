@@ -29,7 +29,7 @@ require_once __DIR__ . '/asset-version.php';
       <h2>Orientation Webinar</h2>
       <p>Watch the orientation session to understand the full learning flow.</p>
       <div class="ratio ratio-16x9 mb-3">
-        <iframe src="https://www.youtube.com/embed/3fumBcKC6RE" title="Orientation Webinar" allowfullscreen></iframe>
+        <iframe src="https://www.youtube.com/embed/sYEitZ01THI" title="Orientation Webinar" allowfullscreen></iframe>
       </div>
       <a class="btn btn-outline-primary" href="online-campus.php">Back to Online Campus</a>
   </main>
