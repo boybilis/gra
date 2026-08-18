@@ -29,13 +29,81 @@ require_once __DIR__ . '/asset-version.php';
       <h2>Orientation Webinar</h2>
       <p>Watch the orientation session to understand the full learning flow.</p>
       <div class="ratio ratio-16x9 mb-3">
-        <iframe src="https://www.youtube.com/embed/sYEitZ01THI" title="Orientation Webinar" allowfullscreen></iframe>
+        <iframe id="orientation-video" src="https://www.youtube.com/embed/sYEitZ01THI?enablejsapi=1&amp;playsinline=1" title="Orientation Webinar" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
       </div>
       <a class="btn btn-outline-primary" href="online-campus.php">Back to Online Campus</a>
   </main>
   <footer id="footer" class="footer dark-background">
     <div class="container copyright text-center mt-4"><p><span>Copyright</span> <strong class="px-1 sitename">Gapuz Review Academy</strong> <span>All Rights Reserved</span></p></div>
   </footer>
+  <script>
+    (() => {
+      let player = null;
+      let resumeWhenActive = false;
+      let automaticPausePending = false;
+
+      const pageIsActive = () => document.visibilityState === 'visible' && document.hasFocus();
+
+      const pauseForInactivity = () => {
+        if (!player || typeof player.getPlayerState !== 'function') return;
+        const state = player.getPlayerState();
+        if (state !== YT.PlayerState.PLAYING && state !== YT.PlayerState.BUFFERING) return;
+
+        resumeWhenActive = true;
+        automaticPausePending = true;
+        player.pauseVideo();
+      };
+
+      const resumeForActivity = () => {
+        if (!player || !resumeWhenActive || !pageIsActive()) return;
+        resumeWhenActive = false;
+        player.playVideo();
+      };
+
+      window.onYouTubeIframeAPIReady = () => {
+        player = new YT.Player('orientation-video', {
+          events: {
+            onStateChange: (event) => {
+              if (event.data === YT.PlayerState.PAUSED) {
+                if (automaticPausePending) {
+                  automaticPausePending = false;
+                } else if (pageIsActive()) {
+                  resumeWhenActive = false;
+                }
+              }
+
+              if (event.data === YT.PlayerState.PLAYING && !pageIsActive()) {
+                pauseForInactivity();
+              }
+
+              if (event.data === YT.PlayerState.ENDED) {
+                resumeWhenActive = false;
+                automaticPausePending = false;
+              }
+            }
+          }
+        });
+      };
+
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'hidden') {
+          pauseForInactivity();
+        } else {
+          resumeForActivity();
+        }
+      });
+
+      window.addEventListener('blur', () => {
+        window.setTimeout(() => {
+          if (!document.hasFocus()) pauseForInactivity();
+        }, 100);
+      });
+      window.addEventListener('focus', resumeForActivity);
+      window.addEventListener('pagehide', pauseForInactivity);
+      window.addEventListener('pageshow', resumeForActivity);
+    })();
+  </script>
+  <script src="https://www.youtube.com/iframe_api"></script>
 </body>
 </html>
 
