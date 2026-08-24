@@ -7,7 +7,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Gapuz Review Academy | Learn With Confidence</title>
   <meta name="description" content="Gapuz Review Academy review programs for NCLEX, DHA, HAAD, Prometric, PNLE, SPLE, Civil Service, and online learning.">
-  <meta name="keywords" content="Gapuz Review Academy, PassEasy, NCLEX, DHA, HAAD, Prometric, PNLE, SPLE, Civil Service">
+  <meta name="keywords" content="Gapuz Review Academy, PassEasy™, NCLEX, DHA, HAAD, Prometric, PNLE, SPLE, Civil Service">
   <link href="assets/img/gra/gra-logo.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -153,12 +153,12 @@
             <div class="container passeasy-hero-container">
               <div class="row align-items-center gy-3">
                 <div class="col-lg-6 text-lg-start text-center">
-                  <h2>PassEasy Review Programs</h2>
-                  <p>Join GRA's PassEasy courses for NCLEX, DHA, HAAD (DOH), Prometric, PNLE, SPLE, and Civil Service review preparation.</p>
+                  <h2>PassEasy<sup class="gra-trademark">&trade;</sup> Review Programs</h2>
+                  <p>Join GRA's PassEasy<sup class="gra-trademark">&trade;</sup> courses for NCLEX, DHA, HAAD (DOH), Prometric, PNLE, SPLE, and Civil Service review preparation.</p>
                   <a href="#enroll" class="btn-get-started">Enroll Now</a>
                 </div>
                 <div class="col-lg-6 d-flex justify-content-center">
-                  <img class="passeasy-hero-logo" src="assets/img/gra/passeasy-logo.jpg" alt="PassEasy Review Program logo" loading="lazy" decoding="async">
+                  <img class="passeasy-hero-logo" src="assets/img/gra/passeasy-logo.jpg" alt="PassEasy™ Review Program logo" loading="lazy" decoding="async">
                 </div>
               </div>
             </div>
@@ -221,7 +221,7 @@
             <div class="service-item position-relative">
               <div class="icon"><i class="fas fa-display icon"></i></div>
               <h4><a href="online-campus.php#campus-access" class="stretched-link">Orientation Webinar</a></h4>
-              <p>Learn how GRA, PassEasy, and Artemis360 work together for flexible online preparation.</p>
+              <p>Learn how GRA, PassEasy<sup class="gra-trademark">&trade;</sup>, and Artemis360 work together for flexible online preparation.</p>
             </div>
           </div>
           <div class="col-12 col-md-6 col-xl d-flex" data-aos="fade-up" data-aos-delay="500">
@@ -378,7 +378,7 @@
             <h3>Powered by expert-led, exam-focused digital learning.</h3>
             <p class="fst-italic">Gapuz Review Academy prepares students for local and international licensure and career exams through expert-led review programs, structured learning, and a supportive academic community.</p>
             <ul>
-              <li><i class="bi bi-check2-all"></i> <span>PassEasy courses for NCLEX, DHA, HAAD (DOH), Prometric, PNLE, SPLE, and Civil Service.</span></li>
+              <li><i class="bi bi-check2-all"></i> <span>PassEasy<sup class="gra-trademark">&trade;</sup> courses for NCLEX, DHA, HAAD (DOH), Prometric, PNLE, SPLE, and Civil Service.</span></li>
               <li><i class="bi bi-check2-all"></i> <span>Live online and fully online learning options for flexible preparation.</span></li>
               <li><i class="bi bi-check2-all"></i> <span>Artemis360 access for recorded lectures, practice exams, study guides, and progress support.</span></li>
             </ul>
@@ -393,10 +393,10 @@
     <section id="passeasy" class="features section">
       <div class="container">
         <div class="row justify-content-around gy-4">
-          <div class="features-image passeasy-poster-frame col-lg-6" data-aos="fade-up" data-aos-delay="100"><img src="assets/img/gra/passeasy-poster.jpg" alt="PassEasy Review Program poster" loading="lazy" decoding="async"></div>
+          <div class="features-image passeasy-poster-frame col-lg-6" data-aos="fade-up" data-aos-delay="100"><img src="assets/img/gra/passeasy-poster.jpg" alt="PassEasy™ Review Program poster" loading="lazy" decoding="async"></div>
           <div class="col-lg-5 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
             <h3>High-yield preparation with structure and flexibility.</h3>
-            <p>The PassEasy review program is designed for candidates who want confidence on their first attempt, as well as students who need renewed direction after previous attempts.</p>
+            <p>The PassEasy<sup class="gra-trademark">&trade;</sup> review program is designed for candidates who want confidence on their first attempt, as well as students who need renewed direction after previous attempts.</p>
             <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="300"><i class="fa-solid fa-chalkboard-user flex-shrink-0"></i><div><h4><a href="#courses" class="stretched-link">Expert instructors</a></h4><p>Seasoned Testmasters guide students through proven strategies and critical topics.</p></div></div>
             <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="400"><i class="fa-solid fa-laptop flex-shrink-0"></i><div><h4><a href="https://artemis360.gapuzreview.com" class="stretched-link">Interactive learning</a></h4><p>Live online sessions, recorded lessons, study tools, and computer-based practice create an active review experience.</p></div></div>
             <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="500"><i class="fa-solid fa-chart-line flex-shrink-0"></i><div><h4><a href="#enroll" class="stretched-link">Flexible scheduling</a></h4><p>Recorded lectures and 24/7 access help students prepare anytime, anywhere.</p></div></div>
@@ -469,7 +469,7 @@
             <div class="col-md-4 form-group mt-3 mt-md-0"><input type="tel" class="form-control" name="phone" placeholder="Mobile / Messaging App" required></div>
           </div>
           <div class="row">
-            <div class="col-md-6 form-group mt-3"><select name="course" class="form-select" required><option value="">Select Program</option><option>NCLEX PassEasy</option><option>DHA PassEasy</option><option>HAAD (DOH) PassEasy</option><option>Prometric PassEasy</option><option>PNLE PassEasy</option><option>SPLE PassEasy</option><option>Civil Service PassEasy</option></select></div>
+            <div class="col-md-6 form-group mt-3"><select name="course" class="form-select" required><option value="">Select Program</option><option>NCLEX PassEasy&trade;</option><option>DHA PassEasy&trade;</option><option>HAAD (DOH) PassEasy&trade;</option><option>Prometric PassEasy&trade;</option><option>PNLE PassEasy&trade;</option><option>SPLE PassEasy&trade;</option><option>Civil Service PassEasy&trade;</option></select></div>
             <div class="col-md-6 form-group mt-3"><select name="review_setup" class="form-select" required><option value="">Preferred Setup</option><option>Live online via Zoom</option><option>Recorded lectures</option><option>Test bank access</option><option>Processing assistance</option></select></div>
           </div>
           <div class="form-group mt-3"><textarea class="form-control" name="message" rows="5" placeholder="Questions or notes"></textarea></div>

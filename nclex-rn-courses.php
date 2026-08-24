@@ -4,11 +4,12 @@
 <head>
   <?php require_once __DIR__ . '/asset-version.php'; ?>
   <?php require_once __DIR__ . '/course-schedule-library.php'; ?>
+  <?php require_once __DIR__ . '/course-hero-library.php'; $courseHero = get_course_hero_image('nclex'); ?>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>NCLEX RN PassEasy Course | Gapuz Review Academy</title>
+  <title>NCLEX RN PassEasy™ Course | Gapuz Review Academy</title>
   <meta name="description" content="Gapuz Review Academy review programs for NCLEX, DHA, HAAD, Prometric, PNLE, SPLE, Civil Service, and online learning.">
-  <meta name="keywords" content="Gapuz Review Academy, PassEasy, NCLEX, DHA, HAAD, Prometric, PNLE, SPLE, Civil Service">
+  <meta name="keywords" content="Gapuz Review Academy, PassEasy™, NCLEX, DHA, HAAD, Prometric, PNLE, SPLE, Civil Service">
   <link href="assets/img/gra/gra-logo.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -489,11 +490,11 @@
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-6 position-relative align-self-start" data-aos="fade-up" data-aos-delay="100">
-            <img src="assets/img/gra/nclex-course.jpg" class="img-fluid" alt="NCLEX - RN review course">
+            <img src="<?php echo htmlspecialchars($courseHero['image_url'], ENT_QUOTES, 'UTF-8'); ?>" class="img-fluid" alt="NCLEX - RN review course">
           </div>
           <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
             <h4><b>Prepare for the Next Generation NCLEX with focused coaching and practice tests that are closely similar to the real thing.</b></h4>
-            <p class="fst-italic">GRA's NCLEX PassEasy course combines expert instruction, flexible learning access, NGN test taking skills enhancement and powerful mentoring that prepares each examinies to sit  and pass the NCLEX confidently.</p>
+            <p class="fst-italic">GRA's NCLEX PassEasy<sup class="gra-trademark">&trade;</sup> course combines expert instruction, flexible learning access, NGN test taking skills enhancement and powerful mentoring that prepares each examinies to sit  and pass the NCLEX confidently.</p>
             <ul>
               <li><i class="bi bi-check2-all"></i> <span>Live online classes via Zoom with expert lecturers.</span></li>
               <li><i class="bi bi-check2-all"></i> <span>Recorded lessons, review materials, and test bank access.</span></li>
@@ -816,7 +817,7 @@
         <form id="nclex-support-form" action="submit.php" method="post" role="form" class="site-form gra-medicio-form">
           <input type="hidden" name="form_type" value="enrollment">
           <div class="row"><div class="col-md-4 form-group"><input type="text" name="name" class="form-control" placeholder="Full Name" required></div><div class="col-md-4 form-group mt-3 mt-md-0"><input type="email" class="form-control" name="email" placeholder="Email" required></div><div class="col-md-4 form-group mt-3 mt-md-0"><input type="tel" class="form-control" name="phone" placeholder="Mobile / Messaging App" required></div></div>
-          <div class="row"><div class="col-md-6 form-group mt-3"><input type="text" name="course" class="form-control" value="NCLEX PassEasy" readonly></div><div class="col-md-6 form-group mt-3"><select name="review_setup" class="form-select"><option>Live online via Zoom</option><option>Recorded lectures and test bank access</option><option>Processing assistance</option></select></div></div>
+          <div class="row"><div class="col-md-6 form-group mt-3"><input type="text" name="course" class="form-control" value="NCLEX PassEasy™" readonly></div><div class="col-md-6 form-group mt-3"><select name="review_setup" class="form-select"><option>Live online via Zoom</option><option>Recorded lectures and test bank access</option><option>Processing assistance</option></select></div></div>
           <div class="row">
             <div class="col-md-6 form-group mt-3">
               <select name="inquiry_type" class="form-select" required>
@@ -858,7 +859,7 @@
                 <div class="col-md-4 form-group mt-3 mt-md-0"><input type="tel" class="form-control" name="phone" placeholder="Mobile / Messaging App" required></div>
               </div>
               <div class="row">
-                <div class="col-md-6 form-group mt-3"><input type="text" name="course" class="form-control" value="NCLEX PassEasy" readonly></div>
+                <div class="col-md-6 form-group mt-3"><input type="text" name="course" class="form-control" value="NCLEX PassEasy™" readonly></div>
                 <div class="col-md-6 form-group mt-3">
                   <select name="review_setup" class="form-select">
                     <option>Live online via Zoom</option>

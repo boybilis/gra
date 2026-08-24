@@ -5,6 +5,7 @@ require_once __DIR__ . '/asset-version.php';
 require_once __DIR__ . '/mini-lessons-library.php';
 require_once __DIR__ . '/mini-lessons-admin-auth.php';
 require_once __DIR__ . '/course-schedule-library.php';
+require_once __DIR__ . '/course-hero-library.php';
 
 $feedback = '';
 $error = '';
@@ -24,6 +25,7 @@ $testimonialFolderOptions = [
 ];
 $testimonialBaseDir = __DIR__ . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'gra' . DIRECTORY_SEPARATOR . 'passers';
 $courseScheduleOptions = get_course_schedule_options();
+$courseHeroOptions = get_course_hero_options();
 $testimonialCsrfToken = (string) ($_SESSION['testimonial_csrf_token'] ?? '');
 if ($testimonialCsrfToken === '') {
     $testimonialCsrfToken = bin2hex(random_bytes(32));
@@ -314,6 +316,55 @@ if (isset($_GET['ajax_table'])) {
             ]);
         }
 
+        if ($table === 'hero-images') {
+            $rows = get_all_course_hero_images();
+            $recordsTotal = count($rows);
+            $searchTerm = strtolower($request['search']);
+
+            if ($searchTerm !== '') {
+                $rows = array_values(array_filter($rows, static function (array $row) use ($searchTerm): bool {
+                    $haystack = strtolower(implode(' ', [
+                        (string) $row['label'],
+                        (string) $row['image_path'],
+                        $row['is_default'] ? 'Default image' : 'Uploaded image',
+                    ]));
+                    return str_contains($haystack, $searchTerm);
+                }));
+            }
+
+            $recordsFiltered = count($rows);
+            $heroOrderColumns = ['label', 'image_path', 'status'];
+            $heroOrderColumn = $heroOrderColumns[$request['order_column']] ?? 'label';
+            usort($rows, static function (array $left, array $right) use ($heroOrderColumn, $request): int {
+                $leftValue = $heroOrderColumn === 'status'
+                    ? ($left['is_default'] ? 'Default image' : 'Uploaded image')
+                    : (string) $left[$heroOrderColumn];
+                $rightValue = $heroOrderColumn === 'status'
+                    ? ($right['is_default'] ? 'Default image' : 'Uploaded image')
+                    : (string) $right[$heroOrderColumn];
+                $comparison = strnatcasecmp($leftValue, $rightValue);
+                return $request['order_direction'] === 'DESC' ? -$comparison : $comparison;
+            });
+
+            $pageRows = array_slice($rows, $request['start'], $request['length']);
+            $data = array_map(static fn (array $row): array => [
+                'course_key' => (string) $row['course_key'],
+                'course' => (string) $row['label'],
+                'image_path' => (string) $row['image_path'],
+                'image_url' => (string) $row['image_url'],
+                'default_image_path' => (string) $row['default_image_path'],
+                'status' => $row['is_default'] ? 'Default image' : 'Uploaded image',
+                'is_default' => (bool) $row['is_default'],
+            ], $pageRows);
+
+            send_admin_datatable_response([
+                'draw' => $request['draw'],
+                'recordsTotal' => $recordsTotal,
+                'recordsFiltered' => $recordsFiltered,
+                'data' => $data,
+            ]);
+        }
+
         throw new InvalidArgumentException('Unknown table requested.');
     } catch (Throwable $exception) {
         send_admin_datatable_response([
@@ -332,6 +383,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_mini_lessons_admin_logged_in()) 
         $activeAdminTab = 'testimonials';
     } elseif ($action === 'upload_schedule') {
         $activeAdminTab = 'schedules';
+    } elseif ($action === 'upload_hero' || $action === 'delete_hero') {
+        $activeAdminTab = 'hero-images';
     }
 
     try {
@@ -458,6 +511,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_mini_lessons_admin_logged_in()) 
 
             save_course_schedule_image($selectedCourse, $_FILES['schedule_image']);
             $feedback = 'Upcoming schedule image uploaded for ' . ($courseScheduleOptions[$selectedCourse] ?? strtoupper($selectedCourse)) . '.';
+        } elseif ($action === 'upload_hero') {
+            $selectedCourse = trim((string) ($_POST['hero_course'] ?? ''));
+            if (!isset($_FILES['hero_image']) || !is_array($_FILES['hero_image'])) {
+                throw new InvalidArgumentException('Please choose a course hero image to upload.');
+            }
+
+            save_course_hero_image($selectedCourse, $_FILES['hero_image']);
+            $feedback = 'Hero image updated for ' . ($courseHeroOptions[$selectedCourse] ?? strtoupper($selectedCourse)) . '.';
+        } elseif ($action === 'delete_hero') {
+            $selectedCourse = trim((string) ($_POST['hero_course'] ?? ''));
+            $deleted = delete_course_hero_image($selectedCourse);
+            $feedback = $deleted
+                ? 'Uploaded hero image removed. The original course image is active again.'
+                : 'The original course hero image is already active.';
         }
     } catch (Throwable $exception) {
         $error = $exception->getMessage();
@@ -537,6 +604,7 @@ endif;
     .lesson-title-cell hr { margin: .65rem 0; border-color: #d8e1e9; opacity: 1; }
     .lesson-title-cell .lesson-url { max-width: 100%; font-size: .86rem; }
     .lesson-action-buttons { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .admin-image-preview { display: block; width: 150px; max-width: 100%; height: 90px; border: 1px solid #d8e1e9; border-radius: .5rem; background: #eef2f5; object-fit: contain; }
     .testimonial-gallery-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
     .testimonial-gallery-card { display: flex; min-width: 0; flex-direction: column; overflow: hidden; border: 1px solid #d8e1e9; border-radius: .65rem; background: #fff; }
     .testimonial-gallery-card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: #eef2f5; }
@@ -576,7 +644,7 @@ endif;
   <main class="container py-5" data-default-admin-tab="<?php echo htmlspecialchars($activeAdminTab, ENT_QUOTES, 'UTF-8'); ?>">
     <div class="section-title">
       <h2>Admin Dashboard</h2>
-      <p>Manage mini lessons, testimonial uploads, and upcoming schedule images.</p>
+      <p>Manage mini lessons, testimonials, course hero images, and upcoming schedules.</p>
     </div>
 
     <?php if ($feedback !== ''): ?>
@@ -589,6 +657,7 @@ endif;
     <nav class="admin-tabs" role="tablist" aria-label="Admin dashboard sections">
       <button id="admin-tab-free-course" class="admin-tab-button active" type="button" role="tab" aria-selected="true" aria-controls="admin-panel-free-course" data-admin-tab="free-course">Free Course</button>
       <button id="admin-tab-testimonials" class="admin-tab-button" type="button" role="tab" aria-selected="false" aria-controls="admin-panel-testimonials" data-admin-tab="testimonials" tabindex="-1">Testimonials</button>
+      <button id="admin-tab-hero-images" class="admin-tab-button" type="button" role="tab" aria-selected="false" aria-controls="admin-panel-hero-images" data-admin-tab="hero-images" tabindex="-1">Hero Images</button>
       <button id="admin-tab-schedules" class="admin-tab-button" type="button" role="tab" aria-selected="false" aria-controls="admin-panel-schedules" data-admin-tab="schedules" tabindex="-1">Schedules</button>
     </nav>
 
@@ -681,6 +750,31 @@ endif;
       </section>
     </section>
 
+    <section id="admin-panel-hero-images" class="mb-4 p-3 border rounded bg-white" role="tabpanel" aria-labelledby="admin-tab-hero-images" data-admin-panel="hero-images" hidden>
+      <h3 class="h5">Upload Course Hero Image</h3>
+      <p class="mb-3">Choose a course and upload a replacement for its current hero image. Removing an uploaded image restores the original automatically.</p>
+      <form method="post" action="admin-mini-lessons.php" enctype="multipart/form-data">
+        <input type="hidden" name="action" value="upload_hero">
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="hero_course" class="form-label">Course</label>
+            <select id="hero_course" name="hero_course" class="form-select" required>
+              <option value="">Select course</option>
+              <?php foreach ($courseHeroOptions as $courseKey => $courseLabel): ?>
+                <option value="<?php echo htmlspecialchars($courseKey, ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($courseLabel, ENT_QUOTES, 'UTF-8'); ?></option>
+              <?php endforeach; ?>
+            </select>
+          </div>
+          <div class="col-md-8 mb-3">
+            <label for="hero_image" class="form-label">Hero Image</label>
+            <input id="hero_image" name="hero_image" type="file" class="form-control" accept=".jpg,.jpeg,.png,.webp,.gif" required>
+            <div class="form-text">Allowed formats: JPG, JPEG, PNG, WEBP, GIF (max 8MB).</div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Upload Hero Image</button>
+      </form>
+    </section>
+
     <section id="admin-panel-schedules" class="mb-4 p-3 border rounded bg-white" role="tabpanel" aria-labelledby="admin-tab-schedules" data-admin-panel="schedules" hidden>
       <h3 class="h5">Upload Upcoming Schedule</h3>
       <p class="mb-3">Upload one feature image per course. This image replaces the default Artemis image in the course Upcoming Schedules section.</p>
@@ -704,6 +798,24 @@ endif;
         </div>
         <button type="submit" class="btn btn-primary">Upload Schedule Image</button>
       </form>
+    </section>
+
+    <section class="mt-4 p-3 border rounded bg-white admin-data-table-wrap" role="tabpanel" aria-labelledby="admin-tab-hero-images" data-admin-panel="hero-images" hidden>
+      <h3 class="h5">Current Course Hero Images</h3>
+      <div class="table-responsive">
+        <table id="hero-images-table" class="table align-middle w-100">
+          <thead>
+            <tr>
+              <th>Course</th>
+              <th>Current Image</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <noscript><p class="alert alert-warning mt-3 mb-0">JavaScript is required to view course hero images.</p></noscript>
     </section>
 
     <section class="p-3 border rounded bg-white admin-data-table-wrap" role="tabpanel" aria-labelledby="admin-tab-free-course" data-admin-panel="free-course">
@@ -930,6 +1042,48 @@ endif;
         ]
       });
 
+      const heroImagesTable = new DataTable('#hero-images-table', {
+        processing: true,
+        serverSide: true,
+        ajax: 'admin-mini-lessons.php?ajax_table=hero-images',
+        pageLength: 10,
+        lengthMenu: [10, 25, 50],
+        searchDelay: 350,
+        order: [[0, 'asc']],
+        language: {
+          search: 'Quick search:',
+          emptyTable: 'No course hero images found.',
+          zeroRecords: 'No matching course hero images found.'
+        },
+        columns: [
+          { data: 'course', render: (data) => escapeHtml(data) },
+          {
+            data: 'image_url',
+            orderable: false,
+            searchable: false,
+            render: (data, type, row) => type === 'display'
+              ? `<a href="${escapeHtml(data)}" target="_blank" rel="noopener" title="View ${escapeHtml(row.course)} hero image"><img class="admin-image-preview" src="${escapeHtml(data)}" alt="${escapeHtml(row.course)} hero image" loading="lazy" decoding="async"></a>`
+              : data
+          },
+          {
+            data: 'status',
+            render: (data, type, row) => type === 'display'
+              ? `<span class="badge ${row.is_default ? 'text-bg-secondary' : 'text-bg-success'}">${escapeHtml(data)}</span>`
+              : data
+          },
+          {
+            data: 'course_key',
+            orderable: false,
+            searchable: false,
+            render: (data, type, row) => {
+              if (type !== 'display') return data;
+              if (row.is_default) return '<span class="text-muted small">Original active</span>';
+              return `<form method="post" action="admin-mini-lessons.php" onsubmit="return confirm('Remove this uploaded hero image and restore the original?');"><input type="hidden" name="action" value="delete_hero"><input type="hidden" name="hero_course" value="${escapeHtml(data)}"><button type="submit" class="btn btn-sm btn-outline-danger">Remove &amp; Restore Default</button></form>`;
+            }
+          }
+        ]
+      });
+
       const tabButtons = Array.from(document.querySelectorAll('[data-admin-tab]'));
       const tabPanels = Array.from(document.querySelectorAll('[data-admin-panel]'));
       const validTabs = tabButtons.map((button) => button.dataset.adminTab);
@@ -965,6 +1119,7 @@ endif;
         window.requestAnimationFrame(() => {
           if (selectedTab === 'free-course') lessonsTable.columns.adjust();
           if (selectedTab === 'schedules') scheduleTable.columns.adjust();
+          if (selectedTab === 'hero-images') heroImagesTable.columns.adjust();
         });
 
         if (updateHash && window.history.replaceState) {

@@ -7,7 +7,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Free Course | Gapuz Review Academy</title>
   <meta name="description" content="Gapuz Review Academy review programs for NCLEX, DHA, HAAD, Prometric, PNLE, SPLE, Civil Service, and online learning.">
-  <meta name="keywords" content="Gapuz Review Academy, PassEasy, NCLEX, DHA, HAAD, Prometric, PNLE, SPLE, Civil Service">
+  <meta name="keywords" content="Gapuz Review Academy, PassEasy™, NCLEX, DHA, HAAD, Prometric, PNLE, SPLE, Civil Service">
   <link href="assets/img/gra/gra-logo.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
   <link href="https://fonts.googleapis.com" rel="preconnect">
@@ -78,7 +78,7 @@
           <div class="col-lg-6 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
             <h3>Start learning for free.</h3>
             <p class="fst-italic">Use GRA's free course page to explore mini lessons, practice quizzes, downloadable notes, and orientation resources before choosing a full review program.</p>
-            <ul><li><i class="bi bi-check2-all"></i> <span>Free mini lessons and practice quizzes.</span></li><li><i class="bi bi-check2-all"></i> <span>Downloadable notes and online orientation support.</span></li><li><i class="bi bi-check2-all"></i> <span>Pathway into Artemis360 and PassEasy review courses.</span></li></ul>
+            <ul><li><i class="bi bi-check2-all"></i> <span>Free mini lessons and practice quizzes.</span></li><li><i class="bi bi-check2-all"></i> <span>Downloadable notes and online orientation support.</span></li><li><i class="bi bi-check2-all"></i> <span>Pathway into Artemis360 and PassEasy<sup class="gra-trademark">&trade;</sup> review courses.</span></li></ul>
           </div>
         </div>
       </div>
