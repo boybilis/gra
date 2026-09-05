@@ -571,6 +571,10 @@
   #course-package .row.gy-4 > [class*="col-"] {
     width: 25%;
   }
+  #course-package .civil-service-package-grid > .civil-service-package-column {
+    width: 50%;
+    flex: 0 0 auto;
+  }
 }
 @media (max-width: 575px) {
   #course-package .row.gy-4 {
