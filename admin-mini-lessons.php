@@ -1224,7 +1224,7 @@ endif;
 
         const imageInput = document.getElementById('schedule_images');
         const selectedImages = Array.from(imageInput?.files || []);
-        if (selectedImages.length < 2) return;
+        if (selectedImages.length === 0) return;
 
         event.preventDefault();
         const submitButton = scheduleForm.querySelector('button[type="submit"]');
