@@ -305,10 +305,10 @@
             <p>Dr. Mia has helped many professionals pass the CSE on their first attempt. A business leader and educator, she has over two decades of experience in teaching and running test preparation centers in the Philippines.</p>
             <h4>Credentials and Achievements</h4>
             <ul>
-              <li><strong>Education:</strong> University of the Philippines – Manila; Asian Institute of Management (Makati, Philippines); Instituto de Empresa (Madrid, Spain); WED Technologies, Harvard (ongoing).</li>
-              <li><strong>Academic Awards:</strong> Board Topnotcher (Rank #2, Nationwide); Most Outstanding Clinician (Endodontics), University of the Philippines – Manila; Highest Distinction, Asian Institute of Management.</li>
-              <li><strong>International Award:</strong> Top 10 Asian Institute of Management Philippines Alumni Leaders 2024 (CEO Insights Asia).</li>
-              <li><strong>Previous Work:</strong> President and CEO, RA Gapuz Review Center, Inc.</li>
+              <li><strong>Education:</strong><br>University of the Philippines – Manila<br>Asian Institute of Management (Makati, Philippines)<br>Instituto de Empresa (Madrid, Spain)<br>WED Technologies, Harvard (ongoing)</li>
+              <li><strong>Academic Awards:</strong><br>Board Topnotcher (Rank #2, Nationwide)<br>Most Outstanding Clinician (Endodontics), University of the Philippines – Manila<br>Highest Distinction, Asian Institute of Management</li>
+              <li><strong>International Award:</strong><br>Top 10 Asian Institute of Management Philippines Alumni Leaders 2024 (CEO Insights Asia)</li>
+              <li><strong>Previous Work:</strong><br>President and CEO, RA Gapuz Review Center, Inc.</li>
             </ul>
           </div>
         </article>
