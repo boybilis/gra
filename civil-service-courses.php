@@ -294,7 +294,7 @@
     </section><section id="testmasters" class="doctors section">
       <div class="container section-title" data-aos="fade-up">
         <h2>Testmasters</h2>
-        <p>CSE Review Lead Testmaster.</p>
+        <p>Our CSE Test Masters are a team of professional CSE trainers, experienced educators, and CSE topnotchers specializing in Mathematics, English, Filipino, and other key areas of the Civil Service Examination. With extensive teaching experience in some of the Philippines’ leading universities, they combine academic expertise, proven test-taking strategies, and firsthand examination experience to provide high-quality training and mentorship for aspiring civil servants.</p>
       </div>
       <div class="container">
         <div class="row gy-4">
