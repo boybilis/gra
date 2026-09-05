@@ -59,6 +59,21 @@ function ensure_course_schedule_content_table(PDO $database): void
     );
 }
 
+function ensure_course_schedule_gallery_images_table(PDO $database): void
+{
+    $database->exec(
+        'CREATE TABLE IF NOT EXISTS course_schedule_gallery_images (
+            id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+            course_key VARCHAR(50) NOT NULL,
+            image_path VARCHAR(255) NOT NULL,
+            created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            PRIMARY KEY (id),
+            UNIQUE KEY uniq_schedule_gallery_path (image_path),
+            KEY idx_schedule_gallery_course (course_key, id)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci'
+    );
+}
+
 function sanitize_course_schedule_html(string $html): string
 {
     $html = trim($html);
@@ -206,32 +221,40 @@ function get_course_schedule_image(string $course): array
     $courseKey = normalize_course_schedule_key($course);
     $database = get_database();
     ensure_course_schedule_images_table($database);
+    ensure_course_schedule_gallery_images_table($database);
+    $images = [];
 
-    $statement = $database->prepare(
-        'SELECT image_path
-         FROM course_schedule_images
-         WHERE course_key = :course_key
-         LIMIT 1'
-    );
+    $statement = $database->prepare('SELECT image_path FROM course_schedule_images WHERE course_key = :course_key LIMIT 1');
     $statement->execute([':course_key' => $courseKey]);
-    $row = $statement->fetch();
-
-    $imagePath = get_default_course_schedule_image();
-    if (is_array($row) && !empty($row['image_path'])) {
-        $candidate = (string) $row['image_path'];
-        $absolutePath = __DIR__ . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $candidate);
-        if (is_file($absolutePath)) {
-            $imagePath = $candidate;
+    $legacyRow = $statement->fetch();
+    if (is_array($legacyRow)) {
+        $candidate = (string) ($legacyRow['image_path'] ?? '');
+        if ($candidate !== '' && is_file(__DIR__ . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $candidate))) {
+            $images[] = $candidate;
         }
     }
 
+    $statement = $database->prepare('SELECT image_path FROM course_schedule_gallery_images WHERE course_key = :course_key ORDER BY id ASC');
+    $statement->execute([':course_key' => $courseKey]);
+    foreach ($statement->fetchAll() as $row) {
+        $candidate = (string) ($row['image_path'] ?? '');
+        if ($candidate !== '' && !in_array($candidate, $images, true)
+            && is_file(__DIR__ . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $candidate))) {
+            $images[] = $candidate;
+        }
+    }
+
+    $isDefault = $images === [];
+    if ($isDefault) $images[] = get_default_course_schedule_image();
     $customText = get_course_schedule_custom_text($courseKey);
 
     return [
         'course_key' => $courseKey,
         'label' => get_course_schedule_options()[$courseKey],
-        'image_path' => $imagePath,
-        'is_default' => $imagePath === get_default_course_schedule_image(),
+        'image_path' => $images[0],
+        'images' => $images,
+        'image_count' => count($images),
+        'is_default' => $isDefault,
         'custom_text' => $customText,
         'has_custom_text' => $customText !== '',
     ];
@@ -308,40 +331,104 @@ function save_course_schedule_image(string $course, array $file): void
     }
 }
 
+function normalize_course_schedule_uploads(array $files): array
+{
+    if (!isset($files['name']) || !is_array($files['name'])) return [$files];
+    $uploads = [];
+    foreach ($files['name'] as $index => $name) {
+        $uploads[] = [
+            'name' => $name,
+            'type' => $files['type'][$index] ?? '',
+            'tmp_name' => $files['tmp_name'][$index] ?? '',
+            'error' => $files['error'][$index] ?? UPLOAD_ERR_NO_FILE,
+            'size' => $files['size'][$index] ?? 0,
+        ];
+    }
+    return $uploads;
+}
+
+function save_course_schedule_images(string $course, array $files): int
+{
+    $courseKey = normalize_course_schedule_key($course);
+    $allowedExtensions = ['jpg', 'jpeg', 'png', 'webp', 'gif'];
+    $targetDir = __DIR__ . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'gra' . DIRECTORY_SEPARATOR . 'upcoming';
+    if (!is_dir($targetDir) && !mkdir($targetDir, 0775, true) && !is_dir($targetDir)) {
+        throw new RuntimeException('Unable to create upcoming schedule upload folder.');
+    }
+    $database = get_database();
+    ensure_course_schedule_gallery_images_table($database);
+    $insert = $database->prepare('INSERT INTO course_schedule_gallery_images (course_key, image_path) VALUES (:course_key, :image_path)');
+    $savedCount = 0;
+
+    foreach (normalize_course_schedule_uploads($files) as $file) {
+        $error = (int) ($file['error'] ?? UPLOAD_ERR_NO_FILE);
+        if ($error === UPLOAD_ERR_NO_FILE) continue;
+        if ($error !== UPLOAD_ERR_OK) throw new RuntimeException('One of the selected images could not be uploaded.');
+        $tmpPath = (string) ($file['tmp_name'] ?? '');
+        $size = (int) ($file['size'] ?? 0);
+        $extension = strtolower(pathinfo((string) ($file['name'] ?? ''), PATHINFO_EXTENSION));
+        if ($tmpPath === '' || !is_uploaded_file($tmpPath) || $size <= 0 || $size > 8 * 1024 * 1024) {
+            throw new RuntimeException('One of the selected images is invalid or larger than 8MB.');
+        }
+        if (!in_array($extension, $allowedExtensions, true)) {
+            throw new RuntimeException('Allowed formats: JPG, JPEG, PNG, WEBP, GIF.');
+        }
+
+        $filename = $courseKey . '-schedule-' . date('YmdHis') . '-' . bin2hex(random_bytes(5)) . '.' . $extension;
+        $relativePath = 'assets/img/gra/upcoming/' . $filename;
+        $targetPath = $targetDir . DIRECTORY_SEPARATOR . $filename;
+        if (!move_uploaded_file($tmpPath, $targetPath)) throw new RuntimeException('Unable to save one of the uploaded images.');
+        try {
+            $insert->execute([':course_key' => $courseKey, ':image_path' => $relativePath]);
+            $savedCount++;
+        } catch (Throwable $exception) {
+            @unlink($targetPath);
+            throw $exception;
+        }
+    }
+    return $savedCount;
+}
+
 function delete_course_schedule_image(string $course): bool
 {
     $courseKey = normalize_course_schedule_key($course);
     $database = get_database();
     ensure_course_schedule_images_table($database);
+    ensure_course_schedule_gallery_images_table($database);
 
     $statement = $database->prepare(
         'SELECT image_path
          FROM course_schedule_images
-         WHERE course_key = :course_key
-         LIMIT 1'
+         WHERE course_key = :course_key'
     );
     $statement->execute([':course_key' => $courseKey]);
-    $row = $statement->fetch();
-    if (!is_array($row)) {
+    $rows = $statement->fetchAll();
+    $gallery = $database->prepare('SELECT image_path FROM course_schedule_gallery_images WHERE course_key = :course_key');
+    $gallery->execute([':course_key' => $courseKey]);
+    $rows = array_merge($rows, $gallery->fetchAll());
+    if ($rows === []) {
         return false;
     }
-
-    $imagePath = str_replace('\\', '/', (string) ($row['image_path'] ?? ''));
     $allowedPrefix = 'assets/img/gra/upcoming/';
-    if (str_starts_with($imagePath, $allowedPrefix)) {
-        $absolutePath = __DIR__ . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $imagePath);
-        $uploadDirectory = realpath(__DIR__ . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'gra' . DIRECTORY_SEPARATOR . 'upcoming');
-        $resolvedImage = is_file($absolutePath) ? realpath($absolutePath) : false;
-        if ($uploadDirectory !== false && $resolvedImage !== false) {
-            $directoryPrefix = rtrim($uploadDirectory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
-            if (str_starts_with($resolvedImage, $directoryPrefix) && !unlink($resolvedImage)) {
-                throw new RuntimeException('Unable to remove the uploaded schedule image.');
+    foreach ($rows as $row) {
+        $imagePath = str_replace('\\', '/', (string) ($row['image_path'] ?? ''));
+        if (str_starts_with($imagePath, $allowedPrefix)) {
+            $absolutePath = __DIR__ . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $imagePath);
+            $uploadDirectory = realpath(__DIR__ . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'gra' . DIRECTORY_SEPARATOR . 'upcoming');
+            $resolvedImage = is_file($absolutePath) ? realpath($absolutePath) : false;
+            if ($uploadDirectory !== false && $resolvedImage !== false) {
+                $directoryPrefix = rtrim($uploadDirectory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+                if (str_starts_with($resolvedImage, $directoryPrefix) && !unlink($resolvedImage)) {
+                    throw new RuntimeException('Unable to remove the uploaded schedule image.');
+                }
             }
         }
     }
 
     $delete = $database->prepare('DELETE FROM course_schedule_images WHERE course_key = :course_key');
     $delete->execute([':course_key' => $courseKey]);
+    $deleteGallery = $database->prepare('DELETE FROM course_schedule_gallery_images WHERE course_key = :course_key');
+    $deleteGallery->execute([':course_key' => $courseKey]);
 
-    return $delete->rowCount() > 0;
+    return $delete->rowCount() > 0 || $deleteGallery->rowCount() > 0;
 }

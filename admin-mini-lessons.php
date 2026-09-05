@@ -307,6 +307,7 @@ if (isset($_GET['ajax_table'])) {
                 'course_key' => (string) $row['course_key'],
                 'course' => (string) $row['label'],
                 'image_path' => (string) $row['image_path'],
+                'image_count' => (int) $row['image_count'],
                 'custom_text' => (string) $row['custom_text'],
                 'has_custom_text' => (bool) $row['has_custom_text'],
                 'is_default' => (bool) $row['is_default'],
@@ -514,11 +515,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_mini_lessons_admin_logged_in()) 
                 throw new InvalidArgumentException('Please choose a valid course.');
             }
 
-            $scheduleImage = $_FILES['schedule_image'] ?? null;
+            $scheduleImage = $_FILES['schedule_images'] ?? null;
             $hasScheduleImage = is_array($scheduleImage)
-                && (int) ($scheduleImage['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE;
+                && array_filter((array) ($scheduleImage['error'] ?? []), static fn ($error): bool => (int) $error !== UPLOAD_ERR_NO_FILE) !== [];
             if ($hasScheduleImage) {
-                save_course_schedule_image($selectedCourse, $scheduleImage);
+                save_course_schedule_images($selectedCourse, $scheduleImage);
             }
 
             $scheduleText = (string) ($_POST['schedule_text'] ?? '');
@@ -546,9 +547,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_mini_lessons_admin_logged_in()) 
                 : 'The original course hero image is already active.';
         }
 
-        if (in_array($action, ['upload_hero', 'delete_hero', 'delete_schedule_image'], true) && $feedback !== '') {
+        if (in_array($action, ['upload_schedule', 'upload_hero', 'delete_hero', 'delete_schedule_image'], true) && $feedback !== '') {
             $_SESSION['admin_feedback'] = $feedback;
-            $redirectTab = $action === 'delete_schedule_image' ? 'schedules' : 'hero-images';
+            $redirectTab = in_array($action, ['upload_schedule', 'delete_schedule_image'], true) ? 'schedules' : 'hero-images';
             header('Location: admin-mini-lessons.php#admin-' . $redirectTab, true, 303);
             exit;
         }
@@ -808,7 +809,7 @@ endif;
 
     <section id="admin-panel-schedules" class="mb-4 p-3 border rounded bg-white" role="tabpanel" aria-labelledby="admin-tab-schedules" data-admin-panel="schedules" hidden>
       <h3 class="h5">Upcoming Schedule Settings</h3>
-      <p class="mb-3">Upload an optional feature image and add optional right-column text for each course. Leave the text blank to use the current default content.</p>
+      <p class="mb-3">Upload one or more schedule images for each course. Uploaded images are added to its carousel. Leave the text blank to use the current default content.</p>
       <form id="schedule-settings-form" method="post" action="admin-mini-lessons.php" enctype="multipart/form-data">
         <input type="hidden" name="action" value="upload_schedule">
         <div class="row">
@@ -822,9 +823,9 @@ endif;
             </select>
           </div>
           <div class="col-md-8 mb-3">
-            <label for="schedule_image" class="form-label">Upcoming Schedule Image</label>
-            <input id="schedule_image" name="schedule_image" type="file" class="form-control" accept=".jpg,.jpeg,.png,.webp,.gif">
-            <div class="form-text">Optional. Allowed formats: JPG, JPEG, PNG, WEBP, GIF (max 8MB).</div>
+            <label for="schedule_images" class="form-label">Upcoming Schedule Images</label>
+            <input id="schedule_images" name="schedule_images[]" type="file" class="form-control" accept=".jpg,.jpeg,.png,.webp,.gif" multiple>
+            <div class="form-text">Optional. Select multiple images if needed. Each image can be up to 8MB.</div>
           </div>
         </div>
         <div class="mb-3">
@@ -1079,8 +1080,8 @@ endif;
           { data: 'course', render: (data) => escapeHtml(data) },
           {
             data: 'image_path',
-            render: (data, type) => type === 'display'
-              ? `<a class="lesson-url" href="${escapeHtml(data)}" target="_blank" rel="noopener">${escapeHtml(data)}</a>`
+            render: (data, type, row) => type === 'display'
+              ? `<a class="lesson-url" href="${escapeHtml(data)}" target="_blank" rel="noopener">${escapeHtml(data)}</a><div class="small text-muted mt-1">${Number(row.image_count)} image${Number(row.image_count) === 1 ? '' : 's'}</div>`
               : data
           },
           {
@@ -1106,7 +1107,7 @@ endif;
               if (type !== 'display') return data;
               const editButton = `<button type="button" class="btn btn-sm btn-outline-primary" data-edit-schedule="${escapeHtml(data)}">Edit Settings</button>`;
               if (row.is_default) return editButton;
-              const restoreForm = `<form method="post" action="admin-mini-lessons.php" onsubmit="return confirm('Remove this uploaded schedule image and restore the default?');"><input type="hidden" name="action" value="delete_schedule_image"><input type="hidden" name="schedule_course" value="${escapeHtml(data)}"><button type="submit" class="btn btn-sm btn-outline-danger">Remove Image &amp; Restore Default</button></form>`;
+              const restoreForm = `<form method="post" action="admin-mini-lessons.php" onsubmit="return confirm('Remove all uploaded schedule images and restore the default?');"><input type="hidden" name="action" value="delete_schedule_image"><input type="hidden" name="schedule_course" value="${escapeHtml(data)}"><button type="submit" class="btn btn-sm btn-outline-danger">Remove All Images &amp; Restore Default</button></form>`;
               return `<div class="lesson-action-buttons">${editButton}${restoreForm}</div>`;
             }
           }

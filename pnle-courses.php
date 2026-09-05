@@ -253,7 +253,19 @@
       </div>
       <div class="container">
         <div class="row justify-content-around gy-4">
-          <div class="features-image col-lg-7" data-aos="fade-up" data-aos-delay="100"><img src="<?php echo htmlspecialchars($courseSchedule['image_path'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($courseScheduleAlt, ENT_QUOTES, 'UTF-8'); ?>"></div>
+          <div class="features-image col-lg-7" data-aos="fade-up" data-aos-delay="100">
+            <div class="swiper course-schedule-carousel" data-course-schedule-carousel>
+              <div class="swiper-wrapper">
+                <?php foreach ($courseSchedule['images'] as $scheduleImage): ?>
+                  <div class="swiper-slide"><img src="<?php echo htmlspecialchars($scheduleImage, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($courseScheduleAlt, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy" decoding="async"></div>
+                <?php endforeach; ?>
+              </div>
+              <?php if ($courseSchedule['image_count'] > 1): ?>
+                <button type="button" class="course-schedule-arrow course-schedule-prev" aria-label="Previous schedule image"><i class="bi bi-chevron-left" aria-hidden="true"></i></button>
+                <button type="button" class="course-schedule-arrow course-schedule-next" aria-label="Next schedule image"><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+              <?php endif; ?>
+            </div>
+          </div>
           <div class="col-lg-5 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
             <?php if ($courseSchedule['has_custom_text']): ?>
             <div class="course-schedule-custom-text"><?php echo $courseSchedule['custom_text']; ?></div>

@@ -638,6 +638,31 @@
     });
   }
 
+  document.querySelectorAll('[data-course-schedule-carousel]').forEach((carousel) => {
+    const previousButton = carousel.querySelector('.course-schedule-prev');
+    const nextButton = carousel.querySelector('.course-schedule-next');
+    const slideCount = carousel.querySelectorAll('.swiper-slide').length;
+    if (slideCount < 2 || typeof Swiper === 'undefined') return;
+
+    new Swiper(carousel, {
+      slidesPerView: 1,
+      spaceBetween: 16,
+      loop: true,
+      speed: 450,
+      autoplay: false,
+      observer: true,
+      observeParents: true,
+      navigation: {
+        prevEl: previousButton,
+        nextEl: nextButton,
+      },
+      keyboard: {
+        enabled: true,
+        onlyInViewport: true,
+      },
+    });
+  });
+
   mobileCourseCards();
   window.addEventListener('resize', mobileCourseCards);
 
