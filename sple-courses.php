@@ -242,6 +242,24 @@
                   </div>
                 </div>
               </div>
+              <div class="col-12" data-aos="fade-up" data-aos-delay="300">
+                <div class="service-item position-relative h-100 w-100 civil-service-package-card">
+                  <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+                  <h3>Complete Test Prep Package</h3>
+                  <h4>Inclusions:</h4>
+                  <ul class="civil-service-package-list">
+                    <li><span class="package-list-icon"><i class="fas fa-chalkboard-user" aria-hidden="true"></i></span><span><strong>Expert-Led Lectures:</strong> Live online via Zoom plus 24/7 access to recordings.</span></li>
+                    <li><span class="package-list-icon"><i class="fas fa-laptop" aria-hidden="true"></i></span><span><strong>Your Own Dashboard:</strong> Access recordings and download review materials in your Artemis360 dashboard, with 24/7 access.</span></li>
+                    <li><span class="package-list-icon"><i class="fas fa-book-medical" aria-hidden="true"></i></span><span><strong>Comprehensive Review Sessions</strong></span></li>
+                    <li><span class="package-list-icon"><i class="fas fa-bolt" aria-hidden="true"></i></span><span><strong>Intensive Final Coaching Review Sessions</strong></span></li>
+                    <li><span class="package-list-icon"><i class="fas fa-user-group" aria-hidden="true"></i></span><span><strong>Mentoring</strong></span></li>
+                    <li><span class="package-list-icon"><i class="fas fa-comments" aria-hidden="true"></i></span><span><strong>Test Master Consultations</strong></span></li>
+                    <li><span class="package-list-icon"><i class="fas fa-file-pdf" aria-hidden="true"></i></span><span><strong>Review Materials:</strong> Downloadable handouts and worksheets in PDF.</span></li>
+                    <li><span class="package-list-icon"><i class="fas fa-chart-line" aria-hidden="true"></i></span><span><strong>Preboard Exam &amp; Assessments:</strong> Online simulations to monitor your progress and readiness to take the CSE.</span></li>
+                    <li><span class="package-list-icon"><i class="fas fa-clipboard-question" aria-hidden="true"></i></span><span><strong>Test Bank:</strong> 2000+ high-yield online practice tests, with 24/7 access.</span></li>
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
         </div>
