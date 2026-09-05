@@ -297,11 +297,8 @@
         <p>Our CSE Test Masters are a team of professional CSE trainers, experienced educators, and CSE topnotchers specializing in Mathematics, English, Filipino, and other key areas of the Civil Service Examination. With extensive teaching experience in some of the Philippines’ leading universities, they combine academic expertise, proven test-taking strategies, and firsthand examination experience to provide high-quality training and mentorship for aspiring civil servants.</p>
       </div>
       <div class="container">
-        <div class="row gy-4">
+        <div class="row gy-4 justify-content-center">
           <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100"><div class="team-member"><div class="member-img"><img src="assets/img/gra/mia_g.png" class="img-fluid" alt="Dr. Mia A. Gapuz"></div><div class="member-info"><h4>Dr. Mia A. Gapuz, ME, MM</h4><span>President & CEO / Curriculum Designer</span></div></div></div>
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200"><div class="team-member"><div class="member-img"><img src="assets/img/gra/liz_1.png" class="img-fluid" alt="Prof. Liz Gapuz Iciano"></div><div class="member-info"><h4>Prof. Liz Gapuz Iciano, USRN, MBA, CNOR</h4><span>International NCLEX Testmaster</span></div></div></div>
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300"><div class="team-member"><div class="member-img"><img src="assets/img/gra/jeni-iciano.jpg" class="img-fluid" alt="Prof. Jeni Gapuz Iciano"></div><div class="member-info"><h4>Prof. Jeni Gapuz Iciano, USRN</h4><span>International Bilingual Testmaster</span></div></div></div>
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400"><div class="team-member"><div class="member-img"><img src="assets/img/gra/belviz_1.png" class="img-fluid" alt="Prof. Clement C. Belvis, USRN, RM, MPH"></div><div class="member-info"><h4>Prof. Clement C. Belvis, USRN, RM, MPH</h4><span>SENIOR TEST MASTER/ ADVISER</span></div></div></div>
         </div>
       </div>
     </section>
