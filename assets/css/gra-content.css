@@ -52,6 +52,12 @@
 .course-schedule-custom-text .ql-indent-6 { margin-left: 9rem; }
 .course-schedule-custom-text .ql-indent-7 { margin-left: 10.5rem; }
 .course-schedule-custom-text .ql-indent-8 { margin-left: 12rem; }
+.services .civil-service-package-card { padding: 38px; text-align: left; }
+.services .civil-service-package-card h3, .services .civil-service-package-card h4, .services .civil-service-package-card p { text-align: left; }
+.services .civil-service-package-card h4 { margin: 1.25rem 0 .75rem; color: var(--heading-color); font-size: 1.05rem; text-transform: uppercase; }
+.civil-service-package-list { margin: 0; padding-left: 1.35rem; color: var(--default-color); }
+.civil-service-package-list li { margin-bottom: .65rem; padding-left: .2rem; line-height: 1.65; }
+.civil-service-package-price { margin: 1.25rem 0 0; color: var(--heading-color); font-size: 1.1rem; }
 .pass-rate-card { position: absolute; right: 18px; bottom: 18px; width: 170px; background: #fff; color: var(--gra-ink); border-radius: 8px; padding: 16px; box-shadow: 0 16px 40px rgba(0,0,0,.2); }
 .pass-rate-card strong { display: block; color: var(--accent-color); font-size: 2.6rem; line-height: 1; }
 .free-strip, .courses, .curriculum, .platform, .team, .why, .passers, .contact, .course-hero, .course-overview, .course-package, .testmasters { padding: 70px max(24px, calc((100vw - 1140px)/2)); }

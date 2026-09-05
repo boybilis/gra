@@ -220,27 +220,24 @@
     <section id="course-package" class="services section">
       <div class="container section-title" data-aos="fade-up">
         <h2>Course Package</h2>
-        <p>Choose the review package that fits your needs.</p>
+        <p>Complete Civil Service Exam test preparation in one package.</p>
       </div>
       <div class="container">
         <div class="row justify-content-center">
-          <div class="col-lg-8">
-            <div class="row">
-              <div class="col-6" data-aos="fade-up" data-aos-delay="100">
-                <div class="service-item position-relative h-100">
-                  <div class="icon"><i class="fas fa-graduation-cap"></i></div>
-                  <h3>1. Complete Test Prep Package</h3>
-                  <p>Our flagship Civil Service Exam review program.</p>
-                  <p>Perfect for first-time takers and repeat test takers who want a full structured review.</p>
-                </div>
-              </div>
-              <div class="col-6" data-aos="fade-up" data-aos-delay="200">
-                <div class="service-item position-relative h-100">
-                  <div class="icon"><i class="fas fa-bolt"></i></div>
-                  <h3>2. Intensive Final Coaching</h3>
-                  <p>A focused final coaching program designed for examinees who need rapid reinforcement, high-yield discussions, test-taking strategies, and intensive practice before the actual exam.</p>
-                </div>
-              </div>
+          <div class="col-lg-10" data-aos="fade-up" data-aos-delay="100">
+            <div class="service-item position-relative h-100 civil-service-package-card">
+              <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+              <h3>Complete Test Prep Package</h3>
+              <h4>Inclusions:</h4>
+              <ol class="civil-service-package-list">
+                <li><strong>Lectures:</strong> Live online via Zoom plus 24/7 access to recordings (26 sessions | 104 review hours).</li>
+                <li><strong>Review Materials:</strong> Downloadable handouts and worksheets in PDF in your own Artemis360 dashboard.</li>
+                <li><strong>Your Own Dashboard:</strong> Access recordings and review materials via the Artemis360 LMS.</li>
+                <li><strong>Test Bank:</strong> Online practice tests in your Artemis360 dashboard with 24/7 access.</li>
+                <li><strong>Mock Test and Assessments:</strong> Online simulations to monitor your progress and readiness to take the CSE.</li>
+                <li><strong>Free Tutorials:</strong> For enhancement in your weak areas.</li>
+              </ol>
+              <p class="civil-service-package-price"><strong>Price:</strong> ₱3,500</p>
             </div>
           </div>
         </div>
