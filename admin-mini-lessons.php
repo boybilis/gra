@@ -525,6 +525,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_mini_lessons_admin_logged_in()) 
             $scheduleText = (string) ($_POST['schedule_text'] ?? '');
             save_course_schedule_custom_text($selectedCourse, $scheduleText);
             $feedback = 'Upcoming schedule settings saved for ' . $courseScheduleOptions[$selectedCourse] . '.';
+
+            if (strtolower((string) ($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '')) === 'xmlhttprequest') {
+                header('Content-Type: application/json; charset=utf-8');
+                echo json_encode(['ok' => true, 'message' => $feedback], JSON_UNESCAPED_SLASHES);
+                exit;
+            }
         } elseif ($action === 'upload_hero') {
             $selectedCourse = trim((string) ($_POST['hero_course'] ?? ''));
             if (!isset($_FILES['hero_image']) || !is_array($_FILES['hero_image'])) {
@@ -555,6 +561,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_mini_lessons_admin_logged_in()) 
         }
     } catch (Throwable $exception) {
         $error = $exception->getMessage();
+        if ($action === 'upload_schedule' && strtolower((string) ($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '')) === 'xmlhttprequest') {
+            header('Content-Type: application/json; charset=utf-8');
+            http_response_code(422);
+            echo json_encode(['ok' => false, 'message' => $error], JSON_UNESCAPED_SLASHES);
+            exit;
+        }
     }
 }
 
@@ -1201,13 +1213,47 @@ endif;
       };
 
       scheduleCourse.addEventListener('change', () => loadScheduleTextForCourse(scheduleCourse.value));
-      scheduleForm.addEventListener('submit', () => {
-        if (!scheduleEditor) return;
-        scheduleText.value = scheduleEditor.getText().trim() === ''
-          ? ''
-          : (typeof scheduleEditor.getSemanticHTML === 'function'
-            ? scheduleEditor.getSemanticHTML()
-            : scheduleEditor.root.innerHTML);
+      scheduleForm.addEventListener('submit', async (event) => {
+        if (scheduleEditor) {
+          scheduleText.value = scheduleEditor.getText().trim() === ''
+            ? ''
+            : (typeof scheduleEditor.getSemanticHTML === 'function'
+              ? scheduleEditor.getSemanticHTML()
+              : scheduleEditor.root.innerHTML);
+        }
+
+        const imageInput = document.getElementById('schedule_images');
+        const selectedImages = Array.from(imageInput?.files || []);
+        if (selectedImages.length < 2) return;
+
+        event.preventDefault();
+        const submitButton = scheduleForm.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.textContent;
+        submitButton.disabled = true;
+
+        try {
+          for (let index = 0; index < selectedImages.length; index += 1) {
+            submitButton.textContent = `Uploading image ${index + 1} of ${selectedImages.length}...`;
+            const uploadData = new FormData(scheduleForm);
+            uploadData.delete('schedule_images[]');
+            uploadData.append('schedule_images[]', selectedImages[index], selectedImages[index].name);
+            const response = await fetch('admin-mini-lessons.php', {
+              method: 'POST',
+              body: uploadData,
+              headers: { 'X-Requested-With': 'XMLHttpRequest', Accept: 'application/json' }
+            });
+            const result = await response.json().catch(() => null);
+            if (!response.ok || !result?.ok) {
+              throw new Error(result?.message || `Image ${index + 1} could not be uploaded.`);
+            }
+          }
+          window.location.href = 'admin-mini-lessons.php?upload_complete=1#admin-schedules';
+        } catch (uploadError) {
+          submitButton.disabled = false;
+          submitButton.textContent = originalButtonText;
+          window.alert(uploadError.message || 'The schedule images could not be uploaded.');
+          scheduleTable.ajax.reload(null, false);
+        }
       });
 
       const resetLessonForm = () => {
