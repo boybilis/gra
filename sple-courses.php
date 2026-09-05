@@ -215,26 +215,31 @@
 
     <section id="course-package" class="services section">
       <div class="container section-title" data-aos="fade-up">
-        <h2>Course Package</h2>
-        <p>Choose the review package that fits your needs.</p>
+        <h2>Review Options</h2>
+        <p>PNLE and SPLE-RN promotional review packages.</p>
       </div>
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-8">
-            <div class="row">
+            <div class="row g-4 pnle-review-options">
               <div class="col-6" data-aos="fade-up" data-aos-delay="100">
-                <div class="service-item position-relative h-100">
-                  <div class="icon"><i class="fas fa-graduation-cap"></i></div>
-                  <h3>1. Complete Test Prep Package</h3>
-                  <p>Our flagship SPLE review program.</p>
-                  <p>Perfect for first-time takers and repeat test takers who want a full structured review.</p>
+                <div class="service-item position-relative h-100 pnle-review-option-card">
+                  <span class="pnle-review-option-badge">PNLE | SPLE-RN</span>
+                  <h3>Full Review Course</h3>
+                  <div class="pnle-review-prices">
+                    <div><span>Original Price:</span><strong class="pnle-original-price">₱15,000</strong></div>
+                    <div><span>Promo Price:</span><strong class="pnle-promo-price">₱7,500</strong></div>
+                  </div>
                 </div>
               </div>
               <div class="col-6" data-aos="fade-up" data-aos-delay="200">
-                <div class="service-item position-relative h-100">
-                  <div class="icon"><i class="fas fa-bolt"></i></div>
-                  <h3>2. Intensive Final Coaching</h3>
-                  <p>A focused final coaching program designed for examinees who need rapid reinforcement, high-yield discussions, test-taking strategies, and intensive practice before the actual exam.</p>
+                <div class="service-item position-relative h-100 pnle-review-option-card">
+                  <span class="pnle-review-option-badge">PNLE | SPLE-RN</span>
+                  <h3>Final Coaching Only</h3>
+                  <div class="pnle-review-prices">
+                    <div><span>Original Price:</span><strong class="pnle-original-price">₱10,000</strong></div>
+                    <div><span>Promo Price:</span><strong class="pnle-promo-price">₱4,999</strong></div>
+                  </div>
                 </div>
               </div>
             </div>
