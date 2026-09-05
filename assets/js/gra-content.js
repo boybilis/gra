@@ -251,7 +251,7 @@
         ]
       },
       'liz_1.png': {
-        name: 'Prof. Liz Gapuz Iciano, USRN, MBA, CNOR',
+        name: 'Prof Liz Gapuz, USRN, CNOR, MBA',
         role: 'Lead Testmaster, GRA - USA & Middle East',
         summary: 'An experienced clinical educator and nurse leader in the USA and the Middle East for more than 25 years in perioperative services, clinical supply chain, and clinical quality practice.',
         details: [
@@ -262,7 +262,7 @@
         ]
       },
       'jeni-iciano.jpg': {
-        name: 'Prof. Jeni Gapuz-Iciano, USRN',
+        name: 'Prof. Jenifer Gapuz- Iciano, USRN',
         role: 'International Bilingual Testmaster, GRA - USA & Latin America',
         summary: 'An experienced bilingual clinical educator, double summa cum laude graduate, and nurse leader with 12 years of experience in direct patient care, staff supervision, and department operations.',
         details: [
