@@ -53,6 +53,7 @@
 .course-schedule-custom-text .ql-indent-7 { margin-left: 10.5rem; }
 .course-schedule-custom-text .ql-indent-8 { margin-left: 12rem; }
 .services .civil-service-package-card { padding: 38px; text-align: left; }
+.services .civil-service-package-card > .icon { display: flex; margin-right: auto; margin-left: auto; }
 .services .civil-service-package-card h3 { text-align: center; }
 .services .civil-service-package-card h4, .services .civil-service-package-card p { text-align: left; }
 .services .civil-service-package-card h4 { margin: 1.25rem 0 .75rem; color: var(--heading-color); font-size: 1.05rem; text-transform: uppercase; }
