@@ -7,7 +7,8 @@ require_once __DIR__ . '/mini-lessons-admin-auth.php';
 require_once __DIR__ . '/course-schedule-library.php';
 require_once __DIR__ . '/course-hero-library.php';
 
-$feedback = '';
+$feedback = (string) ($_SESSION['admin_feedback'] ?? '');
+unset($_SESSION['admin_feedback']);
 $error = '';
 $loginError = '';
 $activeAdminTab = 'free-course';
@@ -536,6 +537,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_mini_lessons_admin_logged_in()) 
             $feedback = $deleted
                 ? 'Uploaded hero image removed. The original course image is active again.'
                 : 'The original course hero image is already active.';
+        }
+
+        if (($action === 'upload_hero' || $action === 'delete_hero') && $feedback !== '') {
+            $_SESSION['admin_feedback'] = $feedback;
+            header('Location: admin-mini-lessons.php#admin-hero-images', true, 303);
+            exit;
         }
     } catch (Throwable $exception) {
         $error = $exception->getMessage();
