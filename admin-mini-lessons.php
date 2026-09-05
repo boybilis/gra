@@ -1237,10 +1237,11 @@ endif;
             const uploadData = new FormData(scheduleForm);
             uploadData.delete('schedule_images[]');
             uploadData.append('schedule_images[]', selectedImages[index], selectedImages[index].name);
-            const response = await fetch('admin-mini-lessons.php', {
+            const response = await fetch('admin-schedule-upload.php', {
               method: 'POST',
               body: uploadData,
-              headers: { 'X-Requested-With': 'XMLHttpRequest', Accept: 'application/json' }
+              credentials: 'same-origin',
+              headers: { Accept: 'application/json' }
             });
             const result = await response.json().catch(() => null);
             if (!response.ok || !result?.ok) {
