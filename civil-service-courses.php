@@ -224,7 +224,7 @@
       </div>
       <div class="container">
         <div class="row justify-content-center gy-4">
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-6" data-aos="fade-up" data-aos-delay="100">
             <div class="service-item position-relative h-100 civil-service-package-card">
               <div class="icon"><i class="fas fa-graduation-cap"></i></div>
               <h3>Complete Test Prep Package</h3>
@@ -240,7 +240,7 @@
               <h2 class="civil-service-package-price"><strong>Price: ₱3,500</strong></h2>
             </div>
           </div>
-          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+          <div class="col-6" data-aos="fade-up" data-aos-delay="200">
             <div class="service-item position-relative h-100 civil-service-package-card">
               <div class="icon"><i class="fas fa-graduation-cap"></i></div>
               <h3>Final Coaching Test Prep Package</h3>
