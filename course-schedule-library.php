@@ -307,3 +307,41 @@ function save_course_schedule_image(string $course, array $file): void
         }
     }
 }
+
+function delete_course_schedule_image(string $course): bool
+{
+    $courseKey = normalize_course_schedule_key($course);
+    $database = get_database();
+    ensure_course_schedule_images_table($database);
+
+    $statement = $database->prepare(
+        'SELECT image_path
+         FROM course_schedule_images
+         WHERE course_key = :course_key
+         LIMIT 1'
+    );
+    $statement->execute([':course_key' => $courseKey]);
+    $row = $statement->fetch();
+    if (!is_array($row)) {
+        return false;
+    }
+
+    $imagePath = str_replace('\\', '/', (string) ($row['image_path'] ?? ''));
+    $allowedPrefix = 'assets/img/gra/upcoming/';
+    if (str_starts_with($imagePath, $allowedPrefix)) {
+        $absolutePath = __DIR__ . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, $imagePath);
+        $uploadDirectory = realpath(__DIR__ . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR . 'gra' . DIRECTORY_SEPARATOR . 'upcoming');
+        $resolvedImage = is_file($absolutePath) ? realpath($absolutePath) : false;
+        if ($uploadDirectory !== false && $resolvedImage !== false) {
+            $directoryPrefix = rtrim($uploadDirectory, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
+            if (str_starts_with($resolvedImage, $directoryPrefix) && !unlink($resolvedImage)) {
+                throw new RuntimeException('Unable to remove the uploaded schedule image.');
+            }
+        }
+    }
+
+    $delete = $database->prepare('DELETE FROM course_schedule_images WHERE course_key = :course_key');
+    $delete->execute([':course_key' => $courseKey]);
+
+    return $delete->rowCount() > 0;
+}

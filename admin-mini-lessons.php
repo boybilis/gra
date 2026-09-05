@@ -309,6 +309,7 @@ if (isset($_GET['ajax_table'])) {
                 'image_path' => (string) $row['image_path'],
                 'custom_text' => (string) $row['custom_text'],
                 'has_custom_text' => (bool) $row['has_custom_text'],
+                'is_default' => (bool) $row['is_default'],
                 'status' => $row['is_default'] ? 'Default Artemis image' : 'Uploaded image',
             ], $pageRows);
 
@@ -385,7 +386,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_mini_lessons_admin_logged_in()) 
     $action = trim((string) ($_POST['action'] ?? ''));
     if ($action === 'upload_testimonials') {
         $activeAdminTab = 'testimonials';
-    } elseif ($action === 'upload_schedule') {
+    } elseif ($action === 'upload_schedule' || $action === 'delete_schedule_image') {
         $activeAdminTab = 'schedules';
     } elseif ($action === 'upload_hero' || $action === 'delete_hero') {
         $activeAdminTab = 'hero-images';
@@ -531,6 +532,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_mini_lessons_admin_logged_in()) 
 
             save_course_hero_image($selectedCourse, $_FILES['hero_image']);
             $feedback = 'Hero image updated for ' . ($courseHeroOptions[$selectedCourse] ?? strtoupper($selectedCourse)) . '.';
+        } elseif ($action === 'delete_schedule_image') {
+            $selectedCourse = trim((string) ($_POST['schedule_course'] ?? ''));
+            $deleted = delete_course_schedule_image($selectedCourse);
+            $feedback = $deleted
+                ? 'Uploaded schedule image removed. The default image is active again.'
+                : 'The default schedule image is already active.';
         } elseif ($action === 'delete_hero') {
             $selectedCourse = trim((string) ($_POST['hero_course'] ?? ''));
             $deleted = delete_course_hero_image($selectedCourse);
@@ -539,9 +546,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_mini_lessons_admin_logged_in()) 
                 : 'The original course hero image is already active.';
         }
 
-        if (($action === 'upload_hero' || $action === 'delete_hero') && $feedback !== '') {
+        if (in_array($action, ['upload_hero', 'delete_hero', 'delete_schedule_image'], true) && $feedback !== '') {
             $_SESSION['admin_feedback'] = $feedback;
-            header('Location: admin-mini-lessons.php#admin-hero-images', true, 303);
+            $redirectTab = $action === 'delete_schedule_image' ? 'schedules' : 'hero-images';
+            header('Location: admin-mini-lessons.php#admin-' . $redirectTab, true, 303);
             exit;
         }
     } catch (Throwable $exception) {
@@ -1094,9 +1102,13 @@ endif;
             data: 'course_key',
             orderable: false,
             searchable: false,
-            render: (data, type) => type === 'display'
-              ? `<button type="button" class="btn btn-sm btn-outline-primary" data-edit-schedule="${escapeHtml(data)}">Edit Settings</button>`
-              : data
+            render: (data, type, row) => {
+              if (type !== 'display') return data;
+              const editButton = `<button type="button" class="btn btn-sm btn-outline-primary" data-edit-schedule="${escapeHtml(data)}">Edit Settings</button>`;
+              if (row.is_default) return editButton;
+              const restoreForm = `<form method="post" action="admin-mini-lessons.php" onsubmit="return confirm('Remove this uploaded schedule image and restore the default?');"><input type="hidden" name="action" value="delete_schedule_image"><input type="hidden" name="schedule_course" value="${escapeHtml(data)}"><button type="submit" class="btn btn-sm btn-outline-danger">Remove Image &amp; Restore Default</button></form>`;
+              return `<div class="lesson-action-buttons">${editButton}${restoreForm}</div>`;
+            }
           }
         ]
       });
