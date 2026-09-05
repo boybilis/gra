@@ -65,6 +65,18 @@
   display: flex;
   margin: 0 auto 20px;
 }
+.cse-lead-profile { display: grid; grid-template-columns: minmax(220px, 300px) minmax(0, 1fr); gap: 32px; align-items: start; padding: 32px; border: 1px solid color-mix(in srgb, var(--gra-navy), transparent 82%); border-radius: 12px; background: #fff; box-shadow: 0 12px 34px rgba(22, 50, 79, .08); }
+.cse-lead-profile-image img { width: 100%; height: auto; max-height: 440px; object-fit: cover; object-position: top center; border-radius: 10px; display: block; }
+.cse-lead-profile-content h3 { margin: 0 0 6px; font-size: 1.65rem; }
+.cse-lead-profile-content .cse-lead-profile-role { margin: 0 0 18px; color: var(--accent-color); font-weight: 700; }
+.cse-lead-profile-content h4 { margin: 22px 0 12px; font-size: 1.15rem; text-transform: uppercase; }
+.cse-lead-profile-content p, .cse-lead-profile-content li { font-size: 1rem; line-height: 1.7; }
+.cse-lead-profile-content ul { margin: 0; padding-left: 1.25rem; }
+.cse-lead-profile-content li { margin-bottom: 10px; }
+@media (max-width: 767px) {
+  .cse-lead-profile { grid-template-columns: 1fr; padding: 22px; gap: 24px; }
+  .cse-lead-profile-image { max-width: 320px; margin: 0 auto; }
+}
 .pass-rate-card { position: absolute; right: 18px; bottom: 18px; width: 170px; background: #fff; color: var(--gra-ink); border-radius: 8px; padding: 16px; box-shadow: 0 16px 40px rgba(0,0,0,.2); }
 .pass-rate-card strong { display: block; color: var(--accent-color); font-size: 2.6rem; line-height: 1; }
 .free-strip, .courses, .curriculum, .platform, .team, .why, .passers, .contact, .course-hero, .course-overview, .course-package, .testmasters { padding: 70px max(24px, calc((100vw - 1140px)/2)); }

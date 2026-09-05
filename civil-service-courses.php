@@ -297,9 +297,21 @@
         <p>Our CSE Test Masters are a team of professional CSE trainers, experienced educators, and CSE topnotchers specializing in Mathematics, English, Filipino, and other key areas of the Civil Service Examination. With extensive teaching experience in some of the Philippines’ leading universities, they combine academic expertise, proven test-taking strategies, and firsthand examination experience to provide high-quality training and mentorship for aspiring civil servants.</p>
       </div>
       <div class="container">
-        <div class="row gy-4 justify-content-center">
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100"><div class="team-member"><div class="member-img"><img src="assets/img/gra/mia_g.png" class="img-fluid" alt="Dr. Mia A. Gapuz"></div><div class="member-info"><h4>Dr. Mia A. Gapuz, ME, MM</h4><span>President & CEO / Curriculum Designer</span></div></div></div>
-        </div>
+        <article class="cse-lead-profile" data-aos="fade-up" data-aos-delay="100">
+          <div class="cse-lead-profile-image"><img src="assets/img/gra/mia_g.png" alt="Dr. Mia A. Gapuz" loading="lazy" decoding="async"></div>
+          <div class="cse-lead-profile-content">
+            <h3>Dr. Mia A. Gapuz, ME, MM</h3>
+            <p class="cse-lead-profile-role">President and CEO, CSE Lead Testmaster and Program Designer</p>
+            <p>Dr. Mia has helped many professionals pass the CSE on their first attempt. A business leader and educator, she has over two decades of experience in teaching and running test preparation centers in the Philippines.</p>
+            <h4>Credentials and Achievements</h4>
+            <ul>
+              <li><strong>Education:</strong> University of the Philippines – Manila; Asian Institute of Management (Makati, Philippines); Instituto de Empresa (Madrid, Spain); WED Technologies, Harvard (ongoing).</li>
+              <li><strong>Academic Awards:</strong> Board Topnotcher (Rank #2, Nationwide); Most Outstanding Clinician (Endodontics), University of the Philippines – Manila; Highest Distinction, Asian Institute of Management.</li>
+              <li><strong>International Award:</strong> Top 10 Asian Institute of Management Philippines Alumni Leaders 2024 (CEO Insights Asia).</li>
+              <li><strong>Previous Work:</strong> President and CEO, RA Gapuz Review Center, Inc.</li>
+            </ul>
+          </div>
+        </article>
       </div>
     </section>
 
