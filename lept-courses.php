@@ -252,7 +252,7 @@
           <div class="features-image col-lg-7" data-aos="fade-up" data-aos-delay="100"><img src="<?php echo htmlspecialchars($courseSchedule['image_path'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($courseScheduleAlt, ENT_QUOTES, 'UTF-8'); ?>"></div>
           <div class="col-lg-5 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
             <?php if ($courseSchedule['has_custom_text']): ?>
-            <div class="course-schedule-custom-text"><?php echo htmlspecialchars($courseSchedule['custom_text'], ENT_QUOTES, 'UTF-8'); ?></div>
+            <div class="course-schedule-custom-text"><?php echo $courseSchedule['custom_text']; ?></div>
             <?php else: ?>
             <h4>Study support from content to confidence.</h4>
             <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="300"><i class="fa-solid fa-list-check flex-shrink-0"></i><div><h4>Course inclusions</h4><p>Exam pathway orientation, study pacing, high-yield concept review, and question analysis techniques.</p></div></div>

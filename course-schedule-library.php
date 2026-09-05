@@ -59,6 +59,98 @@ function ensure_course_schedule_content_table(PDO $database): void
     );
 }
 
+function sanitize_course_schedule_html(string $html): string
+{
+    $html = trim($html);
+    if ($html === '') {
+        return '';
+    }
+
+    if (!preg_match('/<\/?[a-z][^>]*>/i', $html)) {
+        $escaped = htmlspecialchars(str_replace(["\r\n", "\r"], "\n", $html), ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+        return '<p>' . str_replace(["\n\n", "\n"], ['</p><p>', '<br>'], $escaped) . '</p>';
+    }
+
+    $document = new DOMDocument('1.0', 'UTF-8');
+    $previousErrors = libxml_use_internal_errors(true);
+    $document->loadHTML(
+        '<?xml encoding="utf-8" ?><div id="course-schedule-content">' . $html . '</div>',
+        LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD
+    );
+    libxml_clear_errors();
+    libxml_use_internal_errors($previousErrors);
+
+    $root = $document->getElementById('course-schedule-content');
+    if (!$root instanceof DOMElement) {
+        return '';
+    }
+
+    $allowedTags = ['p', 'br', 'h2', 'h3', 'h4', 'h5', 'h6', 'strong', 'b', 'em', 'i', 'u', 's', 'sub', 'sup', 'blockquote', 'ol', 'ul', 'li', 'a', 'span'];
+    $allowedClassPattern = '/^ql-(?:align-(?:center|right|justify)|indent-[1-8]|font-(?:serif|monospace)|size-(?:small|large|huge)|direction-rtl)$/';
+
+    $cleanNode = static function (DOMNode $parent) use (&$cleanNode, $allowedTags, $allowedClassPattern): void {
+        foreach (iterator_to_array($parent->childNodes) as $node) {
+            if (!$node instanceof DOMElement) {
+                continue;
+            }
+
+            $tag = strtolower($node->tagName);
+            if (!in_array($tag, $allowedTags, true)) {
+                if (in_array($tag, ['script', 'style', 'iframe', 'object', 'embed'], true)) {
+                    $parent->removeChild($node);
+                    continue;
+                }
+                while ($node->firstChild !== null) {
+                    $parent->insertBefore($node->firstChild, $node);
+                }
+                $parent->removeChild($node);
+                continue;
+            }
+
+            foreach (iterator_to_array($node->attributes) as $attribute) {
+                $name = strtolower($attribute->name);
+                $value = trim($attribute->value);
+                $keep = false;
+
+                if ($name === 'class') {
+                    $classes = array_values(array_filter(
+                        preg_split('/\s+/', $value) ?: [],
+                        static fn(string $class): bool => preg_match($allowedClassPattern, $class) === 1
+                    ));
+                    if ($classes !== []) {
+                        $node->setAttribute('class', implode(' ', $classes));
+                        $keep = true;
+                    }
+                } elseif ($tag === 'li' && $name === 'data-list' && in_array($value, ['ordered', 'bullet'], true)) {
+                    $keep = true;
+                } elseif ($tag === 'a' && $name === 'href' && preg_match('/^(?:https?:|mailto:|tel:|\/|#)/i', $value)) {
+                    $keep = true;
+                }
+
+                if (!$keep) {
+                    $node->removeAttribute($attribute->name);
+                }
+            }
+
+            if ($tag === 'a' && $node->hasAttribute('href')) {
+                $node->setAttribute('target', '_blank');
+                $node->setAttribute('rel', 'noopener noreferrer');
+            }
+
+            $cleanNode($node);
+        }
+    };
+
+    $cleanNode($root);
+
+    $result = '';
+    foreach ($root->childNodes as $child) {
+        $result .= $document->saveHTML($child);
+    }
+
+    return trim($result);
+}
+
 function get_course_schedule_custom_text(string $course): string
 {
     $courseKey = normalize_course_schedule_key($course);
@@ -74,13 +166,16 @@ function get_course_schedule_custom_text(string $course): string
     $statement->execute([':course_key' => $courseKey]);
     $row = $statement->fetch();
 
-    return is_array($row) ? trim((string) ($row['custom_text'] ?? '')) : '';
+    return is_array($row) ? sanitize_course_schedule_html((string) ($row['custom_text'] ?? '')) : '';
 }
 
 function save_course_schedule_custom_text(string $course, string $customText): void
 {
     $courseKey = normalize_course_schedule_key($course);
-    $customText = trim(str_replace(["\r\n", "\r"], "\n", $customText));
+    $customText = sanitize_course_schedule_html($customText);
+    if (trim(html_entity_decode(strip_tags($customText), ENT_QUOTES | ENT_HTML5, 'UTF-8')) === '') {
+        $customText = '';
+    }
     $database = get_database();
     ensure_course_schedule_content_table($database);
 

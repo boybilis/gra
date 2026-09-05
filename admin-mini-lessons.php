@@ -599,6 +599,7 @@ endif;
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="https://cdn.datatables.net/2.3.5/css/dataTables.dataTables.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.snow.css" rel="stylesheet">
   <link href="<?php echo versioned_asset('assets/css/main.css'); ?>" rel="stylesheet">
   <link href="<?php echo versioned_asset('assets/css/gra-content.css'); ?>" rel="stylesheet">
   <style>
@@ -617,6 +618,9 @@ endif;
     .lesson-action-buttons { display: flex; flex-wrap: wrap; gap: .4rem; }
     .admin-image-preview { display: block; width: 150px; max-width: 100%; height: 90px; border: 1px solid #d8e1e9; border-radius: .5rem; background: #eef2f5; object-fit: contain; }
     .schedule-text-preview { max-width: 360px; margin: 0; overflow: hidden; color: #343a40; font-size: .86rem; line-height: 1.45; white-space: pre-line; }
+    .schedule-rich-editor { min-height: 260px; background: #fff; font-family: var(--default-font); font-size: 1rem; }
+    .schedule-rich-editor .ql-editor { min-height: 260px; }
+    .schedule-rich-editor + .form-text { margin-top: .5rem; }
     .testimonial-gallery-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
     .testimonial-gallery-card { display: flex; min-width: 0; flex-direction: column; overflow: hidden; border: 1px solid #d8e1e9; border-radius: .65rem; background: #fff; }
     .testimonial-gallery-card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: #eef2f5; }
@@ -790,7 +794,7 @@ endif;
     <section id="admin-panel-schedules" class="mb-4 p-3 border rounded bg-white" role="tabpanel" aria-labelledby="admin-tab-schedules" data-admin-panel="schedules" hidden>
       <h3 class="h5">Upcoming Schedule Settings</h3>
       <p class="mb-3">Upload an optional feature image and add optional right-column text for each course. Leave the text blank to use the current default content.</p>
-      <form method="post" action="admin-mini-lessons.php" enctype="multipart/form-data">
+      <form id="schedule-settings-form" method="post" action="admin-mini-lessons.php" enctype="multipart/form-data">
         <input type="hidden" name="action" value="upload_schedule">
         <div class="row">
           <div class="col-md-4 mb-3">
@@ -809,9 +813,10 @@ endif;
           </div>
         </div>
         <div class="mb-3">
-          <label for="schedule_text" class="form-label">Right Column Text</label>
-          <textarea id="schedule_text" name="schedule_text" class="form-control" rows="10" placeholder="Enter optional schedule text for the selected course..."></textarea>
-          <div class="form-text">Line breaks are preserved. Clear this field and save to restore the current default heading and information blocks.</div>
+          <label for="schedule_text_editor" class="form-label">Right Column Content</label>
+          <textarea id="schedule_text" name="schedule_text" class="form-control" rows="10" placeholder="Enter optional schedule content for the selected course..."></textarea>
+          <div id="schedule_text_editor" class="schedule-rich-editor" hidden></div>
+          <div class="form-text">Format headings, fonts, sizes, links, alignment, and ordered or unordered lists. Clear the editor and save to restore the default content.</div>
         </div>
         <button type="submit" class="btn btn-primary">Save Schedule Settings</button>
       </form>
@@ -876,6 +881,7 @@ endif;
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.datatables.net/2.3.5/js/dataTables.min.js"></script>
   <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
   <script>
     (() => {
       const escapeHtml = (value) => String(value ?? '').replace(/[&<>'"]/g, (character) => ({
@@ -885,6 +891,11 @@ endif;
         "'": '&#039;',
         '"': '&quot;'
       })[character]);
+      const htmlToPlainText = (value) => {
+        const container = document.createElement('div');
+        container.innerHTML = String(value ?? '');
+        return container.textContent || '';
+      };
 
       const testimonialCsrfToken = <?php echo json_encode($testimonialCsrfToken, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT); ?>;
       const testimonialGalleryFolder = document.getElementById('testimonial-gallery-folder');
@@ -1062,7 +1073,7 @@ endif;
             orderable: false,
             render: (data, type, row) => type === 'display'
               ? (row.has_custom_text
-                ? `<p class="schedule-text-preview">${escapeHtml(data)}</p>`
+                ? `<p class="schedule-text-preview">${escapeHtml(htmlToPlainText(data))}</p>`
                 : '<span class="text-muted small">Using default content</span>')
               : data
           },
@@ -1137,13 +1148,47 @@ endif;
       const cancelLessonEdit = document.getElementById('cancel-lesson-edit');
       const scheduleCourse = document.getElementById('schedule_course');
       const scheduleText = document.getElementById('schedule_text');
+      const scheduleForm = document.getElementById('schedule-settings-form');
+      const scheduleEditorElement = document.getElementById('schedule_text_editor');
+      let scheduleEditor = null;
+
+      if (typeof Quill !== 'undefined') {
+        scheduleEditorElement.hidden = false;
+        scheduleText.hidden = true;
+        scheduleEditor = new Quill(scheduleEditorElement, {
+          theme: 'snow',
+          placeholder: 'Enter optional schedule content for the selected course...',
+          modules: {
+            toolbar: [
+              [{ header: [2, 3, 4, false] }, { font: [] }, { size: ['small', false, 'large', 'huge'] }],
+              ['bold', 'italic', 'underline', 'strike'],
+              [{ list: 'ordered' }, { list: 'bullet' }, { indent: '-1' }, { indent: '+1' }],
+              [{ align: [] }],
+              ['blockquote', 'link'],
+              ['clean']
+            ]
+          }
+        });
+      }
 
       const loadScheduleTextForCourse = (courseKey) => {
         const schedule = scheduleTable.rows().data().toArray().find((row) => row.course_key === courseKey);
         scheduleText.value = schedule?.custom_text || '';
+        if (scheduleEditor) {
+          scheduleEditor.setText('');
+          if (scheduleText.value) scheduleEditor.clipboard.dangerouslyPasteHTML(scheduleText.value);
+        }
       };
 
       scheduleCourse.addEventListener('change', () => loadScheduleTextForCourse(scheduleCourse.value));
+      scheduleForm.addEventListener('submit', () => {
+        if (!scheduleEditor) return;
+        scheduleText.value = scheduleEditor.getText().trim() === ''
+          ? ''
+          : (typeof scheduleEditor.getSemanticHTML === 'function'
+            ? scheduleEditor.getSemanticHTML()
+            : scheduleEditor.root.innerHTML);
+      });
 
       const resetLessonForm = () => {
         lessonForm.reset();
@@ -1188,7 +1233,8 @@ endif;
           loadScheduleTextForCourse(scheduleCourse.value);
           activateAdminTab('schedules', true);
           document.getElementById('admin-panel-schedules').scrollIntoView({ behavior: 'smooth', block: 'start' });
-          scheduleText.focus({ preventScroll: true });
+          if (scheduleEditor) scheduleEditor.focus();
+          else scheduleText.focus({ preventScroll: true });
           return;
         }
 

@@ -26,7 +26,32 @@
 .gra-page .hero-visual { position: relative; }
 .gra-page .hero-visual img, .gra-page .platform img, .course-hero-image img, .leader-photo img, .testmaster-photo img, .passeasy-brand img { width: 100%; height: auto; border-radius: 8px; object-fit: cover; }
 .gra-trademark { margin-left: .06em; font-size: .5em; line-height: 0; vertical-align: super; }
-.course-schedule-custom-text { color: var(--default-color); font-size: 1rem; line-height: 1.75; overflow-wrap: anywhere; white-space: pre-wrap; }
+.course-schedule-custom-text { color: var(--default-color); font-size: 1rem; line-height: 1.75; overflow-wrap: anywhere; }
+.course-schedule-custom-text > :first-child { margin-top: 0; }
+.course-schedule-custom-text > :last-child { margin-bottom: 0; }
+.course-schedule-custom-text h2, .course-schedule-custom-text h3, .course-schedule-custom-text h4, .course-schedule-custom-text h5, .course-schedule-custom-text h6 { margin: 0 0 .7rem; color: var(--heading-color); line-height: 1.3; }
+.course-schedule-custom-text p, .course-schedule-custom-text blockquote, .course-schedule-custom-text ol, .course-schedule-custom-text ul { margin: 0 0 1rem; }
+.course-schedule-custom-text ol, .course-schedule-custom-text ul { padding-left: 1.6rem; }
+.course-schedule-custom-text ol { list-style: decimal; }
+.course-schedule-custom-text ul, .course-schedule-custom-text li[data-list="bullet"] { list-style: disc; }
+.course-schedule-custom-text blockquote { padding-left: 1rem; border-left: 4px solid var(--accent-color); color: color-mix(in srgb, var(--default-color), transparent 20%); }
+.course-schedule-custom-text a { color: var(--accent-color); text-decoration: underline; }
+.course-schedule-custom-text .ql-align-center { text-align: center; }
+.course-schedule-custom-text .ql-align-right { text-align: right; }
+.course-schedule-custom-text .ql-align-justify { text-align: justify; }
+.course-schedule-custom-text .ql-font-serif { font-family: Georgia, "Times New Roman", serif; }
+.course-schedule-custom-text .ql-font-monospace { font-family: Monaco, Consolas, "Courier New", monospace; }
+.course-schedule-custom-text .ql-size-small { font-size: .8em; }
+.course-schedule-custom-text .ql-size-large { font-size: 1.5em; }
+.course-schedule-custom-text .ql-size-huge { font-size: 2.25em; }
+.course-schedule-custom-text .ql-indent-1 { margin-left: 1.5rem; }
+.course-schedule-custom-text .ql-indent-2 { margin-left: 3rem; }
+.course-schedule-custom-text .ql-indent-3 { margin-left: 4.5rem; }
+.course-schedule-custom-text .ql-indent-4 { margin-left: 6rem; }
+.course-schedule-custom-text .ql-indent-5 { margin-left: 7.5rem; }
+.course-schedule-custom-text .ql-indent-6 { margin-left: 9rem; }
+.course-schedule-custom-text .ql-indent-7 { margin-left: 10.5rem; }
+.course-schedule-custom-text .ql-indent-8 { margin-left: 12rem; }
 .pass-rate-card { position: absolute; right: 18px; bottom: 18px; width: 170px; background: #fff; color: var(--gra-ink); border-radius: 8px; padding: 16px; box-shadow: 0 16px 40px rgba(0,0,0,.2); }
 .pass-rate-card strong { display: block; color: var(--accent-color); font-size: 2.6rem; line-height: 1; }
 .free-strip, .courses, .curriculum, .platform, .team, .why, .passers, .contact, .course-hero, .course-overview, .course-package, .testmasters { padding: 70px max(24px, calc((100vw - 1140px)/2)); }
