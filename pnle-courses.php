@@ -259,7 +259,7 @@
                     <li><span class="package-list-icon"><i class="fas fa-user-group" aria-hidden="true"></i></span><span><strong>Mentoring</strong></span></li>
                     <li><span class="package-list-icon"><i class="fas fa-comments" aria-hidden="true"></i></span><span><strong>Test Master Consultations</strong></span></li>
                     <li><span class="package-list-icon"><i class="fas fa-file-pdf" aria-hidden="true"></i></span><span><strong>Review Materials:</strong> Downloadable handouts and worksheets in PDF.</span></li>
-                    <li><span class="package-list-icon"><i class="fas fa-chart-line" aria-hidden="true"></i></span><span><strong>Preboard Exam &amp; Assessments:</strong> Online simulations to monitor your progress and readiness to take the CSE.</span></li>
+                    <li><span class="package-list-icon"><i class="fas fa-chart-line" aria-hidden="true"></i></span><span><strong>Preboard Exam &amp; Assessments:</strong> Online simulations to monitor your progress and readiness to take the PNLE/SPLE.</span></li>
                     <li><span class="package-list-icon"><i class="fas fa-clipboard-question" aria-hidden="true"></i></span><span><strong>Test Bank:</strong> 2000+ high-yield online practice tests, with 24/7 access.</span></li>
                   </ul>
                 </div>
