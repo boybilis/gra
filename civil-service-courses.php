@@ -223,8 +223,8 @@
         <p>Complete Civil Service Exam test preparation in one package.</p>
       </div>
       <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-lg-10" data-aos="fade-up" data-aos-delay="100">
+        <div class="row justify-content-center gy-4">
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
             <div class="service-item position-relative h-100 civil-service-package-card">
               <div class="icon"><i class="fas fa-graduation-cap"></i></div>
               <h3>Complete Test Prep Package</h3>
@@ -238,6 +238,22 @@
                 <li><span class="package-list-icon"><i class="fas fa-chalkboard-user" aria-hidden="true"></i></span><span><strong>Free Tutorials:</strong> For enhancement in your weak areas.</span></li>
               </ul>
               <h2 class="civil-service-package-price"><strong>Price: ₱3,500</strong></h2>
+            </div>
+          </div>
+          <div class="col-lg-6" data-aos="fade-up" data-aos-delay="200">
+            <div class="service-item position-relative h-100 civil-service-package-card">
+              <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+              <h3>Final Coaching Test Prep Package</h3>
+              <h4>Inclusions:</h4>
+              <ul class="civil-service-package-list">
+                <li><span class="package-list-icon"><i class="fas fa-video" aria-hidden="true"></i></span><span><strong>Lectures:</strong> Live online via Zoom plus 24/7 access to recordings (5 sessions or 20 hours).</span></li>
+                <li><span class="package-list-icon"><i class="fas fa-file-pdf" aria-hidden="true"></i></span><span><strong>Review Materials:</strong> Downloadable handouts and worksheets in PDF in your own Artemis360 dashboard.</span></li>
+                <li><span class="package-list-icon"><i class="fas fa-laptop" aria-hidden="true"></i></span><span><strong>Your Own Dashboard:</strong> Access recordings and review materials via the Artemis360 LMS.</span></li>
+                <li><span class="package-list-icon"><i class="fas fa-clipboard-question" aria-hidden="true"></i></span><span><strong>Test Bank:</strong> Online practice tests in your Artemis360 dashboard with 24/7 access.</span></li>
+                <li><span class="package-list-icon"><i class="fas fa-chart-line" aria-hidden="true"></i></span><span><strong>Mock Test and Assessments:</strong> Online simulations to monitor your progress and readiness to take the CSE.</span></li>
+                <li><span class="package-list-icon"><i class="fas fa-chalkboard-user" aria-hidden="true"></i></span><span><strong>Free Tutorials:</strong> For enhancement in your weak areas.</span></li>
+              </ul>
+              <h2 class="civil-service-package-price"><strong>Price: ₱1,500</strong></h2>
             </div>
           </div>
         </div>
