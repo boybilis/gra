@@ -44,6 +44,63 @@ function ensure_course_schedule_images_table(PDO $database): void
     );
 }
 
+function ensure_course_schedule_content_table(PDO $database): void
+{
+    $database->exec(
+        'CREATE TABLE IF NOT EXISTS course_schedule_content (
+            id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+            course_key VARCHAR(50) NOT NULL,
+            custom_text LONGTEXT NULL,
+            created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            PRIMARY KEY (id),
+            UNIQUE KEY uniq_schedule_content_course (course_key)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci'
+    );
+}
+
+function get_course_schedule_custom_text(string $course): string
+{
+    $courseKey = normalize_course_schedule_key($course);
+    $database = get_database();
+    ensure_course_schedule_content_table($database);
+
+    $statement = $database->prepare(
+        'SELECT custom_text
+         FROM course_schedule_content
+         WHERE course_key = :course_key
+         LIMIT 1'
+    );
+    $statement->execute([':course_key' => $courseKey]);
+    $row = $statement->fetch();
+
+    return is_array($row) ? trim((string) ($row['custom_text'] ?? '')) : '';
+}
+
+function save_course_schedule_custom_text(string $course, string $customText): void
+{
+    $courseKey = normalize_course_schedule_key($course);
+    $customText = trim(str_replace(["\r\n", "\r"], "\n", $customText));
+    $database = get_database();
+    ensure_course_schedule_content_table($database);
+
+    if ($customText === '') {
+        $statement = $database->prepare('DELETE FROM course_schedule_content WHERE course_key = :course_key');
+        $statement->execute([':course_key' => $courseKey]);
+        return;
+    }
+
+    $statement = $database->prepare(
+        'INSERT INTO course_schedule_content (course_key, custom_text)
+         VALUES (:course_key, :custom_text)
+         ON DUPLICATE KEY UPDATE custom_text = VALUES(custom_text)'
+    );
+    $statement->execute([
+        ':course_key' => $courseKey,
+        ':custom_text' => $customText,
+    ]);
+}
+
 function get_default_course_schedule_image(): string
 {
     return 'assets/img/gra/artemis-platform.jpg';
@@ -73,11 +130,15 @@ function get_course_schedule_image(string $course): array
         }
     }
 
+    $customText = get_course_schedule_custom_text($courseKey);
+
     return [
         'course_key' => $courseKey,
         'label' => get_course_schedule_options()[$courseKey],
         'image_path' => $imagePath,
         'is_default' => $imagePath === get_default_course_schedule_image(),
+        'custom_text' => $customText,
+        'has_custom_text' => $customText !== '',
     ];
 }
 

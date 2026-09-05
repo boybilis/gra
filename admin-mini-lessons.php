@@ -288,23 +288,26 @@ if (isset($_GET['ajax_table'])) {
             }
 
             $recordsFiltered = count($rows);
-            $scheduleOrderColumns = ['label', 'image_path', 'status'];
+            $scheduleOrderColumns = ['label', 'image_path', 'custom_text', 'status'];
             $scheduleOrderColumn = $scheduleOrderColumns[$request['order_column']] ?? 'label';
             usort($rows, static function (array $left, array $right) use ($scheduleOrderColumn, $request): int {
                 $leftValue = $scheduleOrderColumn === 'status'
                     ? ($left['is_default'] ? 'Default Artemis image' : 'Uploaded image')
-                    : (string) $left[$scheduleOrderColumn];
+                    : (string) ($left[$scheduleOrderColumn] ?? '');
                 $rightValue = $scheduleOrderColumn === 'status'
                     ? ($right['is_default'] ? 'Default Artemis image' : 'Uploaded image')
-                    : (string) $right[$scheduleOrderColumn];
+                    : (string) ($right[$scheduleOrderColumn] ?? '');
                 $comparison = strnatcasecmp($leftValue, $rightValue);
                 return $request['order_direction'] === 'DESC' ? -$comparison : $comparison;
             });
 
             $pageRows = array_slice($rows, $request['start'], $request['length']);
             $data = array_map(static fn (array $row): array => [
+                'course_key' => (string) $row['course_key'],
                 'course' => (string) $row['label'],
                 'image_path' => (string) $row['image_path'],
+                'custom_text' => (string) $row['custom_text'],
+                'has_custom_text' => (bool) $row['has_custom_text'],
                 'status' => $row['is_default'] ? 'Default Artemis image' : 'Uploaded image',
             ], $pageRows);
 
@@ -505,12 +508,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_mini_lessons_admin_logged_in()) 
             }
         } elseif ($action === 'upload_schedule') {
             $selectedCourse = trim((string) ($_POST['schedule_course'] ?? ''));
-            if (!isset($_FILES['schedule_image']) || !is_array($_FILES['schedule_image'])) {
-                throw new InvalidArgumentException('Please choose an upcoming schedule image to upload.');
+            if (!array_key_exists($selectedCourse, $courseScheduleOptions)) {
+                throw new InvalidArgumentException('Please choose a valid course.');
             }
 
-            save_course_schedule_image($selectedCourse, $_FILES['schedule_image']);
-            $feedback = 'Upcoming schedule image uploaded for ' . ($courseScheduleOptions[$selectedCourse] ?? strtoupper($selectedCourse)) . '.';
+            $scheduleImage = $_FILES['schedule_image'] ?? null;
+            $hasScheduleImage = is_array($scheduleImage)
+                && (int) ($scheduleImage['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE;
+            if ($hasScheduleImage) {
+                save_course_schedule_image($selectedCourse, $scheduleImage);
+            }
+
+            $scheduleText = (string) ($_POST['schedule_text'] ?? '');
+            save_course_schedule_custom_text($selectedCourse, $scheduleText);
+            $feedback = 'Upcoming schedule settings saved for ' . $courseScheduleOptions[$selectedCourse] . '.';
         } elseif ($action === 'upload_hero') {
             $selectedCourse = trim((string) ($_POST['hero_course'] ?? ''));
             if (!isset($_FILES['hero_image']) || !is_array($_FILES['hero_image'])) {
@@ -541,7 +552,7 @@ if (!is_mini_lessons_admin_logged_in()):
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Admin Login | Gapuz Review Academy</title>
-  <link href="assets/img/gra/gra-logo.png" rel="icon">
+  <link href="assets/img/favicon.png" rel="icon" type="image/png">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="<?php echo versioned_asset('assets/css/main.css'); ?>" rel="stylesheet">
   <link href="<?php echo versioned_asset('assets/css/gra-content.css'); ?>" rel="stylesheet">
@@ -584,7 +595,7 @@ endif;
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Admin Mini Lessons | Gapuz Review Academy</title>
-  <link href="assets/img/gra/gra-logo.png" rel="icon">
+  <link href="assets/img/favicon.png" rel="icon" type="image/png">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="https://cdn.datatables.net/2.3.5/css/dataTables.dataTables.min.css" rel="stylesheet">
@@ -605,6 +616,7 @@ endif;
     .lesson-title-cell .lesson-url { max-width: 100%; font-size: .86rem; }
     .lesson-action-buttons { display: flex; flex-wrap: wrap; gap: .4rem; }
     .admin-image-preview { display: block; width: 150px; max-width: 100%; height: 90px; border: 1px solid #d8e1e9; border-radius: .5rem; background: #eef2f5; object-fit: contain; }
+    .schedule-text-preview { max-width: 360px; margin: 0; overflow: hidden; color: #343a40; font-size: .86rem; line-height: 1.45; white-space: pre-line; }
     .testimonial-gallery-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
     .testimonial-gallery-card { display: flex; min-width: 0; flex-direction: column; overflow: hidden; border: 1px solid #d8e1e9; border-radius: .65rem; background: #fff; }
     .testimonial-gallery-card img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: #eef2f5; }
@@ -776,8 +788,8 @@ endif;
     </section>
 
     <section id="admin-panel-schedules" class="mb-4 p-3 border rounded bg-white" role="tabpanel" aria-labelledby="admin-tab-schedules" data-admin-panel="schedules" hidden>
-      <h3 class="h5">Upload Upcoming Schedule</h3>
-      <p class="mb-3">Upload one feature image per course. This image replaces the default Artemis image in the course Upcoming Schedules section.</p>
+      <h3 class="h5">Upcoming Schedule Settings</h3>
+      <p class="mb-3">Upload an optional feature image and add optional right-column text for each course. Leave the text blank to use the current default content.</p>
       <form method="post" action="admin-mini-lessons.php" enctype="multipart/form-data">
         <input type="hidden" name="action" value="upload_schedule">
         <div class="row">
@@ -792,11 +804,16 @@ endif;
           </div>
           <div class="col-md-8 mb-3">
             <label for="schedule_image" class="form-label">Upcoming Schedule Image</label>
-            <input id="schedule_image" name="schedule_image" type="file" class="form-control" accept=".jpg,.jpeg,.png,.webp,.gif" required>
-            <div class="form-text">Allowed formats: JPG, JPEG, PNG, WEBP, GIF (max 8MB).</div>
+            <input id="schedule_image" name="schedule_image" type="file" class="form-control" accept=".jpg,.jpeg,.png,.webp,.gif">
+            <div class="form-text">Optional. Allowed formats: JPG, JPEG, PNG, WEBP, GIF (max 8MB).</div>
           </div>
         </div>
-        <button type="submit" class="btn btn-primary">Upload Schedule Image</button>
+        <div class="mb-3">
+          <label for="schedule_text" class="form-label">Right Column Text</label>
+          <textarea id="schedule_text" name="schedule_text" class="form-control" rows="10" placeholder="Enter optional schedule text for the selected course..."></textarea>
+          <div class="form-text">Line breaks are preserved. Clear this field and save to restore the current default heading and information blocks.</div>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Schedule Settings</button>
       </form>
     </section>
 
@@ -845,7 +862,9 @@ endif;
             <tr>
               <th>Course</th>
               <th>Image</th>
+              <th>Right Column Text</th>
               <th>Status</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody></tbody>
@@ -1038,7 +1057,29 @@ endif;
               ? `<a class="lesson-url" href="${escapeHtml(data)}" target="_blank" rel="noopener">${escapeHtml(data)}</a>`
               : data
           },
-          { data: 'status', render: (data) => escapeHtml(data) }
+          {
+            data: 'custom_text',
+            orderable: false,
+            render: (data, type, row) => type === 'display'
+              ? (row.has_custom_text
+                ? `<p class="schedule-text-preview">${escapeHtml(data)}</p>`
+                : '<span class="text-muted small">Using default content</span>')
+              : data
+          },
+          {
+            data: 'status',
+            render: (data, type, row) => type === 'display'
+              ? `<div class="d-flex flex-wrap gap-1"><span class="badge text-bg-secondary">${escapeHtml(data)}</span><span class="badge ${row.has_custom_text ? 'text-bg-success' : 'text-bg-secondary'}">${row.has_custom_text ? 'Custom text' : 'Default text'}</span></div>`
+              : data
+          },
+          {
+            data: 'course_key',
+            orderable: false,
+            searchable: false,
+            render: (data, type) => type === 'display'
+              ? `<button type="button" class="btn btn-sm btn-outline-primary" data-edit-schedule="${escapeHtml(data)}">Edit Settings</button>`
+              : data
+          }
         ]
       });
 
@@ -1094,6 +1135,15 @@ endif;
       const lessonIdInput = document.getElementById('lesson-id');
       const lessonSubmitButton = document.getElementById('lesson-submit-button');
       const cancelLessonEdit = document.getElementById('cancel-lesson-edit');
+      const scheduleCourse = document.getElementById('schedule_course');
+      const scheduleText = document.getElementById('schedule_text');
+
+      const loadScheduleTextForCourse = (courseKey) => {
+        const schedule = scheduleTable.rows().data().toArray().find((row) => row.course_key === courseKey);
+        scheduleText.value = schedule?.custom_text || '';
+      };
+
+      scheduleCourse.addEventListener('change', () => loadScheduleTextForCourse(scheduleCourse.value));
 
       const resetLessonForm = () => {
         lessonForm.reset();
@@ -1132,6 +1182,16 @@ endif;
       }));
 
       document.addEventListener('click', (event) => {
+        const scheduleButton = event.target.closest('[data-edit-schedule]');
+        if (scheduleButton) {
+          scheduleCourse.value = scheduleButton.dataset.editSchedule;
+          loadScheduleTextForCourse(scheduleCourse.value);
+          activateAdminTab('schedules', true);
+          document.getElementById('admin-panel-schedules').scrollIntoView({ behavior: 'smooth', block: 'start' });
+          scheduleText.focus({ preventScroll: true });
+          return;
+        }
+
         const editButton = event.target.closest('[data-edit-lesson]');
         if (!editButton) return;
 

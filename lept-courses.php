@@ -10,7 +10,7 @@
   <title>LEPT PassEasy™ Course | Gapuz Review Academy</title>
   <meta name="description" content="Gapuz Review Academy review programs for NCLEX, DHA, HAAD, Prometric, PNLE, SPLE, Civil Service, and online learning.">
   <meta name="keywords" content="Gapuz Review Academy, PassEasy™, NCLEX, DHA, HAAD, Prometric, PNLE, SPLE, Civil Service">
-  <link href="assets/img/gra/gra-logo.png" rel="icon">
+  <link href="assets/img/favicon.png" rel="icon" type="image/png">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
@@ -93,7 +93,7 @@
     <div class="topbar d-flex align-items-center">
       <div class="container d-flex justify-content-between">
         <div class="d-flex align-items-center gap-2"><span class="d-none d-md-inline">Learn With Confidence.</span><a class="online-campus-link" href="online-campus.php">ONLINE CAMPUS</a></div>
-        <div class="d-flex align-items-center gap-3"><span><i class="bi bi-telephone me-1"></i> 0285599060 / 85599062</span><span class="d-none d-lg-inline"><i class="bi bi-envelope me-1"></i> Inquire@gratestprepworldwide.com</span></div>
+        <div class="d-flex align-items-center gap-3"><span><i class="bi bi-telephone me-1"></i> Mobile: +639292135296 / Landline: +63285599060</span><span class="d-none d-lg-inline"><i class="bi bi-envelope me-1"></i> Inquire@gratestprepworldwide.com</span></div>
       </div>
     </div>
     <div class="branding d-flex align-items-center">
@@ -118,14 +118,13 @@
               </ul>
             </li>
             <li><a href="index.php#free-courses">Free Courses</a></li>
-            <li><a href="https://artemis360.gapuzreview.com">Artemis360</a></li>
             <li><a href="index.php#testimonials">Passers</a></li>
             <li><a href="index.php#enroll">Contact</a></li>
             <li><a href="test-processing.php">Test Processing</a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
-        <a class="cta-btn" href="index.php#enroll">Enroll Now</a>
+        <a class="cta-btn" href="index.php#enroll">Inquire Now</a>
       </div>
     </div>
   </header>
@@ -252,10 +251,14 @@
         <div class="row justify-content-around gy-4">
           <div class="features-image col-lg-7" data-aos="fade-up" data-aos-delay="100"><img src="<?php echo htmlspecialchars($courseSchedule['image_path'], ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($courseScheduleAlt, ENT_QUOTES, 'UTF-8'); ?>"></div>
           <div class="col-lg-5 d-flex flex-column justify-content-center" data-aos="fade-up" data-aos-delay="200">
+            <?php if ($courseSchedule['has_custom_text']): ?>
+            <div class="course-schedule-custom-text"><?php echo htmlspecialchars($courseSchedule['custom_text'], ENT_QUOTES, 'UTF-8'); ?></div>
+            <?php else: ?>
             <h4>Study support from content to confidence.</h4>
             <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="300"><i class="fa-solid fa-list-check flex-shrink-0"></i><div><h4>Course inclusions</h4><p>Exam pathway orientation, study pacing, high-yield concept review, and question analysis techniques.</p></div></div>
             <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="400"><i class="fa-solid fa-chalkboard-user flex-shrink-0"></i><div><h4>Expert coaching</h4><p>Experienced Testmasters guide students through common exam challenges and readiness planning.</p></div></div>
             <div class="icon-box d-flex position-relative" data-aos="fade-up" data-aos-delay="500"><i class="fa-solid fa-clock flex-shrink-0"></i><div><h4>Flexible access</h4><p>Recorded lectures and 24/7 review materials help students prepare around work, school, and family schedules.</p></div></div>
+            <?php endif; ?>
           </div>
         </div>
       </div>
@@ -299,7 +302,7 @@
           <div class="footer-contact pt-3">
             <p>Ground Floor RA Gapuz Bldg., 1128 Alhambra St. corner United Nations Ave.</p>
             <p>Ermita Manila, Philippines</p>
-            <p class="mt-3"><strong>Phone:</strong> <span>0285599060 / 85599062</span></p><p><strong>Email:</strong> <span>Inquire@gratestprepworldwide.com</span></p>
+            <p class="mt-3"><strong>Phone:</strong> <span>Mobile: +639292135296 / Landline: +63285599060</span></p><p><strong>Email:</strong> <span>Inquire@gratestprepworldwide.com</span></p>
           </div>
           <div class="social-links d-flex mt-4"><a href="https://www.facebook.com/gapuzreviewacademyofficial"><i class="bi bi-facebook"></i></a></div>
         </div>

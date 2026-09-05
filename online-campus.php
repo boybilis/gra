@@ -6,7 +6,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Online Campus | Gapuz Review Academy</title>
   <meta name="description" content="Gapuz Review Academy online campus access, support, and free resources.">
-  <link href="assets/img/gra/gra-logo.png" rel="icon">
+  <link href="assets/img/favicon.png" rel="icon" type="image/png">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/aos/aos.css" rel="stylesheet">
@@ -275,7 +275,7 @@
     <div class="topbar d-flex align-items-center">
       <div class="container d-flex justify-content-between">
         <div class="d-flex align-items-center gap-2"><span class="d-none d-md-inline">Learn With Confidence.</span><a class="online-campus-link" href="online-campus.php">ONLINE CAMPUS</a></div>
-        <div class="d-flex align-items-center gap-3"><span><i class="bi bi-telephone me-1"></i> 0285599060 / 85599062</span><span class="d-none d-lg-inline"><i class="bi bi-envelope me-1"></i> Inquire@gratestprepworldwide.com</span></div>
+        <div class="d-flex align-items-center gap-3"><span><i class="bi bi-telephone me-1"></i> Mobile: +639292135296 / Landline: +63285599060</span><span class="d-none d-lg-inline"><i class="bi bi-envelope me-1"></i> Inquire@gratestprepworldwide.com</span></div>
       </div>
     </div>
     <div class="branding d-flex align-items-center">
@@ -290,11 +290,11 @@
                 <li><a href="nclex-rn-courses.php">NCLEX-RN</a></li><li><a href="dha-rn-courses.php">DHA-RN</a></li><li><a href="doh-haad-rn-courses.php">DOH / HAAD-RN</a></li><li><a href="prometric-rn-courses.php">Prometric-RN</a></li><li><a href="pnle-courses.php">PNLE</a></li><li><a href="sple-courses.php">SPLE</a></li><li><a href="civil-service-courses.php">Civil Service</a></li><li><a href="lept-courses.php">LEPT</a></li>
               </ul>
             </li>
-            <li><a href="index.php#free-courses">Free Courses</a></li><li><a href="https://artemis360.gapuzreview.com">Artemis360</a></li><li><a href="index.php#testimonials">Passers</a></li><li><a href="index.php#enroll">Contact</a></li><li><a href="test-processing.php">Test Processing</a></li>
+            <li><a href="index.php#free-courses">Free Courses</a></li><li><a href="index.php#testimonials">Passers</a></li><li><a href="index.php#enroll">Contact</a></li><li><a href="test-processing.php">Test Processing</a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
-        <a class="cta-btn" href="index.php#enroll">Enroll Now</a>
+        <a class="cta-btn" href="index.php#enroll">Inquire Now</a>
       </div>
     </div>
   </header>
@@ -403,7 +403,7 @@
           <div class="footer-contact pt-3">
             <p>Ground Floor RA Gapuz Bldg., 1128 Alhambra St. corner United Nations Ave.</p>
             <p>Ermita Manila, Philippines</p>
-            <p class="mt-3"><strong>Phone:</strong> <span>0285599060 / 85599062</span></p><p><strong>Email:</strong> <span>Inquire@gratestprepworldwide.com</span></p>
+            <p class="mt-3"><strong>Phone:</strong> <span>Mobile: +639292135296 / Landline: +63285599060</span></p><p><strong>Email:</strong> <span>Inquire@gratestprepworldwide.com</span></p>
           </div>
           <div class="social-links d-flex mt-4"><a href="https://www.facebook.com/gapuzreviewacademyofficial"><i class="bi bi-facebook"></i></a></div>
         </div>

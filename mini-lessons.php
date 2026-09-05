@@ -20,7 +20,7 @@ try {
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Mini Lessons | Gapuz Review Academy</title>
-  <link href="assets/img/gra/gra-logo.png" rel="icon">
+  <link href="assets/img/favicon.png" rel="icon" type="image/png">
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="<?php echo versioned_asset('assets/css/main.css'); ?>" rel="stylesheet">
@@ -48,7 +48,7 @@ try {
     <div class="topbar d-flex align-items-center">
       <div class="container d-flex justify-content-between">
         <div class="d-flex align-items-center gap-2"><span class="d-none d-md-inline">Learn With Confidence.</span><a class="online-campus-link" href="online-campus.php">ONLINE CAMPUS</a></div>
-        <div class="d-flex align-items-center gap-3"><span><i class="bi bi-telephone me-1"></i> 0285599060 / 85599062</span><span class="d-none d-lg-inline"><i class="bi bi-envelope me-1"></i> Inquire@gratestprepworldwide.com</span></div>
+        <div class="d-flex align-items-center gap-3"><span><i class="bi bi-telephone me-1"></i> Mobile: +639292135296 / Landline: +63285599060</span><span class="d-none d-lg-inline"><i class="bi bi-envelope me-1"></i> Inquire@gratestprepworldwide.com</span></div>
       </div>
     </div>
     <div class="branding d-flex align-items-center">

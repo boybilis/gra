@@ -9,7 +9,7 @@ require_once __DIR__ . '/asset-version.php';
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Test Processing | Gapuz Review Academy</title>
   <meta name="description" content="Gapuz Review Academy test processing support and guidance.">
-  <link href="assets/img/gra/gra-logo.png" rel="icon">
+  <link href="assets/img/favicon.png" rel="icon" type="image/png">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
@@ -573,14 +573,13 @@ require_once __DIR__ . '/asset-version.php';
               </ul>
             </li>
             <li><a href="index.php#free-courses">Free Courses</a></li>
-            <li><a href="https://artemis360.gapuzreview.com">Artemis360</a></li>
             <li><a href="index.php#testimonials">Passers</a></li>
             <li><a href="index.php#enroll">Contact</a></li>
             <li><a href="test-processing.php" class="active">Test Processing</a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
-        <a class="cta-btn" href="index.php#enroll">Enroll Now</a>
+        <a class="cta-btn" href="index.php#enroll">Inquire Now</a>
       </div>
     </div>
   </header>

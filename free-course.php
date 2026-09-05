@@ -8,7 +8,7 @@
   <title>Free Course | Gapuz Review Academy</title>
   <meta name="description" content="Gapuz Review Academy review programs for NCLEX, DHA, HAAD, Prometric, PNLE, SPLE, Civil Service, and online learning.">
   <meta name="keywords" content="Gapuz Review Academy, PassEasy™, NCLEX, DHA, HAAD, Prometric, PNLE, SPLE, Civil Service">
-  <link href="assets/img/gra/gra-logo.png" rel="icon">
+  <link href="assets/img/favicon.png" rel="icon" type="image/png">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
@@ -28,7 +28,7 @@
     <div class="topbar d-flex align-items-center">
       <div class="container d-flex justify-content-between">
         <div class="d-flex align-items-center gap-2"><span class="d-none d-md-inline">Learn With Confidence.</span><a class="online-campus-link" href="online-campus.php">ONLINE CAMPUS</a></div>
-        <div class="d-flex align-items-center gap-3"><span><i class="bi bi-telephone me-1"></i> 0285599060 / 85599062</span><span class="d-none d-lg-inline"><i class="bi bi-envelope me-1"></i> Inquire@gratestprepworldwide.com</span></div>
+        <div class="d-flex align-items-center gap-3"><span><i class="bi bi-telephone me-1"></i> Mobile: +639292135296 / Landline: +63285599060</span><span class="d-none d-lg-inline"><i class="bi bi-envelope me-1"></i> Inquire@gratestprepworldwide.com</span></div>
       </div>
     </div>
     <div class="branding d-flex align-items-center">
@@ -53,14 +53,13 @@
               </ul>
             </li>
             <li><a href="index.php#free-courses">Free Courses</a></li>
-            <li><a href="https://artemis360.gapuzreview.com">Artemis360</a></li>
             <li><a href="index.php#testimonials">Passers</a></li>
             <li><a href="index.php#enroll">Contact</a></li>
             <li><a href="test-processing.php">Test Processing</a></li>
           </ul>
           <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
         </nav>
-        <a class="cta-btn" href="index.php#enroll">Enroll Now</a>
+        <a class="cta-btn" href="index.php#enroll">Inquire Now</a>
       </div>
     </div>
   </header>
