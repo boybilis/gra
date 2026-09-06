@@ -264,11 +264,12 @@
       'jeni-iciano.png': {
         name: 'Prof. Jenifer Gapuz- Iciano, USRN',
         role: 'International Bilingual Testmaster, GRA - USA & Latin America',
-        summary: 'An experienced bilingual clinical educator, double summa cum laude graduate, and nurse leader with 12 years of experience in direct patient care, staff supervision, and department operations.',
+        summary: 'A licensed nurse, registered midwife, and educator with extensive experience preparing nurses for local and international licensure examinations.',
         details: [
-          'Licensed as a Registered Nurse in all 50 US states and Washington, DC.',
-          'Education: BS Nursing, Seminole State College of Florida (Summa Cum Laude).',
-          'Education: BS in Information Systems Technology, Seminole State College of Florida (Summa Cum Laude).'
+          'Education: BS Nursing, University of Sto. Tomas; Master in Public Health, University of the Philippines Manila.',
+          'Board Achievement: Double Board Topnotcher (PNLE & MLE).',
+          'Extensive teaching experience in major universities in the Philippines.',
+          'Extensive teaching experience in PNLE, DOH, DHA, Prometric, and International NCLEX Bootcamps.'
         ]
       },
       'belviz_1.png': {
