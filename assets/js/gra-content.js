@@ -261,7 +261,7 @@
           'Previous Work: Vice President, RA Gapuz Review Center, Inc.'
         ]
       },
-      'jeni-iciano.jpg': {
+      'jeni-iciano.png': {
         name: 'Prof. Jenifer Gapuz- Iciano, USRN',
         role: 'International Bilingual Testmaster, GRA - USA & Latin America',
         summary: 'An experienced bilingual clinical educator, double summa cum laude graduate, and nurse leader with 12 years of experience in direct patient care, staff supervision, and department operations.',
