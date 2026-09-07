@@ -277,15 +277,7 @@
     </section><section id="testmasters" class="doctors section">
       <div class="container section-title" data-aos="fade-up">
         <h2>Testmasters</h2>
-        <p>LEPT Review Lead Testmaster.</p>
-      </div>
-      <div class="container">
-        <div class="row gy-4">
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100"><div class="team-member"><div class="member-img"><img src="assets/img/gra/mia_g.png" class="img-fluid" alt="Dr. Mia A. Gapuz"></div><div class="member-info"><h4>Dr. Mia A. Gapuz, ME, MM</h4><span>President & CEO / Curriculum Designer</span></div></div></div>
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200"><div class="team-member"><div class="member-img"><img src="assets/img/gra/liz_1.png" class="img-fluid" alt="Prof Liz Gapuz"></div><div class="member-info"><h4>Prof Liz Gapuz, USRN, CNOR, MBA</h4><span>International NCLEX Testmaster</span></div></div></div>
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300"><div class="team-member"><div class="member-img"><img src="assets/img/gra/jeni-iciano.png" class="img-fluid" alt="Prof. Jenifer Gapuz-Iciano"></div><div class="member-info"><h4>Prof. Jenifer Gapuz- Iciano, USRN</h4><span>International Bilingual Testmaster</span></div></div></div>
-          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400"><div class="team-member"><div class="member-img"><img src="assets/img/gra/belviz_1.png" class="img-fluid" alt="Prof. Clement C. Belvis, USRN, RM, MPH"></div><div class="member-info"><h4>Prof. Clement C. Belvis, USRN, RM, MPH</h4><span>SENIOR TEST MASTER/ ADVISER</span></div></div></div>
-        </div>
+        <p>Our LEPT Test Masters are a team of professional LET/LEPT trainers, experienced educators, licensed professional teachers, and topnotchers specializing in General Education, Professional Education, and Major subjects. With extensive teaching experience in some of the Philippines’ leading universities, they combine academic expertise, proven test-taking strategies, and firsthand examination experience to provide high-quality training and mentorship for aspiring professional teachers.</p>
       </div>
     </section>
 
